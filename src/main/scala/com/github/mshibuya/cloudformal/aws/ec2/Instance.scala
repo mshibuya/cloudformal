@@ -2,12 +2,16 @@ package com.github.mshibuya.cloudformal.aws.ec2
 
 import com.github.mshibuya.cloudformal.model._
 
+/**
+ * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+ */
+
 trait Instance extends Resource {
   val resourceType = "AWS::EC2::Instance"
 
   def affinity: Option[String] = None
   def availabilityZone: Option[String] = None
-  def blockDeviceMappings: Option[String] = None
+  def blockDeviceMappings: Option[Seq[EC2BlockDeviceMapping]] = None
   def disableApiTermination: Option[Boolean] = None
   def ebsOptimized: Option[Boolean] = None
   def hostId: Option[String] = None
@@ -16,23 +20,23 @@ trait Instance extends Resource {
   def instanceInitiatedShutdownBehavior: Option[String] = None
   def instanceType: Option[String] = None
   def ipv6AddressCount: Option[Int] = None
-  def ipv6Addresses: Option[String] = None
+  def ipv6Addresses: Option[Seq[EC2NetworkInterfaceIpv6Addresses]] = None
   def kernelId: Option[String] = None
   def keyName: Option[String] = None
   def monitoring: Option[Boolean] = None
-  def networkInterfaces: Option[String] = None
+  def networkInterfaces: Option[Seq[EC2NetworkInterface]] = None
   def placementGroupName: Option[String] = None
   def privateIpAddress: Option[String] = None
   def ramdiskId: Option[String] = None
   def securityGroupIds: Option[Seq[String]] = None
   def securityGroups: Option[Seq[String]] = None
   def sourceDestCheck: Option[Boolean] = None
-  def ssmAssociations: Option[String] = None
+  def ssmAssociations: Option[Seq[EC2InstanceSsmAssociations]] = None
   def subnetId: Option[String] = None
-  def tags: Option[String] = None
+  def tags: Option[Seq[Tag]] = None
   def tenancy: Option[String] = None
   def userData: Option[String] = None
-  def volumes: Option[String] = None
+  def volumes: Option[Seq[EC2MountPoint]] = None
   def additionalInfo: Option[String] = None
 
   def properties: FormattableMap = Formattable.opt(
