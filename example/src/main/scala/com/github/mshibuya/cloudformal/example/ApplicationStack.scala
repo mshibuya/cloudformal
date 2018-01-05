@@ -8,7 +8,7 @@ object ApplicationStack extends Stack {
   val description = "My stack"
 
   val appServer = new ec2.Instance {
-    val name = "AppServer"
+    val logicalId = "AppServer"
     val imageId = "ami-111111"
   }
 

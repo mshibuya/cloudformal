@@ -21,7 +21,7 @@ lazy val generator = (project in file("generator")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "cloudformal-generator",
-    libraryDependencies ++= Seq(scalaScraper)
+    libraryDependencies ++= Seq(argonaut)
   )
 
 lazy val example = (project in file("example")).

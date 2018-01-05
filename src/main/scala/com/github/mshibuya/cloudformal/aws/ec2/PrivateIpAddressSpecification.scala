@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PrivateIpAddressSpecification(
-    privateIpAddress: String,
-    primary: Boolean) extends Renderable {
+    primary: Boolean,
+    privateIpAddress: String) extends Renderable {
   def render: Formattable = Formattable.opt(
-    "PrivateIpAddress" -> Some(Formattable(privateIpAddress)),
-    "Primary" -> Some(Formattable(primary))
+    "Primary" -> Some(Formattable(primary)),
+    "PrivateIpAddress" -> Some(Formattable(privateIpAddress))
   )
 }

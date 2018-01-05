@@ -1,5 +1,7 @@
 package com.github.mshibuya.cloudformal
 
+import java.time.format.DateTimeFormatter
+
 import argonaut.Argonaut._
 import argonaut._
 import com.github.mshibuya.cloudformal.model._
@@ -23,9 +25,13 @@ case class JsonFormatter() extends Formatter with EncodeJsons {
   implicit def FormattableEncodeJson: EncodeJson[Formattable] = {
     EncodeJson(a => {
       a match {
-        case FormattableString(s) => s.value.asJson
         case FormattableBoolean(b) => b.asJson
         case FormattableInt(i) => i.asJson
+        case FormattableLong(l) => l.asJson
+        case FormattableDouble(d) => d.asJson
+        case FormattableString(s) => s.value.asJson
+        case FormattableJson(j) => j
+        case FormattableTimestamp(t) => t.format(DateTimeFormatter.ISO_ZONED_DATE_TIME).asJson
         case FormattableSeq(s) => s.toList.asJson(ListEncodeJson[Formattable])
         case FormattableMap(m) => m.asJson(ListMapEncodeJson[String, Formattable])
       }

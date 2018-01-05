@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 trait Subnet extends Resource {
-  val resourceType = "AWS::EC2::Subnet"
+  val resourceTypeName = "AWS::EC2::Subnet"
 
   def assignIpv6AddressOnCreation: Option[Boolean] = None
   def availabilityZone: Option[String] = None
@@ -15,9 +15,9 @@ trait Subnet extends Resource {
   def ipv6CidrBlock: Option[String] = None
   def mapPublicIpOnLaunch: Option[Boolean] = None
   def tags: Option[Seq[Tag]] = None
-  def vpcId: Ref
+  def vpcId: String
 
-  def properties: FormattableMap = Formattable.opt(
+  def resourceProperties: FormattableMap = Formattable.opt(
     "AssignIpv6AddressOnCreation" -> assignIpv6AddressOnCreation.map(Formattable(_)),
     "AvailabilityZone" -> availabilityZone.map(Formattable(_)),
     "CidrBlock" -> Some(Formattable(cidrBlock)),

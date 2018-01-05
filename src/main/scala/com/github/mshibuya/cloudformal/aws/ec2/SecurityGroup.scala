@@ -7,21 +7,21 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 trait SecurityGroup extends Resource {
-  val resourceType = "AWS::EC2::SecurityGroup"
+  val resourceTypeName = "AWS::EC2::SecurityGroup"
 
-  def groupName: Option[String] = None
   def groupDescription: String
-  def securityGroupEgress: Option[Seq[EC2SecurityGroupRule]] = None
-  def securityGroupIngress: Option[Seq[EC2SecurityGroupRule]] = None
+  def groupName: Option[String] = None
+  def securityGroupEgress: Option[Seq[Egress]] = None
+  def securityGroupIngress: Option[Seq[Ingress]] = None
   def tags: Option[Seq[Tag]] = None
-  def vpcId: String
+  def vpcId: Option[String] = None
 
-  def properties: FormattableMap = Formattable.opt(
-    "GroupName" -> groupName.map(Formattable(_)),
+  def resourceProperties: FormattableMap = Formattable.opt(
     "GroupDescription" -> Some(Formattable(groupDescription)),
+    "GroupName" -> groupName.map(Formattable(_)),
     "SecurityGroupEgress" -> securityGroupEgress.map(Formattable(_)),
     "SecurityGroupIngress" -> securityGroupIngress.map(Formattable(_)),
     "Tags" -> tags.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+    "VpcId" -> vpcId.map(Formattable(_))
   )
 }
