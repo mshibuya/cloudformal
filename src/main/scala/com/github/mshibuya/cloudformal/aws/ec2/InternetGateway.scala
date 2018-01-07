@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait InternetGateway extends Resource {
   val resourceTypeName = "AWS::EC2::InternetGateway"
 
-  def tags: Option[Seq[Tag]] = None
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Tags" -> tags
   )
 }

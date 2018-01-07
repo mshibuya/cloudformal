@@ -10,17 +10,17 @@ import com.github.mshibuya.cloudformal.model._
 trait UsagePlan extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::UsagePlan"
 
-  def apiStages: Option[Seq[ApiStage]] = None
-  def description: Option[String] = None
-  def quota: Option[QuotaSettings] = None
-  def throttle: Option[ThrottleSettings] = None
-  def usagePlanName: Option[String] = None
+  def apiStages: Property[Seq[ApiStage]] = Empty
+  def description: Property[String] = Empty
+  def quota: Property[QuotaSettings] = Empty
+  def throttle: Property[ThrottleSettings] = Empty
+  def usagePlanName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApiStages" -> apiStages.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Quota" -> quota.map(Formattable(_)),
-    "Throttle" -> throttle.map(Formattable(_)),
-    "UsagePlanName" -> usagePlanName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApiStages" -> apiStages,
+    "Description" -> description,
+    "Quota" -> quota,
+    "Throttle" -> throttle,
+    "UsagePlanName" -> usagePlanName
   )
 }

@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait UsagePlanKey extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::UsagePlanKey"
 
-  def keyId: String
-  def keyType: String
-  def usagePlanId: String
+  def keyId: NonEmptyProperty[String]
+  def keyType: NonEmptyProperty[String]
+  def usagePlanId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "KeyId" -> Some(Formattable(keyId)),
-    "KeyType" -> Some(Formattable(keyType)),
-    "UsagePlanId" -> Some(Formattable(usagePlanId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "KeyId" -> keyId,
+    "KeyType" -> keyType,
+    "UsagePlanId" -> usagePlanId
   )
 }

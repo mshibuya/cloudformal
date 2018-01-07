@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ApplicationVersionLifecycleConfig(
-    maxAgeRule: Option[MaxAgeRule] = None,
-    maxCountRule: Option[MaxCountRule] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MaxAgeRule" -> maxAgeRule.map(Formattable(_)),
-    "MaxCountRule" -> maxCountRule.map(Formattable(_))
+    maxAgeRule: Property[MaxAgeRule] = Empty,
+    maxCountRule: Property[MaxCountRule] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MaxAgeRule" -> maxAgeRule,
+    "MaxCountRule" -> maxCountRule
   )
 }

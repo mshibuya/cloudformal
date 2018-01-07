@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Rule extends Resource {
   val resourceTypeName = "AWS::WAF::Rule"
 
-  def metricName: String
-  def name: String
-  def predicates: Option[Seq[Predicate]] = None
+  def metricName: NonEmptyProperty[String]
+  def name: NonEmptyProperty[String]
+  def predicates: Property[Seq[Predicate]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "MetricName" -> Some(Formattable(metricName)),
-    "Name" -> Some(Formattable(name)),
-    "Predicates" -> predicates.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "MetricName" -> metricName,
+    "Name" -> name,
+    "Predicates" -> predicates
   )
 }

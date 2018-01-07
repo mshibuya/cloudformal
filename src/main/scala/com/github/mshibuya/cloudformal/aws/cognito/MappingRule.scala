@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MappingRule(
-    matchType: String,
-    value: String,
-    claim: String,
-    roleARN: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MatchType" -> Some(Formattable(matchType)),
-    "Value" -> Some(Formattable(value)),
-    "Claim" -> Some(Formattable(claim)),
-    "RoleARN" -> Some(Formattable(roleARN))
+    matchType: NonEmptyProperty[String],
+    value: NonEmptyProperty[String],
+    claim: NonEmptyProperty[String],
+    roleARN: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MatchType" -> matchType,
+    "Value" -> value,
+    "Claim" -> claim,
+    "RoleARN" -> roleARN
   )
 }

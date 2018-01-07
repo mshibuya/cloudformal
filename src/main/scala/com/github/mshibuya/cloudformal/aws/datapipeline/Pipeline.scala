@@ -9,21 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait Pipeline extends Resource {
   val resourceTypeName = "AWS::DataPipeline::Pipeline"
 
-  def activate: Option[Boolean] = None
-  def description: Option[String] = None
-  def name: String
-  def parameterObjects: Seq[ParameterObject]
-  def parameterValues: Option[Seq[ParameterValue]] = None
-  def pipelineObjects: Option[Seq[PipelineObject]] = None
-  def pipelineTags: Option[Seq[PipelineTag]] = None
+  def activate: Property[Boolean] = Empty
+  def description: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+  def parameterObjects: NonEmptyProperty[Seq[ParameterObject]]
+  def parameterValues: Property[Seq[ParameterValue]] = Empty
+  def pipelineObjects: Property[Seq[PipelineObject]] = Empty
+  def pipelineTags: Property[Seq[PipelineTag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Activate" -> activate.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "ParameterObjects" -> Some(Formattable(parameterObjects)),
-    "ParameterValues" -> parameterValues.map(Formattable(_)),
-    "PipelineObjects" -> pipelineObjects.map(Formattable(_)),
-    "PipelineTags" -> pipelineTags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Activate" -> activate,
+    "Description" -> description,
+    "Name" -> name,
+    "ParameterObjects" -> parameterObjects,
+    "ParameterValues" -> parameterValues,
+    "PipelineObjects" -> pipelineObjects,
+    "PipelineTags" -> pipelineTags
   )
 }

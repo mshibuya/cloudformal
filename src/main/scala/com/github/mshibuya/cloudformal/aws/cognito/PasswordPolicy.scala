@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PasswordPolicy(
-    requireNumbers: Option[Boolean] = None,
-    minimumLength: Option[Int] = None,
-    requireUppercase: Option[Boolean] = None,
-    requireLowercase: Option[Boolean] = None,
-    requireSymbols: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RequireNumbers" -> requireNumbers.map(Formattable(_)),
-    "MinimumLength" -> minimumLength.map(Formattable(_)),
-    "RequireUppercase" -> requireUppercase.map(Formattable(_)),
-    "RequireLowercase" -> requireLowercase.map(Formattable(_)),
-    "RequireSymbols" -> requireSymbols.map(Formattable(_))
+    requireNumbers: Property[Boolean] = Empty,
+    minimumLength: Property[Int] = Empty,
+    requireUppercase: Property[Boolean] = Empty,
+    requireLowercase: Property[Boolean] = Empty,
+    requireSymbols: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RequireNumbers" -> requireNumbers,
+    "MinimumLength" -> minimumLength,
+    "RequireUppercase" -> requireUppercase,
+    "RequireLowercase" -> requireLowercase,
+    "RequireSymbols" -> requireSymbols
   )
 }

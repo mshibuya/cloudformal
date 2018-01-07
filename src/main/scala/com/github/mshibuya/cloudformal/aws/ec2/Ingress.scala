@@ -7,24 +7,24 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Ingress(
-    cidrIp: Option[String] = None,
-    cidrIpv6: Option[String] = None,
-    description: Option[String] = None,
-    fromPort: Option[Int] = None,
-    ipProtocol: String,
-    sourceSecurityGroupId: Option[String] = None,
-    sourceSecurityGroupName: Option[String] = None,
-    sourceSecurityGroupOwnerId: Option[String] = None,
-    toPort: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CidrIp" -> cidrIp.map(Formattable(_)),
-    "CidrIpv6" -> cidrIpv6.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "FromPort" -> fromPort.map(Formattable(_)),
-    "IpProtocol" -> Some(Formattable(ipProtocol)),
-    "SourceSecurityGroupId" -> sourceSecurityGroupId.map(Formattable(_)),
-    "SourceSecurityGroupName" -> sourceSecurityGroupName.map(Formattable(_)),
-    "SourceSecurityGroupOwnerId" -> sourceSecurityGroupOwnerId.map(Formattable(_)),
-    "ToPort" -> toPort.map(Formattable(_))
+    cidrIp: Property[String] = Empty,
+    cidrIpv6: Property[String] = Empty,
+    description: Property[String] = Empty,
+    fromPort: Property[Int] = Empty,
+    ipProtocol: NonEmptyProperty[String],
+    sourceSecurityGroupId: Property[String] = Empty,
+    sourceSecurityGroupName: Property[String] = Empty,
+    sourceSecurityGroupOwnerId: Property[String] = Empty,
+    toPort: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CidrIp" -> cidrIp,
+    "CidrIpv6" -> cidrIpv6,
+    "Description" -> description,
+    "FromPort" -> fromPort,
+    "IpProtocol" -> ipProtocol,
+    "SourceSecurityGroupId" -> sourceSecurityGroupId,
+    "SourceSecurityGroupName" -> sourceSecurityGroupName,
+    "SourceSecurityGroupOwnerId" -> sourceSecurityGroupOwnerId,
+    "ToPort" -> toPort
   )
 }

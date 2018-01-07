@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Settings(
-    entityUrlTemplate: Option[String] = None,
-    executionUrlTemplate: Option[String] = None,
-    revisionUrlTemplate: Option[String] = None,
-    thirdPartyConfigurationUrl: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EntityUrlTemplate" -> entityUrlTemplate.map(Formattable(_)),
-    "ExecutionUrlTemplate" -> executionUrlTemplate.map(Formattable(_)),
-    "RevisionUrlTemplate" -> revisionUrlTemplate.map(Formattable(_)),
-    "ThirdPartyConfigurationUrl" -> thirdPartyConfigurationUrl.map(Formattable(_))
+    entityUrlTemplate: Property[String] = Empty,
+    executionUrlTemplate: Property[String] = Empty,
+    revisionUrlTemplate: Property[String] = Empty,
+    thirdPartyConfigurationUrl: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EntityUrlTemplate" -> entityUrlTemplate,
+    "ExecutionUrlTemplate" -> executionUrlTemplate,
+    "RevisionUrlTemplate" -> revisionUrlTemplate,
+    "ThirdPartyConfigurationUrl" -> thirdPartyConfigurationUrl
   )
 }

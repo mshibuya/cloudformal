@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Tier(
-    name: Option[String] = None,
-    `type`: Option[String] = None,
-    version: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_)),
-    "Version" -> version.map(Formattable(_))
+    name: Property[String] = Empty,
+    `type`: Property[String] = Empty,
+    version: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name,
+    "Type" -> `type`,
+    "Version" -> version
   )
 }

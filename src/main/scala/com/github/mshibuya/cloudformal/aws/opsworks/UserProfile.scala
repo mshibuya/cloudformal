@@ -9,15 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait UserProfile extends Resource {
   val resourceTypeName = "AWS::OpsWorks::UserProfile"
 
-  def allowSelfManagement: Option[Boolean] = None
-  def iamUserArn: String
-  def sshPublicKey: Option[String] = None
-  def sshUsername: Option[String] = None
+  def sshUsernameAttribute: Expression[String] = Fn.GetAtt(logicalId, "SshUsername")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AllowSelfManagement" -> allowSelfManagement.map(Formattable(_)),
-    "IamUserArn" -> Some(Formattable(iamUserArn)),
-    "SshPublicKey" -> sshPublicKey.map(Formattable(_)),
-    "SshUsername" -> sshUsername.map(Formattable(_))
+  def allowSelfManagement: Property[Boolean] = Empty
+  def iamUserArn: NonEmptyProperty[String]
+  def sshPublicKey: Property[String] = Empty
+  def sshUsername: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AllowSelfManagement" -> allowSelfManagement,
+    "IamUserArn" -> iamUserArn,
+    "SshPublicKey" -> sshPublicKey,
+    "SshUsername" -> sshUsername
   )
 }

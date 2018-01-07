@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait SubscriptionFilter extends Resource {
   val resourceTypeName = "AWS::Logs::SubscriptionFilter"
 
-  def destinationArn: String
-  def filterPattern: String
-  def logGroupName: String
-  def roleArn: Option[String] = None
+  def destinationArn: NonEmptyProperty[String]
+  def filterPattern: NonEmptyProperty[String]
+  def logGroupName: NonEmptyProperty[String]
+  def roleArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DestinationArn" -> Some(Formattable(destinationArn)),
-    "FilterPattern" -> Some(Formattable(filterPattern)),
-    "LogGroupName" -> Some(Formattable(logGroupName)),
-    "RoleArn" -> roleArn.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DestinationArn" -> destinationArn,
+    "FilterPattern" -> filterPattern,
+    "LogGroupName" -> logGroupName,
+    "RoleArn" -> roleArn
   )
 }

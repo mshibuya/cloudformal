@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AccessLoggingPolicy(
-    emitInterval: Option[Int] = None,
-    enabled: Boolean,
-    s3BucketName: String,
-    s3BucketPrefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EmitInterval" -> emitInterval.map(Formattable(_)),
-    "Enabled" -> Some(Formattable(enabled)),
-    "S3BucketName" -> Some(Formattable(s3BucketName)),
-    "S3BucketPrefix" -> s3BucketPrefix.map(Formattable(_))
+    emitInterval: Property[Int] = Empty,
+    enabled: NonEmptyProperty[Boolean],
+    s3BucketName: NonEmptyProperty[String],
+    s3BucketPrefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EmitInterval" -> emitInterval,
+    "Enabled" -> enabled,
+    "S3BucketName" -> s3BucketName,
+    "S3BucketPrefix" -> s3BucketPrefix
   )
 }

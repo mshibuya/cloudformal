@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ActionTypeId(
-    category: String,
-    owner: String,
-    provider: String,
-    version: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Category" -> Some(Formattable(category)),
-    "Owner" -> Some(Formattable(owner)),
-    "Provider" -> Some(Formattable(provider)),
-    "Version" -> Some(Formattable(version))
+    category: NonEmptyProperty[String],
+    owner: NonEmptyProperty[String],
+    provider: NonEmptyProperty[String],
+    version: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Category" -> category,
+    "Owner" -> owner,
+    "Provider" -> provider,
+    "Version" -> version
   )
 }

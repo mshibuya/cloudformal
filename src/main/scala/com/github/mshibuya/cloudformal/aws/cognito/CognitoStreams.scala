@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CognitoStreams(
-    streamingStatus: Option[String] = None,
-    streamName: Option[String] = None,
-    roleArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "StreamingStatus" -> streamingStatus.map(Formattable(_)),
-    "StreamName" -> streamName.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_))
+    streamingStatus: Property[String] = Empty,
+    streamName: Property[String] = Empty,
+    roleArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "StreamingStatus" -> streamingStatus,
+    "StreamName" -> streamName,
+    "RoleArn" -> roleArn
   )
 }

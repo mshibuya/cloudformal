@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class QuotaSettings(
-    limit: Option[Int] = None,
-    offset: Option[Int] = None,
-    period: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Limit" -> limit.map(Formattable(_)),
-    "Offset" -> offset.map(Formattable(_)),
-    "Period" -> period.map(Formattable(_))
+    limit: Property[Int] = Empty,
+    offset: Property[Int] = Empty,
+    period: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Limit" -> limit,
+    "Offset" -> offset,
+    "Period" -> period
   )
 }

@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Source(
-    `type`: String,
-    auth: Option[SourceAuth] = None,
-    buildSpec: Option[String] = None,
-    location: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Auth" -> auth.map(Formattable(_)),
-    "BuildSpec" -> buildSpec.map(Formattable(_)),
-    "Location" -> location.map(Formattable(_))
+    `type`: NonEmptyProperty[String],
+    auth: Property[SourceAuth] = Empty,
+    buildSpec: Property[String] = Empty,
+    location: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "Auth" -> auth,
+    "BuildSpec" -> buildSpec,
+    "Location" -> location
   )
 }

@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait IPSet extends Resource {
   val resourceTypeName = "AWS::WAF::IPSet"
 
-  def iPSetDescriptors: Option[Seq[IPSetDescriptor]] = None
-  def name: String
+  def iPSetDescriptors: Property[Seq[IPSetDescriptor]] = Empty
+  def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "IPSetDescriptors" -> iPSetDescriptors.map(Formattable(_)),
-    "Name" -> Some(Formattable(name))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "IPSetDescriptors" -> iPSetDescriptors,
+    "Name" -> name
   )
 }

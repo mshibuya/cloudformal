@@ -11,17 +11,17 @@ import scala.collection.immutable.ListMap
 trait Stack extends Resource {
   val resourceTypeName = "AWS::CloudFormation::Stack"
 
-  def notificationARNs: Option[Seq[String]] = None
-  def parameters: Option[ListMap[String, String]] = None
-  def tags: Option[Seq[Tag]] = None
-  def templateURL: String
-  def timeoutInMinutes: Option[Int] = None
+  def notificationARNs: Property[Seq[String]] = Empty
+  def parameters: Property[ListMap[String, String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def templateURL: NonEmptyProperty[String]
+  def timeoutInMinutes: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "NotificationARNs" -> notificationARNs.map(Formattable(_)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TemplateURL" -> Some(Formattable(templateURL)),
-    "TimeoutInMinutes" -> timeoutInMinutes.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "NotificationARNs" -> notificationARNs,
+    "Parameters" -> parameters,
+    "Tags" -> tags,
+    "TemplateURL" -> templateURL,
+    "TimeoutInMinutes" -> timeoutInMinutes
   )
 }

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Certificate(
-    certificateArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CertificateArn" -> certificateArn.map(Formattable(_))
+    certificateArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CertificateArn" -> certificateArn
   )
 }

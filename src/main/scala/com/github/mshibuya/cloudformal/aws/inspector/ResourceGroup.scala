@@ -9,9 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ResourceGroup extends Resource {
   val resourceTypeName = "AWS::Inspector::ResourceGroup"
 
-  def resourceGroupTags: Seq[Tag]
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ResourceGroupTags" -> Some(Formattable(resourceGroupTags))
+  def resourceGroupTags: NonEmptyProperty[Seq[Tag]]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ResourceGroupTags" -> resourceGroupTags
   )
 }

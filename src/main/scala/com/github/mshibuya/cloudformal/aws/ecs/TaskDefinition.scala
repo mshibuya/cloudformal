@@ -9,27 +9,27 @@ import com.github.mshibuya.cloudformal.model._
 trait TaskDefinition extends Resource {
   val resourceTypeName = "AWS::ECS::TaskDefinition"
 
-  def containerDefinitions: Option[Seq[ContainerDefinition]] = None
-  def cpu: Option[String] = None
-  def executionRoleArn: Option[String] = None
-  def family: Option[String] = None
-  def memory: Option[String] = None
-  def networkMode: Option[String] = None
-  def placementConstraints: Option[Seq[TaskDefinitionPlacementConstraint]] = None
-  def requiresCompatibilities: Option[Seq[String]] = None
-  def taskRoleArn: Option[String] = None
-  def volumes: Option[Seq[Volume]] = None
+  def containerDefinitions: Property[Seq[ContainerDefinition]] = Empty
+  def cpu: Property[String] = Empty
+  def executionRoleArn: Property[String] = Empty
+  def family: Property[String] = Empty
+  def memory: Property[String] = Empty
+  def networkMode: Property[String] = Empty
+  def placementConstraints: Property[Seq[TaskDefinitionPlacementConstraint]] = Empty
+  def requiresCompatibilities: Property[Seq[String]] = Empty
+  def taskRoleArn: Property[String] = Empty
+  def volumes: Property[Seq[Volume]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ContainerDefinitions" -> containerDefinitions.map(Formattable(_)),
-    "Cpu" -> cpu.map(Formattable(_)),
-    "ExecutionRoleArn" -> executionRoleArn.map(Formattable(_)),
-    "Family" -> family.map(Formattable(_)),
-    "Memory" -> memory.map(Formattable(_)),
-    "NetworkMode" -> networkMode.map(Formattable(_)),
-    "PlacementConstraints" -> placementConstraints.map(Formattable(_)),
-    "RequiresCompatibilities" -> requiresCompatibilities.map(Formattable(_)),
-    "TaskRoleArn" -> taskRoleArn.map(Formattable(_)),
-    "Volumes" -> volumes.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ContainerDefinitions" -> containerDefinitions,
+    "Cpu" -> cpu,
+    "ExecutionRoleArn" -> executionRoleArn,
+    "Family" -> family,
+    "Memory" -> memory,
+    "NetworkMode" -> networkMode,
+    "PlacementConstraints" -> placementConstraints,
+    "RequiresCompatibilities" -> requiresCompatibilities,
+    "TaskRoleArn" -> taskRoleArn,
+    "Volumes" -> volumes
   )
 }

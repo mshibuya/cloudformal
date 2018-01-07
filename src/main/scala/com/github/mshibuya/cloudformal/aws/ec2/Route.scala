@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait Route extends Resource {
   val resourceTypeName = "AWS::EC2::Route"
 
-  def destinationCidrBlock: Option[String] = None
-  def destinationIpv6CidrBlock: Option[String] = None
-  def egressOnlyInternetGatewayId: Option[String] = None
-  def gatewayId: Option[String] = None
-  def instanceId: Option[String] = None
-  def natGatewayId: Option[String] = None
-  def networkInterfaceId: Option[String] = None
-  def routeTableId: String
-  def vpcPeeringConnectionId: Option[String] = None
+  def destinationCidrBlock: Property[String] = Empty
+  def destinationIpv6CidrBlock: Property[String] = Empty
+  def egressOnlyInternetGatewayId: Property[String] = Empty
+  def gatewayId: Property[String] = Empty
+  def instanceId: Property[String] = Empty
+  def natGatewayId: Property[String] = Empty
+  def networkInterfaceId: Property[String] = Empty
+  def routeTableId: NonEmptyProperty[String]
+  def vpcPeeringConnectionId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DestinationCidrBlock" -> destinationCidrBlock.map(Formattable(_)),
-    "DestinationIpv6CidrBlock" -> destinationIpv6CidrBlock.map(Formattable(_)),
-    "EgressOnlyInternetGatewayId" -> egressOnlyInternetGatewayId.map(Formattable(_)),
-    "GatewayId" -> gatewayId.map(Formattable(_)),
-    "InstanceId" -> instanceId.map(Formattable(_)),
-    "NatGatewayId" -> natGatewayId.map(Formattable(_)),
-    "NetworkInterfaceId" -> networkInterfaceId.map(Formattable(_)),
-    "RouteTableId" -> Some(Formattable(routeTableId)),
-    "VpcPeeringConnectionId" -> vpcPeeringConnectionId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DestinationCidrBlock" -> destinationCidrBlock,
+    "DestinationIpv6CidrBlock" -> destinationIpv6CidrBlock,
+    "EgressOnlyInternetGatewayId" -> egressOnlyInternetGatewayId,
+    "GatewayId" -> gatewayId,
+    "InstanceId" -> instanceId,
+    "NatGatewayId" -> natGatewayId,
+    "NetworkInterfaceId" -> networkInterfaceId,
+    "RouteTableId" -> routeTableId,
+    "VpcPeeringConnectionId" -> vpcPeeringConnectionId
   )
 }

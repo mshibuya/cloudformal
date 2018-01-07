@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RecordColumn(
-    mapping: Option[String] = None,
-    sqlType: String,
-    name: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Mapping" -> mapping.map(Formattable(_)),
-    "SqlType" -> Some(Formattable(sqlType)),
-    "Name" -> Some(Formattable(name))
+    mapping: Property[String] = Empty,
+    sqlType: NonEmptyProperty[String],
+    name: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Mapping" -> mapping,
+    "SqlType" -> sqlType,
+    "Name" -> name
   )
 }

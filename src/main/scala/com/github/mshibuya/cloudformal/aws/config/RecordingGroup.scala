@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RecordingGroup(
-    allSupported: Option[Boolean] = None,
-    includeGlobalResourceTypes: Option[Boolean] = None,
-    resourceTypes: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AllSupported" -> allSupported.map(Formattable(_)),
-    "IncludeGlobalResourceTypes" -> includeGlobalResourceTypes.map(Formattable(_)),
-    "ResourceTypes" -> resourceTypes.map(Formattable(_))
+    allSupported: Property[Boolean] = Empty,
+    includeGlobalResourceTypes: Property[Boolean] = Empty,
+    resourceTypes: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AllSupported" -> allSupported,
+    "IncludeGlobalResourceTypes" -> includeGlobalResourceTypes,
+    "ResourceTypes" -> resourceTypes
   )
 }

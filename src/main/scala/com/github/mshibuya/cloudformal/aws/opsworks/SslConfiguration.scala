@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SslConfiguration(
-    certificate: Option[String] = None,
-    chain: Option[String] = None,
-    privateKey: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Certificate" -> certificate.map(Formattable(_)),
-    "Chain" -> chain.map(Formattable(_)),
-    "PrivateKey" -> privateKey.map(Formattable(_))
+    certificate: Property[String] = Empty,
+    chain: Property[String] = Empty,
+    privateKey: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Certificate" -> certificate,
+    "Chain" -> chain,
+    "PrivateKey" -> privateKey
   )
 }

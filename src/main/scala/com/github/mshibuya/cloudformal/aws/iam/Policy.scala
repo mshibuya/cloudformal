@@ -10,17 +10,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Policy extends Resource {
   val resourceTypeName = "AWS::IAM::Policy"
 
-  def groups: Option[Seq[String]] = None
-  def policyDocument: Json
-  def policyName: String
-  def roles: Option[Seq[String]] = None
-  def users: Option[Seq[String]] = None
+  def groups: Property[Seq[String]] = Empty
+  def policyDocument: NonEmptyProperty[Json]
+  def policyName: NonEmptyProperty[String]
+  def roles: Property[Seq[String]] = Empty
+  def users: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Groups" -> groups.map(Formattable(_)),
-    "PolicyDocument" -> Some(Formattable(policyDocument)),
-    "PolicyName" -> Some(Formattable(policyName)),
-    "Roles" -> roles.map(Formattable(_)),
-    "Users" -> users.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Groups" -> groups,
+    "PolicyDocument" -> policyDocument,
+    "PolicyName" -> policyName,
+    "Roles" -> roles,
+    "Users" -> users
   )
 }

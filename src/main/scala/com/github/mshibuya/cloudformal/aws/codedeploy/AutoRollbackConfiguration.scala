@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AutoRollbackConfiguration(
-    enabled: Option[Boolean] = None,
-    events: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Enabled" -> enabled.map(Formattable(_)),
-    "Events" -> events.map(Formattable(_))
+    enabled: Property[Boolean] = Empty,
+    events: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Enabled" -> enabled,
+    "Events" -> events
   )
 }

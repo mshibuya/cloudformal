@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait DHCPOptions extends Resource {
   val resourceTypeName = "AWS::EC2::DHCPOptions"
 
-  def domainName: Option[String] = None
-  def domainNameServers: Option[Seq[String]] = None
-  def netbiosNameServers: Option[Seq[String]] = None
-  def netbiosNodeType: Option[Int] = None
-  def ntpServers: Option[Seq[String]] = None
-  def tags: Option[Seq[Tag]] = None
+  def domainName: Property[String] = Empty
+  def domainNameServers: Property[Seq[String]] = Empty
+  def netbiosNameServers: Property[Seq[String]] = Empty
+  def netbiosNodeType: Property[Int] = Empty
+  def ntpServers: Property[Seq[String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DomainName" -> domainName.map(Formattable(_)),
-    "DomainNameServers" -> domainNameServers.map(Formattable(_)),
-    "NetbiosNameServers" -> netbiosNameServers.map(Formattable(_)),
-    "NetbiosNodeType" -> netbiosNodeType.map(Formattable(_)),
-    "NtpServers" -> ntpServers.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DomainName" -> domainName,
+    "DomainNameServers" -> domainNameServers,
+    "NetbiosNameServers" -> netbiosNameServers,
+    "NetbiosNodeType" -> netbiosNodeType,
+    "NtpServers" -> ntpServers,
+    "Tags" -> tags
   )
 }

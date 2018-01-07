@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class KinesisParameters(
-    partitionKeyPath: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PartitionKeyPath" -> Some(Formattable(partitionKeyPath))
+    partitionKeyPath: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PartitionKeyPath" -> partitionKeyPath
   )
 }

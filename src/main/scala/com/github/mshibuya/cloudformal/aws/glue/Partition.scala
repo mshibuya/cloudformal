@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Partition extends Resource {
   val resourceTypeName = "AWS::Glue::Partition"
 
-  def tableName: String
-  def databaseName: String
-  def catalogId: String
-  def partitionInput: PartitionInput
+  def tableName: NonEmptyProperty[String]
+  def databaseName: NonEmptyProperty[String]
+  def catalogId: NonEmptyProperty[String]
+  def partitionInput: NonEmptyProperty[PartitionInput]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "TableName" -> Some(Formattable(tableName)),
-    "DatabaseName" -> Some(Formattable(databaseName)),
-    "CatalogId" -> Some(Formattable(catalogId)),
-    "PartitionInput" -> Some(Formattable(partitionInput))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "TableName" -> tableName,
+    "DatabaseName" -> databaseName,
+    "CatalogId" -> catalogId,
+    "PartitionInput" -> partitionInput
   )
 }

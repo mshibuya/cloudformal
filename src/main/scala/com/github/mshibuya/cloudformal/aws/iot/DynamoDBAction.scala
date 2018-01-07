@@ -7,24 +7,24 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DynamoDBAction(
-    hashKeyField: String,
-    hashKeyType: Option[String] = None,
-    hashKeyValue: String,
-    payloadField: Option[String] = None,
-    rangeKeyField: String,
-    rangeKeyType: Option[String] = None,
-    rangeKeyValue: String,
-    roleArn: String,
-    tableName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HashKeyField" -> Some(Formattable(hashKeyField)),
-    "HashKeyType" -> hashKeyType.map(Formattable(_)),
-    "HashKeyValue" -> Some(Formattable(hashKeyValue)),
-    "PayloadField" -> payloadField.map(Formattable(_)),
-    "RangeKeyField" -> Some(Formattable(rangeKeyField)),
-    "RangeKeyType" -> rangeKeyType.map(Formattable(_)),
-    "RangeKeyValue" -> Some(Formattable(rangeKeyValue)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "TableName" -> Some(Formattable(tableName))
+    hashKeyField: NonEmptyProperty[String],
+    hashKeyType: Property[String] = Empty,
+    hashKeyValue: NonEmptyProperty[String],
+    payloadField: Property[String] = Empty,
+    rangeKeyField: NonEmptyProperty[String],
+    rangeKeyType: Property[String] = Empty,
+    rangeKeyValue: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String],
+    tableName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HashKeyField" -> hashKeyField,
+    "HashKeyType" -> hashKeyType,
+    "HashKeyValue" -> hashKeyValue,
+    "PayloadField" -> payloadField,
+    "RangeKeyField" -> rangeKeyField,
+    "RangeKeyType" -> rangeKeyType,
+    "RangeKeyValue" -> rangeKeyValue,
+    "RoleArn" -> roleArn,
+    "TableName" -> tableName
   )
 }

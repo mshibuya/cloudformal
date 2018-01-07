@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PlacementStrategy(
-    field: Option[String] = None,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Field" -> field.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+    field: Property[String] = Empty,
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Field" -> field,
+    "Type" -> `type`
   )
 }

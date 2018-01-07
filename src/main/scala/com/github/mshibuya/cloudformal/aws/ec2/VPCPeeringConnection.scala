@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait VPCPeeringConnection extends Resource {
   val resourceTypeName = "AWS::EC2::VPCPeeringConnection"
 
-  def peerOwnerId: Option[String] = None
-  def peerRoleArn: Option[String] = None
-  def peerVpcId: String
-  def tags: Option[Seq[Tag]] = None
-  def vpcId: String
+  def peerOwnerId: Property[String] = Empty
+  def peerRoleArn: Property[String] = Empty
+  def peerVpcId: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PeerOwnerId" -> peerOwnerId.map(Formattable(_)),
-    "PeerRoleArn" -> peerRoleArn.map(Formattable(_)),
-    "PeerVpcId" -> Some(Formattable(peerVpcId)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PeerOwnerId" -> peerOwnerId,
+    "PeerRoleArn" -> peerRoleArn,
+    "PeerVpcId" -> peerVpcId,
+    "Tags" -> tags,
+    "VpcId" -> vpcId
   )
 }

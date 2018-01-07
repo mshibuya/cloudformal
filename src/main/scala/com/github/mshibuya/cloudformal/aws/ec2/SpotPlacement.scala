@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SpotPlacement(
-    availabilityZone: Option[String] = None,
-    groupName: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AvailabilityZone" -> availabilityZone.map(Formattable(_)),
-    "GroupName" -> groupName.map(Formattable(_))
+    availabilityZone: Property[String] = Empty,
+    groupName: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AvailabilityZone" -> availabilityZone,
+    "GroupName" -> groupName
   )
 }

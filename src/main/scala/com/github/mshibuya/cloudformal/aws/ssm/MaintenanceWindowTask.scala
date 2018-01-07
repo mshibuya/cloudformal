@@ -10,33 +10,33 @@ import com.github.mshibuya.cloudformal.model._
 trait MaintenanceWindowTask extends Resource {
   val resourceTypeName = "AWS::SSM::MaintenanceWindowTask"
 
-  def maxErrors: String
-  def description: Option[String] = None
-  def serviceRoleArn: String
-  def priority: Int
-  def maxConcurrency: String
-  def targets: Seq[Target]
-  def name: Option[String] = None
-  def taskArn: String
-  def taskInvocationParameters: Option[TaskInvocationParameters] = None
-  def windowId: Option[String] = None
-  def taskParameters: Option[Json] = None
-  def taskType: String
-  def loggingInfo: Option[LoggingInfo] = None
+  def maxErrors: NonEmptyProperty[String]
+  def description: Property[String] = Empty
+  def serviceRoleArn: NonEmptyProperty[String]
+  def priority: NonEmptyProperty[Int]
+  def maxConcurrency: NonEmptyProperty[String]
+  def targets: NonEmptyProperty[Seq[Target]]
+  def name: Property[String] = Empty
+  def taskArn: NonEmptyProperty[String]
+  def taskInvocationParameters: Property[TaskInvocationParameters] = Empty
+  def windowId: Property[String] = Empty
+  def taskParameters: Property[Json] = Empty
+  def taskType: NonEmptyProperty[String]
+  def loggingInfo: Property[LoggingInfo] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "MaxErrors" -> Some(Formattable(maxErrors)),
-    "Description" -> description.map(Formattable(_)),
-    "ServiceRoleArn" -> Some(Formattable(serviceRoleArn)),
-    "Priority" -> Some(Formattable(priority)),
-    "MaxConcurrency" -> Some(Formattable(maxConcurrency)),
-    "Targets" -> Some(Formattable(targets)),
-    "Name" -> name.map(Formattable(_)),
-    "TaskArn" -> Some(Formattable(taskArn)),
-    "TaskInvocationParameters" -> taskInvocationParameters.map(Formattable(_)),
-    "WindowId" -> windowId.map(Formattable(_)),
-    "TaskParameters" -> taskParameters.map(Formattable(_)),
-    "TaskType" -> Some(Formattable(taskType)),
-    "LoggingInfo" -> loggingInfo.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "MaxErrors" -> maxErrors,
+    "Description" -> description,
+    "ServiceRoleArn" -> serviceRoleArn,
+    "Priority" -> priority,
+    "MaxConcurrency" -> maxConcurrency,
+    "Targets" -> targets,
+    "Name" -> name,
+    "TaskArn" -> taskArn,
+    "TaskInvocationParameters" -> taskInvocationParameters,
+    "WindowId" -> windowId,
+    "TaskParameters" -> taskParameters,
+    "TaskType" -> taskType,
+    "LoggingInfo" -> loggingInfo
   )
 }

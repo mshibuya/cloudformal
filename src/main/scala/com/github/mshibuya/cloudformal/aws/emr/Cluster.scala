@@ -10,41 +10,43 @@ import com.github.mshibuya.cloudformal.model._
 trait Cluster extends Resource {
   val resourceTypeName = "AWS::EMR::Cluster"
 
-  def additionalInfo: Option[Json] = None
-  def applications: Option[Seq[Application]] = None
-  def autoScalingRole: Option[String] = None
-  def bootstrapActions: Option[Seq[BootstrapActionConfig]] = None
-  def configurations: Option[Seq[Configuration]] = None
-  def customAmiId: Option[String] = None
-  def ebsRootVolumeSize: Option[Int] = None
-  def instances: JobFlowInstancesConfig
-  def jobFlowRole: String
-  def logUri: Option[String] = None
-  def name: String
-  def releaseLabel: Option[String] = None
-  def scaleDownBehavior: Option[String] = None
-  def securityConfiguration: Option[String] = None
-  def serviceRole: String
-  def tags: Option[Seq[Tag]] = None
-  def visibleToAllUsers: Option[Boolean] = None
+  def masterPublicDNSAttribute: Expression[String] = Fn.GetAtt(logicalId, "MasterPublicDNS")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AdditionalInfo" -> additionalInfo.map(Formattable(_)),
-    "Applications" -> applications.map(Formattable(_)),
-    "AutoScalingRole" -> autoScalingRole.map(Formattable(_)),
-    "BootstrapActions" -> bootstrapActions.map(Formattable(_)),
-    "Configurations" -> configurations.map(Formattable(_)),
-    "CustomAmiId" -> customAmiId.map(Formattable(_)),
-    "EbsRootVolumeSize" -> ebsRootVolumeSize.map(Formattable(_)),
-    "Instances" -> Some(Formattable(instances)),
-    "JobFlowRole" -> Some(Formattable(jobFlowRole)),
-    "LogUri" -> logUri.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "ReleaseLabel" -> releaseLabel.map(Formattable(_)),
-    "ScaleDownBehavior" -> scaleDownBehavior.map(Formattable(_)),
-    "SecurityConfiguration" -> securityConfiguration.map(Formattable(_)),
-    "ServiceRole" -> Some(Formattable(serviceRole)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VisibleToAllUsers" -> visibleToAllUsers.map(Formattable(_))
+  def additionalInfo: Property[Json] = Empty
+  def applications: Property[Seq[Application]] = Empty
+  def autoScalingRole: Property[String] = Empty
+  def bootstrapActions: Property[Seq[BootstrapActionConfig]] = Empty
+  def configurations: Property[Seq[Configuration]] = Empty
+  def customAmiId: Property[String] = Empty
+  def ebsRootVolumeSize: Property[Int] = Empty
+  def instances: NonEmptyProperty[JobFlowInstancesConfig]
+  def jobFlowRole: NonEmptyProperty[String]
+  def logUri: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+  def releaseLabel: Property[String] = Empty
+  def scaleDownBehavior: Property[String] = Empty
+  def securityConfiguration: Property[String] = Empty
+  def serviceRole: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def visibleToAllUsers: Property[Boolean] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AdditionalInfo" -> additionalInfo,
+    "Applications" -> applications,
+    "AutoScalingRole" -> autoScalingRole,
+    "BootstrapActions" -> bootstrapActions,
+    "Configurations" -> configurations,
+    "CustomAmiId" -> customAmiId,
+    "EbsRootVolumeSize" -> ebsRootVolumeSize,
+    "Instances" -> instances,
+    "JobFlowRole" -> jobFlowRole,
+    "LogUri" -> logUri,
+    "Name" -> name,
+    "ReleaseLabel" -> releaseLabel,
+    "ScaleDownBehavior" -> scaleDownBehavior,
+    "SecurityConfiguration" -> securityConfiguration,
+    "ServiceRole" -> serviceRole,
+    "Tags" -> tags,
+    "VisibleToAllUsers" -> visibleToAllUsers
   )
 }

@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait SizeConstraintSet extends Resource {
   val resourceTypeName = "AWS::WAFRegional::SizeConstraintSet"
 
-  def sizeConstraints: Option[Seq[SizeConstraint]] = None
-  def name: String
+  def sizeConstraints: Property[Seq[SizeConstraint]] = Empty
+  def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "SizeConstraints" -> sizeConstraints.map(Formattable(_)),
-    "Name" -> Some(Formattable(name))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "SizeConstraints" -> sizeConstraints,
+    "Name" -> name
   )
 }

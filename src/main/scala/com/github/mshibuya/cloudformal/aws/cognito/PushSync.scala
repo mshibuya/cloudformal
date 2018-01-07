@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PushSync(
-    applicationArns: Option[Seq[String]] = None,
-    roleArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ApplicationArns" -> applicationArns.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_))
+    applicationArns: Property[Seq[String]] = Empty,
+    roleArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ApplicationArns" -> applicationArns,
+    "RoleArn" -> roleArn
   )
 }

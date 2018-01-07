@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Matcher(
-    httpCode: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HttpCode" -> Some(Formattable(httpCode))
+    httpCode: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HttpCode" -> httpCode
   )
 }

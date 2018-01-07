@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait Classifier extends Resource {
   val resourceTypeName = "AWS::Glue::Classifier"
 
-  def grokClassifier: Option[GrokClassifier] = None
+  def grokClassifier: Property[GrokClassifier] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "GrokClassifier" -> grokClassifier.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "GrokClassifier" -> grokClassifier
   )
 }

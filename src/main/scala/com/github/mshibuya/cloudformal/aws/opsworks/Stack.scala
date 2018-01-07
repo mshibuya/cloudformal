@@ -12,57 +12,57 @@ import scala.collection.immutable.ListMap
 trait Stack extends Resource {
   val resourceTypeName = "AWS::OpsWorks::Stack"
 
-  def agentVersion: Option[String] = None
-  def attributes: Option[ListMap[String, String]] = None
-  def chefConfiguration: Option[ChefConfiguration] = None
-  def cloneAppIds: Option[Seq[String]] = None
-  def clonePermissions: Option[Boolean] = None
-  def configurationManager: Option[StackConfigurationManager] = None
-  def customCookbooksSource: Option[Source] = None
-  def customJson: Option[Json] = None
-  def defaultAvailabilityZone: Option[String] = None
-  def defaultInstanceProfileArn: String
-  def defaultOs: Option[String] = None
-  def defaultRootDeviceType: Option[String] = None
-  def defaultSshKeyName: Option[String] = None
-  def defaultSubnetId: Option[String] = None
-  def ecsClusterArn: Option[String] = None
-  def elasticIps: Option[Seq[ElasticIp]] = None
-  def hostnameTheme: Option[String] = None
-  def name: String
-  def rdsDbInstances: Option[Seq[RdsDbInstance]] = None
-  def serviceRoleArn: String
-  def sourceStackId: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def useCustomCookbooks: Option[Boolean] = None
-  def useOpsworksSecurityGroups: Option[Boolean] = None
-  def vpcId: Option[String] = None
+  def agentVersion: Property[String] = Empty
+  def attributes: Property[ListMap[String, String]] = Empty
+  def chefConfiguration: Property[ChefConfiguration] = Empty
+  def cloneAppIds: Property[Seq[String]] = Empty
+  def clonePermissions: Property[Boolean] = Empty
+  def configurationManager: Property[StackConfigurationManager] = Empty
+  def customCookbooksSource: Property[Source] = Empty
+  def customJson: Property[Json] = Empty
+  def defaultAvailabilityZone: Property[String] = Empty
+  def defaultInstanceProfileArn: NonEmptyProperty[String]
+  def defaultOs: Property[String] = Empty
+  def defaultRootDeviceType: Property[String] = Empty
+  def defaultSshKeyName: Property[String] = Empty
+  def defaultSubnetId: Property[String] = Empty
+  def ecsClusterArn: Property[String] = Empty
+  def elasticIps: Property[Seq[ElasticIp]] = Empty
+  def hostnameTheme: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+  def rdsDbInstances: Property[Seq[RdsDbInstance]] = Empty
+  def serviceRoleArn: NonEmptyProperty[String]
+  def sourceStackId: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def useCustomCookbooks: Property[Boolean] = Empty
+  def useOpsworksSecurityGroups: Property[Boolean] = Empty
+  def vpcId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AgentVersion" -> agentVersion.map(Formattable(_)),
-    "Attributes" -> attributes.map(Formattable(_)),
-    "ChefConfiguration" -> chefConfiguration.map(Formattable(_)),
-    "CloneAppIds" -> cloneAppIds.map(Formattable(_)),
-    "ClonePermissions" -> clonePermissions.map(Formattable(_)),
-    "ConfigurationManager" -> configurationManager.map(Formattable(_)),
-    "CustomCookbooksSource" -> customCookbooksSource.map(Formattable(_)),
-    "CustomJson" -> customJson.map(Formattable(_)),
-    "DefaultAvailabilityZone" -> defaultAvailabilityZone.map(Formattable(_)),
-    "DefaultInstanceProfileArn" -> Some(Formattable(defaultInstanceProfileArn)),
-    "DefaultOs" -> defaultOs.map(Formattable(_)),
-    "DefaultRootDeviceType" -> defaultRootDeviceType.map(Formattable(_)),
-    "DefaultSshKeyName" -> defaultSshKeyName.map(Formattable(_)),
-    "DefaultSubnetId" -> defaultSubnetId.map(Formattable(_)),
-    "EcsClusterArn" -> ecsClusterArn.map(Formattable(_)),
-    "ElasticIps" -> elasticIps.map(Formattable(_)),
-    "HostnameTheme" -> hostnameTheme.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "RdsDbInstances" -> rdsDbInstances.map(Formattable(_)),
-    "ServiceRoleArn" -> Some(Formattable(serviceRoleArn)),
-    "SourceStackId" -> sourceStackId.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "UseCustomCookbooks" -> useCustomCookbooks.map(Formattable(_)),
-    "UseOpsworksSecurityGroups" -> useOpsworksSecurityGroups.map(Formattable(_)),
-    "VpcId" -> vpcId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AgentVersion" -> agentVersion,
+    "Attributes" -> attributes,
+    "ChefConfiguration" -> chefConfiguration,
+    "CloneAppIds" -> cloneAppIds,
+    "ClonePermissions" -> clonePermissions,
+    "ConfigurationManager" -> configurationManager,
+    "CustomCookbooksSource" -> customCookbooksSource,
+    "CustomJson" -> customJson,
+    "DefaultAvailabilityZone" -> defaultAvailabilityZone,
+    "DefaultInstanceProfileArn" -> defaultInstanceProfileArn,
+    "DefaultOs" -> defaultOs,
+    "DefaultRootDeviceType" -> defaultRootDeviceType,
+    "DefaultSshKeyName" -> defaultSshKeyName,
+    "DefaultSubnetId" -> defaultSubnetId,
+    "EcsClusterArn" -> ecsClusterArn,
+    "ElasticIps" -> elasticIps,
+    "HostnameTheme" -> hostnameTheme,
+    "Name" -> name,
+    "RdsDbInstances" -> rdsDbInstances,
+    "ServiceRoleArn" -> serviceRoleArn,
+    "SourceStackId" -> sourceStackId,
+    "Tags" -> tags,
+    "UseCustomCookbooks" -> useCustomCookbooks,
+    "UseOpsworksSecurityGroups" -> useOpsworksSecurityGroups,
+    "VpcId" -> vpcId
   )
 }

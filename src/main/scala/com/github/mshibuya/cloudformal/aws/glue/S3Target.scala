@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3Target(
-    path: Option[String] = None,
-    exclusions: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Path" -> path.map(Formattable(_)),
-    "Exclusions" -> exclusions.map(Formattable(_))
+    path: Property[String] = Empty,
+    exclusions: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Path" -> path,
+    "Exclusions" -> exclusions
   )
 }

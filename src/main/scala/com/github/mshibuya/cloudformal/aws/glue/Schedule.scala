@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Schedule(
-    scheduleExpression: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ScheduleExpression" -> scheduleExpression.map(Formattable(_))
+    scheduleExpression: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ScheduleExpression" -> scheduleExpression
   )
 }

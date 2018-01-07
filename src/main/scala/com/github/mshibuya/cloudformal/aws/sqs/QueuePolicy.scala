@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model._
 trait QueuePolicy extends Resource {
   val resourceTypeName = "AWS::SQS::QueuePolicy"
 
-  def policyDocument: Json
-  def queues: Seq[String]
+  def policyDocument: NonEmptyProperty[Json]
+  def queues: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PolicyDocument" -> Some(Formattable(policyDocument)),
-    "Queues" -> Some(Formattable(queues))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PolicyDocument" -> policyDocument,
+    "Queues" -> queues
   )
 }

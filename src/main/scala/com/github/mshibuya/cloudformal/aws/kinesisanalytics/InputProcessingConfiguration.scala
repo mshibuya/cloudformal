@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InputProcessingConfiguration(
-    inputLambdaProcessor: Option[InputLambdaProcessor] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "InputLambdaProcessor" -> inputLambdaProcessor.map(Formattable(_))
+    inputLambdaProcessor: Property[InputLambdaProcessor] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "InputLambdaProcessor" -> inputLambdaProcessor
   )
 }

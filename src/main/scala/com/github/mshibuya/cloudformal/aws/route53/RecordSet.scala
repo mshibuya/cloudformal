@@ -9,35 +9,35 @@ import com.github.mshibuya.cloudformal.model._
 trait RecordSet extends Resource {
   val resourceTypeName = "AWS::Route53::RecordSet"
 
-  def aliasTarget: Option[AliasTarget] = None
-  def comment: Option[String] = None
-  def failover: Option[String] = None
-  def geoLocation: Option[GeoLocation] = None
-  def healthCheckId: Option[String] = None
-  def hostedZoneId: Option[String] = None
-  def hostedZoneName: Option[String] = None
-  def name: String
-  def region: Option[String] = None
-  def resourceRecords: Option[Seq[String]] = None
-  def setIdentifier: Option[String] = None
-  def tTL: Option[String] = None
-  def `type`: String
-  def weight: Option[Int] = None
+  def aliasTarget: Property[AliasTarget] = Empty
+  def comment: Property[String] = Empty
+  def failover: Property[String] = Empty
+  def geoLocation: Property[GeoLocation] = Empty
+  def healthCheckId: Property[String] = Empty
+  def hostedZoneId: Property[String] = Empty
+  def hostedZoneName: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+  def region: Property[String] = Empty
+  def resourceRecords: Property[Seq[String]] = Empty
+  def setIdentifier: Property[String] = Empty
+  def tTL: Property[String] = Empty
+  def `type`: NonEmptyProperty[String]
+  def weight: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AliasTarget" -> aliasTarget.map(Formattable(_)),
-    "Comment" -> comment.map(Formattable(_)),
-    "Failover" -> failover.map(Formattable(_)),
-    "GeoLocation" -> geoLocation.map(Formattable(_)),
-    "HealthCheckId" -> healthCheckId.map(Formattable(_)),
-    "HostedZoneId" -> hostedZoneId.map(Formattable(_)),
-    "HostedZoneName" -> hostedZoneName.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "Region" -> region.map(Formattable(_)),
-    "ResourceRecords" -> resourceRecords.map(Formattable(_)),
-    "SetIdentifier" -> setIdentifier.map(Formattable(_)),
-    "TTL" -> tTL.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`)),
-    "Weight" -> weight.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AliasTarget" -> aliasTarget,
+    "Comment" -> comment,
+    "Failover" -> failover,
+    "GeoLocation" -> geoLocation,
+    "HealthCheckId" -> healthCheckId,
+    "HostedZoneId" -> hostedZoneId,
+    "HostedZoneName" -> hostedZoneName,
+    "Name" -> name,
+    "Region" -> region,
+    "ResourceRecords" -> resourceRecords,
+    "SetIdentifier" -> setIdentifier,
+    "TTL" -> tTL,
+    "Type" -> `type`,
+    "Weight" -> weight
   )
 }

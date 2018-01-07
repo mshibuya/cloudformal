@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Listener extends Resource {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::Listener"
 
-  def certificates: Option[Seq[Certificate]] = None
-  def defaultActions: Seq[Action]
-  def loadBalancerArn: String
-  def port: Int
-  def protocol: String
-  def sslPolicy: Option[String] = None
+  def certificates: Property[Seq[Certificate]] = Empty
+  def defaultActions: NonEmptyProperty[Seq[Action]]
+  def loadBalancerArn: NonEmptyProperty[String]
+  def port: NonEmptyProperty[Int]
+  def protocol: NonEmptyProperty[String]
+  def sslPolicy: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Certificates" -> certificates.map(Formattable(_)),
-    "DefaultActions" -> Some(Formattable(defaultActions)),
-    "LoadBalancerArn" -> Some(Formattable(loadBalancerArn)),
-    "Port" -> Some(Formattable(port)),
-    "Protocol" -> Some(Formattable(protocol)),
-    "SslPolicy" -> sslPolicy.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Certificates" -> certificates,
+    "DefaultActions" -> defaultActions,
+    "LoadBalancerArn" -> loadBalancerArn,
+    "Port" -> port,
+    "Protocol" -> protocol,
+    "SslPolicy" -> sslPolicy
   )
 }

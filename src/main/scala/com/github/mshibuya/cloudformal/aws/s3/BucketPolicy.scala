@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model._
 trait BucketPolicy extends Resource {
   val resourceTypeName = "AWS::S3::BucketPolicy"
 
-  def bucket: String
-  def policyDocument: Json
+  def bucket: NonEmptyProperty[String]
+  def policyDocument: NonEmptyProperty[Json]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Bucket" -> Some(Formattable(bucket)),
-    "PolicyDocument" -> Some(Formattable(policyDocument))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Bucket" -> bucket,
+    "PolicyDocument" -> policyDocument
   )
 }

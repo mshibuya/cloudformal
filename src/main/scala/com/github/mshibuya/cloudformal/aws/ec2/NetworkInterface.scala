@@ -9,29 +9,32 @@ import com.github.mshibuya.cloudformal.model._
 trait NetworkInterface extends Resource {
   val resourceTypeName = "AWS::EC2::NetworkInterface"
 
-  def description: Option[String] = None
-  def groupSet: Option[Seq[String]] = None
-  def interfaceType: Option[String] = None
-  def ipv6AddressCount: Option[Int] = None
-  def ipv6Addresses: Option[InstanceIpv6Address] = None
-  def privateIpAddress: Option[String] = None
-  def privateIpAddresses: Option[Seq[PrivateIpAddressSpecification]] = None
-  def secondaryPrivateIpAddressCount: Option[Int] = None
-  def sourceDestCheck: Option[Boolean] = None
-  def subnetId: String
-  def tags: Option[Seq[Tag]] = None
+  def primaryPrivateIpAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryPrivateIpAddress")
+  def secondaryPrivateIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecondaryPrivateIpAddresses")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "GroupSet" -> groupSet.map(Formattable(_)),
-    "InterfaceType" -> interfaceType.map(Formattable(_)),
-    "Ipv6AddressCount" -> ipv6AddressCount.map(Formattable(_)),
-    "Ipv6Addresses" -> ipv6Addresses.map(Formattable(_)),
-    "PrivateIpAddress" -> privateIpAddress.map(Formattable(_)),
-    "PrivateIpAddresses" -> privateIpAddresses.map(Formattable(_)),
-    "SecondaryPrivateIpAddressCount" -> secondaryPrivateIpAddressCount.map(Formattable(_)),
-    "SourceDestCheck" -> sourceDestCheck.map(Formattable(_)),
-    "SubnetId" -> Some(Formattable(subnetId)),
-    "Tags" -> tags.map(Formattable(_))
+  def description: Property[String] = Empty
+  def groupSet: Property[Seq[String]] = Empty
+  def interfaceType: Property[String] = Empty
+  def ipv6AddressCount: Property[Int] = Empty
+  def ipv6Addresses: Property[InstanceIpv6Address] = Empty
+  def privateIpAddress: Property[String] = Empty
+  def privateIpAddresses: Property[Seq[PrivateIpAddressSpecification]] = Empty
+  def secondaryPrivateIpAddressCount: Property[Int] = Empty
+  def sourceDestCheck: Property[Boolean] = Empty
+  def subnetId: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "GroupSet" -> groupSet,
+    "InterfaceType" -> interfaceType,
+    "Ipv6AddressCount" -> ipv6AddressCount,
+    "Ipv6Addresses" -> ipv6Addresses,
+    "PrivateIpAddress" -> privateIpAddress,
+    "PrivateIpAddresses" -> privateIpAddresses,
+    "SecondaryPrivateIpAddressCount" -> secondaryPrivateIpAddressCount,
+    "SourceDestCheck" -> sourceDestCheck,
+    "SubnetId" -> subnetId,
+    "Tags" -> tags
   )
 }

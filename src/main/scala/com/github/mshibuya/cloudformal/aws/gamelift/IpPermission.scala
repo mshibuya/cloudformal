@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class IpPermission(
-    fromPort: Int,
-    ipRange: String,
-    protocol: String,
-    toPort: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "FromPort" -> Some(Formattable(fromPort)),
-    "IpRange" -> Some(Formattable(ipRange)),
-    "Protocol" -> Some(Formattable(protocol)),
-    "ToPort" -> Some(Formattable(toPort))
+    fromPort: NonEmptyProperty[Int],
+    ipRange: NonEmptyProperty[String],
+    protocol: NonEmptyProperty[String],
+    toPort: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "FromPort" -> fromPort,
+    "IpRange" -> ipRange,
+    "Protocol" -> protocol,
+    "ToPort" -> toPort
   )
 }

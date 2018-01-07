@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait VPNGateway extends Resource {
   val resourceTypeName = "AWS::EC2::VPNGateway"
 
-  def amazonSideAsn: Option[Long] = None
-  def tags: Option[Seq[Tag]] = None
-  def `type`: String
+  def amazonSideAsn: Property[Long] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def `type`: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AmazonSideAsn" -> amazonSideAsn.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AmazonSideAsn" -> amazonSideAsn,
+    "Tags" -> tags,
+    "Type" -> `type`
   )
 }

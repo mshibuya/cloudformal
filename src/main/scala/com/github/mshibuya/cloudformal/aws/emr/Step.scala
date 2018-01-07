@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Step extends Resource {
   val resourceTypeName = "AWS::EMR::Step"
 
-  def actionOnFailure: String
-  def hadoopJarStep: HadoopJarStepConfig
-  def jobFlowId: String
-  def name: String
+  def actionOnFailure: NonEmptyProperty[String]
+  def hadoopJarStep: NonEmptyProperty[HadoopJarStepConfig]
+  def jobFlowId: NonEmptyProperty[String]
+  def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ActionOnFailure" -> Some(Formattable(actionOnFailure)),
-    "HadoopJarStep" -> Some(Formattable(hadoopJarStep)),
-    "JobFlowId" -> Some(Formattable(jobFlowId)),
-    "Name" -> Some(Formattable(name))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ActionOnFailure" -> actionOnFailure,
+    "HadoopJarStep" -> hadoopJarStep,
+    "JobFlowId" -> jobFlowId,
+    "Name" -> name
   )
 }

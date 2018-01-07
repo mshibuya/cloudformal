@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GrokClassifier(
-    customPatterns: Option[String] = None,
-    grokPattern: String,
-    classification: String,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CustomPatterns" -> customPatterns.map(Formattable(_)),
-    "GrokPattern" -> Some(Formattable(grokPattern)),
-    "Classification" -> Some(Formattable(classification)),
-    "Name" -> name.map(Formattable(_))
+    customPatterns: Property[String] = Empty,
+    grokPattern: NonEmptyProperty[String],
+    classification: NonEmptyProperty[String],
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CustomPatterns" -> customPatterns,
+    "GrokPattern" -> grokPattern,
+    "Classification" -> classification,
+    "Name" -> name
   )
 }

@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait ReplicationSubnetGroup extends Resource {
   val resourceTypeName = "AWS::DMS::ReplicationSubnetGroup"
 
-  def replicationSubnetGroupDescription: String
-  def replicationSubnetGroupIdentifier: Option[String] = None
-  def subnetIds: Seq[String]
-  def tags: Option[Seq[Tag]] = None
+  def replicationSubnetGroupDescription: NonEmptyProperty[String]
+  def replicationSubnetGroupIdentifier: Property[String] = Empty
+  def subnetIds: NonEmptyProperty[Seq[String]]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ReplicationSubnetGroupDescription" -> Some(Formattable(replicationSubnetGroupDescription)),
-    "ReplicationSubnetGroupIdentifier" -> replicationSubnetGroupIdentifier.map(Formattable(_)),
-    "SubnetIds" -> Some(Formattable(subnetIds)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ReplicationSubnetGroupDescription" -> replicationSubnetGroupDescription,
+    "ReplicationSubnetGroupIdentifier" -> replicationSubnetGroupIdentifier,
+    "SubnetIds" -> subnetIds,
+    "Tags" -> tags
   )
 }

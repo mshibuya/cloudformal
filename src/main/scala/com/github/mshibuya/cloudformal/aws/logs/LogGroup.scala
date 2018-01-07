@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait LogGroup extends Resource {
   val resourceTypeName = "AWS::Logs::LogGroup"
 
-  def logGroupName: Option[String] = None
-  def retentionInDays: Option[Int] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "LogGroupName" -> logGroupName.map(Formattable(_)),
-    "RetentionInDays" -> retentionInDays.map(Formattable(_))
+  def logGroupName: Property[String] = Empty
+  def retentionInDays: Property[Int] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "LogGroupName" -> logGroupName,
+    "RetentionInDays" -> retentionInDays
   )
 }

@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait MetricFilter extends Resource {
   val resourceTypeName = "AWS::Logs::MetricFilter"
 
-  def filterPattern: String
-  def logGroupName: String
-  def metricTransformations: Seq[MetricTransformation]
+  def filterPattern: NonEmptyProperty[String]
+  def logGroupName: NonEmptyProperty[String]
+  def metricTransformations: NonEmptyProperty[Seq[MetricTransformation]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "FilterPattern" -> Some(Formattable(filterPattern)),
-    "LogGroupName" -> Some(Formattable(logGroupName)),
-    "MetricTransformations" -> Some(Formattable(metricTransformations))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "FilterPattern" -> filterPattern,
+    "LogGroupName" -> logGroupName,
+    "MetricTransformations" -> metricTransformations
   )
 }

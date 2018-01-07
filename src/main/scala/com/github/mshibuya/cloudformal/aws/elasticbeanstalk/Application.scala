@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Application extends Resource {
   val resourceTypeName = "AWS::ElasticBeanstalk::Application"
 
-  def applicationName: Option[String] = None
-  def description: Option[String] = None
-  def resourceLifecycleConfig: Option[ApplicationResourceLifecycleConfig] = None
+  def applicationName: Property[String] = Empty
+  def description: Property[String] = Empty
+  def resourceLifecycleConfig: Property[ApplicationResourceLifecycleConfig] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> applicationName.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "ResourceLifecycleConfig" -> resourceLifecycleConfig.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "Description" -> description,
+    "ResourceLifecycleConfig" -> resourceLifecycleConfig
   )
 }

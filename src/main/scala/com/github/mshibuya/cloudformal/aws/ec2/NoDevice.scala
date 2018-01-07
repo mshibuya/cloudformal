@@ -8,7 +8,5 @@ import com.github.mshibuya.cloudformal.model._
 
 case class NoDevice(
 ) extends Renderable {
-  def render: Formattable = Formattable.opt(
-
-  )
+  def render: Formattable = Formattable.emptyMap
 }

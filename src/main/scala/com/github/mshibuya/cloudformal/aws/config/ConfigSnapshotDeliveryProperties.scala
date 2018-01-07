@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConfigSnapshotDeliveryProperties(
-    deliveryFrequency: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeliveryFrequency" -> deliveryFrequency.map(Formattable(_))
+    deliveryFrequency: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeliveryFrequency" -> deliveryFrequency
   )
 }

@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait VPNGatewayRoutePropagation extends Resource {
   val resourceTypeName = "AWS::EC2::VPNGatewayRoutePropagation"
 
-  def routeTableIds: Seq[String]
-  def vpnGatewayId: String
+  def routeTableIds: NonEmptyProperty[Seq[String]]
+  def vpnGatewayId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "RouteTableIds" -> Some(Formattable(routeTableIds)),
-    "VpnGatewayId" -> Some(Formattable(vpnGatewayId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "RouteTableIds" -> routeTableIds,
+    "VpnGatewayId" -> vpnGatewayId
   )
 }

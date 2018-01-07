@@ -10,17 +10,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Role extends Resource {
   val resourceTypeName = "AWS::IAM::Role"
 
-  def assumeRolePolicyDocument: Json
-  def managedPolicyArns: Option[Seq[String]] = None
-  def path: Option[String] = None
-  def policies: Option[Seq[Policy]] = None
-  def roleName: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AssumeRolePolicyDocument" -> Some(Formattable(assumeRolePolicyDocument)),
-    "ManagedPolicyArns" -> managedPolicyArns.map(Formattable(_)),
-    "Path" -> path.map(Formattable(_)),
-    "Policies" -> policies.map(Formattable(_)),
-    "RoleName" -> roleName.map(Formattable(_))
+  def assumeRolePolicyDocument: NonEmptyProperty[Json]
+  def managedPolicyArns: Property[Seq[String]] = Empty
+  def path: Property[String] = Empty
+  def policies: Property[Seq[Policy]] = Empty
+  def roleName: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssumeRolePolicyDocument" -> assumeRolePolicyDocument,
+    "ManagedPolicyArns" -> managedPolicyArns,
+    "Path" -> path,
+    "Policies" -> policies,
+    "RoleName" -> roleName
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ApiStage(
-    apiId: Option[String] = None,
-    stage: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ApiId" -> apiId.map(Formattable(_)),
-    "Stage" -> stage.map(Formattable(_))
+    apiId: Property[String] = Empty,
+    stage: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ApiId" -> apiId,
+    "Stage" -> stage
   )
 }

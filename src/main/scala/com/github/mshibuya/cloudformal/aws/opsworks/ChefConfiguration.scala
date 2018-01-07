@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ChefConfiguration(
-    berkshelfVersion: Option[String] = None,
-    manageBerkshelf: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BerkshelfVersion" -> berkshelfVersion.map(Formattable(_)),
-    "ManageBerkshelf" -> manageBerkshelf.map(Formattable(_))
+    berkshelfVersion: Property[String] = Empty,
+    manageBerkshelf: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BerkshelfVersion" -> berkshelfVersion,
+    "ManageBerkshelf" -> manageBerkshelf
   )
 }

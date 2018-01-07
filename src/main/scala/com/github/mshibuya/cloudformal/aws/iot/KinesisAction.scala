@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class KinesisAction(
-    partitionKey: Option[String] = None,
-    roleArn: String,
-    streamName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PartitionKey" -> partitionKey.map(Formattable(_)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "StreamName" -> Some(Formattable(streamName))
+    partitionKey: Property[String] = Empty,
+    roleArn: NonEmptyProperty[String],
+    streamName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PartitionKey" -> partitionKey,
+    "RoleArn" -> roleArn,
+    "StreamName" -> streamName
   )
 }

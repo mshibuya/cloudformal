@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait JobQueue extends Resource {
   val resourceTypeName = "AWS::Batch::JobQueue"
 
-  def computeEnvironmentOrder: Seq[ComputeEnvironmentOrder]
-  def priority: Int
-  def state: Option[String] = None
-  def jobQueueName: Option[String] = None
+  def computeEnvironmentOrder: NonEmptyProperty[Seq[ComputeEnvironmentOrder]]
+  def priority: NonEmptyProperty[Int]
+  def state: Property[String] = Empty
+  def jobQueueName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ComputeEnvironmentOrder" -> Some(Formattable(computeEnvironmentOrder)),
-    "Priority" -> Some(Formattable(priority)),
-    "State" -> state.map(Formattable(_)),
-    "JobQueueName" -> jobQueueName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ComputeEnvironmentOrder" -> computeEnvironmentOrder,
+    "Priority" -> priority,
+    "State" -> state,
+    "JobQueueName" -> jobQueueName
   )
 }

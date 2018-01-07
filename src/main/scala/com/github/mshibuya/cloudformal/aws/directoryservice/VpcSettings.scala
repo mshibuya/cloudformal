@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VpcSettings(
-    subnetIds: Seq[String],
-    vpcId: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "SubnetIds" -> Some(Formattable(subnetIds)),
-    "VpcId" -> Some(Formattable(vpcId))
+    subnetIds: NonEmptyProperty[Seq[String]],
+    vpcId: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "SubnetIds" -> subnetIds,
+    "VpcId" -> vpcId
   )
 }

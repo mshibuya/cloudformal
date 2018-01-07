@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Target(
-    values: Option[Seq[String]] = None,
-    key: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Values" -> values.map(Formattable(_)),
-    "Key" -> Some(Formattable(key))
+    values: Property[Seq[String]] = Empty,
+    key: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Values" -> values,
+    "Key" -> key
   )
 }

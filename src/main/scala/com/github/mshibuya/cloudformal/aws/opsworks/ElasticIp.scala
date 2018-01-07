@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticIp(
-    ip: String,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Ip" -> Some(Formattable(ip)),
-    "Name" -> name.map(Formattable(_))
+    ip: NonEmptyProperty[String],
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Ip" -> ip,
+    "Name" -> name
   )
 }

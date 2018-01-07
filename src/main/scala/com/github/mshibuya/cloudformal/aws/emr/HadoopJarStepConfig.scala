@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HadoopJarStepConfig(
-    args: Option[Seq[String]] = None,
-    jar: String,
-    mainClass: Option[String] = None,
-    stepProperties: Option[Seq[KeyValue]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Args" -> args.map(Formattable(_)),
-    "Jar" -> Some(Formattable(jar)),
-    "MainClass" -> mainClass.map(Formattable(_)),
-    "StepProperties" -> stepProperties.map(Formattable(_))
+    args: Property[Seq[String]] = Empty,
+    jar: NonEmptyProperty[String],
+    mainClass: Property[String] = Empty,
+    stepProperties: Property[Seq[KeyValue]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Args" -> args,
+    "Jar" -> jar,
+    "MainClass" -> mainClass,
+    "StepProperties" -> stepProperties
   )
 }

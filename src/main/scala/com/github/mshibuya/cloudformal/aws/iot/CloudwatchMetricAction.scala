@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudwatchMetricAction(
-    metricName: String,
-    metricNamespace: String,
-    metricTimestamp: Option[String] = None,
-    metricUnit: String,
-    metricValue: String,
-    roleArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MetricName" -> Some(Formattable(metricName)),
-    "MetricNamespace" -> Some(Formattable(metricNamespace)),
-    "MetricTimestamp" -> metricTimestamp.map(Formattable(_)),
-    "MetricUnit" -> Some(Formattable(metricUnit)),
-    "MetricValue" -> Some(Formattable(metricValue)),
-    "RoleArn" -> Some(Formattable(roleArn))
+    metricName: NonEmptyProperty[String],
+    metricNamespace: NonEmptyProperty[String],
+    metricTimestamp: Property[String] = Empty,
+    metricUnit: NonEmptyProperty[String],
+    metricValue: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MetricName" -> metricName,
+    "MetricNamespace" -> metricNamespace,
+    "MetricTimestamp" -> metricTimestamp,
+    "MetricUnit" -> metricUnit,
+    "MetricValue" -> metricValue,
+    "RoleArn" -> roleArn
   )
 }

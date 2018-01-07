@@ -9,13 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait InstanceProfile extends Resource {
   val resourceTypeName = "AWS::IAM::InstanceProfile"
 
-  def instanceProfileName: Option[String] = None
-  def path: Option[String] = None
-  def roles: Seq[String]
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "InstanceProfileName" -> instanceProfileName.map(Formattable(_)),
-    "Path" -> path.map(Formattable(_)),
-    "Roles" -> Some(Formattable(roles))
+  def instanceProfileName: Property[String] = Empty
+  def path: Property[String] = Empty
+  def roles: NonEmptyProperty[Seq[String]]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "InstanceProfileName" -> instanceProfileName,
+    "Path" -> path,
+    "Roles" -> roles
   )
 }

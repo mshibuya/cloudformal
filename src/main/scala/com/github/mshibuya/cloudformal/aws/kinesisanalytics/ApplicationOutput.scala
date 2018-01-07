@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ApplicationOutput extends Resource {
   val resourceTypeName = "AWS::KinesisAnalytics::ApplicationOutput"
 
-  def applicationName: String
-  def output: Output
+  def applicationName: NonEmptyProperty[String]
+  def output: NonEmptyProperty[Output]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "Output" -> Some(Formattable(output))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "Output" -> output
   )
 }

@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Build extends Resource {
   val resourceTypeName = "AWS::GameLift::Build"
 
-  def name: Option[String] = None
-  def storageLocation: Option[S3Location] = None
-  def version: Option[String] = None
+  def name: Property[String] = Empty
+  def storageLocation: Property[S3Location] = Empty
+  def version: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "StorageLocation" -> storageLocation.map(Formattable(_)),
-    "Version" -> version.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "StorageLocation" -> storageLocation,
+    "Version" -> version
   )
 }

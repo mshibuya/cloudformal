@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TargetTrackingConfiguration(
-    customizedMetricSpecification: Option[CustomizedMetricSpecification] = None,
-    disableScaleIn: Option[Boolean] = None,
-    predefinedMetricSpecification: Option[PredefinedMetricSpecification] = None,
-    targetValue: Double) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CustomizedMetricSpecification" -> customizedMetricSpecification.map(Formattable(_)),
-    "DisableScaleIn" -> disableScaleIn.map(Formattable(_)),
-    "PredefinedMetricSpecification" -> predefinedMetricSpecification.map(Formattable(_)),
-    "TargetValue" -> Some(Formattable(targetValue))
+    customizedMetricSpecification: Property[CustomizedMetricSpecification] = Empty,
+    disableScaleIn: Property[Boolean] = Empty,
+    predefinedMetricSpecification: Property[PredefinedMetricSpecification] = Empty,
+    targetValue: NonEmptyProperty[Double]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CustomizedMetricSpecification" -> customizedMetricSpecification,
+    "DisableScaleIn" -> disableScaleIn,
+    "PredefinedMetricSpecification" -> predefinedMetricSpecification,
+    "TargetValue" -> targetValue
   )
 }

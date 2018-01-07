@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DataExport(
-    destination: Destination,
-    outputSchemaVersion: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Destination" -> Some(Formattable(destination)),
-    "OutputSchemaVersion" -> Some(Formattable(outputSchemaVersion))
+    destination: NonEmptyProperty[Destination],
+    outputSchemaVersion: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Destination" -> destination,
+    "OutputSchemaVersion" -> outputSchemaVersion
   )
 }

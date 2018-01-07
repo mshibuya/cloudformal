@@ -7,26 +7,26 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ExtendedS3DestinationConfiguration(
-    bucketARN: String,
-    bufferingHints: BufferingHints,
-    cloudWatchLoggingOptions: Option[CloudWatchLoggingOptions] = None,
-    compressionFormat: String,
-    encryptionConfiguration: Option[EncryptionConfiguration] = None,
-    prefix: String,
-    processingConfiguration: Option[ProcessingConfiguration] = None,
-    roleARN: String,
-    s3BackupConfiguration: Option[S3DestinationConfiguration] = None,
-    s3BackupMode: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BucketARN" -> Some(Formattable(bucketARN)),
-    "BufferingHints" -> Some(Formattable(bufferingHints)),
-    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions.map(Formattable(_)),
-    "CompressionFormat" -> Some(Formattable(compressionFormat)),
-    "EncryptionConfiguration" -> encryptionConfiguration.map(Formattable(_)),
-    "Prefix" -> Some(Formattable(prefix)),
-    "ProcessingConfiguration" -> processingConfiguration.map(Formattable(_)),
-    "RoleARN" -> Some(Formattable(roleARN)),
-    "S3BackupConfiguration" -> s3BackupConfiguration.map(Formattable(_)),
-    "S3BackupMode" -> s3BackupMode.map(Formattable(_))
+    bucketARN: NonEmptyProperty[String],
+    bufferingHints: NonEmptyProperty[BufferingHints],
+    cloudWatchLoggingOptions: Property[CloudWatchLoggingOptions] = Empty,
+    compressionFormat: NonEmptyProperty[String],
+    encryptionConfiguration: Property[EncryptionConfiguration] = Empty,
+    prefix: NonEmptyProperty[String],
+    processingConfiguration: Property[ProcessingConfiguration] = Empty,
+    roleARN: NonEmptyProperty[String],
+    s3BackupConfiguration: Property[S3DestinationConfiguration] = Empty,
+    s3BackupMode: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BucketARN" -> bucketARN,
+    "BufferingHints" -> bufferingHints,
+    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,
+    "CompressionFormat" -> compressionFormat,
+    "EncryptionConfiguration" -> encryptionConfiguration,
+    "Prefix" -> prefix,
+    "ProcessingConfiguration" -> processingConfiguration,
+    "RoleARN" -> roleARN,
+    "S3BackupConfiguration" -> s3BackupConfiguration,
+    "S3BackupMode" -> s3BackupMode
   )
 }

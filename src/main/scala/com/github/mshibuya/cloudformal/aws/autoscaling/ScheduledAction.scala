@@ -9,21 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait ScheduledAction extends Resource {
   val resourceTypeName = "AWS::AutoScaling::ScheduledAction"
 
-  def autoScalingGroupName: String
-  def desiredCapacity: Option[Int] = None
-  def endTime: Option[String] = None
-  def maxSize: Option[Int] = None
-  def minSize: Option[Int] = None
-  def recurrence: Option[String] = None
-  def startTime: Option[String] = None
+  def autoScalingGroupName: NonEmptyProperty[String]
+  def desiredCapacity: Property[Int] = Empty
+  def endTime: Property[String] = Empty
+  def maxSize: Property[Int] = Empty
+  def minSize: Property[Int] = Empty
+  def recurrence: Property[String] = Empty
+  def startTime: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AutoScalingGroupName" -> Some(Formattable(autoScalingGroupName)),
-    "DesiredCapacity" -> desiredCapacity.map(Formattable(_)),
-    "EndTime" -> endTime.map(Formattable(_)),
-    "MaxSize" -> maxSize.map(Formattable(_)),
-    "MinSize" -> minSize.map(Formattable(_)),
-    "Recurrence" -> recurrence.map(Formattable(_)),
-    "StartTime" -> startTime.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoScalingGroupName" -> autoScalingGroupName,
+    "DesiredCapacity" -> desiredCapacity,
+    "EndTime" -> endTime,
+    "MaxSize" -> maxSize,
+    "MinSize" -> minSize,
+    "Recurrence" -> recurrence,
+    "StartTime" -> startTime
   )
 }

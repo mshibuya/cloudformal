@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Alias extends Resource {
   val resourceTypeName = "AWS::KMS::Alias"
 
-  def aliasName: String
-  def targetKeyId: String
+  def aliasName: NonEmptyProperty[String]
+  def targetKeyId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AliasName" -> Some(Formattable(aliasName)),
-    "TargetKeyId" -> Some(Formattable(targetKeyId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AliasName" -> aliasName,
+    "TargetKeyId" -> targetKeyId
   )
 }

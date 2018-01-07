@@ -11,17 +11,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Model extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Model"
 
-  def contentType: Option[String] = None
-  def description: Option[String] = None
-  def name: Option[String] = None
-  def restApiId: String
-  def schema: Option[Json] = None
+  def contentType: Property[String] = Empty
+  def description: Property[String] = Empty
+  def name: Property[String] = Empty
+  def restApiId: NonEmptyProperty[String]
+  def schema: Property[Json] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ContentType" -> contentType.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "RestApiId" -> Some(Formattable(restApiId)),
-    "Schema" -> schema.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ContentType" -> contentType,
+    "Description" -> description,
+    "Name" -> name,
+    "RestApiId" -> restApiId,
+    "Schema" -> schema
   )
 }

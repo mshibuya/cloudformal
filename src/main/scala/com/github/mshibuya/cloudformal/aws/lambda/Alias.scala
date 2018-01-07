@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Alias extends Resource {
   val resourceTypeName = "AWS::Lambda::Alias"
 
-  def description: Option[String] = None
-  def functionName: String
-  def functionVersion: String
-  def name: String
-  def routingConfig: Option[AliasRoutingConfiguration] = None
+  def description: Property[String] = Empty
+  def functionName: NonEmptyProperty[String]
+  def functionVersion: NonEmptyProperty[String]
+  def name: NonEmptyProperty[String]
+  def routingConfig: Property[AliasRoutingConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "FunctionName" -> Some(Formattable(functionName)),
-    "FunctionVersion" -> Some(Formattable(functionVersion)),
-    "Name" -> Some(Formattable(name)),
-    "RoutingConfig" -> routingConfig.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "FunctionName" -> functionName,
+    "FunctionVersion" -> functionVersion,
+    "Name" -> name,
+    "RoutingConfig" -> routingConfig
   )
 }

@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EbsBlockDevice(
-    deleteOnTermination: Option[Boolean] = None,
-    iops: Option[Int] = None,
-    snapshotId: Option[String] = None,
-    volumeSize: Option[Int] = None,
-    volumeType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeleteOnTermination" -> deleteOnTermination.map(Formattable(_)),
-    "Iops" -> iops.map(Formattable(_)),
-    "SnapshotId" -> snapshotId.map(Formattable(_)),
-    "VolumeSize" -> volumeSize.map(Formattable(_)),
-    "VolumeType" -> volumeType.map(Formattable(_))
+    deleteOnTermination: Property[Boolean] = Empty,
+    iops: Property[Int] = Empty,
+    snapshotId: Property[String] = Empty,
+    volumeSize: Property[Int] = Empty,
+    volumeType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeleteOnTermination" -> deleteOnTermination,
+    "Iops" -> iops,
+    "SnapshotId" -> snapshotId,
+    "VolumeSize" -> volumeSize,
+    "VolumeType" -> volumeType
   )
 }

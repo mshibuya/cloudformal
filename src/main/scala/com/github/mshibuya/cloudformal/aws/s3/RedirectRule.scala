@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RedirectRule(
-    hostName: Option[String] = None,
-    httpRedirectCode: Option[String] = None,
-    protocol: Option[String] = None,
-    replaceKeyPrefixWith: Option[String] = None,
-    replaceKeyWith: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HostName" -> hostName.map(Formattable(_)),
-    "HttpRedirectCode" -> httpRedirectCode.map(Formattable(_)),
-    "Protocol" -> protocol.map(Formattable(_)),
-    "ReplaceKeyPrefixWith" -> replaceKeyPrefixWith.map(Formattable(_)),
-    "ReplaceKeyWith" -> replaceKeyWith.map(Formattable(_))
+    hostName: Property[String] = Empty,
+    httpRedirectCode: Property[String] = Empty,
+    protocol: Property[String] = Empty,
+    replaceKeyPrefixWith: Property[String] = Empty,
+    replaceKeyWith: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HostName" -> hostName,
+    "HttpRedirectCode" -> httpRedirectCode,
+    "Protocol" -> protocol,
+    "ReplaceKeyPrefixWith" -> replaceKeyPrefixWith,
+    "ReplaceKeyWith" -> replaceKeyWith
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class BootstrapActionConfig(
-    name: String,
-    scriptBootstrapAction: ScriptBootstrapActionConfig) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> Some(Formattable(name)),
-    "ScriptBootstrapAction" -> Some(Formattable(scriptBootstrapAction))
+    name: NonEmptyProperty[String],
+    scriptBootstrapAction: NonEmptyProperty[ScriptBootstrapActionConfig]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name,
+    "ScriptBootstrapAction" -> scriptBootstrapAction
   )
 }

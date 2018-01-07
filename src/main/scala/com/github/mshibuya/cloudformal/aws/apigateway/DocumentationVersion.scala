@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait DocumentationVersion extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::DocumentationVersion"
 
-  def description: Option[String] = None
-  def documentationVersion: String
-  def restApiId: String
+  def description: Property[String] = Empty
+  def documentationVersion: NonEmptyProperty[String]
+  def restApiId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "DocumentationVersion" -> Some(Formattable(documentationVersion)),
-    "RestApiId" -> Some(Formattable(restApiId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "DocumentationVersion" -> documentationVersion,
+    "RestApiId" -> restApiId
   )
 }

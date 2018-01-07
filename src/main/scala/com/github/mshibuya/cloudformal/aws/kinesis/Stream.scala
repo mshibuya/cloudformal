@@ -9,15 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Stream extends Resource {
   val resourceTypeName = "AWS::Kinesis::Stream"
 
-  def name: Option[String] = None
-  def retentionPeriodHours: Option[Int] = None
-  def shardCount: Int
-  def tags: Option[Seq[Tag]] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "RetentionPeriodHours" -> retentionPeriodHours.map(Formattable(_)),
-    "ShardCount" -> Some(Formattable(shardCount)),
-    "Tags" -> tags.map(Formattable(_))
+  def name: Property[String] = Empty
+  def retentionPeriodHours: Property[Int] = Empty
+  def shardCount: NonEmptyProperty[Int]
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "RetentionPeriodHours" -> retentionPeriodHours,
+    "ShardCount" -> shardCount,
+    "Tags" -> tags
   )
 }

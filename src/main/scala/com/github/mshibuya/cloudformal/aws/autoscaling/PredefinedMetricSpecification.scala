@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PredefinedMetricSpecification(
-    predefinedMetricType: String,
-    resourceLabel: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PredefinedMetricType" -> Some(Formattable(predefinedMetricType)),
-    "ResourceLabel" -> resourceLabel.map(Formattable(_))
+    predefinedMetricType: NonEmptyProperty[String],
+    resourceLabel: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PredefinedMetricType" -> predefinedMetricType,
+    "ResourceLabel" -> resourceLabel
   )
 }

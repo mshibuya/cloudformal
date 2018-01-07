@@ -9,27 +9,27 @@ import com.github.mshibuya.cloudformal.model._
 trait InstanceGroupConfig extends Resource {
   val resourceTypeName = "AWS::EMR::InstanceGroupConfig"
 
-  def autoScalingPolicy: Option[AutoScalingPolicy] = None
-  def bidPrice: Option[String] = None
-  def configurations: Option[Seq[Configuration]] = None
-  def ebsConfiguration: Option[EbsConfiguration] = None
-  def instanceCount: Int
-  def instanceRole: String
-  def instanceType: String
-  def jobFlowId: String
-  def market: Option[String] = None
-  def name: Option[String] = None
+  def autoScalingPolicy: Property[AutoScalingPolicy] = Empty
+  def bidPrice: Property[String] = Empty
+  def configurations: Property[Seq[Configuration]] = Empty
+  def ebsConfiguration: Property[EbsConfiguration] = Empty
+  def instanceCount: NonEmptyProperty[Int]
+  def instanceRole: NonEmptyProperty[String]
+  def instanceType: NonEmptyProperty[String]
+  def jobFlowId: NonEmptyProperty[String]
+  def market: Property[String] = Empty
+  def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AutoScalingPolicy" -> autoScalingPolicy.map(Formattable(_)),
-    "BidPrice" -> bidPrice.map(Formattable(_)),
-    "Configurations" -> configurations.map(Formattable(_)),
-    "EbsConfiguration" -> ebsConfiguration.map(Formattable(_)),
-    "InstanceCount" -> Some(Formattable(instanceCount)),
-    "InstanceRole" -> Some(Formattable(instanceRole)),
-    "InstanceType" -> Some(Formattable(instanceType)),
-    "JobFlowId" -> Some(Formattable(jobFlowId)),
-    "Market" -> market.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoScalingPolicy" -> autoScalingPolicy,
+    "BidPrice" -> bidPrice,
+    "Configurations" -> configurations,
+    "EbsConfiguration" -> ebsConfiguration,
+    "InstanceCount" -> instanceCount,
+    "InstanceRole" -> instanceRole,
+    "InstanceType" -> instanceType,
+    "JobFlowId" -> jobFlowId,
+    "Market" -> market,
+    "Name" -> name
   )
 }

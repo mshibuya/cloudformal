@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Workspace extends Resource {
   val resourceTypeName = "AWS::WorkSpaces::Workspace"
 
-  def bundleId: String
-  def directoryId: String
-  def rootVolumeEncryptionEnabled: Option[Boolean] = None
-  def userName: String
-  def userVolumeEncryptionEnabled: Option[Boolean] = None
-  def volumeEncryptionKey: Option[String] = None
+  def bundleId: NonEmptyProperty[String]
+  def directoryId: NonEmptyProperty[String]
+  def rootVolumeEncryptionEnabled: Property[Boolean] = Empty
+  def userName: NonEmptyProperty[String]
+  def userVolumeEncryptionEnabled: Property[Boolean] = Empty
+  def volumeEncryptionKey: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "BundleId" -> Some(Formattable(bundleId)),
-    "DirectoryId" -> Some(Formattable(directoryId)),
-    "RootVolumeEncryptionEnabled" -> rootVolumeEncryptionEnabled.map(Formattable(_)),
-    "UserName" -> Some(Formattable(userName)),
-    "UserVolumeEncryptionEnabled" -> userVolumeEncryptionEnabled.map(Formattable(_)),
-    "VolumeEncryptionKey" -> volumeEncryptionKey.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "BundleId" -> bundleId,
+    "DirectoryId" -> directoryId,
+    "RootVolumeEncryptionEnabled" -> rootVolumeEncryptionEnabled,
+    "UserName" -> userName,
+    "UserVolumeEncryptionEnabled" -> userVolumeEncryptionEnabled,
+    "VolumeEncryptionKey" -> volumeEncryptionKey
   )
 }

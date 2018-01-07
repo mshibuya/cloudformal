@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EncryptionKey(
-    id: String,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Id" -> Some(Formattable(id)),
-    "Type" -> Some(Formattable(`type`))
+    id: NonEmptyProperty[String],
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Id" -> id,
+    "Type" -> `type`
   )
 }

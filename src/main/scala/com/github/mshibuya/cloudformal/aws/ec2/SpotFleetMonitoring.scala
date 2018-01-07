@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SpotFleetMonitoring(
-    enabled: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Enabled" -> enabled.map(Formattable(_))
+    enabled: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Enabled" -> enabled
   )
 }

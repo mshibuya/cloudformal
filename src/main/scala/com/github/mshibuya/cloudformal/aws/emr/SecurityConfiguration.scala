@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model._
 trait SecurityConfiguration extends Resource {
   val resourceTypeName = "AWS::EMR::SecurityConfiguration"
 
-  def name: Option[String] = None
-  def securityConfiguration: Json
+  def name: Property[String] = Empty
+  def securityConfiguration: NonEmptyProperty[Json]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "SecurityConfiguration" -> Some(Formattable(securityConfiguration))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "SecurityConfiguration" -> securityConfiguration
   )
 }

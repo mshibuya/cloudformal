@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Condition(
-    state: Option[String] = None,
-    logicalOperator: Option[String] = None,
-    jobName: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "State" -> state.map(Formattable(_)),
-    "LogicalOperator" -> logicalOperator.map(Formattable(_)),
-    "JobName" -> jobName.map(Formattable(_))
+    state: Property[String] = Empty,
+    logicalOperator: Property[String] = Empty,
+    jobName: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "State" -> state,
+    "LogicalOperator" -> logicalOperator,
+    "JobName" -> jobName
   )
 }

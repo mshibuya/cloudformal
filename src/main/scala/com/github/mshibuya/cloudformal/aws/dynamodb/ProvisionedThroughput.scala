@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ProvisionedThroughput(
-    readCapacityUnits: Long,
-    writeCapacityUnits: Long) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ReadCapacityUnits" -> Some(Formattable(readCapacityUnits)),
-    "WriteCapacityUnits" -> Some(Formattable(writeCapacityUnits))
+    readCapacityUnits: NonEmptyProperty[Long],
+    writeCapacityUnits: NonEmptyProperty[Long]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ReadCapacityUnits" -> readCapacityUnits,
+    "WriteCapacityUnits" -> writeCapacityUnits
   )
 }

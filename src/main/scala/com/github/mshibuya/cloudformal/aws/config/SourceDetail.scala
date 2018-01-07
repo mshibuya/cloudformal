@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SourceDetail(
-    eventSource: String,
-    maximumExecutionFrequency: Option[String] = None,
-    messageType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EventSource" -> Some(Formattable(eventSource)),
-    "MaximumExecutionFrequency" -> maximumExecutionFrequency.map(Formattable(_)),
-    "MessageType" -> Some(Formattable(messageType))
+    eventSource: NonEmptyProperty[String],
+    maximumExecutionFrequency: Property[String] = Empty,
+    messageType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EventSource" -> eventSource,
+    "MaximumExecutionFrequency" -> maximumExecutionFrequency,
+    "MessageType" -> messageType
   )
 }

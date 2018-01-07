@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Targets(
-    s3Targets: Option[Seq[S3Target]] = None,
-    jdbcTargets: Option[Seq[JdbcTarget]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "S3Targets" -> s3Targets.map(Formattable(_)),
-    "JdbcTargets" -> jdbcTargets.map(Formattable(_))
+    s3Targets: Property[Seq[S3Target]] = Empty,
+    jdbcTargets: Property[Seq[JdbcTarget]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "S3Targets" -> s3Targets,
+    "JdbcTargets" -> jdbcTargets
   )
 }

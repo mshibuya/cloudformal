@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait VPNConnectionRoute extends Resource {
   val resourceTypeName = "AWS::EC2::VPNConnectionRoute"
 
-  def destinationCidrBlock: String
-  def vpnConnectionId: String
+  def destinationCidrBlock: NonEmptyProperty[String]
+  def vpnConnectionId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DestinationCidrBlock" -> Some(Formattable(destinationCidrBlock)),
-    "VpnConnectionId" -> Some(Formattable(vpnConnectionId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DestinationCidrBlock" -> destinationCidrBlock,
+    "VpnConnectionId" -> vpnConnectionId
   )
 }

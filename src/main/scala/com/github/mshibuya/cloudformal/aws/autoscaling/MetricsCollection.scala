@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MetricsCollection(
-    granularity: String,
-    metrics: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Granularity" -> Some(Formattable(granularity)),
-    "Metrics" -> metrics.map(Formattable(_))
+    granularity: NonEmptyProperty[String],
+    metrics: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Granularity" -> granularity,
+    "Metrics" -> metrics
   )
 }

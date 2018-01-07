@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConnectionDrainingPolicy(
-    enabled: Boolean,
-    timeout: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Enabled" -> Some(Formattable(enabled)),
-    "Timeout" -> timeout.map(Formattable(_))
+    enabled: NonEmptyProperty[Boolean],
+    timeout: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Enabled" -> enabled,
+    "Timeout" -> timeout
   )
 }

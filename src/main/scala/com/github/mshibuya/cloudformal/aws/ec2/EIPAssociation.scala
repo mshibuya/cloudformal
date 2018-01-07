@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait EIPAssociation extends Resource {
   val resourceTypeName = "AWS::EC2::EIPAssociation"
 
-  def allocationId: Option[String] = None
-  def eIP: Option[String] = None
-  def instanceId: Option[String] = None
-  def networkInterfaceId: Option[String] = None
-  def privateIpAddress: Option[String] = None
+  def allocationId: Property[String] = Empty
+  def eIP: Property[String] = Empty
+  def instanceId: Property[String] = Empty
+  def networkInterfaceId: Property[String] = Empty
+  def privateIpAddress: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AllocationId" -> allocationId.map(Formattable(_)),
-    "EIP" -> eIP.map(Formattable(_)),
-    "InstanceId" -> instanceId.map(Formattable(_)),
-    "NetworkInterfaceId" -> networkInterfaceId.map(Formattable(_)),
-    "PrivateIpAddress" -> privateIpAddress.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AllocationId" -> allocationId,
+    "EIP" -> eIP,
+    "InstanceId" -> instanceId,
+    "NetworkInterfaceId" -> networkInterfaceId,
+    "PrivateIpAddress" -> privateIpAddress
   )
 }

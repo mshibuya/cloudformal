@@ -8,12 +8,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PartitionInput(
-    parameters: Option[Json] = None,
-    storageDescriptor: Option[StorageDescriptor] = None,
-    values: Seq[String]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Parameters" -> parameters.map(Formattable(_)),
-    "StorageDescriptor" -> storageDescriptor.map(Formattable(_)),
-    "Values" -> Some(Formattable(values))
+    parameters: Property[Json] = Empty,
+    storageDescriptor: Property[StorageDescriptor] = Empty,
+    values: NonEmptyProperty[Seq[String]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Parameters" -> parameters,
+    "StorageDescriptor" -> storageDescriptor,
+    "Values" -> values
   )
 }

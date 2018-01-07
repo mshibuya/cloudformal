@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NotificationFilter(
-    s3Key: S3KeyFilter) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "S3Key" -> Some(Formattable(s3Key))
+    s3Key: NonEmptyProperty[S3KeyFilter]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "S3Key" -> s3Key
   )
 }

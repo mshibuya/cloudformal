@@ -9,20 +9,20 @@ import scala.collection.immutable.ListMap
  */
 
 case class TimeBasedAutoScaling(
-    friday: Option[ListMap[String, String]] = None,
-    monday: Option[ListMap[String, String]] = None,
-    saturday: Option[ListMap[String, String]] = None,
-    sunday: Option[ListMap[String, String]] = None,
-    thursday: Option[ListMap[String, String]] = None,
-    tuesday: Option[ListMap[String, String]] = None,
-    wednesday: Option[ListMap[String, String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Friday" -> friday.map(Formattable(_)),
-    "Monday" -> monday.map(Formattable(_)),
-    "Saturday" -> saturday.map(Formattable(_)),
-    "Sunday" -> sunday.map(Formattable(_)),
-    "Thursday" -> thursday.map(Formattable(_)),
-    "Tuesday" -> tuesday.map(Formattable(_)),
-    "Wednesday" -> wednesday.map(Formattable(_))
+    friday: Property[ListMap[String, String]] = Empty,
+    monday: Property[ListMap[String, String]] = Empty,
+    saturday: Property[ListMap[String, String]] = Empty,
+    sunday: Property[ListMap[String, String]] = Empty,
+    thursday: Property[ListMap[String, String]] = Empty,
+    tuesday: Property[ListMap[String, String]] = Empty,
+    wednesday: Property[ListMap[String, String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Friday" -> friday,
+    "Monday" -> monday,
+    "Saturday" -> saturday,
+    "Sunday" -> sunday,
+    "Thursday" -> thursday,
+    "Tuesday" -> tuesday,
+    "Wednesday" -> wednesday
   )
 }

@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait VPCGatewayAttachment extends Resource {
   val resourceTypeName = "AWS::EC2::VPCGatewayAttachment"
 
-  def internetGatewayId: Option[String] = None
-  def vpcId: String
-  def vpnGatewayId: Option[String] = None
+  def internetGatewayId: Property[String] = Empty
+  def vpcId: NonEmptyProperty[String]
+  def vpnGatewayId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "InternetGatewayId" -> internetGatewayId.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId)),
-    "VpnGatewayId" -> vpnGatewayId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "InternetGatewayId" -> internetGatewayId,
+    "VpcId" -> vpcId,
+    "VpnGatewayId" -> vpnGatewayId
   )
 }

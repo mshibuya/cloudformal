@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VersionWeight(
-    functionVersion: String,
-    functionWeight: Double) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "FunctionVersion" -> Some(Formattable(functionVersion)),
-    "FunctionWeight" -> Some(Formattable(functionWeight))
+    functionVersion: NonEmptyProperty[String],
+    functionWeight: NonEmptyProperty[Double]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "FunctionVersion" -> functionVersion,
+    "FunctionWeight" -> functionWeight
   )
 }

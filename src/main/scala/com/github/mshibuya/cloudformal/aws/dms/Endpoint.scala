@@ -9,39 +9,41 @@ import com.github.mshibuya.cloudformal.model._
 trait Endpoint extends Resource {
   val resourceTypeName = "AWS::DMS::Endpoint"
 
-  def kmsKeyId: Option[String] = None
-  def port: Option[Int] = None
-  def databaseName: Option[String] = None
-  def s3Settings: Option[S3Settings] = None
-  def engineName: String
-  def dynamoDbSettings: Option[DynamoDbSettings] = None
-  def username: Option[String] = None
-  def sslMode: Option[String] = None
-  def serverName: Option[String] = None
-  def extraConnectionAttributes: Option[String] = None
-  def endpointType: String
-  def tags: Option[Seq[Tag]] = None
-  def endpointIdentifier: Option[String] = None
-  def password: Option[String] = None
-  def certificateArn: Option[String] = None
-  def mongoDbSettings: Option[MongoDbSettings] = None
+  def externalIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "ExternalId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "KmsKeyId" -> kmsKeyId.map(Formattable(_)),
-    "Port" -> port.map(Formattable(_)),
-    "DatabaseName" -> databaseName.map(Formattable(_)),
-    "S3Settings" -> s3Settings.map(Formattable(_)),
-    "EngineName" -> Some(Formattable(engineName)),
-    "DynamoDbSettings" -> dynamoDbSettings.map(Formattable(_)),
-    "Username" -> username.map(Formattable(_)),
-    "SslMode" -> sslMode.map(Formattable(_)),
-    "ServerName" -> serverName.map(Formattable(_)),
-    "ExtraConnectionAttributes" -> extraConnectionAttributes.map(Formattable(_)),
-    "EndpointType" -> Some(Formattable(endpointType)),
-    "Tags" -> tags.map(Formattable(_)),
-    "EndpointIdentifier" -> endpointIdentifier.map(Formattable(_)),
-    "Password" -> password.map(Formattable(_)),
-    "CertificateArn" -> certificateArn.map(Formattable(_)),
-    "MongoDbSettings" -> mongoDbSettings.map(Formattable(_))
+  def kmsKeyId: Property[String] = Empty
+  def port: Property[Int] = Empty
+  def databaseName: Property[String] = Empty
+  def s3Settings: Property[S3Settings] = Empty
+  def engineName: NonEmptyProperty[String]
+  def dynamoDbSettings: Property[DynamoDbSettings] = Empty
+  def username: Property[String] = Empty
+  def sslMode: Property[String] = Empty
+  def serverName: Property[String] = Empty
+  def extraConnectionAttributes: Property[String] = Empty
+  def endpointType: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def endpointIdentifier: Property[String] = Empty
+  def password: Property[String] = Empty
+  def certificateArn: Property[String] = Empty
+  def mongoDbSettings: Property[MongoDbSettings] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "KmsKeyId" -> kmsKeyId,
+    "Port" -> port,
+    "DatabaseName" -> databaseName,
+    "S3Settings" -> s3Settings,
+    "EngineName" -> engineName,
+    "DynamoDbSettings" -> dynamoDbSettings,
+    "Username" -> username,
+    "SslMode" -> sslMode,
+    "ServerName" -> serverName,
+    "ExtraConnectionAttributes" -> extraConnectionAttributes,
+    "EndpointType" -> endpointType,
+    "Tags" -> tags,
+    "EndpointIdentifier" -> endpointIdentifier,
+    "Password" -> password,
+    "CertificateArn" -> certificateArn,
+    "MongoDbSettings" -> mongoDbSettings
   )
 }

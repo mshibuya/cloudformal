@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ArtifactStore(
-    encryptionKey: Option[EncryptionKey] = None,
-    location: String,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EncryptionKey" -> encryptionKey.map(Formattable(_)),
-    "Location" -> Some(Formattable(location)),
-    "Type" -> Some(Formattable(`type`))
+    encryptionKey: Property[EncryptionKey] = Empty,
+    location: NonEmptyProperty[String],
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EncryptionKey" -> encryptionKey,
+    "Location" -> location,
+    "Type" -> `type`
   )
 }

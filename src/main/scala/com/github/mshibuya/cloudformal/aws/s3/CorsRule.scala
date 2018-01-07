@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CorsRule(
-    allowedHeaders: Option[Seq[String]] = None,
-    allowedMethods: Seq[String],
-    allowedOrigins: Seq[String],
-    exposedHeaders: Option[Seq[String]] = None,
-    id: Option[String] = None,
-    maxAge: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AllowedHeaders" -> allowedHeaders.map(Formattable(_)),
-    "AllowedMethods" -> Some(Formattable(allowedMethods)),
-    "AllowedOrigins" -> Some(Formattable(allowedOrigins)),
-    "ExposedHeaders" -> exposedHeaders.map(Formattable(_)),
-    "Id" -> id.map(Formattable(_)),
-    "MaxAge" -> maxAge.map(Formattable(_))
+    allowedHeaders: Property[Seq[String]] = Empty,
+    allowedMethods: NonEmptyProperty[Seq[String]],
+    allowedOrigins: NonEmptyProperty[Seq[String]],
+    exposedHeaders: Property[Seq[String]] = Empty,
+    id: Property[String] = Empty,
+    maxAge: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AllowedHeaders" -> allowedHeaders,
+    "AllowedMethods" -> allowedMethods,
+    "AllowedOrigins" -> allowedOrigins,
+    "ExposedHeaders" -> exposedHeaders,
+    "Id" -> id,
+    "MaxAge" -> maxAge
   )
 }

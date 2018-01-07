@@ -9,21 +9,23 @@ import com.github.mshibuya.cloudformal.model._
 trait DeliveryStream extends Resource {
   val resourceTypeName = "AWS::KinesisFirehose::DeliveryStream"
 
-  def deliveryStreamName: Option[String] = None
-  def deliveryStreamType: Option[String] = None
-  def elasticsearchDestinationConfiguration: Option[ElasticsearchDestinationConfiguration] = None
-  def extendedS3DestinationConfiguration: Option[ExtendedS3DestinationConfiguration] = None
-  def kinesisStreamSourceConfiguration: Option[KinesisStreamSourceConfiguration] = None
-  def redshiftDestinationConfiguration: Option[RedshiftDestinationConfiguration] = None
-  def s3DestinationConfiguration: Option[S3DestinationConfiguration] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DeliveryStreamName" -> deliveryStreamName.map(Formattable(_)),
-    "DeliveryStreamType" -> deliveryStreamType.map(Formattable(_)),
-    "ElasticsearchDestinationConfiguration" -> elasticsearchDestinationConfiguration.map(Formattable(_)),
-    "ExtendedS3DestinationConfiguration" -> extendedS3DestinationConfiguration.map(Formattable(_)),
-    "KinesisStreamSourceConfiguration" -> kinesisStreamSourceConfiguration.map(Formattable(_)),
-    "RedshiftDestinationConfiguration" -> redshiftDestinationConfiguration.map(Formattable(_)),
-    "S3DestinationConfiguration" -> s3DestinationConfiguration.map(Formattable(_))
+  def deliveryStreamName: Property[String] = Empty
+  def deliveryStreamType: Property[String] = Empty
+  def elasticsearchDestinationConfiguration: Property[ElasticsearchDestinationConfiguration] = Empty
+  def extendedS3DestinationConfiguration: Property[ExtendedS3DestinationConfiguration] = Empty
+  def kinesisStreamSourceConfiguration: Property[KinesisStreamSourceConfiguration] = Empty
+  def redshiftDestinationConfiguration: Property[RedshiftDestinationConfiguration] = Empty
+  def s3DestinationConfiguration: Property[S3DestinationConfiguration] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DeliveryStreamName" -> deliveryStreamName,
+    "DeliveryStreamType" -> deliveryStreamType,
+    "ElasticsearchDestinationConfiguration" -> elasticsearchDestinationConfiguration,
+    "ExtendedS3DestinationConfiguration" -> extendedS3DestinationConfiguration,
+    "KinesisStreamSourceConfiguration" -> kinesisStreamSourceConfiguration,
+    "RedshiftDestinationConfiguration" -> redshiftDestinationConfiguration,
+    "S3DestinationConfiguration" -> s3DestinationConfiguration
   )
 }

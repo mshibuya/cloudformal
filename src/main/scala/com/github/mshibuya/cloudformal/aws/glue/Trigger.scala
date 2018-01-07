@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Trigger extends Resource {
   val resourceTypeName = "AWS::Glue::Trigger"
 
-  def `type`: String
-  def description: Option[String] = None
-  def actions: Seq[Action]
-  def schedule: Option[String] = None
-  def name: Option[String] = None
-  def predicate: Option[Predicate] = None
+  def `type`: NonEmptyProperty[String]
+  def description: Property[String] = Empty
+  def actions: NonEmptyProperty[Seq[Action]]
+  def schedule: Property[String] = Empty
+  def name: Property[String] = Empty
+  def predicate: Property[Predicate] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Description" -> description.map(Formattable(_)),
-    "Actions" -> Some(Formattable(actions)),
-    "Schedule" -> schedule.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "Predicate" -> predicate.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Type" -> `type`,
+    "Description" -> description,
+    "Actions" -> actions,
+    "Schedule" -> schedule,
+    "Name" -> name,
+    "Predicate" -> predicate
   )
 }

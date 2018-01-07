@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EbsConfiguration(
-    ebsBlockDeviceConfigs: Option[Seq[EbsBlockDeviceConfig]] = None,
-    ebsOptimized: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EbsBlockDeviceConfigs" -> ebsBlockDeviceConfigs.map(Formattable(_)),
-    "EbsOptimized" -> ebsOptimized.map(Formattable(_))
+    ebsBlockDeviceConfigs: Property[Seq[EbsBlockDeviceConfig]] = Empty,
+    ebsOptimized: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EbsBlockDeviceConfigs" -> ebsBlockDeviceConfigs,
+    "EbsOptimized" -> ebsOptimized
   )
 }

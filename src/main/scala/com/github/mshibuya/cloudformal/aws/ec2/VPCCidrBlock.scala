@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait VPCCidrBlock extends Resource {
   val resourceTypeName = "AWS::EC2::VPCCidrBlock"
 
-  def amazonProvidedIpv6CidrBlock: Option[Boolean] = None
-  def cidrBlock: Option[String] = None
-  def vpcId: String
+  def amazonProvidedIpv6CidrBlock: Property[Boolean] = Empty
+  def cidrBlock: Property[String] = Empty
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AmazonProvidedIpv6CidrBlock" -> amazonProvidedIpv6CidrBlock.map(Formattable(_)),
-    "CidrBlock" -> cidrBlock.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AmazonProvidedIpv6CidrBlock" -> amazonProvidedIpv6CidrBlock,
+    "CidrBlock" -> cidrBlock,
+    "VpcId" -> vpcId
   )
 }

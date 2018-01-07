@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoggingInfo(
-    s3Bucket: String,
-    region: String,
-    s3Prefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "S3Bucket" -> Some(Formattable(s3Bucket)),
-    "Region" -> Some(Formattable(region)),
-    "S3Prefix" -> s3Prefix.map(Formattable(_))
+    s3Bucket: NonEmptyProperty[String],
+    region: NonEmptyProperty[String],
+    s3Prefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "S3Bucket" -> s3Bucket,
+    "Region" -> region,
+    "S3Prefix" -> s3Prefix
   )
 }

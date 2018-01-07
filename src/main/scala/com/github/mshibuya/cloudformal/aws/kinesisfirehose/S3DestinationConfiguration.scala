@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3DestinationConfiguration(
-    bucketARN: String,
-    bufferingHints: BufferingHints,
-    cloudWatchLoggingOptions: Option[CloudWatchLoggingOptions] = None,
-    compressionFormat: String,
-    encryptionConfiguration: Option[EncryptionConfiguration] = None,
-    prefix: Option[String] = None,
-    roleARN: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BucketARN" -> Some(Formattable(bucketARN)),
-    "BufferingHints" -> Some(Formattable(bufferingHints)),
-    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions.map(Formattable(_)),
-    "CompressionFormat" -> Some(Formattable(compressionFormat)),
-    "EncryptionConfiguration" -> encryptionConfiguration.map(Formattable(_)),
-    "Prefix" -> prefix.map(Formattable(_)),
-    "RoleARN" -> Some(Formattable(roleARN))
+    bucketARN: NonEmptyProperty[String],
+    bufferingHints: NonEmptyProperty[BufferingHints],
+    cloudWatchLoggingOptions: Property[CloudWatchLoggingOptions] = Empty,
+    compressionFormat: NonEmptyProperty[String],
+    encryptionConfiguration: Property[EncryptionConfiguration] = Empty,
+    prefix: Property[String] = Empty,
+    roleARN: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BucketARN" -> bucketARN,
+    "BufferingHints" -> bufferingHints,
+    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,
+    "CompressionFormat" -> compressionFormat,
+    "EncryptionConfiguration" -> encryptionConfiguration,
+    "Prefix" -> prefix,
+    "RoleARN" -> roleARN
   )
 }

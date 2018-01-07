@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PipelineObject(
-    fields: Seq[Field],
-    id: String,
-    name: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Fields" -> Some(Formattable(fields)),
-    "Id" -> Some(Formattable(id)),
-    "Name" -> Some(Formattable(name))
+    fields: NonEmptyProperty[Seq[Field]],
+    id: NonEmptyProperty[String],
+    name: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Fields" -> fields,
+    "Id" -> id,
+    "Name" -> name
   )
 }

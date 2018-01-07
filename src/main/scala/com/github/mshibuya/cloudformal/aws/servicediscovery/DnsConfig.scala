@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DnsConfig(
-    dnsRecords: Seq[DnsRecord],
-    namespaceId: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DnsRecords" -> Some(Formattable(dnsRecords)),
-    "NamespaceId" -> Some(Formattable(namespaceId))
+    dnsRecords: NonEmptyProperty[Seq[DnsRecord]],
+    namespaceId: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DnsRecords" -> dnsRecords,
+    "NamespaceId" -> namespaceId
   )
 }

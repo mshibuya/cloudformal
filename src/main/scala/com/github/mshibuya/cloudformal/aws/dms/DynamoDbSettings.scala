@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DynamoDbSettings(
-    serviceAccessRoleArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ServiceAccessRoleArn" -> serviceAccessRoleArn.map(Formattable(_))
+    serviceAccessRoleArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ServiceAccessRoleArn" -> serviceAccessRoleArn
   )
 }

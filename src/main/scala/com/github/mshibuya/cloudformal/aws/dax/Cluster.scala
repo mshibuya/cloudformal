@@ -10,31 +10,34 @@ import com.github.mshibuya.cloudformal.model._
 trait Cluster extends Resource {
   val resourceTypeName = "AWS::DAX::Cluster"
 
-  def description: Option[String] = None
-  def replicationFactor: Int
-  def parameterGroupName: Option[String] = None
-  def availabilityZones: Option[Seq[String]] = None
-  def nodeType: String
-  def iAMRoleARN: String
-  def subnetGroupName: Option[String] = None
-  def clusterName: Option[String] = None
-  def preferredMaintenanceWindow: Option[String] = None
-  def notificationTopicARN: Option[String] = None
-  def securityGroupIds: Option[Seq[String]] = None
-  def tags: Option[Json] = None
+  def clusterDiscoveryEndpointAttribute: Expression[String] = Fn.GetAtt(logicalId, "ClusterDiscoveryEndpoint")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "ReplicationFactor" -> Some(Formattable(replicationFactor)),
-    "ParameterGroupName" -> parameterGroupName.map(Formattable(_)),
-    "AvailabilityZones" -> availabilityZones.map(Formattable(_)),
-    "NodeType" -> Some(Formattable(nodeType)),
-    "IAMRoleARN" -> Some(Formattable(iAMRoleARN)),
-    "SubnetGroupName" -> subnetGroupName.map(Formattable(_)),
-    "ClusterName" -> clusterName.map(Formattable(_)),
-    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow.map(Formattable(_)),
-    "NotificationTopicARN" -> notificationTopicARN.map(Formattable(_)),
-    "SecurityGroupIds" -> securityGroupIds.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def description: Property[String] = Empty
+  def replicationFactor: NonEmptyProperty[Int]
+  def parameterGroupName: Property[String] = Empty
+  def availabilityZones: Property[Seq[String]] = Empty
+  def nodeType: NonEmptyProperty[String]
+  def iAMRoleARN: NonEmptyProperty[String]
+  def subnetGroupName: Property[String] = Empty
+  def clusterName: Property[String] = Empty
+  def preferredMaintenanceWindow: Property[String] = Empty
+  def notificationTopicARN: Property[String] = Empty
+  def securityGroupIds: Property[Seq[String]] = Empty
+  def tags: Property[Json] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "ReplicationFactor" -> replicationFactor,
+    "ParameterGroupName" -> parameterGroupName,
+    "AvailabilityZones" -> availabilityZones,
+    "NodeType" -> nodeType,
+    "IAMRoleARN" -> iAMRoleARN,
+    "SubnetGroupName" -> subnetGroupName,
+    "ClusterName" -> clusterName,
+    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,
+    "NotificationTopicARN" -> notificationTopicARN,
+    "SecurityGroupIds" -> securityGroupIds,
+    "Tags" -> tags
   )
 }

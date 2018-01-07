@@ -9,13 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Version extends Resource {
   val resourceTypeName = "AWS::Lambda::Version"
 
-  def codeSha256: Option[String] = None
-  def description: Option[String] = None
-  def functionName: String
+  def versionAttribute: Expression[String] = Fn.GetAtt(logicalId, "Version")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CodeSha256" -> codeSha256.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "FunctionName" -> Some(Formattable(functionName))
+  def codeSha256: Property[String] = Empty
+  def description: Property[String] = Empty
+  def functionName: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CodeSha256" -> codeSha256,
+    "Description" -> description,
+    "FunctionName" -> functionName
   )
 }

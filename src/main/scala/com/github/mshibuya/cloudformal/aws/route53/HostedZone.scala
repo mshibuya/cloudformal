@@ -9,17 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait HostedZone extends Resource {
   val resourceTypeName = "AWS::Route53::HostedZone"
 
-  def hostedZoneConfig: Option[HostedZoneConfig] = None
-  def hostedZoneTags: Option[Seq[HostedZoneTag]] = None
-  def name: String
-  def queryLoggingConfig: Option[QueryLoggingConfig] = None
-  def vPCs: Option[Seq[VPC]] = None
+  def nameServersAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "NameServers")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "HostedZoneConfig" -> hostedZoneConfig.map(Formattable(_)),
-    "HostedZoneTags" -> hostedZoneTags.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "QueryLoggingConfig" -> queryLoggingConfig.map(Formattable(_)),
-    "VPCs" -> vPCs.map(Formattable(_))
+  def hostedZoneConfig: Property[HostedZoneConfig] = Empty
+  def hostedZoneTags: Property[Seq[HostedZoneTag]] = Empty
+  def name: NonEmptyProperty[String]
+  def queryLoggingConfig: Property[QueryLoggingConfig] = Empty
+  def vPCs: Property[Seq[VPC]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "HostedZoneConfig" -> hostedZoneConfig,
+    "HostedZoneTags" -> hostedZoneTags,
+    "Name" -> name,
+    "QueryLoggingConfig" -> queryLoggingConfig,
+    "VPCs" -> vPCs
   )
 }

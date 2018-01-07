@@ -9,28 +9,28 @@ import scala.collection.immutable.ListMap
  */
 
 case class Integration(
-    cacheKeyParameters: Option[Seq[String]] = None,
-    cacheNamespace: Option[String] = None,
-    contentHandling: Option[String] = None,
-    credentials: Option[String] = None,
-    integrationHttpMethod: Option[String] = None,
-    integrationResponses: Option[Seq[IntegrationResponse]] = None,
-    passthroughBehavior: Option[String] = None,
-    requestParameters: Option[ListMap[String, String]] = None,
-    requestTemplates: Option[ListMap[String, String]] = None,
-    `type`: Option[String] = None,
-    uri: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CacheKeyParameters" -> cacheKeyParameters.map(Formattable(_)),
-    "CacheNamespace" -> cacheNamespace.map(Formattable(_)),
-    "ContentHandling" -> contentHandling.map(Formattable(_)),
-    "Credentials" -> credentials.map(Formattable(_)),
-    "IntegrationHttpMethod" -> integrationHttpMethod.map(Formattable(_)),
-    "IntegrationResponses" -> integrationResponses.map(Formattable(_)),
-    "PassthroughBehavior" -> passthroughBehavior.map(Formattable(_)),
-    "RequestParameters" -> requestParameters.map(Formattable(_)),
-    "RequestTemplates" -> requestTemplates.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_)),
-    "Uri" -> uri.map(Formattable(_))
+    cacheKeyParameters: Property[Seq[String]] = Empty,
+    cacheNamespace: Property[String] = Empty,
+    contentHandling: Property[String] = Empty,
+    credentials: Property[String] = Empty,
+    integrationHttpMethod: Property[String] = Empty,
+    integrationResponses: Property[Seq[IntegrationResponse]] = Empty,
+    passthroughBehavior: Property[String] = Empty,
+    requestParameters: Property[ListMap[String, String]] = Empty,
+    requestTemplates: Property[ListMap[String, String]] = Empty,
+    `type`: Property[String] = Empty,
+    uri: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CacheKeyParameters" -> cacheKeyParameters,
+    "CacheNamespace" -> cacheNamespace,
+    "ContentHandling" -> contentHandling,
+    "Credentials" -> credentials,
+    "IntegrationHttpMethod" -> integrationHttpMethod,
+    "IntegrationResponses" -> integrationResponses,
+    "PassthroughBehavior" -> passthroughBehavior,
+    "RequestParameters" -> requestParameters,
+    "RequestTemplates" -> requestTemplates,
+    "Type" -> `type`,
+    "Uri" -> uri
   )
 }

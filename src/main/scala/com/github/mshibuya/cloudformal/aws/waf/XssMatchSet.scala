@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait XssMatchSet extends Resource {
   val resourceTypeName = "AWS::WAF::XssMatchSet"
 
-  def name: String
-  def xssMatchTuples: Seq[XssMatchTuple]
+  def name: NonEmptyProperty[String]
+  def xssMatchTuples: NonEmptyProperty[Seq[XssMatchTuple]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> Some(Formattable(name)),
-    "XssMatchTuples" -> Some(Formattable(xssMatchTuples))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "XssMatchTuples" -> xssMatchTuples
   )
 }

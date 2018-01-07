@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ArtifactDetails(
-    maximumCount: Int,
-    minimumCount: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MaximumCount" -> Some(Formattable(maximumCount)),
-    "MinimumCount" -> Some(Formattable(minimumCount))
+    maximumCount: NonEmptyProperty[Int],
+    minimumCount: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MaximumCount" -> maximumCount,
+    "MinimumCount" -> minimumCount
   )
 }

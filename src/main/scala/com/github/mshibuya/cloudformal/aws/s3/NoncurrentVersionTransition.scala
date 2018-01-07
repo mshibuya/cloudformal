@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NoncurrentVersionTransition(
-    storageClass: String,
-    transitionInDays: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "StorageClass" -> Some(Formattable(storageClass)),
-    "TransitionInDays" -> Some(Formattable(transitionInDays))
+    storageClass: NonEmptyProperty[String],
+    transitionInDays: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "StorageClass" -> storageClass,
+    "TransitionInDays" -> transitionInDays
   )
 }

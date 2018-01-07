@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SizeConstraint(
-    comparisonOperator: String,
-    size: Int,
-    textTransformation: String,
-    fieldToMatch: FieldToMatch) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ComparisonOperator" -> Some(Formattable(comparisonOperator)),
-    "Size" -> Some(Formattable(size)),
-    "TextTransformation" -> Some(Formattable(textTransformation)),
-    "FieldToMatch" -> Some(Formattable(fieldToMatch))
+    comparisonOperator: NonEmptyProperty[String],
+    size: NonEmptyProperty[Int],
+    textTransformation: NonEmptyProperty[String],
+    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ComparisonOperator" -> comparisonOperator,
+    "Size" -> size,
+    "TextTransformation" -> textTransformation,
+    "FieldToMatch" -> fieldToMatch
   )
 }

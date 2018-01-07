@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Application extends Resource {
   val resourceTypeName = "AWS::CodeDeploy::Application"
 
-  def applicationName: Option[String] = None
-  def computePlatform: Option[String] = None
+  def applicationName: Property[String] = Empty
+  def computePlatform: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> applicationName.map(Formattable(_)),
-    "ComputePlatform" -> computePlatform.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "ComputePlatform" -> computePlatform
   )
 }

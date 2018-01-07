@@ -9,65 +9,74 @@ import com.github.mshibuya.cloudformal.model._
 trait ReplicationGroup extends Resource {
   val resourceTypeName = "AWS::ElastiCache::ReplicationGroup"
 
-  def atRestEncryptionEnabled: Option[Boolean] = None
-  def authToken: Option[String] = None
-  def autoMinorVersionUpgrade: Option[Boolean] = None
-  def automaticFailoverEnabled: Option[Boolean] = None
-  def cacheNodeType: Option[String] = None
-  def cacheParameterGroupName: Option[String] = None
-  def cacheSecurityGroupNames: Option[Seq[String]] = None
-  def cacheSubnetGroupName: Option[String] = None
-  def engine: Option[String] = None
-  def engineVersion: Option[String] = None
-  def nodeGroupConfiguration: Option[Seq[NodeGroupConfiguration]] = None
-  def notificationTopicArn: Option[String] = None
-  def numCacheClusters: Option[Int] = None
-  def numNodeGroups: Option[Int] = None
-  def port: Option[Int] = None
-  def preferredCacheClusterAZs: Option[Seq[String]] = None
-  def preferredMaintenanceWindow: Option[String] = None
-  def primaryClusterId: Option[String] = None
-  def replicasPerNodeGroup: Option[Int] = None
-  def replicationGroupDescription: String
-  def replicationGroupId: Option[String] = None
-  def securityGroupIds: Option[Seq[String]] = None
-  def snapshotArns: Option[Seq[String]] = None
-  def snapshotName: Option[String] = None
-  def snapshotRetentionLimit: Option[Int] = None
-  def snapshotWindow: Option[String] = None
-  def snapshottingClusterId: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def transitEncryptionEnabled: Option[Boolean] = None
+  def configurationEndPointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Address")
+  def configurationEndPointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Port")
+  def primaryEndPointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Address")
+  def primaryEndPointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Port")
+  def readEndPointAddressesAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses")
+  def readEndPointAddressesListAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses.List")
+  def readEndPointPortsAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports")
+  def readEndPointPortsListAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports.List")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AtRestEncryptionEnabled" -> atRestEncryptionEnabled.map(Formattable(_)),
-    "AuthToken" -> authToken.map(Formattable(_)),
-    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade.map(Formattable(_)),
-    "AutomaticFailoverEnabled" -> automaticFailoverEnabled.map(Formattable(_)),
-    "CacheNodeType" -> cacheNodeType.map(Formattable(_)),
-    "CacheParameterGroupName" -> cacheParameterGroupName.map(Formattable(_)),
-    "CacheSecurityGroupNames" -> cacheSecurityGroupNames.map(Formattable(_)),
-    "CacheSubnetGroupName" -> cacheSubnetGroupName.map(Formattable(_)),
-    "Engine" -> engine.map(Formattable(_)),
-    "EngineVersion" -> engineVersion.map(Formattable(_)),
-    "NodeGroupConfiguration" -> nodeGroupConfiguration.map(Formattable(_)),
-    "NotificationTopicArn" -> notificationTopicArn.map(Formattable(_)),
-    "NumCacheClusters" -> numCacheClusters.map(Formattable(_)),
-    "NumNodeGroups" -> numNodeGroups.map(Formattable(_)),
-    "Port" -> port.map(Formattable(_)),
-    "PreferredCacheClusterAZs" -> preferredCacheClusterAZs.map(Formattable(_)),
-    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow.map(Formattable(_)),
-    "PrimaryClusterId" -> primaryClusterId.map(Formattable(_)),
-    "ReplicasPerNodeGroup" -> replicasPerNodeGroup.map(Formattable(_)),
-    "ReplicationGroupDescription" -> Some(Formattable(replicationGroupDescription)),
-    "ReplicationGroupId" -> replicationGroupId.map(Formattable(_)),
-    "SecurityGroupIds" -> securityGroupIds.map(Formattable(_)),
-    "SnapshotArns" -> snapshotArns.map(Formattable(_)),
-    "SnapshotName" -> snapshotName.map(Formattable(_)),
-    "SnapshotRetentionLimit" -> snapshotRetentionLimit.map(Formattable(_)),
-    "SnapshotWindow" -> snapshotWindow.map(Formattable(_)),
-    "SnapshottingClusterId" -> snapshottingClusterId.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TransitEncryptionEnabled" -> transitEncryptionEnabled.map(Formattable(_))
+  def atRestEncryptionEnabled: Property[Boolean] = Empty
+  def authToken: Property[String] = Empty
+  def autoMinorVersionUpgrade: Property[Boolean] = Empty
+  def automaticFailoverEnabled: Property[Boolean] = Empty
+  def cacheNodeType: Property[String] = Empty
+  def cacheParameterGroupName: Property[String] = Empty
+  def cacheSecurityGroupNames: Property[Seq[String]] = Empty
+  def cacheSubnetGroupName: Property[String] = Empty
+  def engine: Property[String] = Empty
+  def engineVersion: Property[String] = Empty
+  def nodeGroupConfiguration: Property[Seq[NodeGroupConfiguration]] = Empty
+  def notificationTopicArn: Property[String] = Empty
+  def numCacheClusters: Property[Int] = Empty
+  def numNodeGroups: Property[Int] = Empty
+  def port: Property[Int] = Empty
+  def preferredCacheClusterAZs: Property[Seq[String]] = Empty
+  def preferredMaintenanceWindow: Property[String] = Empty
+  def primaryClusterId: Property[String] = Empty
+  def replicasPerNodeGroup: Property[Int] = Empty
+  def replicationGroupDescription: NonEmptyProperty[String]
+  def replicationGroupId: Property[String] = Empty
+  def securityGroupIds: Property[Seq[String]] = Empty
+  def snapshotArns: Property[Seq[String]] = Empty
+  def snapshotName: Property[String] = Empty
+  def snapshotRetentionLimit: Property[Int] = Empty
+  def snapshotWindow: Property[String] = Empty
+  def snapshottingClusterId: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def transitEncryptionEnabled: Property[Boolean] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AtRestEncryptionEnabled" -> atRestEncryptionEnabled,
+    "AuthToken" -> authToken,
+    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,
+    "AutomaticFailoverEnabled" -> automaticFailoverEnabled,
+    "CacheNodeType" -> cacheNodeType,
+    "CacheParameterGroupName" -> cacheParameterGroupName,
+    "CacheSecurityGroupNames" -> cacheSecurityGroupNames,
+    "CacheSubnetGroupName" -> cacheSubnetGroupName,
+    "Engine" -> engine,
+    "EngineVersion" -> engineVersion,
+    "NodeGroupConfiguration" -> nodeGroupConfiguration,
+    "NotificationTopicArn" -> notificationTopicArn,
+    "NumCacheClusters" -> numCacheClusters,
+    "NumNodeGroups" -> numNodeGroups,
+    "Port" -> port,
+    "PreferredCacheClusterAZs" -> preferredCacheClusterAZs,
+    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,
+    "PrimaryClusterId" -> primaryClusterId,
+    "ReplicasPerNodeGroup" -> replicasPerNodeGroup,
+    "ReplicationGroupDescription" -> replicationGroupDescription,
+    "ReplicationGroupId" -> replicationGroupId,
+    "SecurityGroupIds" -> securityGroupIds,
+    "SnapshotArns" -> snapshotArns,
+    "SnapshotName" -> snapshotName,
+    "SnapshotRetentionLimit" -> snapshotRetentionLimit,
+    "SnapshotWindow" -> snapshotWindow,
+    "SnapshottingClusterId" -> snapshottingClusterId,
+    "Tags" -> tags,
+    "TransitEncryptionEnabled" -> transitEncryptionEnabled
   )
 }

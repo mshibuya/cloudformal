@@ -12,27 +12,27 @@ import scala.collection.immutable.ListMap
 trait Stage extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Stage"
 
-  def cacheClusterEnabled: Option[Boolean] = None
-  def cacheClusterSize: Option[String] = None
-  def clientCertificateId: Option[String] = None
-  def deploymentId: Option[String] = None
-  def description: Option[String] = None
-  def documentationVersion: Option[String] = None
-  def methodSettings: Option[Seq[MethodSetting]] = None
-  def restApiId: String
-  def stageName: Option[String] = None
-  def variables: Option[ListMap[String, String]] = None
+  def cacheClusterEnabled: Property[Boolean] = Empty
+  def cacheClusterSize: Property[String] = Empty
+  def clientCertificateId: Property[String] = Empty
+  def deploymentId: Property[String] = Empty
+  def description: Property[String] = Empty
+  def documentationVersion: Property[String] = Empty
+  def methodSettings: Property[Seq[MethodSetting]] = Empty
+  def restApiId: NonEmptyProperty[String]
+  def stageName: Property[String] = Empty
+  def variables: Property[ListMap[String, String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CacheClusterEnabled" -> cacheClusterEnabled.map(Formattable(_)),
-    "CacheClusterSize" -> cacheClusterSize.map(Formattable(_)),
-    "ClientCertificateId" -> clientCertificateId.map(Formattable(_)),
-    "DeploymentId" -> deploymentId.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "DocumentationVersion" -> documentationVersion.map(Formattable(_)),
-    "MethodSettings" -> methodSettings.map(Formattable(_)),
-    "RestApiId" -> Some(Formattable(restApiId)),
-    "StageName" -> stageName.map(Formattable(_)),
-    "Variables" -> variables.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CacheClusterEnabled" -> cacheClusterEnabled,
+    "CacheClusterSize" -> cacheClusterSize,
+    "ClientCertificateId" -> clientCertificateId,
+    "DeploymentId" -> deploymentId,
+    "Description" -> description,
+    "DocumentationVersion" -> documentationVersion,
+    "MethodSettings" -> methodSettings,
+    "RestApiId" -> restApiId,
+    "StageName" -> stageName,
+    "Variables" -> variables
   )
 }

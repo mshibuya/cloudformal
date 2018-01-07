@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ViewerCertificate(
-    iamCertificateId: Option[String] = None,
-    sslSupportMethod: Option[String] = None,
-    minimumProtocolVersion: Option[String] = None,
-    cloudFrontDefaultCertificate: Option[Boolean] = None,
-    acmCertificateArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "IamCertificateId" -> iamCertificateId.map(Formattable(_)),
-    "SslSupportMethod" -> sslSupportMethod.map(Formattable(_)),
-    "MinimumProtocolVersion" -> minimumProtocolVersion.map(Formattable(_)),
-    "CloudFrontDefaultCertificate" -> cloudFrontDefaultCertificate.map(Formattable(_)),
-    "AcmCertificateArn" -> acmCertificateArn.map(Formattable(_))
+    iamCertificateId: Property[String] = Empty,
+    sslSupportMethod: Property[String] = Empty,
+    minimumProtocolVersion: Property[String] = Empty,
+    cloudFrontDefaultCertificate: Property[Boolean] = Empty,
+    acmCertificateArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "IamCertificateId" -> iamCertificateId,
+    "SslSupportMethod" -> sslSupportMethod,
+    "MinimumProtocolVersion" -> minimumProtocolVersion,
+    "CloudFrontDefaultCertificate" -> cloudFrontDefaultCertificate,
+    "AcmCertificateArn" -> acmCertificateArn
   )
 }

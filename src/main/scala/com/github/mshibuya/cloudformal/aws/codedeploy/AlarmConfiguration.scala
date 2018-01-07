@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AlarmConfiguration(
-    alarms: Option[Seq[Alarm]] = None,
-    enabled: Option[Boolean] = None,
-    ignorePollAlarmFailure: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Alarms" -> alarms.map(Formattable(_)),
-    "Enabled" -> enabled.map(Formattable(_)),
-    "IgnorePollAlarmFailure" -> ignorePollAlarmFailure.map(Formattable(_))
+    alarms: Property[Seq[Alarm]] = Empty,
+    enabled: Property[Boolean] = Empty,
+    ignorePollAlarmFailure: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Alarms" -> alarms,
+    "Enabled" -> enabled,
+    "IgnorePollAlarmFailure" -> ignorePollAlarmFailure
   )
 }

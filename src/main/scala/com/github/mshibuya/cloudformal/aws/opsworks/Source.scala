@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Source(
-    password: Option[String] = None,
-    revision: Option[String] = None,
-    sshKey: Option[String] = None,
-    `type`: Option[String] = None,
-    url: Option[String] = None,
-    username: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Password" -> password.map(Formattable(_)),
-    "Revision" -> revision.map(Formattable(_)),
-    "SshKey" -> sshKey.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_)),
-    "Url" -> url.map(Formattable(_)),
-    "Username" -> username.map(Formattable(_))
+    password: Property[String] = Empty,
+    revision: Property[String] = Empty,
+    sshKey: Property[String] = Empty,
+    `type`: Property[String] = Empty,
+    url: Property[String] = Empty,
+    username: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Password" -> password,
+    "Revision" -> revision,
+    "SshKey" -> sshKey,
+    "Type" -> `type`,
+    "Url" -> url,
+    "Username" -> username
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HealthCheckConfig(
-    `type`: String,
-    resourcePath: Option[String] = None,
-    failureThreshold: Option[Double] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "ResourcePath" -> resourcePath.map(Formattable(_)),
-    "FailureThreshold" -> failureThreshold.map(Formattable(_))
+    `type`: NonEmptyProperty[String],
+    resourcePath: Property[String] = Empty,
+    failureThreshold: Property[Double] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "ResourcePath" -> resourcePath,
+    "FailureThreshold" -> failureThreshold
   )
 }

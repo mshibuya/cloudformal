@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait ApplicationVersion extends Resource {
   val resourceTypeName = "AWS::ElasticBeanstalk::ApplicationVersion"
 
-  def applicationName: String
-  def description: Option[String] = None
-  def sourceBundle: SourceBundle
+  def applicationName: NonEmptyProperty[String]
+  def description: Property[String] = Empty
+  def sourceBundle: NonEmptyProperty[SourceBundle]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "Description" -> description.map(Formattable(_)),
-    "SourceBundle" -> Some(Formattable(sourceBundle))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "Description" -> description,
+    "SourceBundle" -> sourceBundle
   )
 }

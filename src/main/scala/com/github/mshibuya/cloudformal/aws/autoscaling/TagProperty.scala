@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TagProperty(
-    key: String,
-    propagateAtLaunch: Boolean,
-    value: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "PropagateAtLaunch" -> Some(Formattable(propagateAtLaunch)),
-    "Value" -> Some(Formattable(value))
+    key: NonEmptyProperty[String],
+    propagateAtLaunch: NonEmptyProperty[Boolean],
+    value: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "PropagateAtLaunch" -> propagateAtLaunch,
+    "Value" -> value
   )
 }

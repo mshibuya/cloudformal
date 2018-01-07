@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait SecurityGroup extends Resource {
   val resourceTypeName = "AWS::ElastiCache::SecurityGroup"
 
-  def description: String
+  def description: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description
   )
 }

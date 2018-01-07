@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Order(
-    column: String,
-    sortOrder: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Column" -> Some(Formattable(column)),
-    "SortOrder" -> Some(Formattable(sortOrder))
+    column: NonEmptyProperty[String],
+    sortOrder: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Column" -> column,
+    "SortOrder" -> sortOrder
   )
 }

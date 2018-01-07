@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Destination(
-    bucketAccountId: Option[String] = None,
-    bucketArn: String,
-    format: String,
-    prefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BucketAccountId" -> bucketAccountId.map(Formattable(_)),
-    "BucketArn" -> Some(Formattable(bucketArn)),
-    "Format" -> Some(Formattable(format)),
-    "Prefix" -> prefix.map(Formattable(_))
+    bucketAccountId: Property[String] = Empty,
+    bucketArn: NonEmptyProperty[String],
+    format: NonEmptyProperty[String],
+    prefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BucketAccountId" -> bucketAccountId,
+    "BucketArn" -> bucketArn,
+    "Format" -> format,
+    "Prefix" -> prefix
   )
 }

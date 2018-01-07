@@ -12,25 +12,28 @@ import scala.collection.immutable.ListMap
 trait Domain extends Resource {
   val resourceTypeName = "AWS::Elasticsearch::Domain"
 
-  def accessPolicies: Option[Json] = None
-  def advancedOptions: Option[ListMap[String, String]] = None
-  def domainName: Option[String] = None
-  def eBSOptions: Option[EBSOptions] = None
-  def elasticsearchClusterConfig: Option[ElasticsearchClusterConfig] = None
-  def elasticsearchVersion: Option[String] = None
-  def snapshotOptions: Option[SnapshotOptions] = None
-  def tags: Option[Seq[Tag]] = None
-  def vPCOptions: Option[VPCOptions] = None
+  def domainArnAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainArn")
+  def domainEndpointAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainEndpoint")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AccessPolicies" -> accessPolicies.map(Formattable(_)),
-    "AdvancedOptions" -> advancedOptions.map(Formattable(_)),
-    "DomainName" -> domainName.map(Formattable(_)),
-    "EBSOptions" -> eBSOptions.map(Formattable(_)),
-    "ElasticsearchClusterConfig" -> elasticsearchClusterConfig.map(Formattable(_)),
-    "ElasticsearchVersion" -> elasticsearchVersion.map(Formattable(_)),
-    "SnapshotOptions" -> snapshotOptions.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VPCOptions" -> vPCOptions.map(Formattable(_))
+  def accessPolicies: Property[Json] = Empty
+  def advancedOptions: Property[ListMap[String, String]] = Empty
+  def domainName: Property[String] = Empty
+  def eBSOptions: Property[EBSOptions] = Empty
+  def elasticsearchClusterConfig: Property[ElasticsearchClusterConfig] = Empty
+  def elasticsearchVersion: Property[String] = Empty
+  def snapshotOptions: Property[SnapshotOptions] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def vPCOptions: Property[VPCOptions] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AccessPolicies" -> accessPolicies,
+    "AdvancedOptions" -> advancedOptions,
+    "DomainName" -> domainName,
+    "EBSOptions" -> eBSOptions,
+    "ElasticsearchClusterConfig" -> elasticsearchClusterConfig,
+    "ElasticsearchVersion" -> elasticsearchVersion,
+    "SnapshotOptions" -> snapshotOptions,
+    "Tags" -> tags,
+    "VPCOptions" -> vPCOptions
   )
 }

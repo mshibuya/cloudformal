@@ -9,49 +9,54 @@ import com.github.mshibuya.cloudformal.model._
 trait CacheCluster extends Resource {
   val resourceTypeName = "AWS::ElastiCache::CacheCluster"
 
-  def aZMode: Option[String] = None
-  def autoMinorVersionUpgrade: Option[Boolean] = None
-  def cacheNodeType: String
-  def cacheParameterGroupName: Option[String] = None
-  def cacheSecurityGroupNames: Option[Seq[String]] = None
-  def cacheSubnetGroupName: Option[String] = None
-  def clusterName: Option[String] = None
-  def engine: String
-  def engineVersion: Option[String] = None
-  def notificationTopicArn: Option[String] = None
-  def numCacheNodes: Int
-  def port: Option[Int] = None
-  def preferredAvailabilityZone: Option[String] = None
-  def preferredAvailabilityZones: Option[Seq[String]] = None
-  def preferredMaintenanceWindow: Option[String] = None
-  def snapshotArns: Option[Seq[String]] = None
-  def snapshotName: Option[String] = None
-  def snapshotRetentionLimit: Option[Int] = None
-  def snapshotWindow: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def vpcSecurityGroupIds: Option[Seq[String]] = None
+  def configurationEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Address")
+  def configurationEndpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Port")
+  def redisEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Address")
+  def redisEndpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Port")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AZMode" -> aZMode.map(Formattable(_)),
-    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade.map(Formattable(_)),
-    "CacheNodeType" -> Some(Formattable(cacheNodeType)),
-    "CacheParameterGroupName" -> cacheParameterGroupName.map(Formattable(_)),
-    "CacheSecurityGroupNames" -> cacheSecurityGroupNames.map(Formattable(_)),
-    "CacheSubnetGroupName" -> cacheSubnetGroupName.map(Formattable(_)),
-    "ClusterName" -> clusterName.map(Formattable(_)),
-    "Engine" -> Some(Formattable(engine)),
-    "EngineVersion" -> engineVersion.map(Formattable(_)),
-    "NotificationTopicArn" -> notificationTopicArn.map(Formattable(_)),
-    "NumCacheNodes" -> Some(Formattable(numCacheNodes)),
-    "Port" -> port.map(Formattable(_)),
-    "PreferredAvailabilityZone" -> preferredAvailabilityZone.map(Formattable(_)),
-    "PreferredAvailabilityZones" -> preferredAvailabilityZones.map(Formattable(_)),
-    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow.map(Formattable(_)),
-    "SnapshotArns" -> snapshotArns.map(Formattable(_)),
-    "SnapshotName" -> snapshotName.map(Formattable(_)),
-    "SnapshotRetentionLimit" -> snapshotRetentionLimit.map(Formattable(_)),
-    "SnapshotWindow" -> snapshotWindow.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VpcSecurityGroupIds" -> vpcSecurityGroupIds.map(Formattable(_))
+  def aZMode: Property[String] = Empty
+  def autoMinorVersionUpgrade: Property[Boolean] = Empty
+  def cacheNodeType: NonEmptyProperty[String]
+  def cacheParameterGroupName: Property[String] = Empty
+  def cacheSecurityGroupNames: Property[Seq[String]] = Empty
+  def cacheSubnetGroupName: Property[String] = Empty
+  def clusterName: Property[String] = Empty
+  def engine: NonEmptyProperty[String]
+  def engineVersion: Property[String] = Empty
+  def notificationTopicArn: Property[String] = Empty
+  def numCacheNodes: NonEmptyProperty[Int]
+  def port: Property[Int] = Empty
+  def preferredAvailabilityZone: Property[String] = Empty
+  def preferredAvailabilityZones: Property[Seq[String]] = Empty
+  def preferredMaintenanceWindow: Property[String] = Empty
+  def snapshotArns: Property[Seq[String]] = Empty
+  def snapshotName: Property[String] = Empty
+  def snapshotRetentionLimit: Property[Int] = Empty
+  def snapshotWindow: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def vpcSecurityGroupIds: Property[Seq[String]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AZMode" -> aZMode,
+    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,
+    "CacheNodeType" -> cacheNodeType,
+    "CacheParameterGroupName" -> cacheParameterGroupName,
+    "CacheSecurityGroupNames" -> cacheSecurityGroupNames,
+    "CacheSubnetGroupName" -> cacheSubnetGroupName,
+    "ClusterName" -> clusterName,
+    "Engine" -> engine,
+    "EngineVersion" -> engineVersion,
+    "NotificationTopicArn" -> notificationTopicArn,
+    "NumCacheNodes" -> numCacheNodes,
+    "Port" -> port,
+    "PreferredAvailabilityZone" -> preferredAvailabilityZone,
+    "PreferredAvailabilityZones" -> preferredAvailabilityZones,
+    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,
+    "SnapshotArns" -> snapshotArns,
+    "SnapshotName" -> snapshotName,
+    "SnapshotRetentionLimit" -> snapshotRetentionLimit,
+    "SnapshotWindow" -> snapshotWindow,
+    "Tags" -> tags,
+    "VpcSecurityGroupIds" -> vpcSecurityGroupIds
   )
 }

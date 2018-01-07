@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait FileSystem extends Resource {
   val resourceTypeName = "AWS::EFS::FileSystem"
 
-  def encrypted: Option[Boolean] = None
-  def fileSystemTags: Option[Seq[ElasticFileSystemTag]] = None
-  def kmsKeyId: Option[String] = None
-  def performanceMode: Option[String] = None
+  def encrypted: Property[Boolean] = Empty
+  def fileSystemTags: Property[Seq[ElasticFileSystemTag]] = Empty
+  def kmsKeyId: Property[String] = Empty
+  def performanceMode: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Encrypted" -> encrypted.map(Formattable(_)),
-    "FileSystemTags" -> fileSystemTags.map(Formattable(_)),
-    "KmsKeyId" -> kmsKeyId.map(Formattable(_)),
-    "PerformanceMode" -> performanceMode.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Encrypted" -> encrypted,
+    "FileSystemTags" -> fileSystemTags,
+    "KmsKeyId" -> kmsKeyId,
+    "PerformanceMode" -> performanceMode
   )
 }

@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudwatchAlarmAction(
-    alarmName: String,
-    roleArn: String,
-    stateReason: String,
-    stateValue: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AlarmName" -> Some(Formattable(alarmName)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "StateReason" -> Some(Formattable(stateReason)),
-    "StateValue" -> Some(Formattable(stateValue))
+    alarmName: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String],
+    stateReason: NonEmptyProperty[String],
+    stateValue: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AlarmName" -> alarmName,
+    "RoleArn" -> roleArn,
+    "StateReason" -> stateReason,
+    "StateValue" -> stateValue
   )
 }

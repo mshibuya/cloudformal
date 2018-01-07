@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait ClusterParameterGroup extends Resource {
   val resourceTypeName = "AWS::Redshift::ClusterParameterGroup"
 
-  def description: String
-  def parameterGroupFamily: String
-  def parameters: Option[Seq[Parameter]] = None
-  def tags: Option[Seq[Tag]] = None
+  def description: NonEmptyProperty[String]
+  def parameterGroupFamily: NonEmptyProperty[String]
+  def parameters: Property[Seq[Parameter]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description)),
-    "ParameterGroupFamily" -> Some(Formattable(parameterGroupFamily)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "ParameterGroupFamily" -> parameterGroupFamily,
+    "Parameters" -> parameters,
+    "Tags" -> tags
   )
 }

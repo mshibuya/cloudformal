@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait FlowLog extends Resource {
   val resourceTypeName = "AWS::EC2::FlowLog"
 
-  def deliverLogsPermissionArn: String
-  def logGroupName: String
-  def resourceId: String
-  def resourceType: String
-  def trafficType: String
+  def deliverLogsPermissionArn: NonEmptyProperty[String]
+  def logGroupName: NonEmptyProperty[String]
+  def resourceId: NonEmptyProperty[String]
+  def resourceType: NonEmptyProperty[String]
+  def trafficType: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DeliverLogsPermissionArn" -> Some(Formattable(deliverLogsPermissionArn)),
-    "LogGroupName" -> Some(Formattable(logGroupName)),
-    "ResourceId" -> Some(Formattable(resourceId)),
-    "ResourceType" -> Some(Formattable(resourceType)),
-    "TrafficType" -> Some(Formattable(trafficType))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DeliverLogsPermissionArn" -> deliverLogsPermissionArn,
+    "LogGroupName" -> logGroupName,
+    "ResourceId" -> resourceId,
+    "ResourceType" -> resourceType,
+    "TrafficType" -> trafficType
   )
 }

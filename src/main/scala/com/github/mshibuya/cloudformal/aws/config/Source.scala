@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Source(
-    owner: String,
-    sourceDetails: Option[Seq[SourceDetail]] = None,
-    sourceIdentifier: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Owner" -> Some(Formattable(owner)),
-    "SourceDetails" -> sourceDetails.map(Formattable(_)),
-    "SourceIdentifier" -> Some(Formattable(sourceIdentifier))
+    owner: NonEmptyProperty[String],
+    sourceDetails: Property[Seq[SourceDetail]] = Empty,
+    sourceIdentifier: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Owner" -> owner,
+    "SourceDetails" -> sourceDetails,
+    "SourceIdentifier" -> sourceIdentifier
   )
 }

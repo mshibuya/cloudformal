@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3Location(
-    bucket: String,
-    bundleType: Option[String] = None,
-    eTag: Option[String] = None,
-    key: String,
-    version: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Bucket" -> Some(Formattable(bucket)),
-    "BundleType" -> bundleType.map(Formattable(_)),
-    "ETag" -> eTag.map(Formattable(_)),
-    "Key" -> Some(Formattable(key)),
-    "Version" -> version.map(Formattable(_))
+    bucket: NonEmptyProperty[String],
+    bundleType: Property[String] = Empty,
+    eTag: Property[String] = Empty,
+    key: NonEmptyProperty[String],
+    version: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Bucket" -> bucket,
+    "BundleType" -> bundleType,
+    "ETag" -> eTag,
+    "Key" -> key,
+    "Version" -> version
   )
 }

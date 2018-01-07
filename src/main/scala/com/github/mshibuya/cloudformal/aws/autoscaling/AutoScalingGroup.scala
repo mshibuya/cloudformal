@@ -9,43 +9,43 @@ import com.github.mshibuya.cloudformal.model._
 trait AutoScalingGroup extends Resource {
   val resourceTypeName = "AWS::AutoScaling::AutoScalingGroup"
 
-  def availabilityZones: Option[Seq[String]] = None
-  def cooldown: Option[String] = None
-  def desiredCapacity: Option[String] = None
-  def healthCheckGracePeriod: Option[Int] = None
-  def healthCheckType: Option[String] = None
-  def instanceId: Option[String] = None
-  def launchConfigurationName: Option[String] = None
-  def lifecycleHookSpecificationList: Option[Seq[LifecycleHookSpecification]] = None
-  def loadBalancerNames: Option[Seq[String]] = None
-  def maxSize: String
-  def metricsCollection: Option[Seq[MetricsCollection]] = None
-  def minSize: String
-  def notificationConfigurations: Option[Seq[NotificationConfiguration]] = None
-  def placementGroup: Option[String] = None
-  def tags: Option[Seq[TagProperty]] = None
-  def targetGroupARNs: Option[Seq[String]] = None
-  def terminationPolicies: Option[Seq[String]] = None
-  def vPCZoneIdentifier: Option[Seq[String]] = None
+  def availabilityZones: Property[Seq[String]] = Empty
+  def cooldown: Property[String] = Empty
+  def desiredCapacity: Property[String] = Empty
+  def healthCheckGracePeriod: Property[Int] = Empty
+  def healthCheckType: Property[String] = Empty
+  def instanceId: Property[String] = Empty
+  def launchConfigurationName: Property[String] = Empty
+  def lifecycleHookSpecificationList: Property[Seq[LifecycleHookSpecification]] = Empty
+  def loadBalancerNames: Property[Seq[String]] = Empty
+  def maxSize: NonEmptyProperty[String]
+  def metricsCollection: Property[Seq[MetricsCollection]] = Empty
+  def minSize: NonEmptyProperty[String]
+  def notificationConfigurations: Property[Seq[NotificationConfiguration]] = Empty
+  def placementGroup: Property[String] = Empty
+  def tags: Property[Seq[TagProperty]] = Empty
+  def targetGroupARNs: Property[Seq[String]] = Empty
+  def terminationPolicies: Property[Seq[String]] = Empty
+  def vPCZoneIdentifier: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AvailabilityZones" -> availabilityZones.map(Formattable(_)),
-    "Cooldown" -> cooldown.map(Formattable(_)),
-    "DesiredCapacity" -> desiredCapacity.map(Formattable(_)),
-    "HealthCheckGracePeriod" -> healthCheckGracePeriod.map(Formattable(_)),
-    "HealthCheckType" -> healthCheckType.map(Formattable(_)),
-    "InstanceId" -> instanceId.map(Formattable(_)),
-    "LaunchConfigurationName" -> launchConfigurationName.map(Formattable(_)),
-    "LifecycleHookSpecificationList" -> lifecycleHookSpecificationList.map(Formattable(_)),
-    "LoadBalancerNames" -> loadBalancerNames.map(Formattable(_)),
-    "MaxSize" -> Some(Formattable(maxSize)),
-    "MetricsCollection" -> metricsCollection.map(Formattable(_)),
-    "MinSize" -> Some(Formattable(minSize)),
-    "NotificationConfigurations" -> notificationConfigurations.map(Formattable(_)),
-    "PlacementGroup" -> placementGroup.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TargetGroupARNs" -> targetGroupARNs.map(Formattable(_)),
-    "TerminationPolicies" -> terminationPolicies.map(Formattable(_)),
-    "VPCZoneIdentifier" -> vPCZoneIdentifier.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AvailabilityZones" -> availabilityZones,
+    "Cooldown" -> cooldown,
+    "DesiredCapacity" -> desiredCapacity,
+    "HealthCheckGracePeriod" -> healthCheckGracePeriod,
+    "HealthCheckType" -> healthCheckType,
+    "InstanceId" -> instanceId,
+    "LaunchConfigurationName" -> launchConfigurationName,
+    "LifecycleHookSpecificationList" -> lifecycleHookSpecificationList,
+    "LoadBalancerNames" -> loadBalancerNames,
+    "MaxSize" -> maxSize,
+    "MetricsCollection" -> metricsCollection,
+    "MinSize" -> minSize,
+    "NotificationConfigurations" -> notificationConfigurations,
+    "PlacementGroup" -> placementGroup,
+    "Tags" -> tags,
+    "TargetGroupARNs" -> targetGroupARNs,
+    "TerminationPolicies" -> terminationPolicies,
+    "VPCZoneIdentifier" -> vPCZoneIdentifier
   )
 }

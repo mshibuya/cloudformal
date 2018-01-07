@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait CustomerGateway extends Resource {
   val resourceTypeName = "AWS::EC2::CustomerGateway"
 
-  def bgpAsn: Int
-  def ipAddress: String
-  def tags: Option[Seq[Tag]] = None
-  def `type`: String
+  def bgpAsn: NonEmptyProperty[Int]
+  def ipAddress: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def `type`: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "BgpAsn" -> Some(Formattable(bgpAsn)),
-    "IpAddress" -> Some(Formattable(ipAddress)),
-    "Tags" -> tags.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "BgpAsn" -> bgpAsn,
+    "IpAddress" -> ipAddress,
+    "Tags" -> tags,
+    "Type" -> `type`
   )
 }

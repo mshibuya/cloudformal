@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait SecurityGroupEgress extends Resource {
   val resourceTypeName = "AWS::EC2::SecurityGroupEgress"
 
-  def cidrIp: Option[String] = None
-  def cidrIpv6: Option[String] = None
-  def description: Option[String] = None
-  def destinationPrefixListId: Option[String] = None
-  def destinationSecurityGroupId: Option[String] = None
-  def fromPort: Option[Int] = None
-  def groupId: String
-  def ipProtocol: String
-  def toPort: Option[Int] = None
+  def cidrIp: Property[String] = Empty
+  def cidrIpv6: Property[String] = Empty
+  def description: Property[String] = Empty
+  def destinationPrefixListId: Property[String] = Empty
+  def destinationSecurityGroupId: Property[String] = Empty
+  def fromPort: Property[Int] = Empty
+  def groupId: NonEmptyProperty[String]
+  def ipProtocol: NonEmptyProperty[String]
+  def toPort: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CidrIp" -> cidrIp.map(Formattable(_)),
-    "CidrIpv6" -> cidrIpv6.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "DestinationPrefixListId" -> destinationPrefixListId.map(Formattable(_)),
-    "DestinationSecurityGroupId" -> destinationSecurityGroupId.map(Formattable(_)),
-    "FromPort" -> fromPort.map(Formattable(_)),
-    "GroupId" -> Some(Formattable(groupId)),
-    "IpProtocol" -> Some(Formattable(ipProtocol)),
-    "ToPort" -> toPort.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CidrIp" -> cidrIp,
+    "CidrIpv6" -> cidrIpv6,
+    "Description" -> description,
+    "DestinationPrefixListId" -> destinationPrefixListId,
+    "DestinationSecurityGroupId" -> destinationSecurityGroupId,
+    "FromPort" -> fromPort,
+    "GroupId" -> groupId,
+    "IpProtocol" -> ipProtocol,
+    "ToPort" -> toPort
   )
 }

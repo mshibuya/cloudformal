@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Recipes(
-    configure: Option[Seq[String]] = None,
-    deploy: Option[Seq[String]] = None,
-    setup: Option[Seq[String]] = None,
-    shutdown: Option[Seq[String]] = None,
-    undeploy: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Configure" -> configure.map(Formattable(_)),
-    "Deploy" -> deploy.map(Formattable(_)),
-    "Setup" -> setup.map(Formattable(_)),
-    "Shutdown" -> shutdown.map(Formattable(_)),
-    "Undeploy" -> undeploy.map(Formattable(_))
+    configure: Property[Seq[String]] = Empty,
+    deploy: Property[Seq[String]] = Empty,
+    setup: Property[Seq[String]] = Empty,
+    shutdown: Property[Seq[String]] = Empty,
+    undeploy: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Configure" -> configure,
+    "Deploy" -> deploy,
+    "Setup" -> setup,
+    "Shutdown" -> shutdown,
+    "Undeploy" -> undeploy
   )
 }

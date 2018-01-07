@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AnalyticsConfiguration(
-    id: String,
-    prefix: Option[String] = None,
-    storageClassAnalysis: StorageClassAnalysis,
-    tagFilters: Option[Seq[TagFilter]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Id" -> Some(Formattable(id)),
-    "Prefix" -> prefix.map(Formattable(_)),
-    "StorageClassAnalysis" -> Some(Formattable(storageClassAnalysis)),
-    "TagFilters" -> tagFilters.map(Formattable(_))
+    id: NonEmptyProperty[String],
+    prefix: Property[String] = Empty,
+    storageClassAnalysis: NonEmptyProperty[StorageClassAnalysis],
+    tagFilters: Property[Seq[TagFilter]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Id" -> id,
+    "Prefix" -> prefix,
+    "StorageClassAnalysis" -> storageClassAnalysis,
+    "TagFilters" -> tagFilters
   )
 }

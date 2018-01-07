@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RunCommandParameters(
-    runCommandTargets: Seq[RunCommandTarget]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RunCommandTargets" -> Some(Formattable(runCommandTargets))
+    runCommandTargets: NonEmptyProperty[Seq[RunCommandTarget]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RunCommandTargets" -> runCommandTargets
   )
 }

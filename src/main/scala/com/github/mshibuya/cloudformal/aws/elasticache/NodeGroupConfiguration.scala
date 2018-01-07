@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NodeGroupConfiguration(
-    primaryAvailabilityZone: Option[String] = None,
-    replicaAvailabilityZones: Option[Seq[String]] = None,
-    replicaCount: Option[Int] = None,
-    slots: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PrimaryAvailabilityZone" -> primaryAvailabilityZone.map(Formattable(_)),
-    "ReplicaAvailabilityZones" -> replicaAvailabilityZones.map(Formattable(_)),
-    "ReplicaCount" -> replicaCount.map(Formattable(_)),
-    "Slots" -> slots.map(Formattable(_))
+    primaryAvailabilityZone: Property[String] = Empty,
+    replicaAvailabilityZones: Property[Seq[String]] = Empty,
+    replicaCount: Property[Int] = Empty,
+    slots: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PrimaryAvailabilityZone" -> primaryAvailabilityZone,
+    "ReplicaAvailabilityZones" -> replicaAvailabilityZones,
+    "ReplicaCount" -> replicaCount,
+    "Slots" -> slots
   )
 }

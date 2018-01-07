@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class QueryLoggingConfig(
-    cloudWatchLogsLogGroupArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CloudWatchLogsLogGroupArn" -> Some(Formattable(cloudWatchLogsLogGroupArn))
+    cloudWatchLogsLogGroupArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CloudWatchLogsLogGroupArn" -> cloudWatchLogsLogGroupArn
   )
 }

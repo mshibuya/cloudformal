@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait DocumentationPart extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::DocumentationPart"
 
-  def location: Location
-  def properties: String
-  def restApiId: String
+  def location: NonEmptyProperty[Location]
+  def properties: NonEmptyProperty[String]
+  def restApiId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Location" -> Some(Formattable(location)),
-    "Properties" -> Some(Formattable(properties)),
-    "RestApiId" -> Some(Formattable(restApiId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Location" -> location,
+    "Properties" -> properties,
+    "RestApiId" -> restApiId
   )
 }

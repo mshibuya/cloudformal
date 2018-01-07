@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EnvironmentVariable(
-    key: String,
-    secure: Option[Boolean] = None,
-    value: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "Secure" -> secure.map(Formattable(_)),
-    "Value" -> Some(Formattable(value))
+    key: NonEmptyProperty[String],
+    secure: Property[Boolean] = Empty,
+    value: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "Secure" -> secure,
+    "Value" -> value
   )
 }

@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticsearchClusterConfig(
-    dedicatedMasterCount: Option[Int] = None,
-    dedicatedMasterEnabled: Option[Boolean] = None,
-    dedicatedMasterType: Option[String] = None,
-    instanceCount: Option[Int] = None,
-    instanceType: Option[String] = None,
-    zoneAwarenessEnabled: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DedicatedMasterCount" -> dedicatedMasterCount.map(Formattable(_)),
-    "DedicatedMasterEnabled" -> dedicatedMasterEnabled.map(Formattable(_)),
-    "DedicatedMasterType" -> dedicatedMasterType.map(Formattable(_)),
-    "InstanceCount" -> instanceCount.map(Formattable(_)),
-    "InstanceType" -> instanceType.map(Formattable(_)),
-    "ZoneAwarenessEnabled" -> zoneAwarenessEnabled.map(Formattable(_))
+    dedicatedMasterCount: Property[Int] = Empty,
+    dedicatedMasterEnabled: Property[Boolean] = Empty,
+    dedicatedMasterType: Property[String] = Empty,
+    instanceCount: Property[Int] = Empty,
+    instanceType: Property[String] = Empty,
+    zoneAwarenessEnabled: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DedicatedMasterCount" -> dedicatedMasterCount,
+    "DedicatedMasterEnabled" -> dedicatedMasterEnabled,
+    "DedicatedMasterType" -> dedicatedMasterType,
+    "InstanceCount" -> instanceCount,
+    "InstanceType" -> instanceType,
+    "ZoneAwarenessEnabled" -> zoneAwarenessEnabled
   )
 }

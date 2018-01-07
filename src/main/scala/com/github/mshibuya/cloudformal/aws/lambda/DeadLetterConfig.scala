@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DeadLetterConfig(
-    targetArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TargetArn" -> targetArn.map(Formattable(_))
+    targetArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TargetArn" -> targetArn
   )
 }

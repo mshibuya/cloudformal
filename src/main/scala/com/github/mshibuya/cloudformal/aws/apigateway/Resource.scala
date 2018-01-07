@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Resource extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Resource"
 
-  def parentId: String
-  def pathPart: String
-  def restApiId: String
+  def parentId: NonEmptyProperty[String]
+  def pathPart: NonEmptyProperty[String]
+  def restApiId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ParentId" -> Some(Formattable(parentId)),
-    "PathPart" -> Some(Formattable(pathPart)),
-    "RestApiId" -> Some(Formattable(restApiId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ParentId" -> parentId,
+    "PathPart" -> pathPart,
+    "RestApiId" -> restApiId
   )
 }

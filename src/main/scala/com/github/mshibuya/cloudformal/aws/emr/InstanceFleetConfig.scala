@@ -9,21 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait InstanceFleetConfig extends Resource {
   val resourceTypeName = "AWS::EMR::InstanceFleetConfig"
 
-  def clusterId: String
-  def instanceFleetType: String
-  def instanceTypeConfigs: Option[Seq[InstanceTypeConfig]] = None
-  def launchSpecifications: Option[InstanceFleetProvisioningSpecifications] = None
-  def name: Option[String] = None
-  def targetOnDemandCapacity: Option[Int] = None
-  def targetSpotCapacity: Option[Int] = None
+  def clusterId: NonEmptyProperty[String]
+  def instanceFleetType: NonEmptyProperty[String]
+  def instanceTypeConfigs: Property[Seq[InstanceTypeConfig]] = Empty
+  def launchSpecifications: Property[InstanceFleetProvisioningSpecifications] = Empty
+  def name: Property[String] = Empty
+  def targetOnDemandCapacity: Property[Int] = Empty
+  def targetSpotCapacity: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ClusterId" -> Some(Formattable(clusterId)),
-    "InstanceFleetType" -> Some(Formattable(instanceFleetType)),
-    "InstanceTypeConfigs" -> instanceTypeConfigs.map(Formattable(_)),
-    "LaunchSpecifications" -> launchSpecifications.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "TargetOnDemandCapacity" -> targetOnDemandCapacity.map(Formattable(_)),
-    "TargetSpotCapacity" -> targetSpotCapacity.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ClusterId" -> clusterId,
+    "InstanceFleetType" -> instanceFleetType,
+    "InstanceTypeConfigs" -> instanceTypeConfigs,
+    "LaunchSpecifications" -> launchSpecifications,
+    "Name" -> name,
+    "TargetOnDemandCapacity" -> targetOnDemandCapacity,
+    "TargetSpotCapacity" -> targetSpotCapacity
   )
 }

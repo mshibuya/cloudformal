@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LocalSecondaryIndex(
-    indexName: String,
-    keySchema: Seq[KeySchema],
-    projection: Projection) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "IndexName" -> Some(Formattable(indexName)),
-    "KeySchema" -> Some(Formattable(keySchema)),
-    "Projection" -> Some(Formattable(projection))
+    indexName: NonEmptyProperty[String],
+    keySchema: NonEmptyProperty[Seq[KeySchema]],
+    projection: NonEmptyProperty[Projection]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "IndexName" -> indexName,
+    "KeySchema" -> keySchema,
+    "Projection" -> projection
   )
 }

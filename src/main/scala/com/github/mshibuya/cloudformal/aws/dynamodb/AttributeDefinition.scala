@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AttributeDefinition(
-    attributeName: String,
-    attributeType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AttributeName" -> Some(Formattable(attributeName)),
-    "AttributeType" -> Some(Formattable(attributeType))
+    attributeName: NonEmptyProperty[String],
+    attributeType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AttributeName" -> attributeName,
+    "AttributeType" -> attributeType
   )
 }

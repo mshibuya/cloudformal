@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class OptionConfiguration(
-    dBSecurityGroupMemberships: Option[Seq[String]] = None,
-    optionName: String,
-    optionSettings: Option[OptionSetting] = None,
-    optionVersion: Option[String] = None,
-    port: Option[Int] = None,
-    vpcSecurityGroupMemberships: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DBSecurityGroupMemberships" -> dBSecurityGroupMemberships.map(Formattable(_)),
-    "OptionName" -> Some(Formattable(optionName)),
-    "OptionSettings" -> optionSettings.map(Formattable(_)),
-    "OptionVersion" -> optionVersion.map(Formattable(_)),
-    "Port" -> port.map(Formattable(_)),
-    "VpcSecurityGroupMemberships" -> vpcSecurityGroupMemberships.map(Formattable(_))
+    dBSecurityGroupMemberships: Property[Seq[String]] = Empty,
+    optionName: NonEmptyProperty[String],
+    optionSettings: Property[OptionSetting] = Empty,
+    optionVersion: Property[String] = Empty,
+    port: Property[Int] = Empty,
+    vpcSecurityGroupMemberships: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DBSecurityGroupMemberships" -> dBSecurityGroupMemberships,
+    "OptionName" -> optionName,
+    "OptionSettings" -> optionSettings,
+    "OptionVersion" -> optionVersion,
+    "Port" -> port,
+    "VpcSecurityGroupMemberships" -> vpcSecurityGroupMemberships
   )
 }

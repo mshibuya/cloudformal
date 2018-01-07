@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PortRange(
-    from: Option[Int] = None,
-    to: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "From" -> from.map(Formattable(_)),
-    "To" -> to.map(Formattable(_))
+    from: Property[Int] = Empty,
+    to: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "From" -> from,
+    "To" -> to
   )
 }

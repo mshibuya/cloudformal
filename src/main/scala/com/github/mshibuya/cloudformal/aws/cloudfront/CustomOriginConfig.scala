@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CustomOriginConfig(
-    originReadTimeout: Option[Int] = None,
-    hTTPSPort: Option[Int] = None,
-    originKeepaliveTimeout: Option[Int] = None,
-    originSSLProtocols: Option[Seq[String]] = None,
-    hTTPPort: Option[Int] = None,
-    originProtocolPolicy: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "OriginReadTimeout" -> originReadTimeout.map(Formattable(_)),
-    "HTTPSPort" -> hTTPSPort.map(Formattable(_)),
-    "OriginKeepaliveTimeout" -> originKeepaliveTimeout.map(Formattable(_)),
-    "OriginSSLProtocols" -> originSSLProtocols.map(Formattable(_)),
-    "HTTPPort" -> hTTPPort.map(Formattable(_)),
-    "OriginProtocolPolicy" -> Some(Formattable(originProtocolPolicy))
+    originReadTimeout: Property[Int] = Empty,
+    hTTPSPort: Property[Int] = Empty,
+    originKeepaliveTimeout: Property[Int] = Empty,
+    originSSLProtocols: Property[Seq[String]] = Empty,
+    hTTPPort: Property[Int] = Empty,
+    originProtocolPolicy: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "OriginReadTimeout" -> originReadTimeout,
+    "HTTPSPort" -> hTTPSPort,
+    "OriginKeepaliveTimeout" -> originKeepaliveTimeout,
+    "OriginSSLProtocols" -> originSSLProtocols,
+    "HTTPPort" -> hTTPPort,
+    "OriginProtocolPolicy" -> originProtocolPolicy
   )
 }

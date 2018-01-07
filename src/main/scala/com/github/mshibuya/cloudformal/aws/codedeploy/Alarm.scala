@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Alarm(
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> name.map(Formattable(_))
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name
   )
 }

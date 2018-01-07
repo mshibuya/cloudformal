@@ -10,15 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait DBClusterParameterGroup extends Resource {
   val resourceTypeName = "AWS::RDS::DBClusterParameterGroup"
 
-  def description: String
-  def family: String
-  def parameters: Json
-  def tags: Option[Seq[Tag]] = None
+  def description: NonEmptyProperty[String]
+  def family: NonEmptyProperty[String]
+  def parameters: NonEmptyProperty[Json]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description)),
-    "Family" -> Some(Formattable(family)),
-    "Parameters" -> Some(Formattable(parameters)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Family" -> family,
+    "Parameters" -> parameters,
+    "Tags" -> tags
   )
 }

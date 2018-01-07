@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LifecycleEventConfiguration(
-    shutdownEventConfiguration: Option[ShutdownEventConfiguration] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ShutdownEventConfiguration" -> shutdownEventConfiguration.map(Formattable(_))
+    shutdownEventConfiguration: Property[ShutdownEventConfiguration] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ShutdownEventConfiguration" -> shutdownEventConfiguration
   )
 }

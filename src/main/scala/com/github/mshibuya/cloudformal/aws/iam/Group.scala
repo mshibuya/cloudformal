@@ -9,15 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Group extends Resource {
   val resourceTypeName = "AWS::IAM::Group"
 
-  def groupName: Option[String] = None
-  def managedPolicyArns: Option[Seq[String]] = None
-  def path: Option[String] = None
-  def policies: Option[Seq[Policy]] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "GroupName" -> groupName.map(Formattable(_)),
-    "ManagedPolicyArns" -> managedPolicyArns.map(Formattable(_)),
-    "Path" -> path.map(Formattable(_)),
-    "Policies" -> policies.map(Formattable(_))
+  def groupName: Property[String] = Empty
+  def managedPolicyArns: Property[Seq[String]] = Empty
+  def path: Property[String] = Empty
+  def policies: Property[Seq[Policy]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "GroupName" -> groupName,
+    "ManagedPolicyArns" -> managedPolicyArns,
+    "Path" -> path,
+    "Policies" -> policies
   )
 }

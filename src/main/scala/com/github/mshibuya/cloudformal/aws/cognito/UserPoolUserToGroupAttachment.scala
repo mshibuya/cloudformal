@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait UserPoolUserToGroupAttachment extends Resource {
   val resourceTypeName = "AWS::Cognito::UserPoolUserToGroupAttachment"
 
-  def groupName: String
-  def userPoolId: String
-  def username: String
+  def groupName: NonEmptyProperty[String]
+  def userPoolId: NonEmptyProperty[String]
+  def username: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "GroupName" -> Some(Formattable(groupName)),
-    "UserPoolId" -> Some(Formattable(userPoolId)),
-    "Username" -> Some(Formattable(username))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "GroupName" -> groupName,
+    "UserPoolId" -> userPoolId,
+    "Username" -> username
   )
 }

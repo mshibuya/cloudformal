@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ParameterAttribute(
-    key: String,
-    stringValue: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "StringValue" -> Some(Formattable(stringValue))
+    key: NonEmptyProperty[String],
+    stringValue: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "StringValue" -> stringValue
   )
 }

@@ -10,11 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Policy extends Resource {
   val resourceTypeName = "AWS::IoT::Policy"
 
-  def policyDocument: Json
-  def policyName: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PolicyDocument" -> Some(Formattable(policyDocument)),
-    "PolicyName" -> policyName.map(Formattable(_))
+  def policyDocument: NonEmptyProperty[Json]
+  def policyName: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PolicyDocument" -> policyDocument,
+    "PolicyName" -> policyName
   )
 }

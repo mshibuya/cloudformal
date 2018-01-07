@@ -9,21 +9,24 @@ import com.github.mshibuya.cloudformal.model._
 trait EnvironmentEC2 extends Resource {
   val resourceTypeName = "AWS::Cloud9::EnvironmentEC2"
 
-  def repositories: Option[Seq[Repository]] = None
-  def ownerArn: Option[String] = None
-  def description: Option[String] = None
-  def automaticStopTimeMinutes: Option[Int] = None
-  def subnetId: Option[String] = None
-  def instanceType: String
-  def name: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Repositories" -> repositories.map(Formattable(_)),
-    "OwnerArn" -> ownerArn.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "AutomaticStopTimeMinutes" -> automaticStopTimeMinutes.map(Formattable(_)),
-    "SubnetId" -> subnetId.map(Formattable(_)),
-    "InstanceType" -> Some(Formattable(instanceType)),
-    "Name" -> name.map(Formattable(_))
+  def repositories: Property[Seq[Repository]] = Empty
+  def ownerArn: Property[String] = Empty
+  def description: Property[String] = Empty
+  def automaticStopTimeMinutes: Property[Int] = Empty
+  def subnetId: Property[String] = Empty
+  def instanceType: NonEmptyProperty[String]
+  def name: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Repositories" -> repositories,
+    "OwnerArn" -> ownerArn,
+    "Description" -> description,
+    "AutomaticStopTimeMinutes" -> automaticStopTimeMinutes,
+    "SubnetId" -> subnetId,
+    "InstanceType" -> instanceType,
+    "Name" -> name
   )
 }

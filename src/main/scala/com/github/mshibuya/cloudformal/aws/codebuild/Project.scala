@@ -9,31 +9,33 @@ import com.github.mshibuya.cloudformal.model._
 trait Project extends Resource {
   val resourceTypeName = "AWS::CodeBuild::Project"
 
-  def artifacts: Artifacts
-  def badgeEnabled: Option[Boolean] = None
-  def description: Option[String] = None
-  def serviceRole: String
-  def vpcConfig: Option[VpcConfig] = None
-  def environment: Environment
-  def encryptionKey: Option[String] = None
-  def source: Source
-  def tags: Option[Seq[Tag]] = None
-  def name: Option[String] = None
-  def timeoutInMinutes: Option[Int] = None
-  def cache: Option[ProjectCache] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Artifacts" -> Some(Formattable(artifacts)),
-    "BadgeEnabled" -> badgeEnabled.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "ServiceRole" -> Some(Formattable(serviceRole)),
-    "VpcConfig" -> vpcConfig.map(Formattable(_)),
-    "Environment" -> Some(Formattable(environment)),
-    "EncryptionKey" -> encryptionKey.map(Formattable(_)),
-    "Source" -> Some(Formattable(source)),
-    "Tags" -> tags.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "TimeoutInMinutes" -> timeoutInMinutes.map(Formattable(_)),
-    "Cache" -> cache.map(Formattable(_))
+  def artifacts: NonEmptyProperty[Artifacts]
+  def badgeEnabled: Property[Boolean] = Empty
+  def description: Property[String] = Empty
+  def serviceRole: NonEmptyProperty[String]
+  def vpcConfig: Property[VpcConfig] = Empty
+  def environment: NonEmptyProperty[Environment]
+  def encryptionKey: Property[String] = Empty
+  def source: NonEmptyProperty[Source]
+  def tags: Property[Seq[Tag]] = Empty
+  def name: Property[String] = Empty
+  def timeoutInMinutes: Property[Int] = Empty
+  def cache: Property[ProjectCache] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Artifacts" -> artifacts,
+    "BadgeEnabled" -> badgeEnabled,
+    "Description" -> description,
+    "ServiceRole" -> serviceRole,
+    "VpcConfig" -> vpcConfig,
+    "Environment" -> environment,
+    "EncryptionKey" -> encryptionKey,
+    "Source" -> source,
+    "Tags" -> tags,
+    "Name" -> name,
+    "TimeoutInMinutes" -> timeoutInMinutes,
+    "Cache" -> cache
   )
 }

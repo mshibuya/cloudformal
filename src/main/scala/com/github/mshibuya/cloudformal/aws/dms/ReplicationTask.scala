@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait ReplicationTask extends Resource {
   val resourceTypeName = "AWS::DMS::ReplicationTask"
 
-  def replicationTaskSettings: Option[String] = None
-  def tableMappings: String
-  def replicationTaskIdentifier: Option[String] = None
-  def sourceEndpointArn: String
-  def migrationType: String
-  def targetEndpointArn: String
-  def replicationInstanceArn: String
-  def tags: Option[Seq[Tag]] = None
-  def cdcStartTime: Option[Double] = None
+  def replicationTaskSettings: Property[String] = Empty
+  def tableMappings: NonEmptyProperty[String]
+  def replicationTaskIdentifier: Property[String] = Empty
+  def sourceEndpointArn: NonEmptyProperty[String]
+  def migrationType: NonEmptyProperty[String]
+  def targetEndpointArn: NonEmptyProperty[String]
+  def replicationInstanceArn: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def cdcStartTime: Property[Double] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ReplicationTaskSettings" -> replicationTaskSettings.map(Formattable(_)),
-    "TableMappings" -> Some(Formattable(tableMappings)),
-    "ReplicationTaskIdentifier" -> replicationTaskIdentifier.map(Formattable(_)),
-    "SourceEndpointArn" -> Some(Formattable(sourceEndpointArn)),
-    "MigrationType" -> Some(Formattable(migrationType)),
-    "TargetEndpointArn" -> Some(Formattable(targetEndpointArn)),
-    "ReplicationInstanceArn" -> Some(Formattable(replicationInstanceArn)),
-    "Tags" -> tags.map(Formattable(_)),
-    "CdcStartTime" -> cdcStartTime.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ReplicationTaskSettings" -> replicationTaskSettings,
+    "TableMappings" -> tableMappings,
+    "ReplicationTaskIdentifier" -> replicationTaskIdentifier,
+    "SourceEndpointArn" -> sourceEndpointArn,
+    "MigrationType" -> migrationType,
+    "TargetEndpointArn" -> targetEndpointArn,
+    "ReplicationInstanceArn" -> replicationInstanceArn,
+    "Tags" -> tags,
+    "CdcStartTime" -> cdcStartTime
   )
 }

@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ReplicationRule(
-    destination: ReplicationDestination,
-    id: Option[String] = None,
-    prefix: String,
-    status: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Destination" -> Some(Formattable(destination)),
-    "Id" -> id.map(Formattable(_)),
-    "Prefix" -> Some(Formattable(prefix)),
-    "Status" -> Some(Formattable(status))
+    destination: NonEmptyProperty[ReplicationDestination],
+    id: Property[String] = Empty,
+    prefix: NonEmptyProperty[String],
+    status: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Destination" -> destination,
+    "Id" -> id,
+    "Prefix" -> prefix,
+    "Status" -> status
   )
 }

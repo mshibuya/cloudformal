@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudWatchLoggingOptions(
-    enabled: Option[Boolean] = None,
-    logGroupName: Option[String] = None,
-    logStreamName: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Enabled" -> enabled.map(Formattable(_)),
-    "LogGroupName" -> logGroupName.map(Formattable(_)),
-    "LogStreamName" -> logStreamName.map(Formattable(_))
+    enabled: Property[Boolean] = Empty,
+    logGroupName: Property[String] = Empty,
+    logStreamName: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Enabled" -> enabled,
+    "LogGroupName" -> logGroupName,
+    "LogStreamName" -> logStreamName
   )
 }

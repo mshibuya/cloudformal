@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Output(
-    destinationSchema: DestinationSchema,
-    kinesisFirehoseOutput: Option[KinesisFirehoseOutput] = None,
-    kinesisStreamsOutput: Option[KinesisStreamsOutput] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DestinationSchema" -> Some(Formattable(destinationSchema)),
-    "KinesisFirehoseOutput" -> kinesisFirehoseOutput.map(Formattable(_)),
-    "KinesisStreamsOutput" -> kinesisStreamsOutput.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    destinationSchema: NonEmptyProperty[DestinationSchema],
+    kinesisFirehoseOutput: Property[KinesisFirehoseOutput] = Empty,
+    kinesisStreamsOutput: Property[KinesisStreamsOutput] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DestinationSchema" -> destinationSchema,
+    "KinesisFirehoseOutput" -> kinesisFirehoseOutput,
+    "KinesisStreamsOutput" -> kinesisStreamsOutput,
+    "Name" -> name
   )
 }

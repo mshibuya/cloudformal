@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class JobCommand(
-    scriptLocation: Option[String] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ScriptLocation" -> scriptLocation.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    scriptLocation: Property[String] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ScriptLocation" -> scriptLocation,
+    "Name" -> name
   )
 }

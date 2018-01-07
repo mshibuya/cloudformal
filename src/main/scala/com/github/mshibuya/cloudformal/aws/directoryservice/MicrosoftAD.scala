@@ -9,19 +9,22 @@ import com.github.mshibuya.cloudformal.model._
 trait MicrosoftAD extends Resource {
   val resourceTypeName = "AWS::DirectoryService::MicrosoftAD"
 
-  def createAlias: Option[Boolean] = None
-  def enableSso: Option[Boolean] = None
-  def name: String
-  def password: String
-  def shortName: Option[String] = None
-  def vpcSettings: VpcSettings
+  def aliasAttribute: Expression[String] = Fn.GetAtt(logicalId, "Alias")
+  def dnsIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "DnsIpAddresses")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CreateAlias" -> createAlias.map(Formattable(_)),
-    "EnableSso" -> enableSso.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "Password" -> Some(Formattable(password)),
-    "ShortName" -> shortName.map(Formattable(_)),
-    "VpcSettings" -> Some(Formattable(vpcSettings))
+  def createAlias: Property[Boolean] = Empty
+  def enableSso: Property[Boolean] = Empty
+  def name: NonEmptyProperty[String]
+  def password: NonEmptyProperty[String]
+  def shortName: Property[String] = Empty
+  def vpcSettings: NonEmptyProperty[VpcSettings]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CreateAlias" -> createAlias,
+    "EnableSso" -> enableSso,
+    "Name" -> name,
+    "Password" -> password,
+    "ShortName" -> shortName,
+    "VpcSettings" -> vpcSettings
   )
 }

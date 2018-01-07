@@ -10,9 +10,9 @@ import com.github.mshibuya.cloudformal.model._
 trait Account extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Account"
 
-  def cloudWatchRoleArn: Option[String] = None
+  def cloudWatchRoleArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CloudWatchRoleArn" -> cloudWatchRoleArn.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CloudWatchRoleArn" -> cloudWatchRoleArn
   )
 }

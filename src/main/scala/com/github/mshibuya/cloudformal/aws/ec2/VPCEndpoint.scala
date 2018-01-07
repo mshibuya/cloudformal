@@ -10,15 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait VPCEndpoint extends Resource {
   val resourceTypeName = "AWS::EC2::VPCEndpoint"
 
-  def policyDocument: Option[Json] = None
-  def routeTableIds: Option[Seq[String]] = None
-  def serviceName: String
-  def vpcId: String
+  def policyDocument: Property[Json] = Empty
+  def routeTableIds: Property[Seq[String]] = Empty
+  def serviceName: NonEmptyProperty[String]
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PolicyDocument" -> policyDocument.map(Formattable(_)),
-    "RouteTableIds" -> routeTableIds.map(Formattable(_)),
-    "ServiceName" -> Some(Formattable(serviceName)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PolicyDocument" -> policyDocument,
+    "RouteTableIds" -> routeTableIds,
+    "ServiceName" -> serviceName,
+    "VpcId" -> vpcId
   )
 }

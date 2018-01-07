@@ -9,12 +9,12 @@ import scala.collection.immutable.ListMap
  */
 
 case class Configuration(
-    classification: Option[String] = None,
-    configurationProperties: Option[ListMap[String, String]] = None,
-    configurations: Option[Seq[Configuration]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Classification" -> classification.map(Formattable(_)),
-    "ConfigurationProperties" -> configurationProperties.map(Formattable(_)),
-    "Configurations" -> configurations.map(Formattable(_))
+    classification: Property[String] = Empty,
+    configurationProperties: Property[ListMap[String, String]] = Empty,
+    configurations: Property[Seq[Configuration]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Classification" -> classification,
+    "ConfigurationProperties" -> configurationProperties,
+    "Configurations" -> configurations
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LambdaConfiguration(
-    event: String,
-    filter: Option[NotificationFilter] = None,
-    function: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Event" -> Some(Formattable(event)),
-    "Filter" -> filter.map(Formattable(_)),
-    "Function" -> Some(Formattable(function))
+    event: NonEmptyProperty[String],
+    filter: Property[NotificationFilter] = Empty,
+    function: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Event" -> event,
+    "Filter" -> filter,
+    "Function" -> function
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InviteMessageTemplate(
-    emailMessage: Option[String] = None,
-    sMSMessage: Option[String] = None,
-    emailSubject: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EmailMessage" -> emailMessage.map(Formattable(_)),
-    "SMSMessage" -> sMSMessage.map(Formattable(_)),
-    "EmailSubject" -> emailSubject.map(Formattable(_))
+    emailMessage: Property[String] = Empty,
+    sMSMessage: Property[String] = Empty,
+    emailSubject: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EmailMessage" -> emailMessage,
+    "SMSMessage" -> sMSMessage,
+    "EmailSubject" -> emailSubject
   )
 }

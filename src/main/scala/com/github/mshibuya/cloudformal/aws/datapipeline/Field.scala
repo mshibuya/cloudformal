@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Field(
-    key: String,
-    refValue: Option[String] = None,
-    stringValue: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "RefValue" -> refValue.map(Formattable(_)),
-    "StringValue" -> stringValue.map(Formattable(_))
+    key: NonEmptyProperty[String],
+    refValue: Property[String] = Empty,
+    stringValue: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "RefValue" -> refValue,
+    "StringValue" -> stringValue
   )
 }

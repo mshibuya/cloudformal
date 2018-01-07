@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ByteMatchSet extends Resource {
   val resourceTypeName = "AWS::WAFRegional::ByteMatchSet"
 
-  def byteMatchTuples: Option[Seq[ByteMatchTuple]] = None
-  def name: String
+  def byteMatchTuples: Property[Seq[ByteMatchTuple]] = Empty
+  def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ByteMatchTuples" -> byteMatchTuples.map(Formattable(_)),
-    "Name" -> Some(Formattable(name))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ByteMatchTuples" -> byteMatchTuples,
+    "Name" -> name
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InputLambdaProcessor(
-    resourceARN: String,
-    roleARN: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ResourceARN" -> Some(Formattable(resourceARN)),
-    "RoleARN" -> Some(Formattable(roleARN))
+    resourceARN: NonEmptyProperty[String],
+    roleARN: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ResourceARN" -> resourceARN,
+    "RoleARN" -> roleARN
   )
 }

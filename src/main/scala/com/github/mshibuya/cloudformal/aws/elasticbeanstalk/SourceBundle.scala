@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SourceBundle(
-    s3Bucket: String,
-    s3Key: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "S3Bucket" -> Some(Formattable(s3Bucket)),
-    "S3Key" -> Some(Formattable(s3Key))
+    s3Bucket: NonEmptyProperty[String],
+    s3Key: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "S3Bucket" -> s3Bucket,
+    "S3Key" -> s3Key
   )
 }

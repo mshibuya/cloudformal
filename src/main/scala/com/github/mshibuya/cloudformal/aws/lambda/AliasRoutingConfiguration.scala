@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AliasRoutingConfiguration(
-    additionalVersionWeights: Seq[VersionWeight]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AdditionalVersionWeights" -> Some(Formattable(additionalVersionWeights))
+    additionalVersionWeights: NonEmptyProperty[Seq[VersionWeight]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AdditionalVersionWeights" -> additionalVersionWeights
   )
 }

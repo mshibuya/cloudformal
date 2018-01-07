@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait SubnetGroup extends Resource {
   val resourceTypeName = "AWS::ElastiCache::SubnetGroup"
 
-  def cacheSubnetGroupName: Option[String] = None
-  def description: String
-  def subnetIds: Seq[String]
+  def cacheSubnetGroupName: Property[String] = Empty
+  def description: NonEmptyProperty[String]
+  def subnetIds: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CacheSubnetGroupName" -> cacheSubnetGroupName.map(Formattable(_)),
-    "Description" -> Some(Formattable(description)),
-    "SubnetIds" -> Some(Formattable(subnetIds))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CacheSubnetGroupName" -> cacheSubnetGroupName,
+    "Description" -> description,
+    "SubnetIds" -> subnetIds
   )
 }

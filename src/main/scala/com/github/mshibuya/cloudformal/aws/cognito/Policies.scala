@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Policies(
-    passwordPolicy: Option[PasswordPolicy] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PasswordPolicy" -> passwordPolicy.map(Formattable(_))
+    passwordPolicy: Property[PasswordPolicy] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PasswordPolicy" -> passwordPolicy
   )
 }

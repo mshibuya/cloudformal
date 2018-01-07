@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GeoRestriction(
-    locations: Option[Seq[String]] = None,
-    restrictionType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Locations" -> locations.map(Formattable(_)),
-    "RestrictionType" -> Some(Formattable(restrictionType))
+    locations: Property[Seq[String]] = Empty,
+    restrictionType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Locations" -> locations,
+    "RestrictionType" -> restrictionType
   )
 }

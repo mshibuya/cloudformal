@@ -7,28 +7,28 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticsearchDestinationConfiguration(
-    bufferingHints: ElasticsearchBufferingHints,
-    cloudWatchLoggingOptions: Option[CloudWatchLoggingOptions] = None,
-    domainARN: String,
-    indexName: String,
-    indexRotationPeriod: String,
-    processingConfiguration: Option[ProcessingConfiguration] = None,
-    retryOptions: ElasticsearchRetryOptions,
-    roleARN: String,
-    s3BackupMode: String,
-    s3Configuration: S3DestinationConfiguration,
-    typeName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BufferingHints" -> Some(Formattable(bufferingHints)),
-    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions.map(Formattable(_)),
-    "DomainARN" -> Some(Formattable(domainARN)),
-    "IndexName" -> Some(Formattable(indexName)),
-    "IndexRotationPeriod" -> Some(Formattable(indexRotationPeriod)),
-    "ProcessingConfiguration" -> processingConfiguration.map(Formattable(_)),
-    "RetryOptions" -> Some(Formattable(retryOptions)),
-    "RoleARN" -> Some(Formattable(roleARN)),
-    "S3BackupMode" -> Some(Formattable(s3BackupMode)),
-    "S3Configuration" -> Some(Formattable(s3Configuration)),
-    "TypeName" -> Some(Formattable(typeName))
+    bufferingHints: NonEmptyProperty[ElasticsearchBufferingHints],
+    cloudWatchLoggingOptions: Property[CloudWatchLoggingOptions] = Empty,
+    domainARN: NonEmptyProperty[String],
+    indexName: NonEmptyProperty[String],
+    indexRotationPeriod: NonEmptyProperty[String],
+    processingConfiguration: Property[ProcessingConfiguration] = Empty,
+    retryOptions: NonEmptyProperty[ElasticsearchRetryOptions],
+    roleARN: NonEmptyProperty[String],
+    s3BackupMode: NonEmptyProperty[String],
+    s3Configuration: NonEmptyProperty[S3DestinationConfiguration],
+    typeName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BufferingHints" -> bufferingHints,
+    "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,
+    "DomainARN" -> domainARN,
+    "IndexName" -> indexName,
+    "IndexRotationPeriod" -> indexRotationPeriod,
+    "ProcessingConfiguration" -> processingConfiguration,
+    "RetryOptions" -> retryOptions,
+    "RoleARN" -> roleARN,
+    "S3BackupMode" -> s3BackupMode,
+    "S3Configuration" -> s3Configuration,
+    "TypeName" -> typeName
   )
 }

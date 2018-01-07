@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait Domain extends Resource {
   val resourceTypeName = "AWS::SDB::Domain"
 
-  def description: Option[String] = None
+  def description: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PlacementConstraint(
-    expression: Option[String] = None,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Expression" -> expression.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+    expression: Property[String] = Empty,
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Expression" -> expression,
+    "Type" -> `type`
   )
 }

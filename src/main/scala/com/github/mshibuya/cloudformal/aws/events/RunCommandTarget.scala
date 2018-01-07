@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RunCommandTarget(
-    key: String,
-    values: Seq[String]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "Values" -> Some(Formattable(values))
+    key: NonEmptyProperty[String],
+    values: NonEmptyProperty[Seq[String]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "Values" -> values
   )
 }

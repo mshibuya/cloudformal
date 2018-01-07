@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait ClusterSecurityGroupIngress extends Resource {
   val resourceTypeName = "AWS::Redshift::ClusterSecurityGroupIngress"
 
-  def cIDRIP: Option[String] = None
-  def clusterSecurityGroupName: String
-  def eC2SecurityGroupName: Option[String] = None
-  def eC2SecurityGroupOwnerId: Option[String] = None
+  def cIDRIP: Property[String] = Empty
+  def clusterSecurityGroupName: NonEmptyProperty[String]
+  def eC2SecurityGroupName: Property[String] = Empty
+  def eC2SecurityGroupOwnerId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CIDRIP" -> cIDRIP.map(Formattable(_)),
-    "ClusterSecurityGroupName" -> Some(Formattable(clusterSecurityGroupName)),
-    "EC2SecurityGroupName" -> eC2SecurityGroupName.map(Formattable(_)),
-    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CIDRIP" -> cIDRIP,
+    "ClusterSecurityGroupName" -> clusterSecurityGroupName,
+    "EC2SecurityGroupName" -> eC2SecurityGroupName,
+    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId
   )
 }

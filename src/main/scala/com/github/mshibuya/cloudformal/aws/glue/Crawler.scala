@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait Crawler extends Resource {
   val resourceTypeName = "AWS::Glue::Crawler"
 
-  def role: String
-  def classifiers: Option[Seq[String]] = None
-  def description: Option[String] = None
-  def schemaChangePolicy: Option[SchemaChangePolicy] = None
-  def schedule: Option[Schedule] = None
-  def databaseName: String
-  def targets: Targets
-  def tablePrefix: Option[String] = None
-  def name: Option[String] = None
+  def role: NonEmptyProperty[String]
+  def classifiers: Property[Seq[String]] = Empty
+  def description: Property[String] = Empty
+  def schemaChangePolicy: Property[SchemaChangePolicy] = Empty
+  def schedule: Property[Schedule] = Empty
+  def databaseName: NonEmptyProperty[String]
+  def targets: NonEmptyProperty[Targets]
+  def tablePrefix: Property[String] = Empty
+  def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Role" -> Some(Formattable(role)),
-    "Classifiers" -> classifiers.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "SchemaChangePolicy" -> schemaChangePolicy.map(Formattable(_)),
-    "Schedule" -> schedule.map(Formattable(_)),
-    "DatabaseName" -> Some(Formattable(databaseName)),
-    "Targets" -> Some(Formattable(targets)),
-    "TablePrefix" -> tablePrefix.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Role" -> role,
+    "Classifiers" -> classifiers,
+    "Description" -> description,
+    "SchemaChangePolicy" -> schemaChangePolicy,
+    "Schedule" -> schedule,
+    "DatabaseName" -> databaseName,
+    "Targets" -> targets,
+    "TablePrefix" -> tablePrefix,
+    "Name" -> name
   )
 }

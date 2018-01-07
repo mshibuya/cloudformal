@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DomainValidationOption(
-    domainName: String,
-    validationDomain: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DomainName" -> Some(Formattable(domainName)),
-    "ValidationDomain" -> Some(Formattable(validationDomain))
+    domainName: NonEmptyProperty[String],
+    validationDomain: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DomainName" -> domainName,
+    "ValidationDomain" -> validationDomain
   )
 }

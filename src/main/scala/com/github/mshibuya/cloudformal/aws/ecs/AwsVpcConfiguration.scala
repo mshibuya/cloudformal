@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AwsVpcConfiguration(
-    assignPublicIp: Option[String] = None,
-    securityGroups: Option[Seq[String]] = None,
-    subnets: Seq[String]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AssignPublicIp" -> assignPublicIp.map(Formattable(_)),
-    "SecurityGroups" -> securityGroups.map(Formattable(_)),
-    "Subnets" -> Some(Formattable(subnets))
+    assignPublicIp: Property[String] = Empty,
+    securityGroups: Property[Seq[String]] = Empty,
+    subnets: NonEmptyProperty[Seq[String]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AssignPublicIp" -> assignPublicIp,
+    "SecurityGroups" -> securityGroups,
+    "Subnets" -> subnets
   )
 }

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PutItemInput(
-    tableName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TableName" -> Some(Formattable(tableName))
+    tableName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TableName" -> tableName
   )
 }

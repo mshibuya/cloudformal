@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class XssMatchTuple(
-    fieldToMatch: FieldToMatch,
-    textTransformation: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "FieldToMatch" -> Some(Formattable(fieldToMatch)),
-    "TextTransformation" -> Some(Formattable(textTransformation))
+    fieldToMatch: NonEmptyProperty[FieldToMatch],
+    textTransformation: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "FieldToMatch" -> fieldToMatch,
+    "TextTransformation" -> textTransformation
   )
 }

@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Thing extends Resource {
   val resourceTypeName = "AWS::IoT::Thing"
 
-  def attributePayload: Option[AttributePayload] = None
-  def thingName: Option[String] = None
+  def attributePayload: Property[AttributePayload] = Empty
+  def thingName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AttributePayload" -> attributePayload.map(Formattable(_)),
-    "ThingName" -> thingName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AttributePayload" -> attributePayload,
+    "ThingName" -> thingName
   )
 }

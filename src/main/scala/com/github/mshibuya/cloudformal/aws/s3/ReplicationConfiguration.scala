@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ReplicationConfiguration(
-    role: String,
-    rules: Seq[ReplicationRule]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Role" -> Some(Formattable(role)),
-    "Rules" -> Some(Formattable(rules))
+    role: NonEmptyProperty[String],
+    rules: NonEmptyProperty[Seq[ReplicationRule]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Role" -> role,
+    "Rules" -> rules
   )
 }

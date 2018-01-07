@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SchemaAttribute(
-    developerOnlyAttribute: Option[Boolean] = None,
-    mutable: Option[Boolean] = None,
-    attributeDataType: Option[String] = None,
-    stringAttributeConstraints: Option[StringAttributeConstraints] = None,
-    required: Option[Boolean] = None,
-    numberAttributeConstraints: Option[NumberAttributeConstraints] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeveloperOnlyAttribute" -> developerOnlyAttribute.map(Formattable(_)),
-    "Mutable" -> mutable.map(Formattable(_)),
-    "AttributeDataType" -> attributeDataType.map(Formattable(_)),
-    "StringAttributeConstraints" -> stringAttributeConstraints.map(Formattable(_)),
-    "Required" -> required.map(Formattable(_)),
-    "NumberAttributeConstraints" -> numberAttributeConstraints.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    developerOnlyAttribute: Property[Boolean] = Empty,
+    mutable: Property[Boolean] = Empty,
+    attributeDataType: Property[String] = Empty,
+    stringAttributeConstraints: Property[StringAttributeConstraints] = Empty,
+    required: Property[Boolean] = Empty,
+    numberAttributeConstraints: Property[NumberAttributeConstraints] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeveloperOnlyAttribute" -> developerOnlyAttribute,
+    "Mutable" -> mutable,
+    "AttributeDataType" -> attributeDataType,
+    "StringAttributeConstraints" -> stringAttributeConstraints,
+    "Required" -> required,
+    "NumberAttributeConstraints" -> numberAttributeConstraints,
+    "Name" -> name
   )
 }

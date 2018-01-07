@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait OptionGroup extends Resource {
   val resourceTypeName = "AWS::RDS::OptionGroup"
 
-  def engineName: String
-  def majorEngineVersion: String
-  def optionConfigurations: Seq[OptionConfiguration]
-  def optionGroupDescription: String
-  def tags: Option[Seq[Tag]] = None
+  def engineName: NonEmptyProperty[String]
+  def majorEngineVersion: NonEmptyProperty[String]
+  def optionConfigurations: NonEmptyProperty[Seq[OptionConfiguration]]
+  def optionGroupDescription: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "EngineName" -> Some(Formattable(engineName)),
-    "MajorEngineVersion" -> Some(Formattable(majorEngineVersion)),
-    "OptionConfigurations" -> Some(Formattable(optionConfigurations)),
-    "OptionGroupDescription" -> Some(Formattable(optionGroupDescription)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "EngineName" -> engineName,
+    "MajorEngineVersion" -> majorEngineVersion,
+    "OptionConfigurations" -> optionConfigurations,
+    "OptionGroupDescription" -> optionGroupDescription,
+    "Tags" -> tags
   )
 }

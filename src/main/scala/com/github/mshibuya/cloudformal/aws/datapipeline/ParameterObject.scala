@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ParameterObject(
-    attributes: Seq[ParameterAttribute],
-    id: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Attributes" -> Some(Formattable(attributes)),
-    "Id" -> Some(Formattable(id))
+    attributes: NonEmptyProperty[Seq[ParameterAttribute]],
+    id: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Attributes" -> attributes,
+    "Id" -> id
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GeoLocation(
-    continentCode: Option[String] = None,
-    countryCode: Option[String] = None,
-    subdivisionCode: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ContinentCode" -> continentCode.map(Formattable(_)),
-    "CountryCode" -> countryCode.map(Formattable(_)),
-    "SubdivisionCode" -> subdivisionCode.map(Formattable(_))
+    continentCode: Property[String] = Empty,
+    countryCode: Property[String] = Empty,
+    subdivisionCode: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ContinentCode" -> continentCode,
+    "CountryCode" -> countryCode,
+    "SubdivisionCode" -> subdivisionCode
   )
 }

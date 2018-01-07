@@ -9,15 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Service extends Resource {
   val resourceTypeName = "AWS::ServiceDiscovery::Service"
 
-  def description: Option[String] = None
-  def dnsConfig: DnsConfig
-  def healthCheckConfig: Option[HealthCheckConfig] = None
-  def name: Option[String] = None
+  def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "DnsConfig" -> Some(Formattable(dnsConfig)),
-    "HealthCheckConfig" -> healthCheckConfig.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+  def description: Property[String] = Empty
+  def dnsConfig: NonEmptyProperty[DnsConfig]
+  def healthCheckConfig: Property[HealthCheckConfig] = Empty
+  def name: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "DnsConfig" -> dnsConfig,
+    "HealthCheckConfig" -> healthCheckConfig,
+    "Name" -> name
   )
 }

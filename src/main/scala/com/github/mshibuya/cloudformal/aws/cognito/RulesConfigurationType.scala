@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RulesConfigurationType(
-    rules: Seq[MappingRule]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Rules" -> Some(Formattable(rules))
+    rules: NonEmptyProperty[Seq[MappingRule]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Rules" -> rules
   )
 }

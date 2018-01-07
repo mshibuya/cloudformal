@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait UserToGroupAddition extends Resource {
   val resourceTypeName = "AWS::IAM::UserToGroupAddition"
 
-  def groupName: String
-  def users: Seq[String]
+  def groupName: NonEmptyProperty[String]
+  def users: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "GroupName" -> Some(Formattable(groupName)),
-    "Users" -> Some(Formattable(users))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "GroupName" -> groupName,
+    "Users" -> users
   )
 }

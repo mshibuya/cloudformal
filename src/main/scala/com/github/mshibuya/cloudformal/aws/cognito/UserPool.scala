@@ -10,39 +10,43 @@ import com.github.mshibuya.cloudformal.model._
 trait UserPool extends Resource {
   val resourceTypeName = "AWS::Cognito::UserPool"
 
-  def userPoolTags: Option[Json] = None
-  def policies: Option[Policies] = None
-  def mfaConfiguration: Option[String] = None
-  def schema: Option[Seq[SchemaAttribute]] = None
-  def adminCreateUserConfig: Option[AdminCreateUserConfig] = None
-  def smsAuthenticationMessage: Option[String] = None
-  def userPoolName: Option[String] = None
-  def smsVerificationMessage: Option[String] = None
-  def emailConfiguration: Option[EmailConfiguration] = None
-  def smsConfiguration: Option[SmsConfiguration] = None
-  def aliasAttributes: Option[Seq[String]] = None
-  def emailVerificationSubject: Option[String] = None
-  def lambdaConfig: Option[LambdaConfig] = None
-  def autoVerifiedAttributes: Option[Seq[String]] = None
-  def deviceConfiguration: Option[DeviceConfiguration] = None
-  def emailVerificationMessage: Option[String] = None
+  def providerNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "ProviderName")
+  def providerURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "ProviderURL")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "UserPoolTags" -> userPoolTags.map(Formattable(_)),
-    "Policies" -> policies.map(Formattable(_)),
-    "MfaConfiguration" -> mfaConfiguration.map(Formattable(_)),
-    "Schema" -> schema.map(Formattable(_)),
-    "AdminCreateUserConfig" -> adminCreateUserConfig.map(Formattable(_)),
-    "SmsAuthenticationMessage" -> smsAuthenticationMessage.map(Formattable(_)),
-    "UserPoolName" -> userPoolName.map(Formattable(_)),
-    "SmsVerificationMessage" -> smsVerificationMessage.map(Formattable(_)),
-    "EmailConfiguration" -> emailConfiguration.map(Formattable(_)),
-    "SmsConfiguration" -> smsConfiguration.map(Formattable(_)),
-    "AliasAttributes" -> aliasAttributes.map(Formattable(_)),
-    "EmailVerificationSubject" -> emailVerificationSubject.map(Formattable(_)),
-    "LambdaConfig" -> lambdaConfig.map(Formattable(_)),
-    "AutoVerifiedAttributes" -> autoVerifiedAttributes.map(Formattable(_)),
-    "DeviceConfiguration" -> deviceConfiguration.map(Formattable(_)),
-    "EmailVerificationMessage" -> emailVerificationMessage.map(Formattable(_))
+  def userPoolTags: Property[Json] = Empty
+  def policies: Property[Policies] = Empty
+  def mfaConfiguration: Property[String] = Empty
+  def schema: Property[Seq[SchemaAttribute]] = Empty
+  def adminCreateUserConfig: Property[AdminCreateUserConfig] = Empty
+  def smsAuthenticationMessage: Property[String] = Empty
+  def userPoolName: Property[String] = Empty
+  def smsVerificationMessage: Property[String] = Empty
+  def emailConfiguration: Property[EmailConfiguration] = Empty
+  def smsConfiguration: Property[SmsConfiguration] = Empty
+  def aliasAttributes: Property[Seq[String]] = Empty
+  def emailVerificationSubject: Property[String] = Empty
+  def lambdaConfig: Property[LambdaConfig] = Empty
+  def autoVerifiedAttributes: Property[Seq[String]] = Empty
+  def deviceConfiguration: Property[DeviceConfiguration] = Empty
+  def emailVerificationMessage: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "UserPoolTags" -> userPoolTags,
+    "Policies" -> policies,
+    "MfaConfiguration" -> mfaConfiguration,
+    "Schema" -> schema,
+    "AdminCreateUserConfig" -> adminCreateUserConfig,
+    "SmsAuthenticationMessage" -> smsAuthenticationMessage,
+    "UserPoolName" -> userPoolName,
+    "SmsVerificationMessage" -> smsVerificationMessage,
+    "EmailConfiguration" -> emailConfiguration,
+    "SmsConfiguration" -> smsConfiguration,
+    "AliasAttributes" -> aliasAttributes,
+    "EmailVerificationSubject" -> emailVerificationSubject,
+    "LambdaConfig" -> lambdaConfig,
+    "AutoVerifiedAttributes" -> autoVerifiedAttributes,
+    "DeviceConfiguration" -> deviceConfiguration,
+    "EmailVerificationMessage" -> emailVerificationMessage
   )
 }

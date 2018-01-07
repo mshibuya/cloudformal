@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PatchFilter(
-    values: Option[Seq[String]] = None,
-    key: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Values" -> values.map(Formattable(_)),
-    "Key" -> key.map(Formattable(_))
+    values: Property[Seq[String]] = Empty,
+    key: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Values" -> values,
+    "Key" -> key
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Action(
-    targetGroupArn: String,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TargetGroupArn" -> Some(Formattable(targetGroupArn)),
-    "Type" -> Some(Formattable(`type`))
+    targetGroupArn: NonEmptyProperty[String],
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TargetGroupArn" -> targetGroupArn,
+    "Type" -> `type`
   )
 }

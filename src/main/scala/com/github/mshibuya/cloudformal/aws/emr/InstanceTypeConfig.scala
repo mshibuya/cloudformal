@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InstanceTypeConfig(
-    bidPrice: Option[String] = None,
-    bidPriceAsPercentageOfOnDemandPrice: Option[Double] = None,
-    configurations: Option[Seq[Configuration]] = None,
-    ebsConfiguration: Option[EbsConfiguration] = None,
-    instanceType: String,
-    weightedCapacity: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BidPrice" -> bidPrice.map(Formattable(_)),
-    "BidPriceAsPercentageOfOnDemandPrice" -> bidPriceAsPercentageOfOnDemandPrice.map(Formattable(_)),
-    "Configurations" -> configurations.map(Formattable(_)),
-    "EbsConfiguration" -> ebsConfiguration.map(Formattable(_)),
-    "InstanceType" -> Some(Formattable(instanceType)),
-    "WeightedCapacity" -> weightedCapacity.map(Formattable(_))
+    bidPrice: Property[String] = Empty,
+    bidPriceAsPercentageOfOnDemandPrice: Property[Double] = Empty,
+    configurations: Property[Seq[Configuration]] = Empty,
+    ebsConfiguration: Property[EbsConfiguration] = Empty,
+    instanceType: NonEmptyProperty[String],
+    weightedCapacity: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BidPrice" -> bidPrice,
+    "BidPriceAsPercentageOfOnDemandPrice" -> bidPriceAsPercentageOfOnDemandPrice,
+    "Configurations" -> configurations,
+    "EbsConfiguration" -> ebsConfiguration,
+    "InstanceType" -> instanceType,
+    "WeightedCapacity" -> weightedCapacity
   )
 }

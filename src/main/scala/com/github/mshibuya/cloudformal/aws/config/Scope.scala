@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Scope(
-    complianceResourceId: Option[String] = None,
-    complianceResourceTypes: Option[Seq[String]] = None,
-    tagKey: Option[String] = None,
-    tagValue: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ComplianceResourceId" -> complianceResourceId.map(Formattable(_)),
-    "ComplianceResourceTypes" -> complianceResourceTypes.map(Formattable(_)),
-    "TagKey" -> tagKey.map(Formattable(_)),
-    "TagValue" -> tagValue.map(Formattable(_))
+    complianceResourceId: Property[String] = Empty,
+    complianceResourceTypes: Property[Seq[String]] = Empty,
+    tagKey: Property[String] = Empty,
+    tagValue: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ComplianceResourceId" -> complianceResourceId,
+    "ComplianceResourceTypes" -> complianceResourceTypes,
+    "TagKey" -> tagKey,
+    "TagValue" -> tagValue
   )
 }

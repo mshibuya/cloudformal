@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AutoScalingPolicy(
-    constraints: ScalingConstraints,
-    rules: Seq[ScalingRule]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Constraints" -> Some(Formattable(constraints)),
-    "Rules" -> Some(Formattable(rules))
+    constraints: NonEmptyProperty[ScalingConstraints],
+    rules: NonEmptyProperty[Seq[ScalingRule]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Constraints" -> constraints,
+    "Rules" -> rules
   )
 }

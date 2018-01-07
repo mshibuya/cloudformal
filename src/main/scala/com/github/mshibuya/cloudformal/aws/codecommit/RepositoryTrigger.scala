@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RepositoryTrigger(
-    events: Option[Seq[String]] = None,
-    branches: Option[Seq[String]] = None,
-    customData: Option[String] = None,
-    destinationArn: Option[String] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Events" -> events.map(Formattable(_)),
-    "Branches" -> branches.map(Formattable(_)),
-    "CustomData" -> customData.map(Formattable(_)),
-    "DestinationArn" -> destinationArn.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    events: Property[Seq[String]] = Empty,
+    branches: Property[Seq[String]] = Empty,
+    customData: Property[String] = Empty,
+    destinationArn: Property[String] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Events" -> events,
+    "Branches" -> branches,
+    "CustomData" -> customData,
+    "DestinationArn" -> destinationArn,
+    "Name" -> name
   )
 }

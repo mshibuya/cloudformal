@@ -10,21 +10,23 @@ import com.github.mshibuya.cloudformal.model._
 trait Rule extends Resource {
   val resourceTypeName = "AWS::Events::Rule"
 
-  def description: Option[String] = None
-  def eventPattern: Option[Json] = None
-  def name: Option[String] = None
-  def roleArn: Option[String] = None
-  def scheduleExpression: Option[String] = None
-  def state: Option[String] = None
-  def targets: Option[Seq[Target]] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "EventPattern" -> eventPattern.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_)),
-    "ScheduleExpression" -> scheduleExpression.map(Formattable(_)),
-    "State" -> state.map(Formattable(_)),
-    "Targets" -> targets.map(Formattable(_))
+  def description: Property[String] = Empty
+  def eventPattern: Property[Json] = Empty
+  def name: Property[String] = Empty
+  def roleArn: Property[String] = Empty
+  def scheduleExpression: Property[String] = Empty
+  def state: Property[String] = Empty
+  def targets: Property[Seq[Target]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "EventPattern" -> eventPattern,
+    "Name" -> name,
+    "RoleArn" -> roleArn,
+    "ScheduleExpression" -> scheduleExpression,
+    "State" -> state,
+    "Targets" -> targets
   )
 }

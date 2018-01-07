@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SubnetMapping(
-    allocationId: String,
-    subnetId: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AllocationId" -> Some(Formattable(allocationId)),
-    "SubnetId" -> Some(Formattable(subnetId))
+    allocationId: NonEmptyProperty[String],
+    subnetId: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AllocationId" -> allocationId,
+    "SubnetId" -> subnetId
   )
 }

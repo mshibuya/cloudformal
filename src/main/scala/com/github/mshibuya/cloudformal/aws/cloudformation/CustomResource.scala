@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait CustomResource extends Resource {
   val resourceTypeName = "AWS::CloudFormation::CustomResource"
 
-  def serviceToken: String
+  def serviceToken: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ServiceToken" -> Some(Formattable(serviceToken))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ServiceToken" -> serviceToken
   )
 }

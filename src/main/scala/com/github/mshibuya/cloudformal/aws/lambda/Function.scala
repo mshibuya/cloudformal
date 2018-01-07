@@ -9,35 +9,37 @@ import com.github.mshibuya.cloudformal.model._
 trait Function extends Resource {
   val resourceTypeName = "AWS::Lambda::Function"
 
-  def code: Code
-  def deadLetterConfig: Option[DeadLetterConfig] = None
-  def description: Option[String] = None
-  def environment: Option[Environment] = None
-  def functionName: Option[String] = None
-  def handler: String
-  def kmsKeyArn: Option[String] = None
-  def memorySize: Option[Int] = None
-  def role: String
-  def runtime: String
-  def tags: Option[Seq[Tag]] = None
-  def timeout: Option[Int] = None
-  def tracingConfig: Option[TracingConfig] = None
-  def vpcConfig: Option[VpcConfig] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Code" -> Some(Formattable(code)),
-    "DeadLetterConfig" -> deadLetterConfig.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Environment" -> environment.map(Formattable(_)),
-    "FunctionName" -> functionName.map(Formattable(_)),
-    "Handler" -> Some(Formattable(handler)),
-    "KmsKeyArn" -> kmsKeyArn.map(Formattable(_)),
-    "MemorySize" -> memorySize.map(Formattable(_)),
-    "Role" -> Some(Formattable(role)),
-    "Runtime" -> Some(Formattable(runtime)),
-    "Tags" -> tags.map(Formattable(_)),
-    "Timeout" -> timeout.map(Formattable(_)),
-    "TracingConfig" -> tracingConfig.map(Formattable(_)),
-    "VpcConfig" -> vpcConfig.map(Formattable(_))
+  def code: NonEmptyProperty[Code]
+  def deadLetterConfig: Property[DeadLetterConfig] = Empty
+  def description: Property[String] = Empty
+  def environment: Property[Environment] = Empty
+  def functionName: Property[String] = Empty
+  def handler: NonEmptyProperty[String]
+  def kmsKeyArn: Property[String] = Empty
+  def memorySize: Property[Int] = Empty
+  def role: NonEmptyProperty[String]
+  def runtime: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def timeout: Property[Int] = Empty
+  def tracingConfig: Property[TracingConfig] = Empty
+  def vpcConfig: Property[VpcConfig] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Code" -> code,
+    "DeadLetterConfig" -> deadLetterConfig,
+    "Description" -> description,
+    "Environment" -> environment,
+    "FunctionName" -> functionName,
+    "Handler" -> handler,
+    "KmsKeyArn" -> kmsKeyArn,
+    "MemorySize" -> memorySize,
+    "Role" -> role,
+    "Runtime" -> runtime,
+    "Tags" -> tags,
+    "Timeout" -> timeout,
+    "TracingConfig" -> tracingConfig,
+    "VpcConfig" -> vpcConfig
   )
 }

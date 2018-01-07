@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait ClusterSubnetGroup extends Resource {
   val resourceTypeName = "AWS::Redshift::ClusterSubnetGroup"
 
-  def description: String
-  def subnetIds: Seq[String]
-  def tags: Option[Seq[Tag]] = None
+  def description: NonEmptyProperty[String]
+  def subnetIds: NonEmptyProperty[Seq[String]]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description)),
-    "SubnetIds" -> Some(Formattable(subnetIds)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "SubnetIds" -> subnetIds,
+    "Tags" -> tags
   )
 }

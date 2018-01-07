@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LambdaFunctionAssociation(
-    eventType: Option[String] = None,
-    lambdaFunctionARN: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EventType" -> eventType.map(Formattable(_)),
-    "LambdaFunctionARN" -> lambdaFunctionARN.map(Formattable(_))
+    eventType: Property[String] = Empty,
+    lambdaFunctionARN: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EventType" -> eventType,
+    "LambdaFunctionARN" -> lambdaFunctionARN
   )
 }

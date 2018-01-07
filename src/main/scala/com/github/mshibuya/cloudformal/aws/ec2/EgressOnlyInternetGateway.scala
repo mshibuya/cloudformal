@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait EgressOnlyInternetGateway extends Resource {
   val resourceTypeName = "AWS::EC2::EgressOnlyInternetGateway"
 
-  def vpcId: String
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "VpcId" -> vpcId
   )
 }

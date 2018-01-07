@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HealthCheck(
-    healthyThreshold: String,
-    interval: String,
-    target: String,
-    timeout: String,
-    unhealthyThreshold: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HealthyThreshold" -> Some(Formattable(healthyThreshold)),
-    "Interval" -> Some(Formattable(interval)),
-    "Target" -> Some(Formattable(target)),
-    "Timeout" -> Some(Formattable(timeout)),
-    "UnhealthyThreshold" -> Some(Formattable(unhealthyThreshold))
+    healthyThreshold: NonEmptyProperty[String],
+    interval: NonEmptyProperty[String],
+    target: NonEmptyProperty[String],
+    timeout: NonEmptyProperty[String],
+    unhealthyThreshold: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HealthyThreshold" -> healthyThreshold,
+    "Interval" -> interval,
+    "Target" -> target,
+    "Timeout" -> timeout,
+    "UnhealthyThreshold" -> unhealthyThreshold
   )
 }

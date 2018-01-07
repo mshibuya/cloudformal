@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait VPCDHCPOptionsAssociation extends Resource {
   val resourceTypeName = "AWS::EC2::VPCDHCPOptionsAssociation"
 
-  def dhcpOptionsId: String
-  def vpcId: String
+  def dhcpOptionsId: NonEmptyProperty[String]
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DhcpOptionsId" -> Some(Formattable(dhcpOptionsId)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DhcpOptionsId" -> dhcpOptionsId,
+    "VpcId" -> vpcId
   )
 }

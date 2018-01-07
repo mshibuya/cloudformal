@@ -7,32 +7,19 @@ case class Property(name: String,
                     itemType: Option[String],
                     primitiveType: Option[String],
                     primitiveItemType: Option[String],
-                    propertyType: Option[String],
-                    required: Boolean) {
+                    `type`: Option[String],
+                    required: Boolean) extends HasType {
   val identifier: String =
     if (name == "Type")
       "`type`"
     else
       Inflector.camelize(name)
 
-  val isList: Boolean = propertyType.exists(_.equals("List"))
-  val isMap: Boolean = propertyType.exists(_.equals("Map"))
-  val isJson: Boolean = primitiveType.exists(_.equals("Json")) || primitiveItemType.exists(_.equals("Json"))
-
-  val inferredTypeName: String =
-    if (isList) {
-      s"Seq[${TypeRegistry.lookup(name, primitiveItemType.orElse(itemType).get)}]"
-    } else if(isMap) {
-      s"ListMap[String, ${TypeRegistry.lookup(name, primitiveItemType.orElse(itemType).get)}]"
-    } else {
-      TypeRegistry.lookup(name, primitiveType.orElse(propertyType).get)
-    }
-
   val typeName: String = {
     if(required)
-      inferredTypeName
+      s"NonEmptyProperty[${inferredTypeName}]"
     else
-      s"Option[${inferredTypeName}] = None"
+      s"Property[${inferredTypeName}] = Empty"
   }
 
   def methodValue: String = {
@@ -44,8 +31,7 @@ case class Property(name: String,
   }
 
   def renderedValue: String = {
-    val value = if(required) s"Some(Formattable(${identifier}))" else s"${identifier}.map(Formattable(_))"
-    s"""    "${name}" -> ${value}"""
+    s"""    "${name}" -> ${identifier}"""
   }
 }
 

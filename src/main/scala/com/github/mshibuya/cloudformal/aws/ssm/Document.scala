@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Document extends Resource {
   val resourceTypeName = "AWS::SSM::Document"
 
-  def content: Json
-  def documentType: Option[String] = None
+  def content: NonEmptyProperty[Json]
+  def documentType: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Content" -> Some(Formattable(content)),
-    "DocumentType" -> documentType.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Content" -> content,
+    "DocumentType" -> documentType
   )
 }

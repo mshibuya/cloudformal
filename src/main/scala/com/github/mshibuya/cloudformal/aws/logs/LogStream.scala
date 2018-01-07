@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait LogStream extends Resource {
   val resourceTypeName = "AWS::Logs::LogStream"
 
-  def logGroupName: String
-  def logStreamName: Option[String] = None
+  def logGroupName: NonEmptyProperty[String]
+  def logStreamName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "LogGroupName" -> Some(Formattable(logGroupName)),
-    "LogStreamName" -> logStreamName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "LogGroupName" -> logGroupName,
+    "LogStreamName" -> logStreamName
   )
 }

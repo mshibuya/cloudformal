@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait VolumeAttachment extends Resource {
   val resourceTypeName = "AWS::EC2::VolumeAttachment"
 
-  def device: String
-  def instanceId: String
-  def volumeId: String
+  def device: NonEmptyProperty[String]
+  def instanceId: NonEmptyProperty[String]
+  def volumeId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Device" -> Some(Formattable(device)),
-    "InstanceId" -> Some(Formattable(instanceId)),
-    "VolumeId" -> Some(Formattable(volumeId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Device" -> device,
+    "InstanceId" -> instanceId,
+    "VolumeId" -> volumeId
   )
 }

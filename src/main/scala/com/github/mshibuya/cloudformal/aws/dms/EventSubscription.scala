@@ -9,21 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait EventSubscription extends Resource {
   val resourceTypeName = "AWS::DMS::EventSubscription"
 
-  def sourceType: Option[String] = None
-  def eventCategories: Option[Seq[String]] = None
-  def enabled: Option[Boolean] = None
-  def subscriptionName: Option[String] = None
-  def snsTopicArn: String
-  def sourceIds: Option[Seq[String]] = None
-  def tags: Option[Seq[Tag]] = None
+  def sourceType: Property[String] = Empty
+  def eventCategories: Property[Seq[String]] = Empty
+  def enabled: Property[Boolean] = Empty
+  def subscriptionName: Property[String] = Empty
+  def snsTopicArn: NonEmptyProperty[String]
+  def sourceIds: Property[Seq[String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "SourceType" -> sourceType.map(Formattable(_)),
-    "EventCategories" -> eventCategories.map(Formattable(_)),
-    "Enabled" -> enabled.map(Formattable(_)),
-    "SubscriptionName" -> subscriptionName.map(Formattable(_)),
-    "SnsTopicArn" -> Some(Formattable(snsTopicArn)),
-    "SourceIds" -> sourceIds.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "SourceType" -> sourceType,
+    "EventCategories" -> eventCategories,
+    "Enabled" -> enabled,
+    "SubscriptionName" -> subscriptionName,
+    "SnsTopicArn" -> snsTopicArn,
+    "SourceIds" -> sourceIds,
+    "Tags" -> tags
   )
 }

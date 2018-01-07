@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HostEntry(
-    hostname: String,
-    ipAddress: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Hostname" -> Some(Formattable(hostname)),
-    "IpAddress" -> Some(Formattable(ipAddress))
+    hostname: NonEmptyProperty[String],
+    ipAddress: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Hostname" -> hostname,
+    "IpAddress" -> ipAddress
   )
 }

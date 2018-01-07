@@ -7,22 +7,22 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LambdaConfig(
-    createAuthChallenge: Option[String] = None,
-    preAuthentication: Option[String] = None,
-    defineAuthChallenge: Option[String] = None,
-    preSignUp: Option[String] = None,
-    postAuthentication: Option[String] = None,
-    postConfirmation: Option[String] = None,
-    customMessage: Option[String] = None,
-    verifyAuthChallengeResponse: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CreateAuthChallenge" -> createAuthChallenge.map(Formattable(_)),
-    "PreAuthentication" -> preAuthentication.map(Formattable(_)),
-    "DefineAuthChallenge" -> defineAuthChallenge.map(Formattable(_)),
-    "PreSignUp" -> preSignUp.map(Formattable(_)),
-    "PostAuthentication" -> postAuthentication.map(Formattable(_)),
-    "PostConfirmation" -> postConfirmation.map(Formattable(_)),
-    "CustomMessage" -> customMessage.map(Formattable(_)),
-    "VerifyAuthChallengeResponse" -> verifyAuthChallengeResponse.map(Formattable(_))
+    createAuthChallenge: Property[String] = Empty,
+    preAuthentication: Property[String] = Empty,
+    defineAuthChallenge: Property[String] = Empty,
+    preSignUp: Property[String] = Empty,
+    postAuthentication: Property[String] = Empty,
+    postConfirmation: Property[String] = Empty,
+    customMessage: Property[String] = Empty,
+    verifyAuthChallengeResponse: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CreateAuthChallenge" -> createAuthChallenge,
+    "PreAuthentication" -> preAuthentication,
+    "DefineAuthChallenge" -> defineAuthChallenge,
+    "PreSignUp" -> preSignUp,
+    "PostAuthentication" -> postAuthentication,
+    "PostConfirmation" -> postConfirmation,
+    "CustomMessage" -> customMessage,
+    "VerifyAuthChallengeResponse" -> verifyAuthChallengeResponse
   )
 }

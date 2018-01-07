@@ -9,39 +9,45 @@ import com.github.mshibuya.cloudformal.model._
 trait LoadBalancer extends Resource {
   val resourceTypeName = "AWS::ElasticLoadBalancing::LoadBalancer"
 
-  def accessLoggingPolicy: Option[AccessLoggingPolicy] = None
-  def appCookieStickinessPolicy: Option[Seq[AppCookieStickinessPolicy]] = None
-  def availabilityZones: Option[Seq[String]] = None
-  def connectionDrainingPolicy: Option[ConnectionDrainingPolicy] = None
-  def connectionSettings: Option[ConnectionSettings] = None
-  def crossZone: Option[Boolean] = None
-  def healthCheck: Option[HealthCheck] = None
-  def instances: Option[Seq[String]] = None
-  def lBCookieStickinessPolicy: Option[Seq[LBCookieStickinessPolicy]] = None
-  def listeners: Seq[Listeners]
-  def loadBalancerName: Option[String] = None
-  def policies: Option[Seq[Policies]] = None
-  def scheme: Option[String] = None
-  def securityGroups: Option[Seq[String]] = None
-  def subnets: Option[Seq[String]] = None
-  def tags: Option[Seq[Tag]] = None
+  def canonicalHostedZoneNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneName")
+  def canonicalHostedZoneNameIDAttribute: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneNameID")
+  def dNSNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
+  def sourceSecurityGroupGroupNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "SourceSecurityGroup.GroupName")
+  def sourceSecurityGroupOwnerAliasAttribute: Expression[String] = Fn.GetAtt(logicalId, "SourceSecurityGroup.OwnerAlias")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AccessLoggingPolicy" -> accessLoggingPolicy.map(Formattable(_)),
-    "AppCookieStickinessPolicy" -> appCookieStickinessPolicy.map(Formattable(_)),
-    "AvailabilityZones" -> availabilityZones.map(Formattable(_)),
-    "ConnectionDrainingPolicy" -> connectionDrainingPolicy.map(Formattable(_)),
-    "ConnectionSettings" -> connectionSettings.map(Formattable(_)),
-    "CrossZone" -> crossZone.map(Formattable(_)),
-    "HealthCheck" -> healthCheck.map(Formattable(_)),
-    "Instances" -> instances.map(Formattable(_)),
-    "LBCookieStickinessPolicy" -> lBCookieStickinessPolicy.map(Formattable(_)),
-    "Listeners" -> Some(Formattable(listeners)),
-    "LoadBalancerName" -> loadBalancerName.map(Formattable(_)),
-    "Policies" -> policies.map(Formattable(_)),
-    "Scheme" -> scheme.map(Formattable(_)),
-    "SecurityGroups" -> securityGroups.map(Formattable(_)),
-    "Subnets" -> subnets.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def accessLoggingPolicy: Property[AccessLoggingPolicy] = Empty
+  def appCookieStickinessPolicy: Property[Seq[AppCookieStickinessPolicy]] = Empty
+  def availabilityZones: Property[Seq[String]] = Empty
+  def connectionDrainingPolicy: Property[ConnectionDrainingPolicy] = Empty
+  def connectionSettings: Property[ConnectionSettings] = Empty
+  def crossZone: Property[Boolean] = Empty
+  def healthCheck: Property[HealthCheck] = Empty
+  def instances: Property[Seq[String]] = Empty
+  def lBCookieStickinessPolicy: Property[Seq[LBCookieStickinessPolicy]] = Empty
+  def listeners: NonEmptyProperty[Seq[Listeners]]
+  def loadBalancerName: Property[String] = Empty
+  def policies: Property[Seq[Policies]] = Empty
+  def scheme: Property[String] = Empty
+  def securityGroups: Property[Seq[String]] = Empty
+  def subnets: Property[Seq[String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AccessLoggingPolicy" -> accessLoggingPolicy,
+    "AppCookieStickinessPolicy" -> appCookieStickinessPolicy,
+    "AvailabilityZones" -> availabilityZones,
+    "ConnectionDrainingPolicy" -> connectionDrainingPolicy,
+    "ConnectionSettings" -> connectionSettings,
+    "CrossZone" -> crossZone,
+    "HealthCheck" -> healthCheck,
+    "Instances" -> instances,
+    "LBCookieStickinessPolicy" -> lBCookieStickinessPolicy,
+    "Listeners" -> listeners,
+    "LoadBalancerName" -> loadBalancerName,
+    "Policies" -> policies,
+    "Scheme" -> scheme,
+    "SecurityGroups" -> securityGroups,
+    "Subnets" -> subnets,
+    "Tags" -> tags
   )
 }

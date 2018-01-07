@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LifecycleHookSpecification(
-    defaultResult: Option[String] = None,
-    heartbeatTimeout: Option[Int] = None,
-    lifecycleHookName: String,
-    lifecycleTransition: String,
-    notificationMetadata: Option[String] = None,
-    notificationTargetARN: Option[String] = None,
-    roleARN: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DefaultResult" -> defaultResult.map(Formattable(_)),
-    "HeartbeatTimeout" -> heartbeatTimeout.map(Formattable(_)),
-    "LifecycleHookName" -> Some(Formattable(lifecycleHookName)),
-    "LifecycleTransition" -> Some(Formattable(lifecycleTransition)),
-    "NotificationMetadata" -> notificationMetadata.map(Formattable(_)),
-    "NotificationTargetARN" -> notificationTargetARN.map(Formattable(_)),
-    "RoleARN" -> roleARN.map(Formattable(_))
+    defaultResult: Property[String] = Empty,
+    heartbeatTimeout: Property[Int] = Empty,
+    lifecycleHookName: NonEmptyProperty[String],
+    lifecycleTransition: NonEmptyProperty[String],
+    notificationMetadata: Property[String] = Empty,
+    notificationTargetARN: Property[String] = Empty,
+    roleARN: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DefaultResult" -> defaultResult,
+    "HeartbeatTimeout" -> heartbeatTimeout,
+    "LifecycleHookName" -> lifecycleHookName,
+    "LifecycleTransition" -> lifecycleTransition,
+    "NotificationMetadata" -> notificationMetadata,
+    "NotificationTargetARN" -> notificationTargetARN,
+    "RoleARN" -> roleARN
   )
 }

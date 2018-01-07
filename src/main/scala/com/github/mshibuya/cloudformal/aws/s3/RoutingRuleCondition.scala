@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RoutingRuleCondition(
-    httpErrorCodeReturnedEquals: Option[String] = None,
-    keyPrefixEquals: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HttpErrorCodeReturnedEquals" -> httpErrorCodeReturnedEquals.map(Formattable(_)),
-    "KeyPrefixEquals" -> keyPrefixEquals.map(Formattable(_))
+    httpErrorCodeReturnedEquals: Property[String] = Empty,
+    keyPrefixEquals: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HttpErrorCodeReturnedEquals" -> httpErrorCodeReturnedEquals,
+    "KeyPrefixEquals" -> keyPrefixEquals
   )
 }

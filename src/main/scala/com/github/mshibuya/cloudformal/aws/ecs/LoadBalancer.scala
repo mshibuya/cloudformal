@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoadBalancer(
-    containerName: Option[String] = None,
-    containerPort: Int,
-    loadBalancerName: Option[String] = None,
-    targetGroupArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ContainerName" -> containerName.map(Formattable(_)),
-    "ContainerPort" -> Some(Formattable(containerPort)),
-    "LoadBalancerName" -> loadBalancerName.map(Formattable(_)),
-    "TargetGroupArn" -> targetGroupArn.map(Formattable(_))
+    containerName: Property[String] = Empty,
+    containerPort: NonEmptyProperty[Int],
+    loadBalancerName: Property[String] = Empty,
+    targetGroupArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ContainerName" -> containerName,
+    "ContainerPort" -> containerPort,
+    "LoadBalancerName" -> loadBalancerName,
+    "TargetGroupArn" -> targetGroupArn
   )
 }

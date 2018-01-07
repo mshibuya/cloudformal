@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Icmp(
-    code: Option[Int] = None,
-    `type`: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Code" -> code.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_))
+    code: Property[Int] = Empty,
+    `type`: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Code" -> code,
+    "Type" -> `type`
   )
 }

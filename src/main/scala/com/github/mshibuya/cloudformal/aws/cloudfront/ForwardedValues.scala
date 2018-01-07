@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ForwardedValues(
-    cookies: Option[Cookies] = None,
-    headers: Option[Seq[String]] = None,
-    queryString: Boolean,
-    queryStringCacheKeys: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Cookies" -> cookies.map(Formattable(_)),
-    "Headers" -> headers.map(Formattable(_)),
-    "QueryString" -> Some(Formattable(queryString)),
-    "QueryStringCacheKeys" -> queryStringCacheKeys.map(Formattable(_))
+    cookies: Property[Cookies] = Empty,
+    headers: Property[Seq[String]] = Empty,
+    queryString: NonEmptyProperty[Boolean],
+    queryStringCacheKeys: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Cookies" -> cookies,
+    "Headers" -> headers,
+    "QueryString" -> queryString,
+    "QueryStringCacheKeys" -> queryStringCacheKeys
   )
 }

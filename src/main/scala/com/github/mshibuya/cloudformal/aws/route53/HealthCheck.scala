@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait HealthCheck extends Resource {
   val resourceTypeName = "AWS::Route53::HealthCheck"
 
-  def healthCheckConfig: HealthCheckConfig
-  def healthCheckTags: Option[Seq[HealthCheckTag]] = None
+  def healthCheckConfig: NonEmptyProperty[HealthCheckConfig]
+  def healthCheckTags: Property[Seq[HealthCheckTag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "HealthCheckConfig" -> Some(Formattable(healthCheckConfig)),
-    "HealthCheckTags" -> healthCheckTags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "HealthCheckConfig" -> healthCheckConfig,
+    "HealthCheckTags" -> healthCheckTags
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InputSchema(
-    recordEncoding: Option[String] = None,
-    recordColumns: Seq[RecordColumn],
-    recordFormat: RecordFormat) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RecordEncoding" -> recordEncoding.map(Formattable(_)),
-    "RecordColumns" -> Some(Formattable(recordColumns)),
-    "RecordFormat" -> Some(Formattable(recordFormat))
+    recordEncoding: Property[String] = Empty,
+    recordColumns: NonEmptyProperty[Seq[RecordColumn]],
+    recordFormat: NonEmptyProperty[RecordFormat]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RecordEncoding" -> recordEncoding,
+    "RecordColumns" -> recordColumns,
+    "RecordFormat" -> recordFormat
   )
 }

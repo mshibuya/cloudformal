@@ -7,24 +7,24 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudWatchAlarmDefinition(
-    comparisonOperator: String,
-    dimensions: Option[Seq[MetricDimension]] = None,
-    evaluationPeriods: Option[Int] = None,
-    metricName: String,
-    namespace: Option[String] = None,
-    period: Int,
-    statistic: Option[String] = None,
-    threshold: Double,
-    unit: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ComparisonOperator" -> Some(Formattable(comparisonOperator)),
-    "Dimensions" -> dimensions.map(Formattable(_)),
-    "EvaluationPeriods" -> evaluationPeriods.map(Formattable(_)),
-    "MetricName" -> Some(Formattable(metricName)),
-    "Namespace" -> namespace.map(Formattable(_)),
-    "Period" -> Some(Formattable(period)),
-    "Statistic" -> statistic.map(Formattable(_)),
-    "Threshold" -> Some(Formattable(threshold)),
-    "Unit" -> unit.map(Formattable(_))
+    comparisonOperator: NonEmptyProperty[String],
+    dimensions: Property[Seq[MetricDimension]] = Empty,
+    evaluationPeriods: Property[Int] = Empty,
+    metricName: NonEmptyProperty[String],
+    namespace: Property[String] = Empty,
+    period: NonEmptyProperty[Int],
+    statistic: Property[String] = Empty,
+    threshold: NonEmptyProperty[Double],
+    unit: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ComparisonOperator" -> comparisonOperator,
+    "Dimensions" -> dimensions,
+    "EvaluationPeriods" -> evaluationPeriods,
+    "MetricName" -> metricName,
+    "Namespace" -> namespace,
+    "Period" -> period,
+    "Statistic" -> statistic,
+    "Threshold" -> threshold,
+    "Unit" -> unit
   )
 }

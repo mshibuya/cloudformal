@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StackConfigurationManager(
-    name: Option[String] = None,
-    version: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "Version" -> version.map(Formattable(_))
+    name: Property[String] = Empty,
+    version: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name,
+    "Version" -> version
   )
 }

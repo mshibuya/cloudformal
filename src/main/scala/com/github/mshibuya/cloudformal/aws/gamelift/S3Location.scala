@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3Location(
-    bucket: String,
-    key: String,
-    roleArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Bucket" -> Some(Formattable(bucket)),
-    "Key" -> Some(Formattable(key)),
-    "RoleArn" -> Some(Formattable(roleArn))
+    bucket: NonEmptyProperty[String],
+    key: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Bucket" -> bucket,
+    "Key" -> key,
+    "RoleArn" -> roleArn
   )
 }

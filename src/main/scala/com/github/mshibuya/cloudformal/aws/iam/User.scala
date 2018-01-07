@@ -9,19 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait User extends Resource {
   val resourceTypeName = "AWS::IAM::User"
 
-  def groups: Option[Seq[String]] = None
-  def loginProfile: Option[LoginProfile] = None
-  def managedPolicyArns: Option[Seq[String]] = None
-  def path: Option[String] = None
-  def policies: Option[Seq[Policy]] = None
-  def userName: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Groups" -> groups.map(Formattable(_)),
-    "LoginProfile" -> loginProfile.map(Formattable(_)),
-    "ManagedPolicyArns" -> managedPolicyArns.map(Formattable(_)),
-    "Path" -> path.map(Formattable(_)),
-    "Policies" -> policies.map(Formattable(_)),
-    "UserName" -> userName.map(Formattable(_))
+  def groups: Property[Seq[String]] = Empty
+  def loginProfile: Property[LoginProfile] = Empty
+  def managedPolicyArns: Property[Seq[String]] = Empty
+  def path: Property[String] = Empty
+  def policies: Property[Seq[Policy]] = Empty
+  def userName: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Groups" -> groups,
+    "LoginProfile" -> loginProfile,
+    "ManagedPolicyArns" -> managedPolicyArns,
+    "Path" -> path,
+    "Policies" -> policies,
+    "UserName" -> userName
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NumberAttributeConstraints(
-    minValue: Option[String] = None,
-    maxValue: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MinValue" -> minValue.map(Formattable(_)),
-    "MaxValue" -> maxValue.map(Formattable(_))
+    minValue: Property[String] = Empty,
+    maxValue: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MinValue" -> minValue,
+    "MaxValue" -> maxValue
   )
 }

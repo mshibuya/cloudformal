@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait ComputeEnvironment extends Resource {
   val resourceTypeName = "AWS::Batch::ComputeEnvironment"
 
-  def `type`: String
-  def serviceRole: String
-  def computeEnvironmentName: Option[String] = None
-  def computeResources: ComputeResources
-  def state: Option[String] = None
+  def `type`: NonEmptyProperty[String]
+  def serviceRole: NonEmptyProperty[String]
+  def computeEnvironmentName: Property[String] = Empty
+  def computeResources: NonEmptyProperty[ComputeResources]
+  def state: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "ServiceRole" -> Some(Formattable(serviceRole)),
-    "ComputeEnvironmentName" -> computeEnvironmentName.map(Formattable(_)),
-    "ComputeResources" -> Some(Formattable(computeResources)),
-    "State" -> state.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Type" -> `type`,
+    "ServiceRole" -> serviceRole,
+    "ComputeEnvironmentName" -> computeEnvironmentName,
+    "ComputeResources" -> computeResources,
+    "State" -> state
   )
 }

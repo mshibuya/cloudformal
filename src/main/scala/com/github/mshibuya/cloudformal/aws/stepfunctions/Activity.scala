@@ -9,9 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Activity extends Resource {
   val resourceTypeName = "AWS::StepFunctions::Activity"
 
-  def name: String
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> Some(Formattable(name))
+  def name: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name
   )
 }

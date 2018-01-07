@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GitHubLocation(
-    commitId: String,
-    repository: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CommitId" -> Some(Formattable(commitId)),
-    "Repository" -> Some(Formattable(repository))
+    commitId: NonEmptyProperty[String],
+    repository: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CommitId" -> commitId,
+    "Repository" -> repository
   )
 }

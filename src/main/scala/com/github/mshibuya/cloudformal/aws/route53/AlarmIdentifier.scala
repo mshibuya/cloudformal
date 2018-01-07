@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AlarmIdentifier(
-    name: String,
-    region: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> Some(Formattable(name)),
-    "Region" -> Some(Formattable(region))
+    name: NonEmptyProperty[String],
+    region: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name,
+    "Region" -> region
   )
 }

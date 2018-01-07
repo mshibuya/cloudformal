@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class KernelCapabilities(
-    add: Option[Seq[String]] = None,
-    drop: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Add" -> add.map(Formattable(_)),
-    "Drop" -> drop.map(Formattable(_))
+    add: Property[Seq[String]] = Empty,
+    drop: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Add" -> add,
+    "Drop" -> drop
   )
 }

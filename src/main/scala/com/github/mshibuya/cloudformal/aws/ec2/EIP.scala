@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait EIP extends Resource {
   val resourceTypeName = "AWS::EC2::EIP"
 
-  def domain: Option[String] = None
-  def instanceId: Option[String] = None
+  def allocationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "AllocationId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Domain" -> domain.map(Formattable(_)),
-    "InstanceId" -> instanceId.map(Formattable(_))
+  def domain: Property[String] = Empty
+  def instanceId: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Domain" -> domain,
+    "InstanceId" -> instanceId
   )
 }

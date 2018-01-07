@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Ingress(
-    cIDRIP: Option[String] = None,
-    eC2SecurityGroupId: Option[String] = None,
-    eC2SecurityGroupName: Option[String] = None,
-    eC2SecurityGroupOwnerId: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CIDRIP" -> cIDRIP.map(Formattable(_)),
-    "EC2SecurityGroupId" -> eC2SecurityGroupId.map(Formattable(_)),
-    "EC2SecurityGroupName" -> eC2SecurityGroupName.map(Formattable(_)),
-    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId.map(Formattable(_))
+    cIDRIP: Property[String] = Empty,
+    eC2SecurityGroupId: Property[String] = Empty,
+    eC2SecurityGroupName: Property[String] = Empty,
+    eC2SecurityGroupOwnerId: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CIDRIP" -> cIDRIP,
+    "EC2SecurityGroupId" -> eC2SecurityGroupId,
+    "EC2SecurityGroupName" -> eC2SecurityGroupName,
+    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId
   )
 }

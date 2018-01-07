@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait PlacementGroup extends Resource {
   val resourceTypeName = "AWS::EC2::PlacementGroup"
 
-  def strategy: Option[String] = None
+  def strategy: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Strategy" -> strategy.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Strategy" -> strategy
   )
 }

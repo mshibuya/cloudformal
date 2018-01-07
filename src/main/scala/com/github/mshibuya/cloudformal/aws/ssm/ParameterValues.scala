@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ParameterValues(
-    parameterValues: Seq[String]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ParameterValues" -> Some(Formattable(parameterValues))
+    parameterValues: NonEmptyProperty[Seq[String]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ParameterValues" -> parameterValues
   )
 }

@@ -10,27 +10,27 @@ import com.github.mshibuya.cloudformal.model._
 trait Job extends Resource {
   val resourceTypeName = "AWS::Glue::Job"
 
-  def role: String
-  def defaultArguments: Option[Json] = None
-  def connections: Option[ConnectionsList] = None
-  def maxRetries: Option[Double] = None
-  def description: Option[String] = None
-  def logUri: Option[String] = None
-  def command: JobCommand
-  def allocatedCapacity: Option[Double] = None
-  def executionProperty: Option[ExecutionProperty] = None
-  def name: Option[String] = None
+  def role: NonEmptyProperty[String]
+  def defaultArguments: Property[Json] = Empty
+  def connections: Property[ConnectionsList] = Empty
+  def maxRetries: Property[Double] = Empty
+  def description: Property[String] = Empty
+  def logUri: Property[String] = Empty
+  def command: NonEmptyProperty[JobCommand]
+  def allocatedCapacity: Property[Double] = Empty
+  def executionProperty: Property[ExecutionProperty] = Empty
+  def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Role" -> Some(Formattable(role)),
-    "DefaultArguments" -> defaultArguments.map(Formattable(_)),
-    "Connections" -> connections.map(Formattable(_)),
-    "MaxRetries" -> maxRetries.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "LogUri" -> logUri.map(Formattable(_)),
-    "Command" -> Some(Formattable(command)),
-    "AllocatedCapacity" -> allocatedCapacity.map(Formattable(_)),
-    "ExecutionProperty" -> executionProperty.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Role" -> role,
+    "DefaultArguments" -> defaultArguments,
+    "Connections" -> connections,
+    "MaxRetries" -> maxRetries,
+    "Description" -> description,
+    "LogUri" -> logUri,
+    "Command" -> command,
+    "AllocatedCapacity" -> allocatedCapacity,
+    "ExecutionProperty" -> executionProperty,
+    "Name" -> name
   )
 }

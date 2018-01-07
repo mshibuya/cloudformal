@@ -7,28 +7,28 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MongoDbSettings(
-    authSource: Option[String] = None,
-    authMechanism: Option[String] = None,
-    username: Option[String] = None,
-    docsToInvestigate: Option[String] = None,
-    serverName: Option[String] = None,
-    port: Option[Int] = None,
-    extractDocId: Option[String] = None,
-    databaseName: Option[String] = None,
-    authType: Option[String] = None,
-    password: Option[String] = None,
-    nestingLevel: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AuthSource" -> authSource.map(Formattable(_)),
-    "AuthMechanism" -> authMechanism.map(Formattable(_)),
-    "Username" -> username.map(Formattable(_)),
-    "DocsToInvestigate" -> docsToInvestigate.map(Formattable(_)),
-    "ServerName" -> serverName.map(Formattable(_)),
-    "Port" -> port.map(Formattable(_)),
-    "ExtractDocId" -> extractDocId.map(Formattable(_)),
-    "DatabaseName" -> databaseName.map(Formattable(_)),
-    "AuthType" -> authType.map(Formattable(_)),
-    "Password" -> password.map(Formattable(_)),
-    "NestingLevel" -> nestingLevel.map(Formattable(_))
+    authSource: Property[String] = Empty,
+    authMechanism: Property[String] = Empty,
+    username: Property[String] = Empty,
+    docsToInvestigate: Property[String] = Empty,
+    serverName: Property[String] = Empty,
+    port: Property[Int] = Empty,
+    extractDocId: Property[String] = Empty,
+    databaseName: Property[String] = Empty,
+    authType: Property[String] = Empty,
+    password: Property[String] = Empty,
+    nestingLevel: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AuthSource" -> authSource,
+    "AuthMechanism" -> authMechanism,
+    "Username" -> username,
+    "DocsToInvestigate" -> docsToInvestigate,
+    "ServerName" -> serverName,
+    "Port" -> port,
+    "ExtractDocId" -> extractDocId,
+    "DatabaseName" -> databaseName,
+    "AuthType" -> authType,
+    "Password" -> password,
+    "NestingLevel" -> nestingLevel
   )
 }

@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait Volume extends Resource {
   val resourceTypeName = "AWS::EC2::Volume"
 
-  def autoEnableIO: Option[Boolean] = None
-  def availabilityZone: String
-  def encrypted: Option[Boolean] = None
-  def iops: Option[Int] = None
-  def kmsKeyId: Option[String] = None
-  def size: Option[Int] = None
-  def snapshotId: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def volumeType: Option[String] = None
+  def autoEnableIO: Property[Boolean] = Empty
+  def availabilityZone: NonEmptyProperty[String]
+  def encrypted: Property[Boolean] = Empty
+  def iops: Property[Int] = Empty
+  def kmsKeyId: Property[String] = Empty
+  def size: Property[Int] = Empty
+  def snapshotId: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def volumeType: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AutoEnableIO" -> autoEnableIO.map(Formattable(_)),
-    "AvailabilityZone" -> Some(Formattable(availabilityZone)),
-    "Encrypted" -> encrypted.map(Formattable(_)),
-    "Iops" -> iops.map(Formattable(_)),
-    "KmsKeyId" -> kmsKeyId.map(Formattable(_)),
-    "Size" -> size.map(Formattable(_)),
-    "SnapshotId" -> snapshotId.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VolumeType" -> volumeType.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoEnableIO" -> autoEnableIO,
+    "AvailabilityZone" -> availabilityZone,
+    "Encrypted" -> encrypted,
+    "Iops" -> iops,
+    "KmsKeyId" -> kmsKeyId,
+    "Size" -> size,
+    "SnapshotId" -> snapshotId,
+    "Tags" -> tags,
+    "VolumeType" -> volumeType
   )
 }

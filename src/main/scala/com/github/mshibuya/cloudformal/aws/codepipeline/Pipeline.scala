@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Pipeline extends Resource {
   val resourceTypeName = "AWS::CodePipeline::Pipeline"
 
-  def artifactStore: ArtifactStore
-  def disableInboundStageTransitions: Option[Seq[StageTransition]] = None
-  def name: Option[String] = None
-  def restartExecutionOnUpdate: Option[Boolean] = None
-  def roleArn: String
-  def stages: Seq[StageDeclaration]
+  def artifactStore: NonEmptyProperty[ArtifactStore]
+  def disableInboundStageTransitions: Property[Seq[StageTransition]] = Empty
+  def name: Property[String] = Empty
+  def restartExecutionOnUpdate: Property[Boolean] = Empty
+  def roleArn: NonEmptyProperty[String]
+  def stages: NonEmptyProperty[Seq[StageDeclaration]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ArtifactStore" -> Some(Formattable(artifactStore)),
-    "DisableInboundStageTransitions" -> disableInboundStageTransitions.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "RestartExecutionOnUpdate" -> restartExecutionOnUpdate.map(Formattable(_)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "Stages" -> Some(Formattable(stages))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ArtifactStore" -> artifactStore,
+    "DisableInboundStageTransitions" -> disableInboundStageTransitions,
+    "Name" -> name,
+    "RestartExecutionOnUpdate" -> restartExecutionOnUpdate,
+    "RoleArn" -> roleArn,
+    "Stages" -> stages
   )
 }

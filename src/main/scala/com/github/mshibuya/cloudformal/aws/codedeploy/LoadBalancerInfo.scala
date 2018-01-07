@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoadBalancerInfo(
-    elbInfoList: Option[Seq[ELBInfo]] = None,
-    targetGroupInfoList: Option[Seq[TargetGroupInfo]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ElbInfoList" -> elbInfoList.map(Formattable(_)),
-    "TargetGroupInfoList" -> targetGroupInfoList.map(Formattable(_))
+    elbInfoList: Property[Seq[ELBInfo]] = Empty,
+    targetGroupInfoList: Property[Seq[TargetGroupInfo]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ElbInfoList" -> elbInfoList,
+    "TargetGroupInfoList" -> targetGroupInfoList
   )
 }

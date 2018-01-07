@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait EventSubscription extends Resource {
   val resourceTypeName = "AWS::RDS::EventSubscription"
 
-  def enabled: Option[Boolean] = None
-  def eventCategories: Option[Seq[String]] = None
-  def snsTopicArn: String
-  def sourceIds: Option[Seq[String]] = None
-  def sourceType: Option[String] = None
+  def enabled: Property[Boolean] = Empty
+  def eventCategories: Property[Seq[String]] = Empty
+  def snsTopicArn: NonEmptyProperty[String]
+  def sourceIds: Property[Seq[String]] = Empty
+  def sourceType: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Enabled" -> enabled.map(Formattable(_)),
-    "EventCategories" -> eventCategories.map(Formattable(_)),
-    "SnsTopicArn" -> Some(Formattable(snsTopicArn)),
-    "SourceIds" -> sourceIds.map(Formattable(_)),
-    "SourceType" -> sourceType.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Enabled" -> enabled,
+    "EventCategories" -> eventCategories,
+    "SnsTopicArn" -> snsTopicArn,
+    "SourceIds" -> sourceIds,
+    "SourceType" -> sourceType
   )
 }

@@ -10,19 +10,19 @@ import com.github.mshibuya.cloudformal.model._
 trait ApiKey extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::ApiKey"
 
-  def customerId: Option[String] = None
-  def description: Option[String] = None
-  def enabled: Option[Boolean] = None
-  def generateDistinctId: Option[Boolean] = None
-  def name: Option[String] = None
-  def stageKeys: Option[Seq[StageKey]] = None
+  def customerId: Property[String] = Empty
+  def description: Property[String] = Empty
+  def enabled: Property[Boolean] = Empty
+  def generateDistinctId: Property[Boolean] = Empty
+  def name: Property[String] = Empty
+  def stageKeys: Property[Seq[StageKey]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CustomerId" -> customerId.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Enabled" -> enabled.map(Formattable(_)),
-    "GenerateDistinctId" -> generateDistinctId.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "StageKeys" -> stageKeys.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CustomerId" -> customerId,
+    "Description" -> description,
+    "Enabled" -> enabled,
+    "GenerateDistinctId" -> generateDistinctId,
+    "Name" -> name,
+    "StageKeys" -> stageKeys
   )
 }

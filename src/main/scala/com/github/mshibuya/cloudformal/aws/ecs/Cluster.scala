@@ -9,9 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Cluster extends Resource {
   val resourceTypeName = "AWS::ECS::Cluster"
 
-  def clusterName: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ClusterName" -> clusterName.map(Formattable(_))
+  def clusterName: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ClusterName" -> clusterName
   )
 }

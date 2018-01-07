@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Connection extends Resource {
   val resourceTypeName = "AWS::Glue::Connection"
 
-  def connectionInput: ConnectionInput
-  def catalogId: String
+  def connectionInput: NonEmptyProperty[ConnectionInput]
+  def catalogId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ConnectionInput" -> Some(Formattable(connectionInput)),
-    "CatalogId" -> Some(Formattable(catalogId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ConnectionInput" -> connectionInput,
+    "CatalogId" -> catalogId
   )
 }

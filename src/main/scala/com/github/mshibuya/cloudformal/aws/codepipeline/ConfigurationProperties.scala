@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConfigurationProperties(
-    description: Option[String] = None,
-    key: Boolean,
-    name: String,
-    queryable: Option[Boolean] = None,
-    required: Boolean,
-    secret: Boolean,
-    `type`: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "Key" -> Some(Formattable(key)),
-    "Name" -> Some(Formattable(name)),
-    "Queryable" -> queryable.map(Formattable(_)),
-    "Required" -> Some(Formattable(required)),
-    "Secret" -> Some(Formattable(secret)),
-    "Type" -> `type`.map(Formattable(_))
+    description: Property[String] = Empty,
+    key: NonEmptyProperty[Boolean],
+    name: NonEmptyProperty[String],
+    queryable: Property[Boolean] = Empty,
+    required: NonEmptyProperty[Boolean],
+    secret: NonEmptyProperty[Boolean],
+    `type`: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Description" -> description,
+    "Key" -> key,
+    "Name" -> name,
+    "Queryable" -> queryable,
+    "Required" -> required,
+    "Secret" -> secret,
+    "Type" -> `type`
   )
 }

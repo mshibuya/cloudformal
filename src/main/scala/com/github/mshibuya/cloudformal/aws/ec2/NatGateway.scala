@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait NatGateway extends Resource {
   val resourceTypeName = "AWS::EC2::NatGateway"
 
-  def allocationId: String
-  def subnetId: String
-  def tags: Option[Seq[Tag]] = None
+  def allocationId: NonEmptyProperty[String]
+  def subnetId: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AllocationId" -> Some(Formattable(allocationId)),
-    "SubnetId" -> Some(Formattable(subnetId)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AllocationId" -> allocationId,
+    "SubnetId" -> subnetId,
+    "Tags" -> tags
   )
 }

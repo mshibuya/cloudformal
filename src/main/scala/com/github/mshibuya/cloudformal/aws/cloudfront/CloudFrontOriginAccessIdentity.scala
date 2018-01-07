@@ -9,9 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait CloudFrontOriginAccessIdentity extends Resource {
   val resourceTypeName = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 
-  def cloudFrontOriginAccessIdentityConfig: CloudFrontOriginAccessIdentityConfig
+  def s3CanonicalUserIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "S3CanonicalUserId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CloudFrontOriginAccessIdentityConfig" -> Some(Formattable(cloudFrontOriginAccessIdentityConfig))
+  def cloudFrontOriginAccessIdentityConfig: NonEmptyProperty[CloudFrontOriginAccessIdentityConfig]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CloudFrontOriginAccessIdentityConfig" -> cloudFrontOriginAccessIdentityConfig
   )
 }

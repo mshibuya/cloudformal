@@ -9,13 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait StateMachine extends Resource {
   val resourceTypeName = "AWS::StepFunctions::StateMachine"
 
-  def definitionString: String
-  def stateMachineName: Option[String] = None
-  def roleArn: String
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DefinitionString" -> Some(Formattable(definitionString)),
-    "StateMachineName" -> stateMachineName.map(Formattable(_)),
-    "RoleArn" -> Some(Formattable(roleArn))
+  def definitionString: NonEmptyProperty[String]
+  def stateMachineName: Property[String] = Empty
+  def roleArn: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DefinitionString" -> definitionString,
+    "StateMachineName" -> stateMachineName,
+    "RoleArn" -> roleArn
   )
 }

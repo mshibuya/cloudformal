@@ -11,7 +11,5 @@ trait WaitConditionHandle extends Resource {
 
 
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-
-  )
+  def resourceProperties: FormattableMap = Formattable.emptyMap
 }

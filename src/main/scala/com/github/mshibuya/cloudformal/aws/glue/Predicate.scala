@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Predicate(
-    logical: Option[String] = None,
-    conditions: Option[Seq[Condition]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Logical" -> logical.map(Formattable(_)),
-    "Conditions" -> conditions.map(Formattable(_))
+    logical: Property[String] = Empty,
+    conditions: Property[Seq[Condition]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Logical" -> logical,
+    "Conditions" -> conditions
   )
 }

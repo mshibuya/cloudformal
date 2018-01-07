@@ -9,13 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Topic extends Resource {
   val resourceTypeName = "AWS::SNS::Topic"
 
-  def displayName: Option[String] = None
-  def subscription: Option[Seq[Subscription]] = None
-  def topicName: Option[String] = None
+  def topicNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TopicName")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DisplayName" -> displayName.map(Formattable(_)),
-    "Subscription" -> subscription.map(Formattable(_)),
-    "TopicName" -> topicName.map(Formattable(_))
+  def displayName: Property[String] = Empty
+  def subscription: Property[Seq[Subscription]] = Empty
+  def topicName: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DisplayName" -> displayName,
+    "Subscription" -> subscription,
+    "TopicName" -> topicName
   )
 }

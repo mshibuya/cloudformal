@@ -10,13 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Repository extends Resource {
   val resourceTypeName = "AWS::ECR::Repository"
 
-  def lifecyclePolicy: Option[LifecyclePolicy] = None
-  def repositoryName: Option[String] = None
-  def repositoryPolicyText: Option[Json] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "LifecyclePolicy" -> lifecyclePolicy.map(Formattable(_)),
-    "RepositoryName" -> repositoryName.map(Formattable(_)),
-    "RepositoryPolicyText" -> repositoryPolicyText.map(Formattable(_))
+  def lifecyclePolicy: Property[LifecyclePolicy] = Empty
+  def repositoryName: Property[String] = Empty
+  def repositoryPolicyText: Property[Json] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "LifecyclePolicy" -> lifecyclePolicy,
+    "RepositoryName" -> repositoryName,
+    "RepositoryPolicyText" -> repositoryPolicyText
   )
 }

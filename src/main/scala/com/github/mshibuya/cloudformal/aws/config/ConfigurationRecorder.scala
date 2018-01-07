@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait ConfigurationRecorder extends Resource {
   val resourceTypeName = "AWS::Config::ConfigurationRecorder"
 
-  def name: Option[String] = None
-  def recordingGroup: Option[RecordingGroup] = None
-  def roleARN: String
+  def name: Property[String] = Empty
+  def recordingGroup: Property[RecordingGroup] = Empty
+  def roleARN: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> name.map(Formattable(_)),
-    "RecordingGroup" -> recordingGroup.map(Formattable(_)),
-    "RoleARN" -> Some(Formattable(roleARN))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "RecordingGroup" -> recordingGroup,
+    "RoleARN" -> roleARN
   )
 }

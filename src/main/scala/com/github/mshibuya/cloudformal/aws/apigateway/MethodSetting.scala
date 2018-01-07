@@ -7,26 +7,26 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MethodSetting(
-    cacheDataEncrypted: Option[Boolean] = None,
-    cacheTtlInSeconds: Option[Int] = None,
-    cachingEnabled: Option[Boolean] = None,
-    dataTraceEnabled: Option[Boolean] = None,
-    httpMethod: Option[String] = None,
-    loggingLevel: Option[String] = None,
-    metricsEnabled: Option[Boolean] = None,
-    resourcePath: Option[String] = None,
-    throttlingBurstLimit: Option[Int] = None,
-    throttlingRateLimit: Option[Double] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CacheDataEncrypted" -> cacheDataEncrypted.map(Formattable(_)),
-    "CacheTtlInSeconds" -> cacheTtlInSeconds.map(Formattable(_)),
-    "CachingEnabled" -> cachingEnabled.map(Formattable(_)),
-    "DataTraceEnabled" -> dataTraceEnabled.map(Formattable(_)),
-    "HttpMethod" -> httpMethod.map(Formattable(_)),
-    "LoggingLevel" -> loggingLevel.map(Formattable(_)),
-    "MetricsEnabled" -> metricsEnabled.map(Formattable(_)),
-    "ResourcePath" -> resourcePath.map(Formattable(_)),
-    "ThrottlingBurstLimit" -> throttlingBurstLimit.map(Formattable(_)),
-    "ThrottlingRateLimit" -> throttlingRateLimit.map(Formattable(_))
+    cacheDataEncrypted: Property[Boolean] = Empty,
+    cacheTtlInSeconds: Property[Int] = Empty,
+    cachingEnabled: Property[Boolean] = Empty,
+    dataTraceEnabled: Property[Boolean] = Empty,
+    httpMethod: Property[String] = Empty,
+    loggingLevel: Property[String] = Empty,
+    metricsEnabled: Property[Boolean] = Empty,
+    resourcePath: Property[String] = Empty,
+    throttlingBurstLimit: Property[Int] = Empty,
+    throttlingRateLimit: Property[Double] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CacheDataEncrypted" -> cacheDataEncrypted,
+    "CacheTtlInSeconds" -> cacheTtlInSeconds,
+    "CachingEnabled" -> cachingEnabled,
+    "DataTraceEnabled" -> dataTraceEnabled,
+    "HttpMethod" -> httpMethod,
+    "LoggingLevel" -> loggingLevel,
+    "MetricsEnabled" -> metricsEnabled,
+    "ResourcePath" -> resourcePath,
+    "ThrottlingBurstLimit" -> throttlingBurstLimit,
+    "ThrottlingRateLimit" -> throttlingRateLimit
   )
 }

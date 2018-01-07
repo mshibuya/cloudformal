@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class JdbcTarget(
-    connectionName: Option[String] = None,
-    path: Option[String] = None,
-    exclusions: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ConnectionName" -> connectionName.map(Formattable(_)),
-    "Path" -> path.map(Formattable(_)),
-    "Exclusions" -> exclusions.map(Formattable(_))
+    connectionName: Property[String] = Empty,
+    path: Property[String] = Empty,
+    exclusions: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ConnectionName" -> connectionName,
+    "Path" -> path,
+    "Exclusions" -> exclusions
   )
 }

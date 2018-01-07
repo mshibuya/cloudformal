@@ -10,27 +10,27 @@ import com.github.mshibuya.cloudformal.model._
 trait Authorizer extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Authorizer"
 
-  def authType: Option[String] = None
-  def authorizerCredentials: Option[String] = None
-  def authorizerResultTtlInSeconds: Option[Int] = None
-  def authorizerUri: Option[String] = None
-  def identitySource: Option[String] = None
-  def identityValidationExpression: Option[String] = None
-  def name: Option[String] = None
-  def providerARNs: Option[Seq[String]] = None
-  def restApiId: String
-  def `type`: Option[String] = None
+  def authType: Property[String] = Empty
+  def authorizerCredentials: Property[String] = Empty
+  def authorizerResultTtlInSeconds: Property[Int] = Empty
+  def authorizerUri: Property[String] = Empty
+  def identitySource: Property[String] = Empty
+  def identityValidationExpression: Property[String] = Empty
+  def name: Property[String] = Empty
+  def providerARNs: Property[Seq[String]] = Empty
+  def restApiId: NonEmptyProperty[String]
+  def `type`: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AuthType" -> authType.map(Formattable(_)),
-    "AuthorizerCredentials" -> authorizerCredentials.map(Formattable(_)),
-    "AuthorizerResultTtlInSeconds" -> authorizerResultTtlInSeconds.map(Formattable(_)),
-    "AuthorizerUri" -> authorizerUri.map(Formattable(_)),
-    "IdentitySource" -> identitySource.map(Formattable(_)),
-    "IdentityValidationExpression" -> identityValidationExpression.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "ProviderARNs" -> providerARNs.map(Formattable(_)),
-    "RestApiId" -> Some(Formattable(restApiId)),
-    "Type" -> `type`.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AuthType" -> authType,
+    "AuthorizerCredentials" -> authorizerCredentials,
+    "AuthorizerResultTtlInSeconds" -> authorizerResultTtlInSeconds,
+    "AuthorizerUri" -> authorizerUri,
+    "IdentitySource" -> identitySource,
+    "IdentityValidationExpression" -> identityValidationExpression,
+    "Name" -> name,
+    "ProviderARNs" -> providerARNs,
+    "RestApiId" -> restApiId,
+    "Type" -> `type`
   )
 }

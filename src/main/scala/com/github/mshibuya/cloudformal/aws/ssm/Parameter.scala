@@ -9,17 +9,20 @@ import com.github.mshibuya.cloudformal.model._
 trait Parameter extends Resource {
   val resourceTypeName = "AWS::SSM::Parameter"
 
-  def `type`: String
-  def description: Option[String] = None
-  def allowedPattern: Option[String] = None
-  def value: String
-  def name: Option[String] = None
+  def typeAttribute: Expression[String] = Fn.GetAtt(logicalId, "Type")
+  def valueAttribute: Expression[String] = Fn.GetAtt(logicalId, "Value")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Description" -> description.map(Formattable(_)),
-    "AllowedPattern" -> allowedPattern.map(Formattable(_)),
-    "Value" -> Some(Formattable(value)),
-    "Name" -> name.map(Formattable(_))
+  def `type`: NonEmptyProperty[String]
+  def description: Property[String] = Empty
+  def allowedPattern: Property[String] = Empty
+  def value: NonEmptyProperty[String]
+  def name: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Type" -> `type`,
+    "Description" -> description,
+    "AllowedPattern" -> allowedPattern,
+    "Value" -> value,
+    "Name" -> name
   )
 }

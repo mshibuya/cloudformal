@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TimeToLiveSpecification(
-    attributeName: String,
-    enabled: Boolean) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AttributeName" -> Some(Formattable(attributeName)),
-    "Enabled" -> Some(Formattable(enabled))
+    attributeName: NonEmptyProperty[String],
+    enabled: NonEmptyProperty[Boolean]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AttributeName" -> attributeName,
+    "Enabled" -> enabled
   )
 }

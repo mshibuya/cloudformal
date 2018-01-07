@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class KeySchema(
-    attributeName: String,
-    keyType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AttributeName" -> Some(Formattable(attributeName)),
-    "KeyType" -> Some(Formattable(keyType))
+    attributeName: NonEmptyProperty[String],
+    keyType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AttributeName" -> attributeName,
+    "KeyType" -> keyType
   )
 }

@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait MountTarget extends Resource {
   val resourceTypeName = "AWS::EFS::MountTarget"
 
-  def fileSystemId: String
-  def ipAddress: Option[String] = None
-  def securityGroups: Seq[String]
-  def subnetId: String
+  def fileSystemId: NonEmptyProperty[String]
+  def ipAddress: Property[String] = Empty
+  def securityGroups: NonEmptyProperty[Seq[String]]
+  def subnetId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "FileSystemId" -> Some(Formattable(fileSystemId)),
-    "IpAddress" -> ipAddress.map(Formattable(_)),
-    "SecurityGroups" -> Some(Formattable(securityGroups)),
-    "SubnetId" -> Some(Formattable(subnetId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "FileSystemId" -> fileSystemId,
+    "IpAddress" -> ipAddress,
+    "SecurityGroups" -> securityGroups,
+    "SubnetId" -> subnetId
   )
 }

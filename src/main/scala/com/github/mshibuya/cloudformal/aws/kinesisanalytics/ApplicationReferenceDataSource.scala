@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ApplicationReferenceDataSource extends Resource {
   val resourceTypeName = "AWS::KinesisAnalytics::ApplicationReferenceDataSource"
 
-  def applicationName: String
-  def referenceDataSource: ReferenceDataSource
+  def applicationName: NonEmptyProperty[String]
+  def referenceDataSource: NonEmptyProperty[ReferenceDataSource]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "ReferenceDataSource" -> Some(Formattable(referenceDataSource))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "ReferenceDataSource" -> referenceDataSource
   )
 }

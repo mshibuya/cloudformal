@@ -8,12 +8,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SkewedInfo(
-    skewedColumnNames: Option[Seq[String]] = None,
-    skewedColumnValues: Option[Seq[String]] = None,
-    skewedColumnValueLocationMaps: Option[Json] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "SkewedColumnNames" -> skewedColumnNames.map(Formattable(_)),
-    "SkewedColumnValues" -> skewedColumnValues.map(Formattable(_)),
-    "SkewedColumnValueLocationMaps" -> skewedColumnValueLocationMaps.map(Formattable(_))
+    skewedColumnNames: Property[Seq[String]] = Empty,
+    skewedColumnValues: Property[Seq[String]] = Empty,
+    skewedColumnValueLocationMaps: Property[Json] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "SkewedColumnNames" -> skewedColumnNames,
+    "SkewedColumnValues" -> skewedColumnValues,
+    "SkewedColumnValueLocationMaps" -> skewedColumnValueLocationMaps
   )
 }

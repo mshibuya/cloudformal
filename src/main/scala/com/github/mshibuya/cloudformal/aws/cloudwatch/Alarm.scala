@@ -9,43 +9,45 @@ import com.github.mshibuya.cloudformal.model._
 trait Alarm extends Resource {
   val resourceTypeName = "AWS::CloudWatch::Alarm"
 
-  def actionsEnabled: Option[Boolean] = None
-  def alarmActions: Option[Seq[String]] = None
-  def alarmDescription: Option[String] = None
-  def alarmName: Option[String] = None
-  def comparisonOperator: String
-  def dimensions: Option[Seq[Dimension]] = None
-  def evaluateLowSampleCountPercentile: Option[String] = None
-  def evaluationPeriods: Int
-  def extendedStatistic: Option[String] = None
-  def insufficientDataActions: Option[Seq[String]] = None
-  def metricName: String
-  def namespace: String
-  def oKActions: Option[Seq[String]] = None
-  def period: Int
-  def statistic: Option[String] = None
-  def threshold: Double
-  def treatMissingData: Option[String] = None
-  def unit: Option[String] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ActionsEnabled" -> actionsEnabled.map(Formattable(_)),
-    "AlarmActions" -> alarmActions.map(Formattable(_)),
-    "AlarmDescription" -> alarmDescription.map(Formattable(_)),
-    "AlarmName" -> alarmName.map(Formattable(_)),
-    "ComparisonOperator" -> Some(Formattable(comparisonOperator)),
-    "Dimensions" -> dimensions.map(Formattable(_)),
-    "EvaluateLowSampleCountPercentile" -> evaluateLowSampleCountPercentile.map(Formattable(_)),
-    "EvaluationPeriods" -> Some(Formattable(evaluationPeriods)),
-    "ExtendedStatistic" -> extendedStatistic.map(Formattable(_)),
-    "InsufficientDataActions" -> insufficientDataActions.map(Formattable(_)),
-    "MetricName" -> Some(Formattable(metricName)),
-    "Namespace" -> Some(Formattable(namespace)),
-    "OKActions" -> oKActions.map(Formattable(_)),
-    "Period" -> Some(Formattable(period)),
-    "Statistic" -> statistic.map(Formattable(_)),
-    "Threshold" -> Some(Formattable(threshold)),
-    "TreatMissingData" -> treatMissingData.map(Formattable(_)),
-    "Unit" -> unit.map(Formattable(_))
+  def actionsEnabled: Property[Boolean] = Empty
+  def alarmActions: Property[Seq[String]] = Empty
+  def alarmDescription: Property[String] = Empty
+  def alarmName: Property[String] = Empty
+  def comparisonOperator: NonEmptyProperty[String]
+  def dimensions: Property[Seq[Dimension]] = Empty
+  def evaluateLowSampleCountPercentile: Property[String] = Empty
+  def evaluationPeriods: NonEmptyProperty[Int]
+  def extendedStatistic: Property[String] = Empty
+  def insufficientDataActions: Property[Seq[String]] = Empty
+  def metricName: NonEmptyProperty[String]
+  def namespace: NonEmptyProperty[String]
+  def oKActions: Property[Seq[String]] = Empty
+  def period: NonEmptyProperty[Int]
+  def statistic: Property[String] = Empty
+  def threshold: NonEmptyProperty[Double]
+  def treatMissingData: Property[String] = Empty
+  def unit: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ActionsEnabled" -> actionsEnabled,
+    "AlarmActions" -> alarmActions,
+    "AlarmDescription" -> alarmDescription,
+    "AlarmName" -> alarmName,
+    "ComparisonOperator" -> comparisonOperator,
+    "Dimensions" -> dimensions,
+    "EvaluateLowSampleCountPercentile" -> evaluateLowSampleCountPercentile,
+    "EvaluationPeriods" -> evaluationPeriods,
+    "ExtendedStatistic" -> extendedStatistic,
+    "InsufficientDataActions" -> insufficientDataActions,
+    "MetricName" -> metricName,
+    "Namespace" -> namespace,
+    "OKActions" -> oKActions,
+    "Period" -> period,
+    "Statistic" -> statistic,
+    "Threshold" -> threshold,
+    "TreatMissingData" -> treatMissingData,
+    "Unit" -> unit
   )
 }

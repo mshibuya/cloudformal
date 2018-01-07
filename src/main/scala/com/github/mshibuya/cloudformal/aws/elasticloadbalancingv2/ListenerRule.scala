@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait ListenerRule extends Resource {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::ListenerRule"
 
-  def actions: Seq[Action]
-  def conditions: Seq[RuleCondition]
-  def listenerArn: String
-  def priority: Int
+  def actions: NonEmptyProperty[Seq[Action]]
+  def conditions: NonEmptyProperty[Seq[RuleCondition]]
+  def listenerArn: NonEmptyProperty[String]
+  def priority: NonEmptyProperty[Int]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Actions" -> Some(Formattable(actions)),
-    "Conditions" -> Some(Formattable(conditions)),
-    "ListenerArn" -> Some(Formattable(listenerArn)),
-    "Priority" -> Some(Formattable(priority))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Actions" -> actions,
+    "Conditions" -> conditions,
+    "ListenerArn" -> listenerArn,
+    "Priority" -> priority
   )
 }

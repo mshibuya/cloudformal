@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait SubnetNetworkAclAssociation extends Resource {
   val resourceTypeName = "AWS::EC2::SubnetNetworkAclAssociation"
 
-  def networkAclId: String
-  def subnetId: String
+  def associationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "AssociationId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "NetworkAclId" -> Some(Formattable(networkAclId)),
-    "SubnetId" -> Some(Formattable(subnetId))
+  def networkAclId: NonEmptyProperty[String]
+  def subnetId: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "NetworkAclId" -> networkAclId,
+    "SubnetId" -> subnetId
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class FirehoseAction(
-    deliveryStreamName: String,
-    roleArn: String,
-    separator: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeliveryStreamName" -> Some(Formattable(deliveryStreamName)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "Separator" -> separator.map(Formattable(_))
+    deliveryStreamName: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String],
+    separator: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeliveryStreamName" -> deliveryStreamName,
+    "RoleArn" -> roleArn,
+    "Separator" -> separator
   )
 }

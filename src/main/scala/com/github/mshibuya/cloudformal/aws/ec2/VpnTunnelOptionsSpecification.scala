@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VpnTunnelOptionsSpecification(
-    preSharedKey: Option[String] = None,
-    tunnelInsideCidr: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PreSharedKey" -> preSharedKey.map(Formattable(_)),
-    "TunnelInsideCidr" -> tunnelInsideCidr.map(Formattable(_))
+    preSharedKey: Property[String] = Empty,
+    tunnelInsideCidr: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PreSharedKey" -> preSharedKey,
+    "TunnelInsideCidr" -> tunnelInsideCidr
   )
 }

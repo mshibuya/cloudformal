@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait EventSourceMapping extends Resource {
   val resourceTypeName = "AWS::Lambda::EventSourceMapping"
 
-  def batchSize: Option[Int] = None
-  def enabled: Option[Boolean] = None
-  def eventSourceArn: String
-  def functionName: String
-  def startingPosition: String
+  def batchSize: Property[Int] = Empty
+  def enabled: Property[Boolean] = Empty
+  def eventSourceArn: NonEmptyProperty[String]
+  def functionName: NonEmptyProperty[String]
+  def startingPosition: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "BatchSize" -> batchSize.map(Formattable(_)),
-    "Enabled" -> enabled.map(Formattable(_)),
-    "EventSourceArn" -> Some(Formattable(eventSourceArn)),
-    "FunctionName" -> Some(Formattable(functionName)),
-    "StartingPosition" -> Some(Formattable(startingPosition))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "BatchSize" -> batchSize,
+    "Enabled" -> enabled,
+    "EventSourceArn" -> eventSourceArn,
+    "FunctionName" -> functionName,
+    "StartingPosition" -> startingPosition
   )
 }

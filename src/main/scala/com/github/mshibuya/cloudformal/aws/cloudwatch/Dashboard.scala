@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Dashboard extends Resource {
   val resourceTypeName = "AWS::CloudWatch::Dashboard"
 
-  def dashboardName: Option[String] = None
-  def dashboardBody: String
+  def dashboardName: Property[String] = Empty
+  def dashboardBody: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DashboardName" -> dashboardName.map(Formattable(_)),
-    "DashboardBody" -> Some(Formattable(dashboardBody))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DashboardName" -> dashboardName,
+    "DashboardBody" -> dashboardBody
   )
 }

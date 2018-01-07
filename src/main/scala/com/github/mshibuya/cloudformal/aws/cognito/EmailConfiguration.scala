@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EmailConfiguration(
-    replyToEmailAddress: Option[String] = None,
-    sourceArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ReplyToEmailAddress" -> replyToEmailAddress.map(Formattable(_)),
-    "SourceArn" -> sourceArn.map(Formattable(_))
+    replyToEmailAddress: Property[String] = Empty,
+    sourceArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ReplyToEmailAddress" -> replyToEmailAddress,
+    "SourceArn" -> sourceArn
   )
 }

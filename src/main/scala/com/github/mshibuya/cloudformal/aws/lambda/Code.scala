@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Code(
-    s3Bucket: Option[String] = None,
-    s3Key: Option[String] = None,
-    s3ObjectVersion: Option[String] = None,
-    zipFile: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "S3Bucket" -> s3Bucket.map(Formattable(_)),
-    "S3Key" -> s3Key.map(Formattable(_)),
-    "S3ObjectVersion" -> s3ObjectVersion.map(Formattable(_)),
-    "ZipFile" -> zipFile.map(Formattable(_))
+    s3Bucket: Property[String] = Empty,
+    s3Key: Property[String] = Empty,
+    s3ObjectVersion: Property[String] = Empty,
+    zipFile: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "S3Bucket" -> s3Bucket,
+    "S3Key" -> s3Key,
+    "S3ObjectVersion" -> s3ObjectVersion,
+    "ZipFile" -> zipFile
   )
 }

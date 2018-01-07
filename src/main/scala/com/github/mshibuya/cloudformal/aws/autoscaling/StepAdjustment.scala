@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StepAdjustment(
-    metricIntervalLowerBound: Option[Double] = None,
-    metricIntervalUpperBound: Option[Double] = None,
-    scalingAdjustment: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MetricIntervalLowerBound" -> metricIntervalLowerBound.map(Formattable(_)),
-    "MetricIntervalUpperBound" -> metricIntervalUpperBound.map(Formattable(_)),
-    "ScalingAdjustment" -> Some(Formattable(scalingAdjustment))
+    metricIntervalLowerBound: Property[Double] = Empty,
+    metricIntervalUpperBound: Property[Double] = Empty,
+    scalingAdjustment: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MetricIntervalLowerBound" -> metricIntervalLowerBound,
+    "MetricIntervalUpperBound" -> metricIntervalUpperBound,
+    "ScalingAdjustment" -> scalingAdjustment
   )
 }

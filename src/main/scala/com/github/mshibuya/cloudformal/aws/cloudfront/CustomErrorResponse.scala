@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CustomErrorResponse(
-    responseCode: Option[Int] = None,
-    errorCachingMinTTL: Option[Double] = None,
-    errorCode: Int,
-    responsePagePath: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ResponseCode" -> responseCode.map(Formattable(_)),
-    "ErrorCachingMinTTL" -> errorCachingMinTTL.map(Formattable(_)),
-    "ErrorCode" -> Some(Formattable(errorCode)),
-    "ResponsePagePath" -> responsePagePath.map(Formattable(_))
+    responseCode: Property[Int] = Empty,
+    errorCachingMinTTL: Property[Double] = Empty,
+    errorCode: NonEmptyProperty[Int],
+    responsePagePath: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ResponseCode" -> responseCode,
+    "ErrorCachingMinTTL" -> errorCachingMinTTL,
+    "ErrorCode" -> errorCode,
+    "ResponsePagePath" -> responsePagePath
   )
 }

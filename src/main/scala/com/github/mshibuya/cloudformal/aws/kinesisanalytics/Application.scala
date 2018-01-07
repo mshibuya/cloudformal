@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Application extends Resource {
   val resourceTypeName = "AWS::KinesisAnalytics::Application"
 
-  def applicationName: Option[String] = None
-  def inputs: Seq[Input]
-  def applicationDescription: Option[String] = None
-  def applicationCode: Option[String] = None
+  def applicationName: Property[String] = Empty
+  def inputs: NonEmptyProperty[Seq[Input]]
+  def applicationDescription: Property[String] = Empty
+  def applicationCode: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> applicationName.map(Formattable(_)),
-    "Inputs" -> Some(Formattable(inputs)),
-    "ApplicationDescription" -> applicationDescription.map(Formattable(_)),
-    "ApplicationCode" -> applicationCode.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "Inputs" -> inputs,
+    "ApplicationDescription" -> applicationDescription,
+    "ApplicationCode" -> applicationCode
   )
 }

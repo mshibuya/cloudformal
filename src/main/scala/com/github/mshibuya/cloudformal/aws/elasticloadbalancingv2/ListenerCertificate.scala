@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ListenerCertificate extends Resource {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::ListenerCertificate"
 
-  def certificates: Seq[Certificate]
-  def listenerArn: String
+  def certificates: NonEmptyProperty[Seq[Certificate]]
+  def listenerArn: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Certificates" -> Some(Formattable(certificates)),
-    "ListenerArn" -> Some(Formattable(listenerArn))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Certificates" -> certificates,
+    "ListenerArn" -> listenerArn
   )
 }

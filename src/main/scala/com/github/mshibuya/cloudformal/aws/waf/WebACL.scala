@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait WebACL extends Resource {
   val resourceTypeName = "AWS::WAF::WebACL"
 
-  def defaultAction: WafAction
-  def metricName: String
-  def name: String
-  def rules: Option[Seq[ActivatedRule]] = None
+  def defaultAction: NonEmptyProperty[WafAction]
+  def metricName: NonEmptyProperty[String]
+  def name: NonEmptyProperty[String]
+  def rules: Property[Seq[ActivatedRule]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DefaultAction" -> Some(Formattable(defaultAction)),
-    "MetricName" -> Some(Formattable(metricName)),
-    "Name" -> Some(Formattable(name)),
-    "Rules" -> rules.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DefaultAction" -> defaultAction,
+    "MetricName" -> metricName,
+    "Name" -> name,
+    "Rules" -> rules
   )
 }

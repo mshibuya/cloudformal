@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RedirectAllRequestsTo(
-    hostName: String,
-    protocol: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HostName" -> Some(Formattable(hostName)),
-    "Protocol" -> protocol.map(Formattable(_))
+    hostName: NonEmptyProperty[String],
+    protocol: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HostName" -> hostName,
+    "Protocol" -> protocol
   )
 }

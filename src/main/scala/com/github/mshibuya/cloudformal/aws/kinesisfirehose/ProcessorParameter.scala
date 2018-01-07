@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ProcessorParameter(
-    parameterName: String,
-    parameterValue: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ParameterName" -> Some(Formattable(parameterName)),
-    "ParameterValue" -> Some(Formattable(parameterValue))
+    parameterName: NonEmptyProperty[String],
+    parameterValue: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ParameterName" -> parameterName,
+    "ParameterValue" -> parameterValue
   )
 }

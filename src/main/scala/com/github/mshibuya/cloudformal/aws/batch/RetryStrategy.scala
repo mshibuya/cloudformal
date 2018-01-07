@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RetryStrategy(
-    attempts: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Attempts" -> attempts.map(Formattable(_))
+    attempts: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Attempts" -> attempts
   )
 }

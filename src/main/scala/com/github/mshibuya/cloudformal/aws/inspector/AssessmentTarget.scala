@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait AssessmentTarget extends Resource {
   val resourceTypeName = "AWS::Inspector::AssessmentTarget"
 
-  def assessmentTargetName: Option[String] = None
-  def resourceGroupArn: String
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AssessmentTargetName" -> assessmentTargetName.map(Formattable(_)),
-    "ResourceGroupArn" -> Some(Formattable(resourceGroupArn))
+  def assessmentTargetName: Property[String] = Empty
+  def resourceGroupArn: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssessmentTargetName" -> assessmentTargetName,
+    "ResourceGroupArn" -> resourceGroupArn
   )
 }

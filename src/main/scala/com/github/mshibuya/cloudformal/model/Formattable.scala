@@ -54,8 +54,18 @@ object Formattable {
     }
   )
 
-  def apply(values: Tuple2[String, Formattable]*): FormattableMap = FormattableMap(ListMap(values: _*).collect { case (k, v) => k -> v })
-  def opt(values: Tuple2[String, Option[Formattable]]*): FormattableMap = FormattableMap(ListMap(values: _*).collect { case (k, Some(v)) => k -> v })
+  def apply(values: Tuple2[String, Formattable]*): FormattableMap =
+    FormattableMap(ListMap(values: _*)
+      .collect {
+        case (k, v) => k -> v
+      })
 
-  val emptyMap: Formattable = FormattableMap(ListMap.empty)
+  def withProperties(values: Tuple2[String, Property[_]]*): FormattableMap =
+    FormattableMap(ListMap(values: _*)
+      .collect {
+        case (k, e: Expression[_]) => k -> e.render
+        case (k, v: Value[_]) => k -> v.render
+      })
+
+  val emptyMap: FormattableMap = FormattableMap(ListMap.empty)
 }

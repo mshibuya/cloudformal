@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VolumesHost(
-    sourcePath: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "SourcePath" -> sourcePath.map(Formattable(_))
+    sourcePath: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "SourcePath" -> sourcePath
   )
 }

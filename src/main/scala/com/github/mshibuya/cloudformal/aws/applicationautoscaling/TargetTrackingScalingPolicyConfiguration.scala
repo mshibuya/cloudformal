@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TargetTrackingScalingPolicyConfiguration(
-    customizedMetricSpecification: Option[CustomizedMetricSpecification] = None,
-    predefinedMetricSpecification: Option[PredefinedMetricSpecification] = None,
-    scaleInCooldown: Option[Int] = None,
-    scaleOutCooldown: Option[Int] = None,
-    targetValue: Double) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CustomizedMetricSpecification" -> customizedMetricSpecification.map(Formattable(_)),
-    "PredefinedMetricSpecification" -> predefinedMetricSpecification.map(Formattable(_)),
-    "ScaleInCooldown" -> scaleInCooldown.map(Formattable(_)),
-    "ScaleOutCooldown" -> scaleOutCooldown.map(Formattable(_)),
-    "TargetValue" -> Some(Formattable(targetValue))
+    customizedMetricSpecification: Property[CustomizedMetricSpecification] = Empty,
+    predefinedMetricSpecification: Property[PredefinedMetricSpecification] = Empty,
+    scaleInCooldown: Property[Int] = Empty,
+    scaleOutCooldown: Property[Int] = Empty,
+    targetValue: NonEmptyProperty[Double]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CustomizedMetricSpecification" -> customizedMetricSpecification,
+    "PredefinedMetricSpecification" -> predefinedMetricSpecification,
+    "ScaleInCooldown" -> scaleInCooldown,
+    "ScaleOutCooldown" -> scaleOutCooldown,
+    "TargetValue" -> targetValue
   )
 }

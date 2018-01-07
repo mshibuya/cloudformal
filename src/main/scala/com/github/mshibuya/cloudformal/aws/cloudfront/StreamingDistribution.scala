@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait StreamingDistribution extends Resource {
   val resourceTypeName = "AWS::CloudFront::StreamingDistribution"
 
-  def streamingDistributionConfig: StreamingDistributionConfig
-  def tags: Seq[Tag]
+  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "StreamingDistributionConfig" -> Some(Formattable(streamingDistributionConfig)),
-    "Tags" -> Some(Formattable(tags))
+  def streamingDistributionConfig: NonEmptyProperty[StreamingDistributionConfig]
+  def tags: NonEmptyProperty[Seq[Tag]]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "StreamingDistributionConfig" -> streamingDistributionConfig,
+    "Tags" -> tags
   )
 }

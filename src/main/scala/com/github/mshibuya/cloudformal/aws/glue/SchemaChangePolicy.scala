@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SchemaChangePolicy(
-    updateBehavior: Option[String] = None,
-    deleteBehavior: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "UpdateBehavior" -> updateBehavior.map(Formattable(_)),
-    "DeleteBehavior" -> deleteBehavior.map(Formattable(_))
+    updateBehavior: Property[String] = Empty,
+    deleteBehavior: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "UpdateBehavior" -> updateBehavior,
+    "DeleteBehavior" -> deleteBehavior
   )
 }

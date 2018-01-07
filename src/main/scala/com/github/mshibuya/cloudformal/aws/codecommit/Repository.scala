@@ -9,13 +9,18 @@ import com.github.mshibuya.cloudformal.model._
 trait Repository extends Resource {
   val resourceTypeName = "AWS::CodeCommit::Repository"
 
-  def repositoryName: String
-  def triggers: Option[Seq[RepositoryTrigger]] = None
-  def repositoryDescription: Option[String] = None
+  def cloneUrlHttpAttribute: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlHttp")
+  def cloneUrlSshAttribute: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlSsh")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "RepositoryName" -> Some(Formattable(repositoryName)),
-    "Triggers" -> triggers.map(Formattable(_)),
-    "RepositoryDescription" -> repositoryDescription.map(Formattable(_))
+  def repositoryName: NonEmptyProperty[String]
+  def triggers: Property[Seq[RepositoryTrigger]] = Empty
+  def repositoryDescription: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "RepositoryName" -> repositoryName,
+    "Triggers" -> triggers,
+    "RepositoryDescription" -> repositoryDescription
   )
 }

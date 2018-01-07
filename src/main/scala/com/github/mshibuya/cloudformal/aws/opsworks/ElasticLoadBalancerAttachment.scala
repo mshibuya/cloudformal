@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ElasticLoadBalancerAttachment extends Resource {
   val resourceTypeName = "AWS::OpsWorks::ElasticLoadBalancerAttachment"
 
-  def elasticLoadBalancerName: String
-  def layerId: String
+  def elasticLoadBalancerName: NonEmptyProperty[String]
+  def layerId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ElasticLoadBalancerName" -> Some(Formattable(elasticLoadBalancerName)),
-    "LayerId" -> Some(Formattable(layerId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ElasticLoadBalancerName" -> elasticLoadBalancerName,
+    "LayerId" -> layerId
   )
 }

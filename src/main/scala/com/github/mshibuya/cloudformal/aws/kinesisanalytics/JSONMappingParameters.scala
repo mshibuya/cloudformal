@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class JSONMappingParameters(
-    recordRowPath: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RecordRowPath" -> Some(Formattable(recordRowPath))
+    recordRowPath: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RecordRowPath" -> recordRowPath
   )
 }

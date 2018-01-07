@@ -9,17 +9,23 @@ import com.github.mshibuya.cloudformal.model._
 trait VPC extends Resource {
   val resourceTypeName = "AWS::EC2::VPC"
 
-  def cidrBlock: String
-  def enableDnsHostnames: Option[Boolean] = None
-  def enableDnsSupport: Option[Boolean] = None
-  def instanceTenancy: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
+  def cidrBlockAttribute: Expression[String] = Fn.GetAtt(logicalId, "CidrBlock")
+  def cidrBlockAssociationsAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "CidrBlockAssociations")
+  def defaultNetworkAclAttribute: Expression[String] = Fn.GetAtt(logicalId, "DefaultNetworkAcl")
+  def defaultSecurityGroupAttribute: Expression[String] = Fn.GetAtt(logicalId, "DefaultSecurityGroup")
+  def ipv6CidrBlocksAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CidrBlock" -> Some(Formattable(cidrBlock)),
-    "EnableDnsHostnames" -> enableDnsHostnames.map(Formattable(_)),
-    "EnableDnsSupport" -> enableDnsSupport.map(Formattable(_)),
-    "InstanceTenancy" -> instanceTenancy.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def cidrBlock: NonEmptyProperty[String]
+  def enableDnsHostnames: Property[Boolean] = Empty
+  def enableDnsSupport: Property[Boolean] = Empty
+  def instanceTenancy: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CidrBlock" -> cidrBlock,
+    "EnableDnsHostnames" -> enableDnsHostnames,
+    "EnableDnsSupport" -> enableDnsSupport,
+    "InstanceTenancy" -> instanceTenancy,
+    "Tags" -> tags
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TargetDescription(
-    availabilityZone: Option[String] = None,
-    id: String,
-    port: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AvailabilityZone" -> availabilityZone.map(Formattable(_)),
-    "Id" -> Some(Formattable(id)),
-    "Port" -> port.map(Formattable(_))
+    availabilityZone: Property[String] = Empty,
+    id: NonEmptyProperty[String],
+    port: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AvailabilityZone" -> availabilityZone,
+    "Id" -> id,
+    "Port" -> port
   )
 }

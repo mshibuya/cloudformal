@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait ThreatIntelSet extends Resource {
   val resourceTypeName = "AWS::GuardDuty::ThreatIntelSet"
 
-  def format: String
-  def activate: Boolean
-  def detectorId: String
-  def name: Option[String] = None
-  def location: String
+  def format: NonEmptyProperty[String]
+  def activate: NonEmptyProperty[Boolean]
+  def detectorId: NonEmptyProperty[String]
+  def name: Property[String] = Empty
+  def location: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Format" -> Some(Formattable(format)),
-    "Activate" -> Some(Formattable(activate)),
-    "DetectorId" -> Some(Formattable(detectorId)),
-    "Name" -> name.map(Formattable(_)),
-    "Location" -> Some(Formattable(location))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Format" -> format,
+    "Activate" -> activate,
+    "DetectorId" -> detectorId,
+    "Name" -> name,
+    "Location" -> location
   )
 }

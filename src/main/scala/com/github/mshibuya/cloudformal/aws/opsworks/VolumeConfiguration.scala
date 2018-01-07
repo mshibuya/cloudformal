@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VolumeConfiguration(
-    iops: Option[Int] = None,
-    mountPoint: Option[String] = None,
-    numberOfDisks: Option[Int] = None,
-    raidLevel: Option[Int] = None,
-    size: Option[Int] = None,
-    volumeType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Iops" -> iops.map(Formattable(_)),
-    "MountPoint" -> mountPoint.map(Formattable(_)),
-    "NumberOfDisks" -> numberOfDisks.map(Formattable(_)),
-    "RaidLevel" -> raidLevel.map(Formattable(_)),
-    "Size" -> size.map(Formattable(_)),
-    "VolumeType" -> volumeType.map(Formattable(_))
+    iops: Property[Int] = Empty,
+    mountPoint: Property[String] = Empty,
+    numberOfDisks: Property[Int] = Empty,
+    raidLevel: Property[Int] = Empty,
+    size: Property[Int] = Empty,
+    volumeType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Iops" -> iops,
+    "MountPoint" -> mountPoint,
+    "NumberOfDisks" -> numberOfDisks,
+    "RaidLevel" -> raidLevel,
+    "Size" -> size,
+    "VolumeType" -> volumeType
   )
 }

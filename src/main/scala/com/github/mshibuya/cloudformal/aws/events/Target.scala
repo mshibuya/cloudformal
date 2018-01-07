@@ -7,24 +7,24 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Target(
-    arn: String,
-    ecsParameters: Option[EcsParameters] = None,
-    id: String,
-    input: Option[String] = None,
-    inputPath: Option[String] = None,
-    inputTransformer: Option[InputTransformer] = None,
-    kinesisParameters: Option[KinesisParameters] = None,
-    roleArn: Option[String] = None,
-    runCommandParameters: Option[RunCommandParameters] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Arn" -> Some(Formattable(arn)),
-    "EcsParameters" -> ecsParameters.map(Formattable(_)),
-    "Id" -> Some(Formattable(id)),
-    "Input" -> input.map(Formattable(_)),
-    "InputPath" -> inputPath.map(Formattable(_)),
-    "InputTransformer" -> inputTransformer.map(Formattable(_)),
-    "KinesisParameters" -> kinesisParameters.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_)),
-    "RunCommandParameters" -> runCommandParameters.map(Formattable(_))
+    arn: NonEmptyProperty[String],
+    ecsParameters: Property[EcsParameters] = Empty,
+    id: NonEmptyProperty[String],
+    input: Property[String] = Empty,
+    inputPath: Property[String] = Empty,
+    inputTransformer: Property[InputTransformer] = Empty,
+    kinesisParameters: Property[KinesisParameters] = Empty,
+    roleArn: Property[String] = Empty,
+    runCommandParameters: Property[RunCommandParameters] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Arn" -> arn,
+    "EcsParameters" -> ecsParameters,
+    "Id" -> id,
+    "Input" -> input,
+    "InputPath" -> inputPath,
+    "InputTransformer" -> inputTransformer,
+    "KinesisParameters" -> kinesisParameters,
+    "RoleArn" -> roleArn,
+    "RunCommandParameters" -> runCommandParameters
   )
 }

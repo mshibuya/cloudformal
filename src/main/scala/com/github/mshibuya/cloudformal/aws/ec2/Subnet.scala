@@ -9,21 +9,26 @@ import com.github.mshibuya.cloudformal.model._
 trait Subnet extends Resource {
   val resourceTypeName = "AWS::EC2::Subnet"
 
-  def assignIpv6AddressOnCreation: Option[Boolean] = None
-  def availabilityZone: Option[String] = None
-  def cidrBlock: String
-  def ipv6CidrBlock: Option[String] = None
-  def mapPublicIpOnLaunch: Option[Boolean] = None
-  def tags: Option[Seq[Tag]] = None
-  def vpcId: String
+  def availabilityZoneAttribute: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")
+  def ipv6CidrBlocksAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
+  def networkAclAssociationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "NetworkAclAssociationId")
+  def vpcIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "VpcId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AssignIpv6AddressOnCreation" -> assignIpv6AddressOnCreation.map(Formattable(_)),
-    "AvailabilityZone" -> availabilityZone.map(Formattable(_)),
-    "CidrBlock" -> Some(Formattable(cidrBlock)),
-    "Ipv6CidrBlock" -> ipv6CidrBlock.map(Formattable(_)),
-    "MapPublicIpOnLaunch" -> mapPublicIpOnLaunch.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def assignIpv6AddressOnCreation: Property[Boolean] = Empty
+  def availabilityZone: Property[String] = Empty
+  def cidrBlock: NonEmptyProperty[String]
+  def ipv6CidrBlock: Property[String] = Empty
+  def mapPublicIpOnLaunch: Property[Boolean] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def vpcId: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssignIpv6AddressOnCreation" -> assignIpv6AddressOnCreation,
+    "AvailabilityZone" -> availabilityZone,
+    "CidrBlock" -> cidrBlock,
+    "Ipv6CidrBlock" -> ipv6CidrBlock,
+    "MapPublicIpOnLaunch" -> mapPublicIpOnLaunch,
+    "Tags" -> tags,
+    "VpcId" -> vpcId
   )
 }

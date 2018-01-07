@@ -10,27 +10,29 @@ import com.github.mshibuya.cloudformal.model._
 trait IdentityPool extends Resource {
   val resourceTypeName = "AWS::Cognito::IdentityPool"
 
-  def pushSync: Option[PushSync] = None
-  def cognitoIdentityProviders: Option[Seq[CognitoIdentityProvider]] = None
-  def cognitoEvents: Option[Json] = None
-  def developerProviderName: Option[String] = None
-  def cognitoStreams: Option[CognitoStreams] = None
-  def identityPoolName: Option[String] = None
-  def allowUnauthenticatedIdentities: Boolean
-  def supportedLoginProviders: Option[Json] = None
-  def samlProviderARNs: Option[Seq[String]] = None
-  def openIdConnectProviderARNs: Option[Seq[String]] = None
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PushSync" -> pushSync.map(Formattable(_)),
-    "CognitoIdentityProviders" -> cognitoIdentityProviders.map(Formattable(_)),
-    "CognitoEvents" -> cognitoEvents.map(Formattable(_)),
-    "DeveloperProviderName" -> developerProviderName.map(Formattable(_)),
-    "CognitoStreams" -> cognitoStreams.map(Formattable(_)),
-    "IdentityPoolName" -> identityPoolName.map(Formattable(_)),
-    "AllowUnauthenticatedIdentities" -> Some(Formattable(allowUnauthenticatedIdentities)),
-    "SupportedLoginProviders" -> supportedLoginProviders.map(Formattable(_)),
-    "SamlProviderARNs" -> samlProviderARNs.map(Formattable(_)),
-    "OpenIdConnectProviderARNs" -> openIdConnectProviderARNs.map(Formattable(_))
+  def pushSync: Property[PushSync] = Empty
+  def cognitoIdentityProviders: Property[Seq[CognitoIdentityProvider]] = Empty
+  def cognitoEvents: Property[Json] = Empty
+  def developerProviderName: Property[String] = Empty
+  def cognitoStreams: Property[CognitoStreams] = Empty
+  def identityPoolName: Property[String] = Empty
+  def allowUnauthenticatedIdentities: NonEmptyProperty[Boolean]
+  def supportedLoginProviders: Property[Json] = Empty
+  def samlProviderARNs: Property[Seq[String]] = Empty
+  def openIdConnectProviderARNs: Property[Seq[String]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PushSync" -> pushSync,
+    "CognitoIdentityProviders" -> cognitoIdentityProviders,
+    "CognitoEvents" -> cognitoEvents,
+    "DeveloperProviderName" -> developerProviderName,
+    "CognitoStreams" -> cognitoStreams,
+    "IdentityPoolName" -> identityPoolName,
+    "AllowUnauthenticatedIdentities" -> allowUnauthenticatedIdentities,
+    "SupportedLoginProviders" -> supportedLoginProviders,
+    "SamlProviderARNs" -> samlProviderARNs,
+    "OpenIdConnectProviderARNs" -> openIdConnectProviderARNs
   )
 }

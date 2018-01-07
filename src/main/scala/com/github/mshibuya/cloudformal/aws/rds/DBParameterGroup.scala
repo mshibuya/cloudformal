@@ -11,15 +11,15 @@ import scala.collection.immutable.ListMap
 trait DBParameterGroup extends Resource {
   val resourceTypeName = "AWS::RDS::DBParameterGroup"
 
-  def description: String
-  def family: String
-  def parameters: Option[ListMap[String, String]] = None
-  def tags: Option[Seq[Tag]] = None
+  def description: NonEmptyProperty[String]
+  def family: NonEmptyProperty[String]
+  def parameters: Property[ListMap[String, String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description)),
-    "Family" -> Some(Formattable(family)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Family" -> family,
+    "Parameters" -> parameters,
+    "Tags" -> tags
   )
 }

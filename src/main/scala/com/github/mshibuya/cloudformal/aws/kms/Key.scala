@@ -10,19 +10,21 @@ import com.github.mshibuya.cloudformal.model._
 trait Key extends Resource {
   val resourceTypeName = "AWS::KMS::Key"
 
-  def description: Option[String] = None
-  def enableKeyRotation: Option[Boolean] = None
-  def enabled: Option[Boolean] = None
-  def keyPolicy: Json
-  def keyUsage: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "EnableKeyRotation" -> enableKeyRotation.map(Formattable(_)),
-    "Enabled" -> enabled.map(Formattable(_)),
-    "KeyPolicy" -> Some(Formattable(keyPolicy)),
-    "KeyUsage" -> keyUsage.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def description: Property[String] = Empty
+  def enableKeyRotation: Property[Boolean] = Empty
+  def enabled: Property[Boolean] = Empty
+  def keyPolicy: NonEmptyProperty[Json]
+  def keyUsage: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "EnableKeyRotation" -> enableKeyRotation,
+    "Enabled" -> enabled,
+    "KeyPolicy" -> keyPolicy,
+    "KeyUsage" -> keyUsage,
+    "Tags" -> tags
   )
 }

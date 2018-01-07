@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ScheduledAction(
-    endTime: Option[java.time.ZonedDateTime] = None,
-    scalableTargetAction: Option[ScalableTargetAction] = None,
-    schedule: String,
-    scheduledActionName: String,
-    startTime: Option[java.time.ZonedDateTime] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "EndTime" -> endTime.map(Formattable(_)),
-    "ScalableTargetAction" -> scalableTargetAction.map(Formattable(_)),
-    "Schedule" -> Some(Formattable(schedule)),
-    "ScheduledActionName" -> Some(Formattable(scheduledActionName)),
-    "StartTime" -> startTime.map(Formattable(_))
+    endTime: Property[java.time.ZonedDateTime] = Empty,
+    scalableTargetAction: Property[ScalableTargetAction] = Empty,
+    schedule: NonEmptyProperty[String],
+    scheduledActionName: NonEmptyProperty[String],
+    startTime: Property[java.time.ZonedDateTime] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "EndTime" -> endTime,
+    "ScalableTargetAction" -> scalableTargetAction,
+    "Schedule" -> schedule,
+    "ScheduledActionName" -> scheduledActionName,
+    "StartTime" -> startTime
   )
 }

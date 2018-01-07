@@ -9,10 +9,10 @@ import scala.collection.immutable.ListMap
  */
 
 case class LogConfiguration(
-    logDriver: String,
-    options: Option[ListMap[String, String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "LogDriver" -> Some(Formattable(logDriver)),
-    "Options" -> options.map(Formattable(_))
+    logDriver: NonEmptyProperty[String],
+    options: Property[ListMap[String, String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "LogDriver" -> logDriver,
+    "Options" -> options
   )
 }

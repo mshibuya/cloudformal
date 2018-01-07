@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ThingPrincipalAttachment extends Resource {
   val resourceTypeName = "AWS::IoT::ThingPrincipalAttachment"
 
-  def principal: String
-  def thingName: String
+  def principal: NonEmptyProperty[String]
+  def thingName: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Principal" -> Some(Formattable(principal)),
-    "ThingName" -> Some(Formattable(thingName))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Principal" -> principal,
+    "ThingName" -> thingName
   )
 }

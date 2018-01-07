@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Device(
-    containerPath: Option[String] = None,
-    hostPath: String,
-    permissions: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ContainerPath" -> containerPath.map(Formattable(_)),
-    "HostPath" -> Some(Formattable(hostPath)),
-    "Permissions" -> permissions.map(Formattable(_))
+    containerPath: Property[String] = Empty,
+    hostPath: NonEmptyProperty[String],
+    permissions: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ContainerPath" -> containerPath,
+    "HostPath" -> hostPath,
+    "Permissions" -> permissions
   )
 }

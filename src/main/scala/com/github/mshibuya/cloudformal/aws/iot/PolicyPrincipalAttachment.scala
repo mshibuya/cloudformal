@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait PolicyPrincipalAttachment extends Resource {
   val resourceTypeName = "AWS::IoT::PolicyPrincipalAttachment"
 
-  def policyName: String
-  def principal: String
+  def policyName: NonEmptyProperty[String]
+  def principal: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PolicyName" -> Some(Formattable(policyName)),
-    "Principal" -> Some(Formattable(principal))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PolicyName" -> policyName,
+    "Principal" -> principal
   )
 }

@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait Detector extends Resource {
   val resourceTypeName = "AWS::GuardDuty::Detector"
 
-  def enable: Boolean
+  def enable: NonEmptyProperty[Boolean]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Enable" -> Some(Formattable(enable))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Enable" -> enable
   )
 }

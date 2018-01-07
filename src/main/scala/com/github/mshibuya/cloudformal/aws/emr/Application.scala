@@ -9,14 +9,14 @@ import scala.collection.immutable.ListMap
  */
 
 case class Application(
-    additionalInfo: Option[ListMap[String, String]] = None,
-    args: Option[Seq[String]] = None,
-    name: Option[String] = None,
-    version: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AdditionalInfo" -> additionalInfo.map(Formattable(_)),
-    "Args" -> args.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "Version" -> version.map(Formattable(_))
+    additionalInfo: Property[ListMap[String, String]] = Empty,
+    args: Property[Seq[String]] = Empty,
+    name: Property[String] = Empty,
+    version: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AdditionalInfo" -> additionalInfo,
+    "Args" -> args,
+    "Name" -> name,
+    "Version" -> version
   )
 }

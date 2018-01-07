@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SourceConfiguration(
-    applicationName: String,
-    templateName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "TemplateName" -> Some(Formattable(templateName))
+    applicationName: NonEmptyProperty[String],
+    templateName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "TemplateName" -> templateName
   )
 }

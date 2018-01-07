@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Logging(
-    includeCookies: Option[Boolean] = None,
-    bucket: String,
-    prefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "IncludeCookies" -> includeCookies.map(Formattable(_)),
-    "Bucket" -> Some(Formattable(bucket)),
-    "Prefix" -> prefix.map(Formattable(_))
+    includeCookies: Property[Boolean] = Empty,
+    bucket: NonEmptyProperty[String],
+    prefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "IncludeCookies" -> includeCookies,
+    "Bucket" -> bucket,
+    "Prefix" -> prefix
   )
 }

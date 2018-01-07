@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Predicate(
-    dataId: String,
-    negated: Boolean,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DataId" -> Some(Formattable(dataId)),
-    "Negated" -> Some(Formattable(negated)),
-    "Type" -> Some(Formattable(`type`))
+    dataId: NonEmptyProperty[String],
+    negated: NonEmptyProperty[Boolean],
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DataId" -> dataId,
+    "Negated" -> negated,
+    "Type" -> `type`
   )
 }

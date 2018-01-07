@@ -8,14 +8,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DatabaseInput(
-    locationUri: Option[String] = None,
-    description: Option[String] = None,
-    parameters: Option[Json] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "LocationUri" -> locationUri.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    locationUri: Property[String] = Empty,
+    description: Property[String] = Empty,
+    parameters: Property[Json] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "LocationUri" -> locationUri,
+    "Description" -> description,
+    "Parameters" -> parameters,
+    "Name" -> name
   )
 }

@@ -7,30 +7,30 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DefaultCacheBehavior(
-    compress: Option[Boolean] = None,
-    allowedMethods: Option[Seq[String]] = None,
-    cachedMethods: Option[Seq[String]] = None,
-    lambdaFunctionAssociations: Option[Seq[LambdaFunctionAssociation]] = None,
-    smoothStreaming: Option[Boolean] = None,
-    targetOriginId: String,
-    viewerProtocolPolicy: String,
-    forwardedValues: ForwardedValues,
-    minTTL: Option[Double] = None,
-    maxTTL: Option[Double] = None,
-    trustedSigners: Option[Seq[String]] = None,
-    defaultTTL: Option[Double] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Compress" -> compress.map(Formattable(_)),
-    "AllowedMethods" -> allowedMethods.map(Formattable(_)),
-    "CachedMethods" -> cachedMethods.map(Formattable(_)),
-    "LambdaFunctionAssociations" -> lambdaFunctionAssociations.map(Formattable(_)),
-    "SmoothStreaming" -> smoothStreaming.map(Formattable(_)),
-    "TargetOriginId" -> Some(Formattable(targetOriginId)),
-    "ViewerProtocolPolicy" -> Some(Formattable(viewerProtocolPolicy)),
-    "ForwardedValues" -> Some(Formattable(forwardedValues)),
-    "MinTTL" -> minTTL.map(Formattable(_)),
-    "MaxTTL" -> maxTTL.map(Formattable(_)),
-    "TrustedSigners" -> trustedSigners.map(Formattable(_)),
-    "DefaultTTL" -> defaultTTL.map(Formattable(_))
+    compress: Property[Boolean] = Empty,
+    allowedMethods: Property[Seq[String]] = Empty,
+    cachedMethods: Property[Seq[String]] = Empty,
+    lambdaFunctionAssociations: Property[Seq[LambdaFunctionAssociation]] = Empty,
+    smoothStreaming: Property[Boolean] = Empty,
+    targetOriginId: NonEmptyProperty[String],
+    viewerProtocolPolicy: NonEmptyProperty[String],
+    forwardedValues: NonEmptyProperty[ForwardedValues],
+    minTTL: Property[Double] = Empty,
+    maxTTL: Property[Double] = Empty,
+    trustedSigners: Property[Seq[String]] = Empty,
+    defaultTTL: Property[Double] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Compress" -> compress,
+    "AllowedMethods" -> allowedMethods,
+    "CachedMethods" -> cachedMethods,
+    "LambdaFunctionAssociations" -> lambdaFunctionAssociations,
+    "SmoothStreaming" -> smoothStreaming,
+    "TargetOriginId" -> targetOriginId,
+    "ViewerProtocolPolicy" -> viewerProtocolPolicy,
+    "ForwardedValues" -> forwardedValues,
+    "MinTTL" -> minTTL,
+    "MaxTTL" -> maxTTL,
+    "TrustedSigners" -> trustedSigners,
+    "DefaultTTL" -> defaultTTL
   )
 }

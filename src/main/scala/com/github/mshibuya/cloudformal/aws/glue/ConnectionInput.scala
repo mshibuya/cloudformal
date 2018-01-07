@@ -8,18 +8,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConnectionInput(
-    description: Option[String] = None,
-    connectionType: String,
-    matchCriteria: Option[Seq[String]] = None,
-    physicalConnectionRequirements: Option[PhysicalConnectionRequirements] = None,
-    connectionProperties: Json,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "ConnectionType" -> Some(Formattable(connectionType)),
-    "MatchCriteria" -> matchCriteria.map(Formattable(_)),
-    "PhysicalConnectionRequirements" -> physicalConnectionRequirements.map(Formattable(_)),
-    "ConnectionProperties" -> Some(Formattable(connectionProperties)),
-    "Name" -> name.map(Formattable(_))
+    description: Property[String] = Empty,
+    connectionType: NonEmptyProperty[String],
+    matchCriteria: Property[Seq[String]] = Empty,
+    physicalConnectionRequirements: Property[PhysicalConnectionRequirements] = Empty,
+    connectionProperties: NonEmptyProperty[Json],
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Description" -> description,
+    "ConnectionType" -> connectionType,
+    "MatchCriteria" -> matchCriteria,
+    "PhysicalConnectionRequirements" -> physicalConnectionRequirements,
+    "ConnectionProperties" -> connectionProperties,
+    "Name" -> name
   )
 }

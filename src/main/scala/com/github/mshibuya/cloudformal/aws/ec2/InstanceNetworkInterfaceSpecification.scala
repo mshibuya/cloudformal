@@ -7,28 +7,28 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InstanceNetworkInterfaceSpecification(
-    associatePublicIpAddress: Option[Boolean] = None,
-    deleteOnTermination: Option[Boolean] = None,
-    description: Option[String] = None,
-    deviceIndex: Option[Int] = None,
-    groups: Option[Seq[String]] = None,
-    ipv6AddressCount: Option[Int] = None,
-    ipv6Addresses: Option[Seq[InstanceIpv6Address]] = None,
-    networkInterfaceId: Option[String] = None,
-    privateIpAddresses: Option[Seq[PrivateIpAddressSpecification]] = None,
-    secondaryPrivateIpAddressCount: Option[Int] = None,
-    subnetId: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AssociatePublicIpAddress" -> associatePublicIpAddress.map(Formattable(_)),
-    "DeleteOnTermination" -> deleteOnTermination.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "DeviceIndex" -> deviceIndex.map(Formattable(_)),
-    "Groups" -> groups.map(Formattable(_)),
-    "Ipv6AddressCount" -> ipv6AddressCount.map(Formattable(_)),
-    "Ipv6Addresses" -> ipv6Addresses.map(Formattable(_)),
-    "NetworkInterfaceId" -> networkInterfaceId.map(Formattable(_)),
-    "PrivateIpAddresses" -> privateIpAddresses.map(Formattable(_)),
-    "SecondaryPrivateIpAddressCount" -> secondaryPrivateIpAddressCount.map(Formattable(_)),
-    "SubnetId" -> subnetId.map(Formattable(_))
+    associatePublicIpAddress: Property[Boolean] = Empty,
+    deleteOnTermination: Property[Boolean] = Empty,
+    description: Property[String] = Empty,
+    deviceIndex: Property[Int] = Empty,
+    groups: Property[Seq[String]] = Empty,
+    ipv6AddressCount: Property[Int] = Empty,
+    ipv6Addresses: Property[Seq[InstanceIpv6Address]] = Empty,
+    networkInterfaceId: Property[String] = Empty,
+    privateIpAddresses: Property[Seq[PrivateIpAddressSpecification]] = Empty,
+    secondaryPrivateIpAddressCount: Property[Int] = Empty,
+    subnetId: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AssociatePublicIpAddress" -> associatePublicIpAddress,
+    "DeleteOnTermination" -> deleteOnTermination,
+    "Description" -> description,
+    "DeviceIndex" -> deviceIndex,
+    "Groups" -> groups,
+    "Ipv6AddressCount" -> ipv6AddressCount,
+    "Ipv6Addresses" -> ipv6Addresses,
+    "NetworkInterfaceId" -> networkInterfaceId,
+    "PrivateIpAddresses" -> privateIpAddresses,
+    "SecondaryPrivateIpAddressCount" -> secondaryPrivateIpAddressCount,
+    "SubnetId" -> subnetId
   )
 }

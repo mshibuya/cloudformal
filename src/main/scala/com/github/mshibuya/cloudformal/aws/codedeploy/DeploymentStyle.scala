@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DeploymentStyle(
-    deploymentOption: Option[String] = None,
-    deploymentType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeploymentOption" -> deploymentOption.map(Formattable(_)),
-    "DeploymentType" -> deploymentType.map(Formattable(_))
+    deploymentOption: Property[String] = Empty,
+    deploymentType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeploymentOption" -> deploymentOption,
+    "DeploymentType" -> deploymentType
   )
 }

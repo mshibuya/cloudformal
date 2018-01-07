@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Dimension(
-    name: String,
-    value: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Name" -> Some(Formattable(name)),
-    "Value" -> Some(Formattable(value))
+    name: NonEmptyProperty[String],
+    value: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Name" -> name,
+    "Value" -> value
   )
 }

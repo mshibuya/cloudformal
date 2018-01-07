@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait SecurityGroupIngress extends Resource {
   val resourceTypeName = "AWS::ElastiCache::SecurityGroupIngress"
 
-  def cacheSecurityGroupName: String
-  def eC2SecurityGroupName: String
-  def eC2SecurityGroupOwnerId: Option[String] = None
+  def cacheSecurityGroupName: NonEmptyProperty[String]
+  def eC2SecurityGroupName: NonEmptyProperty[String]
+  def eC2SecurityGroupOwnerId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CacheSecurityGroupName" -> Some(Formattable(cacheSecurityGroupName)),
-    "EC2SecurityGroupName" -> Some(Formattable(eC2SecurityGroupName)),
-    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CacheSecurityGroupName" -> cacheSecurityGroupName,
+    "EC2SecurityGroupName" -> eC2SecurityGroupName,
+    "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId
   )
 }

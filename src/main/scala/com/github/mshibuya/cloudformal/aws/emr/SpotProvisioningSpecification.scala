@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SpotProvisioningSpecification(
-    blockDurationMinutes: Option[Int] = None,
-    timeoutAction: String,
-    timeoutDurationMinutes: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BlockDurationMinutes" -> blockDurationMinutes.map(Formattable(_)),
-    "TimeoutAction" -> Some(Formattable(timeoutAction)),
-    "TimeoutDurationMinutes" -> Some(Formattable(timeoutDurationMinutes))
+    blockDurationMinutes: Property[Int] = Empty,
+    timeoutAction: NonEmptyProperty[String],
+    timeoutDurationMinutes: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BlockDurationMinutes" -> blockDurationMinutes,
+    "TimeoutAction" -> timeoutAction,
+    "TimeoutDurationMinutes" -> timeoutDurationMinutes
   )
 }

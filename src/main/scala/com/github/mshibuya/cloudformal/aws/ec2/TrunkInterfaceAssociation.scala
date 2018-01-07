@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait TrunkInterfaceAssociation extends Resource {
   val resourceTypeName = "AWS::EC2::TrunkInterfaceAssociation"
 
-  def branchInterfaceId: String
-  def gREKey: Option[Int] = None
-  def trunkInterfaceId: String
-  def vLANId: Option[Int] = None
+  def branchInterfaceId: NonEmptyProperty[String]
+  def gREKey: Property[Int] = Empty
+  def trunkInterfaceId: NonEmptyProperty[String]
+  def vLANId: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "BranchInterfaceId" -> Some(Formattable(branchInterfaceId)),
-    "GREKey" -> gREKey.map(Formattable(_)),
-    "TrunkInterfaceId" -> Some(Formattable(trunkInterfaceId)),
-    "VLANId" -> vLANId.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "BranchInterfaceId" -> branchInterfaceId,
+    "GREKey" -> gREKey,
+    "TrunkInterfaceId" -> trunkInterfaceId,
+    "VLANId" -> vLANId
   )
 }

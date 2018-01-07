@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Ulimit(
-    softLimit: Int,
-    hardLimit: Int,
-    name: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "SoftLimit" -> Some(Formattable(softLimit)),
-    "HardLimit" -> Some(Formattable(hardLimit)),
-    "Name" -> Some(Formattable(name))
+    softLimit: NonEmptyProperty[Int],
+    hardLimit: NonEmptyProperty[Int],
+    name: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "SoftLimit" -> softLimit,
+    "HardLimit" -> hardLimit,
+    "Name" -> name
   )
 }

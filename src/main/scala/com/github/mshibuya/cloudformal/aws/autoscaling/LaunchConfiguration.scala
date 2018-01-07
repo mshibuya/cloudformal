@@ -9,41 +9,41 @@ import com.github.mshibuya.cloudformal.model._
 trait LaunchConfiguration extends Resource {
   val resourceTypeName = "AWS::AutoScaling::LaunchConfiguration"
 
-  def associatePublicIpAddress: Option[Boolean] = None
-  def blockDeviceMappings: Option[Seq[BlockDeviceMapping]] = None
-  def classicLinkVPCId: Option[String] = None
-  def classicLinkVPCSecurityGroups: Option[Seq[String]] = None
-  def ebsOptimized: Option[Boolean] = None
-  def iamInstanceProfile: Option[String] = None
-  def imageId: String
-  def instanceId: Option[String] = None
-  def instanceMonitoring: Option[Boolean] = None
-  def instanceType: String
-  def kernelId: Option[String] = None
-  def keyName: Option[String] = None
-  def placementTenancy: Option[String] = None
-  def ramDiskId: Option[String] = None
-  def securityGroups: Option[Seq[String]] = None
-  def spotPrice: Option[String] = None
-  def userData: Option[String] = None
+  def associatePublicIpAddress: Property[Boolean] = Empty
+  def blockDeviceMappings: Property[Seq[BlockDeviceMapping]] = Empty
+  def classicLinkVPCId: Property[String] = Empty
+  def classicLinkVPCSecurityGroups: Property[Seq[String]] = Empty
+  def ebsOptimized: Property[Boolean] = Empty
+  def iamInstanceProfile: Property[String] = Empty
+  def imageId: NonEmptyProperty[String]
+  def instanceId: Property[String] = Empty
+  def instanceMonitoring: Property[Boolean] = Empty
+  def instanceType: NonEmptyProperty[String]
+  def kernelId: Property[String] = Empty
+  def keyName: Property[String] = Empty
+  def placementTenancy: Property[String] = Empty
+  def ramDiskId: Property[String] = Empty
+  def securityGroups: Property[Seq[String]] = Empty
+  def spotPrice: Property[String] = Empty
+  def userData: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AssociatePublicIpAddress" -> associatePublicIpAddress.map(Formattable(_)),
-    "BlockDeviceMappings" -> blockDeviceMappings.map(Formattable(_)),
-    "ClassicLinkVPCId" -> classicLinkVPCId.map(Formattable(_)),
-    "ClassicLinkVPCSecurityGroups" -> classicLinkVPCSecurityGroups.map(Formattable(_)),
-    "EbsOptimized" -> ebsOptimized.map(Formattable(_)),
-    "IamInstanceProfile" -> iamInstanceProfile.map(Formattable(_)),
-    "ImageId" -> Some(Formattable(imageId)),
-    "InstanceId" -> instanceId.map(Formattable(_)),
-    "InstanceMonitoring" -> instanceMonitoring.map(Formattable(_)),
-    "InstanceType" -> Some(Formattable(instanceType)),
-    "KernelId" -> kernelId.map(Formattable(_)),
-    "KeyName" -> keyName.map(Formattable(_)),
-    "PlacementTenancy" -> placementTenancy.map(Formattable(_)),
-    "RamDiskId" -> ramDiskId.map(Formattable(_)),
-    "SecurityGroups" -> securityGroups.map(Formattable(_)),
-    "SpotPrice" -> spotPrice.map(Formattable(_)),
-    "UserData" -> userData.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssociatePublicIpAddress" -> associatePublicIpAddress,
+    "BlockDeviceMappings" -> blockDeviceMappings,
+    "ClassicLinkVPCId" -> classicLinkVPCId,
+    "ClassicLinkVPCSecurityGroups" -> classicLinkVPCSecurityGroups,
+    "EbsOptimized" -> ebsOptimized,
+    "IamInstanceProfile" -> iamInstanceProfile,
+    "ImageId" -> imageId,
+    "InstanceId" -> instanceId,
+    "InstanceMonitoring" -> instanceMonitoring,
+    "InstanceType" -> instanceType,
+    "KernelId" -> kernelId,
+    "KeyName" -> keyName,
+    "PlacementTenancy" -> placementTenancy,
+    "RamDiskId" -> ramDiskId,
+    "SecurityGroups" -> securityGroups,
+    "SpotPrice" -> spotPrice,
+    "UserData" -> userData
   )
 }

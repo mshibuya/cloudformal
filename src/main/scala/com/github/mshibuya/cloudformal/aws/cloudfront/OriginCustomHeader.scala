@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class OriginCustomHeader(
-    headerValue: String,
-    headerName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "HeaderValue" -> Some(Formattable(headerValue)),
-    "HeaderName" -> Some(Formattable(headerName))
+    headerValue: NonEmptyProperty[String],
+    headerName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "HeaderValue" -> headerValue,
+    "HeaderName" -> headerName
   )
 }

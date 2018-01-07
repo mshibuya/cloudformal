@@ -10,15 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait DomainName extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::DomainName"
 
-  def certificateArn: Option[String] = None
-  def domainName: String
-  def endpointConfiguration: Option[EndpointConfiguration] = None
-  def regionalCertificateArn: Option[String] = None
+  def certificateArn: Property[String] = Empty
+  def domainName: NonEmptyProperty[String]
+  def endpointConfiguration: Property[EndpointConfiguration] = Empty
+  def regionalCertificateArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CertificateArn" -> certificateArn.map(Formattable(_)),
-    "DomainName" -> Some(Formattable(domainName)),
-    "EndpointConfiguration" -> endpointConfiguration.map(Formattable(_)),
-    "RegionalCertificateArn" -> regionalCertificateArn.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CertificateArn" -> certificateArn,
+    "DomainName" -> domainName,
+    "EndpointConfiguration" -> endpointConfiguration,
+    "RegionalCertificateArn" -> regionalCertificateArn
   )
 }

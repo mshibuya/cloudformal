@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Instance extends Resource {
   val resourceTypeName = "AWS::ServiceDiscovery::Instance"
 
-  def instanceAttributes: Json
-  def instanceId: Option[String] = None
-  def serviceId: String
+  def instanceAttributes: NonEmptyProperty[Json]
+  def instanceId: Property[String] = Empty
+  def serviceId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "InstanceAttributes" -> Some(Formattable(instanceAttributes)),
-    "InstanceId" -> instanceId.map(Formattable(_)),
-    "ServiceId" -> Some(Formattable(serviceId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "InstanceAttributes" -> instanceAttributes,
+    "InstanceId" -> instanceId,
+    "ServiceId" -> serviceId
   )
 }

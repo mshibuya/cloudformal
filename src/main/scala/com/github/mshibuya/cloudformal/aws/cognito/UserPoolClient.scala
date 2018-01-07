@@ -9,21 +9,24 @@ import com.github.mshibuya.cloudformal.model._
 trait UserPoolClient extends Resource {
   val resourceTypeName = "AWS::Cognito::UserPoolClient"
 
-  def generateSecret: Option[Boolean] = None
-  def clientName: Option[String] = None
-  def userPoolId: String
-  def explicitAuthFlows: Option[Seq[String]] = None
-  def refreshTokenValidity: Option[Double] = None
-  def readAttributes: Option[Seq[String]] = None
-  def writeAttributes: Option[Seq[String]] = None
+  def clientSecretAttribute: Expression[String] = Fn.GetAtt(logicalId, "ClientSecret")
+  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "GenerateSecret" -> generateSecret.map(Formattable(_)),
-    "ClientName" -> clientName.map(Formattable(_)),
-    "UserPoolId" -> Some(Formattable(userPoolId)),
-    "ExplicitAuthFlows" -> explicitAuthFlows.map(Formattable(_)),
-    "RefreshTokenValidity" -> refreshTokenValidity.map(Formattable(_)),
-    "ReadAttributes" -> readAttributes.map(Formattable(_)),
-    "WriteAttributes" -> writeAttributes.map(Formattable(_))
+  def generateSecret: Property[Boolean] = Empty
+  def clientName: Property[String] = Empty
+  def userPoolId: NonEmptyProperty[String]
+  def explicitAuthFlows: Property[Seq[String]] = Empty
+  def refreshTokenValidity: Property[Double] = Empty
+  def readAttributes: Property[Seq[String]] = Empty
+  def writeAttributes: Property[Seq[String]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "GenerateSecret" -> generateSecret,
+    "ClientName" -> clientName,
+    "UserPoolId" -> userPoolId,
+    "ExplicitAuthFlows" -> explicitAuthFlows,
+    "RefreshTokenValidity" -> refreshTokenValidity,
+    "ReadAttributes" -> readAttributes,
+    "WriteAttributes" -> writeAttributes
   )
 }

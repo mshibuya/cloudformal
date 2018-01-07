@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DeploymentConfiguration(
-    maximumPercent: Option[Int] = None,
-    minimumHealthyPercent: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MaximumPercent" -> maximumPercent.map(Formattable(_)),
-    "MinimumHealthyPercent" -> minimumHealthyPercent.map(Formattable(_))
+    maximumPercent: Property[Int] = Empty,
+    minimumHealthyPercent: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MaximumPercent" -> maximumPercent,
+    "MinimumHealthyPercent" -> minimumHealthyPercent
   )
 }

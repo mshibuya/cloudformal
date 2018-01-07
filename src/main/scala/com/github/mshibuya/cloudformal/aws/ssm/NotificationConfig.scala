@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NotificationConfig(
-    notificationArn: Option[String] = None,
-    notificationType: Option[String] = None,
-    notificationEvents: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "NotificationArn" -> notificationArn.map(Formattable(_)),
-    "NotificationType" -> notificationType.map(Formattable(_)),
-    "NotificationEvents" -> notificationEvents.map(Formattable(_))
+    notificationArn: Property[String] = Empty,
+    notificationType: Property[String] = Empty,
+    notificationEvents: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "NotificationArn" -> notificationArn,
+    "NotificationType" -> notificationType,
+    "NotificationEvents" -> notificationEvents
   )
 }

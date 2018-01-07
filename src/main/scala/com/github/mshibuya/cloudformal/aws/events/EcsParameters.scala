@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EcsParameters(
-    taskCount: Option[Int] = None,
-    taskDefinitionArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TaskCount" -> taskCount.map(Formattable(_)),
-    "TaskDefinitionArn" -> Some(Formattable(taskDefinitionArn))
+    taskCount: Property[Int] = Empty,
+    taskDefinitionArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TaskCount" -> taskCount,
+    "TaskDefinitionArn" -> taskDefinitionArn
   )
 }

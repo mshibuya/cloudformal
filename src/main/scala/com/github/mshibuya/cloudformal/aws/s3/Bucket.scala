@@ -9,35 +9,40 @@ import com.github.mshibuya.cloudformal.model._
 trait Bucket extends Resource {
   val resourceTypeName = "AWS::S3::Bucket"
 
-  def accelerateConfiguration: Option[AccelerateConfiguration] = None
-  def accessControl: Option[String] = None
-  def analyticsConfigurations: Option[Seq[AnalyticsConfiguration]] = None
-  def bucketName: Option[String] = None
-  def corsConfiguration: Option[CorsConfiguration] = None
-  def inventoryConfigurations: Option[Seq[InventoryConfiguration]] = None
-  def lifecycleConfiguration: Option[LifecycleConfiguration] = None
-  def loggingConfiguration: Option[LoggingConfiguration] = None
-  def metricsConfigurations: Option[Seq[MetricsConfiguration]] = None
-  def notificationConfiguration: Option[NotificationConfiguration] = None
-  def replicationConfiguration: Option[ReplicationConfiguration] = None
-  def tags: Option[Seq[Tag]] = None
-  def versioningConfiguration: Option[VersioningConfiguration] = None
-  def websiteConfiguration: Option[WebsiteConfiguration] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+  def dualStackDomainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DualStackDomainName")
+  def websiteURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "WebsiteURL")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AccelerateConfiguration" -> accelerateConfiguration.map(Formattable(_)),
-    "AccessControl" -> accessControl.map(Formattable(_)),
-    "AnalyticsConfigurations" -> analyticsConfigurations.map(Formattable(_)),
-    "BucketName" -> bucketName.map(Formattable(_)),
-    "CorsConfiguration" -> corsConfiguration.map(Formattable(_)),
-    "InventoryConfigurations" -> inventoryConfigurations.map(Formattable(_)),
-    "LifecycleConfiguration" -> lifecycleConfiguration.map(Formattable(_)),
-    "LoggingConfiguration" -> loggingConfiguration.map(Formattable(_)),
-    "MetricsConfigurations" -> metricsConfigurations.map(Formattable(_)),
-    "NotificationConfiguration" -> notificationConfiguration.map(Formattable(_)),
-    "ReplicationConfiguration" -> replicationConfiguration.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VersioningConfiguration" -> versioningConfiguration.map(Formattable(_)),
-    "WebsiteConfiguration" -> websiteConfiguration.map(Formattable(_))
+  def accelerateConfiguration: Property[AccelerateConfiguration] = Empty
+  def accessControl: Property[String] = Empty
+  def analyticsConfigurations: Property[Seq[AnalyticsConfiguration]] = Empty
+  def bucketName: Property[String] = Empty
+  def corsConfiguration: Property[CorsConfiguration] = Empty
+  def inventoryConfigurations: Property[Seq[InventoryConfiguration]] = Empty
+  def lifecycleConfiguration: Property[LifecycleConfiguration] = Empty
+  def loggingConfiguration: Property[LoggingConfiguration] = Empty
+  def metricsConfigurations: Property[Seq[MetricsConfiguration]] = Empty
+  def notificationConfiguration: Property[NotificationConfiguration] = Empty
+  def replicationConfiguration: Property[ReplicationConfiguration] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def versioningConfiguration: Property[VersioningConfiguration] = Empty
+  def websiteConfiguration: Property[WebsiteConfiguration] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AccelerateConfiguration" -> accelerateConfiguration,
+    "AccessControl" -> accessControl,
+    "AnalyticsConfigurations" -> analyticsConfigurations,
+    "BucketName" -> bucketName,
+    "CorsConfiguration" -> corsConfiguration,
+    "InventoryConfigurations" -> inventoryConfigurations,
+    "LifecycleConfiguration" -> lifecycleConfiguration,
+    "LoggingConfiguration" -> loggingConfiguration,
+    "MetricsConfigurations" -> metricsConfigurations,
+    "NotificationConfiguration" -> notificationConfiguration,
+    "ReplicationConfiguration" -> replicationConfiguration,
+    "Tags" -> tags,
+    "VersioningConfiguration" -> versioningConfiguration,
+    "WebsiteConfiguration" -> websiteConfiguration
   )
 }

@@ -8,20 +8,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ActionDeclaration(
-    actionTypeId: ActionTypeId,
-    configuration: Option[Json] = None,
-    inputArtifacts: Option[Seq[InputArtifact]] = None,
-    name: String,
-    outputArtifacts: Option[Seq[OutputArtifact]] = None,
-    roleArn: Option[String] = None,
-    runOrder: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ActionTypeId" -> Some(Formattable(actionTypeId)),
-    "Configuration" -> configuration.map(Formattable(_)),
-    "InputArtifacts" -> inputArtifacts.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "OutputArtifacts" -> outputArtifacts.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_)),
-    "RunOrder" -> runOrder.map(Formattable(_))
+    actionTypeId: NonEmptyProperty[ActionTypeId],
+    configuration: Property[Json] = Empty,
+    inputArtifacts: Property[Seq[InputArtifact]] = Empty,
+    name: NonEmptyProperty[String],
+    outputArtifacts: Property[Seq[OutputArtifact]] = Empty,
+    roleArn: Property[String] = Empty,
+    runOrder: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ActionTypeId" -> actionTypeId,
+    "Configuration" -> configuration,
+    "InputArtifacts" -> inputArtifacts,
+    "Name" -> name,
+    "OutputArtifacts" -> outputArtifacts,
+    "RoleArn" -> roleArn,
+    "RunOrder" -> runOrder
   )
 }

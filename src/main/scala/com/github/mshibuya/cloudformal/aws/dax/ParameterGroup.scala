@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait ParameterGroup extends Resource {
   val resourceTypeName = "AWS::DAX::ParameterGroup"
 
-  def parameterNameValues: Option[Json] = None
-  def description: Option[String] = None
-  def parameterGroupName: Option[String] = None
+  def parameterNameValues: Property[Json] = Empty
+  def description: Property[String] = Empty
+  def parameterGroupName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ParameterNameValues" -> parameterNameValues.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "ParameterGroupName" -> parameterGroupName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ParameterNameValues" -> parameterNameValues,
+    "Description" -> description,
+    "ParameterGroupName" -> parameterGroupName
   )
 }

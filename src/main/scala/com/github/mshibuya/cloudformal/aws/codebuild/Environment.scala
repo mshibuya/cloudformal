@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Environment(
-    `type`: String,
-    environmentVariables: Option[Seq[EnvironmentVariable]] = None,
-    privilegedMode: Option[Boolean] = None,
-    image: String,
-    computeType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "EnvironmentVariables" -> environmentVariables.map(Formattable(_)),
-    "PrivilegedMode" -> privilegedMode.map(Formattable(_)),
-    "Image" -> Some(Formattable(image)),
-    "ComputeType" -> Some(Formattable(computeType))
+    `type`: NonEmptyProperty[String],
+    environmentVariables: Property[Seq[EnvironmentVariable]] = Empty,
+    privilegedMode: Property[Boolean] = Empty,
+    image: NonEmptyProperty[String],
+    computeType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "EnvironmentVariables" -> environmentVariables,
+    "PrivilegedMode" -> privilegedMode,
+    "Image" -> image,
+    "ComputeType" -> computeType
   )
 }

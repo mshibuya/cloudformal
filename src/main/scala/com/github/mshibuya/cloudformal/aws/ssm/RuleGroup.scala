@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RuleGroup(
-    patchRules: Option[Seq[Rule]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PatchRules" -> patchRules.map(Formattable(_))
+    patchRules: Property[Seq[Rule]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PatchRules" -> patchRules
   )
 }

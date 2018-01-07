@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoginProfile(
-    password: String,
-    passwordResetRequired: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Password" -> Some(Formattable(password)),
-    "PasswordResetRequired" -> passwordResetRequired.map(Formattable(_))
+    password: NonEmptyProperty[String],
+    passwordResetRequired: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Password" -> password,
+    "PasswordResetRequired" -> passwordResetRequired
   )
 }

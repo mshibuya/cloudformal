@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CustomizedMetricSpecification(
-    dimensions: Option[Seq[MetricDimension]] = None,
-    metricName: String,
-    namespace: String,
-    statistic: String,
-    unit: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Dimensions" -> dimensions.map(Formattable(_)),
-    "MetricName" -> Some(Formattable(metricName)),
-    "Namespace" -> Some(Formattable(namespace)),
-    "Statistic" -> Some(Formattable(statistic)),
-    "Unit" -> unit.map(Formattable(_))
+    dimensions: Property[Seq[MetricDimension]] = Empty,
+    metricName: NonEmptyProperty[String],
+    namespace: NonEmptyProperty[String],
+    statistic: NonEmptyProperty[String],
+    unit: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Dimensions" -> dimensions,
+    "MetricName" -> metricName,
+    "Namespace" -> namespace,
+    "Statistic" -> statistic,
+    "Unit" -> unit
   )
 }

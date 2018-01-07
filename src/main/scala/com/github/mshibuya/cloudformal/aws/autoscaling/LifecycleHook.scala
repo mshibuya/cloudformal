@@ -9,23 +9,23 @@ import com.github.mshibuya.cloudformal.model._
 trait LifecycleHook extends Resource {
   val resourceTypeName = "AWS::AutoScaling::LifecycleHook"
 
-  def autoScalingGroupName: String
-  def defaultResult: Option[String] = None
-  def heartbeatTimeout: Option[Int] = None
-  def lifecycleHookName: Option[String] = None
-  def lifecycleTransition: String
-  def notificationMetadata: Option[String] = None
-  def notificationTargetARN: Option[String] = None
-  def roleARN: Option[String] = None
+  def autoScalingGroupName: NonEmptyProperty[String]
+  def defaultResult: Property[String] = Empty
+  def heartbeatTimeout: Property[Int] = Empty
+  def lifecycleHookName: Property[String] = Empty
+  def lifecycleTransition: NonEmptyProperty[String]
+  def notificationMetadata: Property[String] = Empty
+  def notificationTargetARN: Property[String] = Empty
+  def roleARN: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AutoScalingGroupName" -> Some(Formattable(autoScalingGroupName)),
-    "DefaultResult" -> defaultResult.map(Formattable(_)),
-    "HeartbeatTimeout" -> heartbeatTimeout.map(Formattable(_)),
-    "LifecycleHookName" -> lifecycleHookName.map(Formattable(_)),
-    "LifecycleTransition" -> Some(Formattable(lifecycleTransition)),
-    "NotificationMetadata" -> notificationMetadata.map(Formattable(_)),
-    "NotificationTargetARN" -> notificationTargetARN.map(Formattable(_)),
-    "RoleARN" -> roleARN.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoScalingGroupName" -> autoScalingGroupName,
+    "DefaultResult" -> defaultResult,
+    "HeartbeatTimeout" -> heartbeatTimeout,
+    "LifecycleHookName" -> lifecycleHookName,
+    "LifecycleTransition" -> lifecycleTransition,
+    "NotificationMetadata" -> notificationMetadata,
+    "NotificationTargetARN" -> notificationTargetARN,
+    "RoleARN" -> roleARN
   )
 }

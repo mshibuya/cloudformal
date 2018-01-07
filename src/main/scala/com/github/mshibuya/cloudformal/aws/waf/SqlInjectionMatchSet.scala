@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait SqlInjectionMatchSet extends Resource {
   val resourceTypeName = "AWS::WAF::SqlInjectionMatchSet"
 
-  def name: String
-  def sqlInjectionMatchTuples: Option[Seq[SqlInjectionMatchTuple]] = None
+  def name: NonEmptyProperty[String]
+  def sqlInjectionMatchTuples: Property[Seq[SqlInjectionMatchTuple]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Name" -> Some(Formattable(name)),
-    "SqlInjectionMatchTuples" -> sqlInjectionMatchTuples.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Name" -> name,
+    "SqlInjectionMatchTuples" -> sqlInjectionMatchTuples
   )
 }

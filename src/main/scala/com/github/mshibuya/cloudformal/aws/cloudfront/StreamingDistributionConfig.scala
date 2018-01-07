@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StreamingDistributionConfig(
-    logging: Option[Logging] = None,
-    comment: String,
-    priceClass: Option[String] = None,
-    s3Origin: S3Origin,
-    enabled: Boolean,
-    aliases: Option[Seq[String]] = None,
-    trustedSigners: TrustedSigners) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Logging" -> logging.map(Formattable(_)),
-    "Comment" -> Some(Formattable(comment)),
-    "PriceClass" -> priceClass.map(Formattable(_)),
-    "S3Origin" -> Some(Formattable(s3Origin)),
-    "Enabled" -> Some(Formattable(enabled)),
-    "Aliases" -> aliases.map(Formattable(_)),
-    "TrustedSigners" -> Some(Formattable(trustedSigners))
+    logging: Property[Logging] = Empty,
+    comment: NonEmptyProperty[String],
+    priceClass: Property[String] = Empty,
+    s3Origin: NonEmptyProperty[S3Origin],
+    enabled: NonEmptyProperty[Boolean],
+    aliases: Property[Seq[String]] = Empty,
+    trustedSigners: NonEmptyProperty[TrustedSigners]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Logging" -> logging,
+    "Comment" -> comment,
+    "PriceClass" -> priceClass,
+    "S3Origin" -> s3Origin,
+    "Enabled" -> enabled,
+    "Aliases" -> aliases,
+    "TrustedSigners" -> trustedSigners
   )
 }

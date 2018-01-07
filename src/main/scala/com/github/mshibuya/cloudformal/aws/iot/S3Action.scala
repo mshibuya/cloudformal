@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3Action(
-    bucketName: String,
-    key: String,
-    roleArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BucketName" -> Some(Formattable(bucketName)),
-    "Key" -> Some(Formattable(key)),
-    "RoleArn" -> Some(Formattable(roleArn))
+    bucketName: NonEmptyProperty[String],
+    key: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BucketName" -> bucketName,
+    "Key" -> key,
+    "RoleArn" -> roleArn
   )
 }

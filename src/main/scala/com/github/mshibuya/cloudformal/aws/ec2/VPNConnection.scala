@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait VPNConnection extends Resource {
   val resourceTypeName = "AWS::EC2::VPNConnection"
 
-  def customerGatewayId: String
-  def staticRoutesOnly: Option[Boolean] = None
-  def tags: Option[Seq[Tag]] = None
-  def `type`: String
-  def vpnGatewayId: String
-  def vpnTunnelOptionsSpecifications: Option[Seq[VpnTunnelOptionsSpecification]] = None
+  def customerGatewayId: NonEmptyProperty[String]
+  def staticRoutesOnly: Property[Boolean] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def `type`: NonEmptyProperty[String]
+  def vpnGatewayId: NonEmptyProperty[String]
+  def vpnTunnelOptionsSpecifications: Property[Seq[VpnTunnelOptionsSpecification]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CustomerGatewayId" -> Some(Formattable(customerGatewayId)),
-    "StaticRoutesOnly" -> staticRoutesOnly.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`)),
-    "VpnGatewayId" -> Some(Formattable(vpnGatewayId)),
-    "VpnTunnelOptionsSpecifications" -> vpnTunnelOptionsSpecifications.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CustomerGatewayId" -> customerGatewayId,
+    "StaticRoutesOnly" -> staticRoutesOnly,
+    "Tags" -> tags,
+    "Type" -> `type`,
+    "VpnGatewayId" -> vpnGatewayId,
+    "VpnTunnelOptionsSpecifications" -> vpnTunnelOptionsSpecifications
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Deployment(
-    description: Option[String] = None,
-    ignoreApplicationStopFailures: Option[Boolean] = None,
-    revision: RevisionLocation) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "IgnoreApplicationStopFailures" -> ignoreApplicationStopFailures.map(Formattable(_)),
-    "Revision" -> Some(Formattable(revision))
+    description: Property[String] = Empty,
+    ignoreApplicationStopFailures: Property[Boolean] = Empty,
+    revision: NonEmptyProperty[RevisionLocation]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Description" -> description,
+    "IgnoreApplicationStopFailures" -> ignoreApplicationStopFailures,
+    "Revision" -> revision
   )
 }

@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Input(
-    namePrefix: String,
-    inputSchema: InputSchema,
-    kinesisStreamsInput: Option[KinesisStreamsInput] = None,
-    kinesisFirehoseInput: Option[KinesisFirehoseInput] = None,
-    inputProcessingConfiguration: Option[InputProcessingConfiguration] = None,
-    inputParallelism: Option[InputParallelism] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "NamePrefix" -> Some(Formattable(namePrefix)),
-    "InputSchema" -> Some(Formattable(inputSchema)),
-    "KinesisStreamsInput" -> kinesisStreamsInput.map(Formattable(_)),
-    "KinesisFirehoseInput" -> kinesisFirehoseInput.map(Formattable(_)),
-    "InputProcessingConfiguration" -> inputProcessingConfiguration.map(Formattable(_)),
-    "InputParallelism" -> inputParallelism.map(Formattable(_))
+    namePrefix: NonEmptyProperty[String],
+    inputSchema: NonEmptyProperty[InputSchema],
+    kinesisStreamsInput: Property[KinesisStreamsInput] = Empty,
+    kinesisFirehoseInput: Property[KinesisFirehoseInput] = Empty,
+    inputProcessingConfiguration: Property[InputProcessingConfiguration] = Empty,
+    inputParallelism: Property[InputParallelism] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "NamePrefix" -> namePrefix,
+    "InputSchema" -> inputSchema,
+    "KinesisStreamsInput" -> kinesisStreamsInput,
+    "KinesisFirehoseInput" -> kinesisFirehoseInput,
+    "InputProcessingConfiguration" -> inputProcessingConfiguration,
+    "InputParallelism" -> inputParallelism
   )
 }

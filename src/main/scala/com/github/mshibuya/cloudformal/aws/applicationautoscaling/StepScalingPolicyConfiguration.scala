@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StepScalingPolicyConfiguration(
-    adjustmentType: Option[String] = None,
-    cooldown: Option[Int] = None,
-    metricAggregationType: Option[String] = None,
-    minAdjustmentMagnitude: Option[Int] = None,
-    stepAdjustments: Option[Seq[StepAdjustment]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AdjustmentType" -> adjustmentType.map(Formattable(_)),
-    "Cooldown" -> cooldown.map(Formattable(_)),
-    "MetricAggregationType" -> metricAggregationType.map(Formattable(_)),
-    "MinAdjustmentMagnitude" -> minAdjustmentMagnitude.map(Formattable(_)),
-    "StepAdjustments" -> stepAdjustments.map(Formattable(_))
+    adjustmentType: Property[String] = Empty,
+    cooldown: Property[Int] = Empty,
+    metricAggregationType: Property[String] = Empty,
+    minAdjustmentMagnitude: Property[Int] = Empty,
+    stepAdjustments: Property[Seq[StepAdjustment]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AdjustmentType" -> adjustmentType,
+    "Cooldown" -> cooldown,
+    "MetricAggregationType" -> metricAggregationType,
+    "MinAdjustmentMagnitude" -> minAdjustmentMagnitude,
+    "StepAdjustments" -> stepAdjustments
   )
 }

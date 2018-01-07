@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DataResource(
-    `type`: String,
-    values: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Values" -> values.map(Formattable(_))
+    `type`: NonEmptyProperty[String],
+    values: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "Values" -> values
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RoutingStrategy(
-    fleetId: Option[String] = None,
-    message: Option[String] = None,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "FleetId" -> fleetId.map(Formattable(_)),
-    "Message" -> message.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+    fleetId: Property[String] = Empty,
+    message: Property[String] = Empty,
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "FleetId" -> fleetId,
+    "Message" -> message,
+    "Type" -> `type`
   )
 }

@@ -9,23 +9,26 @@ import com.github.mshibuya.cloudformal.model._
 trait SimpleAD extends Resource {
   val resourceTypeName = "AWS::DirectoryService::SimpleAD"
 
-  def createAlias: Option[Boolean] = None
-  def description: Option[String] = None
-  def enableSso: Option[Boolean] = None
-  def name: String
-  def password: String
-  def shortName: Option[String] = None
-  def size: String
-  def vpcSettings: VpcSettings
+  def aliasAttribute: Expression[String] = Fn.GetAtt(logicalId, "Alias")
+  def dnsIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "DnsIpAddresses")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CreateAlias" -> createAlias.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "EnableSso" -> enableSso.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "Password" -> Some(Formattable(password)),
-    "ShortName" -> shortName.map(Formattable(_)),
-    "Size" -> Some(Formattable(size)),
-    "VpcSettings" -> Some(Formattable(vpcSettings))
+  def createAlias: Property[Boolean] = Empty
+  def description: Property[String] = Empty
+  def enableSso: Property[Boolean] = Empty
+  def name: NonEmptyProperty[String]
+  def password: NonEmptyProperty[String]
+  def shortName: Property[String] = Empty
+  def size: NonEmptyProperty[String]
+  def vpcSettings: NonEmptyProperty[VpcSettings]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CreateAlias" -> createAlias,
+    "Description" -> description,
+    "EnableSso" -> enableSso,
+    "Name" -> name,
+    "Password" -> password,
+    "ShortName" -> shortName,
+    "Size" -> size,
+    "VpcSettings" -> vpcSettings
   )
 }

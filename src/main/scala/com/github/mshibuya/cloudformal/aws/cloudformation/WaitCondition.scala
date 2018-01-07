@@ -1,5 +1,6 @@
 package com.github.mshibuya.cloudformal.aws.cloudformation
 
+import argonaut.Json
 import com.github.mshibuya.cloudformal.model._
 
 /**
@@ -9,13 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait WaitCondition extends Resource {
   val resourceTypeName = "AWS::CloudFormation::WaitCondition"
 
-  def count: Option[Int] = None
-  def handle: String
-  def timeout: String
+  def dataAttribute: Expression[Json] = Fn.GetAtt(logicalId, "Data")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Count" -> count.map(Formattable(_)),
-    "Handle" -> Some(Formattable(handle)),
-    "Timeout" -> Some(Formattable(timeout))
+  def count: Property[Int] = Empty
+  def handle: NonEmptyProperty[String]
+  def timeout: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Count" -> count,
+    "Handle" -> handle,
+    "Timeout" -> timeout
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SsmAssociation(
-    associationParameters: Option[Seq[AssociationParameter]] = None,
-    documentName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AssociationParameters" -> associationParameters.map(Formattable(_)),
-    "DocumentName" -> Some(Formattable(documentName))
+    associationParameters: Property[Seq[AssociationParameter]] = Empty,
+    documentName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AssociationParameters" -> associationParameters,
+    "DocumentName" -> documentName
   )
 }

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TracingConfig(
-    mode: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Mode" -> mode.map(Formattable(_))
+    mode: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Mode" -> mode
   )
 }

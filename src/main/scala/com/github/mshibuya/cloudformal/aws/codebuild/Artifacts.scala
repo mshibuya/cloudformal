@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Artifacts(
-    path: Option[String] = None,
-    `type`: String,
-    packaging: Option[String] = None,
-    location: Option[String] = None,
-    name: Option[String] = None,
-    namespaceType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Path" -> path.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`)),
-    "Packaging" -> packaging.map(Formattable(_)),
-    "Location" -> location.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "NamespaceType" -> namespaceType.map(Formattable(_))
+    path: Property[String] = Empty,
+    `type`: NonEmptyProperty[String],
+    packaging: Property[String] = Empty,
+    location: Property[String] = Empty,
+    name: Property[String] = Empty,
+    namespaceType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Path" -> path,
+    "Type" -> `type`,
+    "Packaging" -> packaging,
+    "Location" -> location,
+    "Name" -> name,
+    "NamespaceType" -> namespaceType
   )
 }

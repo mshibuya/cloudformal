@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EC2TagFilter(
-    key: Option[String] = None,
-    `type`: Option[String] = None,
-    value: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> key.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_)),
-    "Value" -> value.map(Formattable(_))
+    key: Property[String] = Empty,
+    `type`: Property[String] = Empty,
+    value: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "Type" -> `type`,
+    "Value" -> value
   )
 }

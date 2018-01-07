@@ -9,29 +9,31 @@ import com.github.mshibuya.cloudformal.model._
 trait Environment extends Resource {
   val resourceTypeName = "AWS::ElasticBeanstalk::Environment"
 
-  def applicationName: String
-  def cNAMEPrefix: Option[String] = None
-  def description: Option[String] = None
-  def environmentName: Option[String] = None
-  def optionSettings: Option[Seq[OptionSetting]] = None
-  def platformArn: Option[String] = None
-  def solutionStackName: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def templateName: Option[String] = None
-  def tier: Option[Tier] = None
-  def versionLabel: Option[String] = None
+  def endpointURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "EndpointURL")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "CNAMEPrefix" -> cNAMEPrefix.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "EnvironmentName" -> environmentName.map(Formattable(_)),
-    "OptionSettings" -> optionSettings.map(Formattable(_)),
-    "PlatformArn" -> platformArn.map(Formattable(_)),
-    "SolutionStackName" -> solutionStackName.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TemplateName" -> templateName.map(Formattable(_)),
-    "Tier" -> tier.map(Formattable(_)),
-    "VersionLabel" -> versionLabel.map(Formattable(_))
+  def applicationName: NonEmptyProperty[String]
+  def cNAMEPrefix: Property[String] = Empty
+  def description: Property[String] = Empty
+  def environmentName: Property[String] = Empty
+  def optionSettings: Property[Seq[OptionSetting]] = Empty
+  def platformArn: Property[String] = Empty
+  def solutionStackName: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def templateName: Property[String] = Empty
+  def tier: Property[Tier] = Empty
+  def versionLabel: Property[String] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApplicationName" -> applicationName,
+    "CNAMEPrefix" -> cNAMEPrefix,
+    "Description" -> description,
+    "EnvironmentName" -> environmentName,
+    "OptionSettings" -> optionSettings,
+    "PlatformArn" -> platformArn,
+    "SolutionStackName" -> solutionStackName,
+    "Tags" -> tags,
+    "TemplateName" -> templateName,
+    "Tier" -> tier,
+    "VersionLabel" -> versionLabel
   )
 }

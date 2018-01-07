@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoggingProperties(
-    bucketName: String,
-    s3KeyPrefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "BucketName" -> Some(Formattable(bucketName)),
-    "S3KeyPrefix" -> s3KeyPrefix.map(Formattable(_))
+    bucketName: NonEmptyProperty[String],
+    s3KeyPrefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "BucketName" -> bucketName,
+    "S3KeyPrefix" -> s3KeyPrefix
   )
 }

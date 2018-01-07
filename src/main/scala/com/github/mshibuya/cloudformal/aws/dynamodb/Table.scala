@@ -9,25 +9,28 @@ import com.github.mshibuya.cloudformal.model._
 trait Table extends Resource {
   val resourceTypeName = "AWS::DynamoDB::Table"
 
-  def attributeDefinitions: Option[Seq[AttributeDefinition]] = None
-  def globalSecondaryIndexes: Option[Seq[GlobalSecondaryIndex]] = None
-  def keySchema: Seq[KeySchema]
-  def localSecondaryIndexes: Option[Seq[LocalSecondaryIndex]] = None
-  def provisionedThroughput: ProvisionedThroughput
-  def streamSpecification: Option[StreamSpecification] = None
-  def tableName: Option[String] = None
-  def tags: Option[Seq[Tag]] = None
-  def timeToLiveSpecification: Option[TimeToLiveSpecification] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def streamArnAttribute: Expression[String] = Fn.GetAtt(logicalId, "StreamArn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AttributeDefinitions" -> attributeDefinitions.map(Formattable(_)),
-    "GlobalSecondaryIndexes" -> globalSecondaryIndexes.map(Formattable(_)),
-    "KeySchema" -> Some(Formattable(keySchema)),
-    "LocalSecondaryIndexes" -> localSecondaryIndexes.map(Formattable(_)),
-    "ProvisionedThroughput" -> Some(Formattable(provisionedThroughput)),
-    "StreamSpecification" -> streamSpecification.map(Formattable(_)),
-    "TableName" -> tableName.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TimeToLiveSpecification" -> timeToLiveSpecification.map(Formattable(_))
+  def attributeDefinitions: Property[Seq[AttributeDefinition]] = Empty
+  def globalSecondaryIndexes: Property[Seq[GlobalSecondaryIndex]] = Empty
+  def keySchema: NonEmptyProperty[Seq[KeySchema]]
+  def localSecondaryIndexes: Property[Seq[LocalSecondaryIndex]] = Empty
+  def provisionedThroughput: NonEmptyProperty[ProvisionedThroughput]
+  def streamSpecification: Property[StreamSpecification] = Empty
+  def tableName: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def timeToLiveSpecification: Property[TimeToLiveSpecification] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AttributeDefinitions" -> attributeDefinitions,
+    "GlobalSecondaryIndexes" -> globalSecondaryIndexes,
+    "KeySchema" -> keySchema,
+    "LocalSecondaryIndexes" -> localSecondaryIndexes,
+    "ProvisionedThroughput" -> provisionedThroughput,
+    "StreamSpecification" -> streamSpecification,
+    "TableName" -> tableName,
+    "Tags" -> tags,
+    "TimeToLiveSpecification" -> timeToLiveSpecification
   )
 }

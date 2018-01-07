@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class BlockDeviceMapping(
-    deviceName: String,
-    ebs: Option[BlockDevice] = None,
-    noDevice: Option[Boolean] = None,
-    virtualName: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeviceName" -> Some(Formattable(deviceName)),
-    "Ebs" -> ebs.map(Formattable(_)),
-    "NoDevice" -> noDevice.map(Formattable(_)),
-    "VirtualName" -> virtualName.map(Formattable(_))
+    deviceName: NonEmptyProperty[String],
+    ebs: Property[BlockDevice] = Empty,
+    noDevice: Property[Boolean] = Empty,
+    virtualName: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeviceName" -> deviceName,
+    "Ebs" -> ebs,
+    "NoDevice" -> noDevice,
+    "VirtualName" -> virtualName
   )
 }

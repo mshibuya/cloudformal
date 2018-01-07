@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ByteMatchTuple(
-    targetString: Option[String] = None,
-    targetStringBase64: Option[String] = None,
-    positionalConstraint: String,
-    textTransformation: String,
-    fieldToMatch: FieldToMatch) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TargetString" -> targetString.map(Formattable(_)),
-    "TargetStringBase64" -> targetStringBase64.map(Formattable(_)),
-    "PositionalConstraint" -> Some(Formattable(positionalConstraint)),
-    "TextTransformation" -> Some(Formattable(textTransformation)),
-    "FieldToMatch" -> Some(Formattable(fieldToMatch))
+    targetString: Property[String] = Empty,
+    targetStringBase64: Property[String] = Empty,
+    positionalConstraint: NonEmptyProperty[String],
+    textTransformation: NonEmptyProperty[String],
+    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TargetString" -> targetString,
+    "TargetStringBase64" -> targetStringBase64,
+    "PositionalConstraint" -> positionalConstraint,
+    "TextTransformation" -> textTransformation,
+    "FieldToMatch" -> fieldToMatch
   )
 }

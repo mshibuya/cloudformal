@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait SubnetRouteTableAssociation extends Resource {
   val resourceTypeName = "AWS::EC2::SubnetRouteTableAssociation"
 
-  def routeTableId: String
-  def subnetId: String
+  def routeTableId: NonEmptyProperty[String]
+  def subnetId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "RouteTableId" -> Some(Formattable(routeTableId)),
-    "SubnetId" -> Some(Formattable(subnetId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "RouteTableId" -> routeTableId,
+    "SubnetId" -> subnetId
   )
 }

@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait DBSecurityGroup extends Resource {
   val resourceTypeName = "AWS::RDS::DBSecurityGroup"
 
-  def dBSecurityGroupIngress: Seq[Ingress]
-  def eC2VpcId: Option[String] = None
-  def groupDescription: String
-  def tags: Option[Seq[Tag]] = None
+  def dBSecurityGroupIngress: NonEmptyProperty[Seq[Ingress]]
+  def eC2VpcId: Property[String] = Empty
+  def groupDescription: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DBSecurityGroupIngress" -> Some(Formattable(dBSecurityGroupIngress)),
-    "EC2VpcId" -> eC2VpcId.map(Formattable(_)),
-    "GroupDescription" -> Some(Formattable(groupDescription)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DBSecurityGroupIngress" -> dBSecurityGroupIngress,
+    "EC2VpcId" -> eC2VpcId,
+    "GroupDescription" -> groupDescription,
+    "Tags" -> tags
   )
 }

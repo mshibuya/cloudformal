@@ -12,31 +12,31 @@ import scala.collection.immutable.ListMap
 trait Method extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Method"
 
-  def apiKeyRequired: Option[Boolean] = None
-  def authorizationType: Option[String] = None
-  def authorizerId: Option[String] = None
-  def httpMethod: String
-  def integration: Option[Integration] = None
-  def methodResponses: Option[Seq[MethodResponse]] = None
-  def operationName: Option[String] = None
-  def requestModels: Option[ListMap[String, String]] = None
-  def requestParameters: Option[ListMap[String, Boolean]] = None
-  def requestValidatorId: Option[String] = None
-  def resourceId: String
-  def restApiId: String
+  def apiKeyRequired: Property[Boolean] = Empty
+  def authorizationType: Property[String] = Empty
+  def authorizerId: Property[String] = Empty
+  def httpMethod: NonEmptyProperty[String]
+  def integration: Property[Integration] = Empty
+  def methodResponses: Property[Seq[MethodResponse]] = Empty
+  def operationName: Property[String] = Empty
+  def requestModels: Property[ListMap[String, String]] = Empty
+  def requestParameters: Property[ListMap[String, Boolean]] = Empty
+  def requestValidatorId: Property[String] = Empty
+  def resourceId: NonEmptyProperty[String]
+  def restApiId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ApiKeyRequired" -> apiKeyRequired.map(Formattable(_)),
-    "AuthorizationType" -> authorizationType.map(Formattable(_)),
-    "AuthorizerId" -> authorizerId.map(Formattable(_)),
-    "HttpMethod" -> Some(Formattable(httpMethod)),
-    "Integration" -> integration.map(Formattable(_)),
-    "MethodResponses" -> methodResponses.map(Formattable(_)),
-    "OperationName" -> operationName.map(Formattable(_)),
-    "RequestModels" -> requestModels.map(Formattable(_)),
-    "RequestParameters" -> requestParameters.map(Formattable(_)),
-    "RequestValidatorId" -> requestValidatorId.map(Formattable(_)),
-    "ResourceId" -> Some(Formattable(resourceId)),
-    "RestApiId" -> Some(Formattable(restApiId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApiKeyRequired" -> apiKeyRequired,
+    "AuthorizationType" -> authorizationType,
+    "AuthorizerId" -> authorizerId,
+    "HttpMethod" -> httpMethod,
+    "Integration" -> integration,
+    "MethodResponses" -> methodResponses,
+    "OperationName" -> operationName,
+    "RequestModels" -> requestModels,
+    "RequestParameters" -> requestParameters,
+    "RequestValidatorId" -> requestValidatorId,
+    "ResourceId" -> resourceId,
+    "RestApiId" -> restApiId
   )
 }

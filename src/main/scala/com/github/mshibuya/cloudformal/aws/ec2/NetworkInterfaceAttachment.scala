@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait NetworkInterfaceAttachment extends Resource {
   val resourceTypeName = "AWS::EC2::NetworkInterfaceAttachment"
 
-  def deleteOnTermination: Option[Boolean] = None
-  def deviceIndex: String
-  def instanceId: String
-  def networkInterfaceId: String
+  def deleteOnTermination: Property[Boolean] = Empty
+  def deviceIndex: NonEmptyProperty[String]
+  def instanceId: NonEmptyProperty[String]
+  def networkInterfaceId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DeleteOnTermination" -> deleteOnTermination.map(Formattable(_)),
-    "DeviceIndex" -> Some(Formattable(deviceIndex)),
-    "InstanceId" -> Some(Formattable(instanceId)),
-    "NetworkInterfaceId" -> Some(Formattable(networkInterfaceId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DeleteOnTermination" -> deleteOnTermination,
+    "DeviceIndex" -> deviceIndex,
+    "InstanceId" -> instanceId,
+    "NetworkInterfaceId" -> networkInterfaceId
   )
 }

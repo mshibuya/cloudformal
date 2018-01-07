@@ -9,12 +9,12 @@ import scala.collection.immutable.ListMap
  */
 
 case class MethodResponse(
-    responseModels: Option[ListMap[String, String]] = None,
-    responseParameters: Option[ListMap[String, Boolean]] = None,
-    statusCode: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ResponseModels" -> responseModels.map(Formattable(_)),
-    "ResponseParameters" -> responseParameters.map(Formattable(_)),
-    "StatusCode" -> Some(Formattable(statusCode))
+    responseModels: Property[ListMap[String, String]] = Empty,
+    responseParameters: Property[ListMap[String, Boolean]] = Empty,
+    statusCode: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ResponseModels" -> responseModels,
+    "ResponseParameters" -> responseParameters,
+    "StatusCode" -> statusCode
   )
 }

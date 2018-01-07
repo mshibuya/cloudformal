@@ -8,10 +8,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Action(
-    jobName: Option[String] = None,
-    arguments: Option[Json] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "JobName" -> jobName.map(Formattable(_)),
-    "Arguments" -> arguments.map(Formattable(_))
+    jobName: Property[String] = Empty,
+    arguments: Property[Json] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "JobName" -> jobName,
+    "Arguments" -> arguments
   )
 }

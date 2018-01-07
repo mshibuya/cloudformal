@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VolumeSpecification(
-    iops: Option[Int] = None,
-    sizeInGB: Int,
-    volumeType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Iops" -> iops.map(Formattable(_)),
-    "SizeInGB" -> Some(Formattable(sizeInGB)),
-    "VolumeType" -> Some(Formattable(volumeType))
+    iops: Property[Int] = Empty,
+    sizeInGB: NonEmptyProperty[Int],
+    volumeType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Iops" -> iops,
+    "SizeInGB" -> sizeInGB,
+    "VolumeType" -> volumeType
   )
 }

@@ -10,13 +10,13 @@ import com.github.mshibuya.cloudformal.model._
 trait IdentityPoolRoleAttachment extends Resource {
   val resourceTypeName = "AWS::Cognito::IdentityPoolRoleAttachment"
 
-  def roleMappings: Option[Json] = None
-  def identityPoolId: String
-  def roles: Option[Json] = None
+  def roleMappings: Property[Json] = Empty
+  def identityPoolId: NonEmptyProperty[String]
+  def roles: Property[Json] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "RoleMappings" -> roleMappings.map(Formattable(_)),
-    "IdentityPoolId" -> Some(Formattable(identityPoolId)),
-    "Roles" -> roles.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "RoleMappings" -> roleMappings,
+    "IdentityPoolId" -> identityPoolId,
+    "Roles" -> roles
   )
 }

@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait NamedQuery extends Resource {
   val resourceTypeName = "AWS::Athena::NamedQuery"
 
-  def description: Option[String] = None
-  def queryString: String
-  def database: String
-  def name: Option[String] = None
+  def description: Property[String] = Empty
+  def queryString: NonEmptyProperty[String]
+  def database: NonEmptyProperty[String]
+  def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "QueryString" -> Some(Formattable(queryString)),
-    "Database" -> Some(Formattable(database)),
-    "Name" -> name.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "QueryString" -> queryString,
+    "Database" -> database,
+    "Name" -> name
   )
 }

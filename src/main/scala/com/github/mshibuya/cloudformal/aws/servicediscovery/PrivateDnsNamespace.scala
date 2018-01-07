@@ -9,13 +9,16 @@ import com.github.mshibuya.cloudformal.model._
 trait PrivateDnsNamespace extends Resource {
   val resourceTypeName = "AWS::ServiceDiscovery::PrivateDnsNamespace"
 
-  def description: Option[String] = None
-  def vpc: String
-  def name: String
+  def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "Vpc" -> Some(Formattable(vpc)),
-    "Name" -> Some(Formattable(name))
+  def description: Property[String] = Empty
+  def vpc: NonEmptyProperty[String]
+  def name: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Vpc" -> vpc,
+    "Name" -> name
   )
 }

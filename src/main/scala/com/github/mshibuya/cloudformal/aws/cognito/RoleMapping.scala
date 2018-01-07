@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RoleMapping(
-    `type`: String,
-    ambiguousRoleResolution: Option[String] = None,
-    rulesConfiguration: Option[RulesConfigurationType] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "AmbiguousRoleResolution" -> ambiguousRoleResolution.map(Formattable(_)),
-    "RulesConfiguration" -> rulesConfiguration.map(Formattable(_))
+    `type`: NonEmptyProperty[String],
+    ambiguousRoleResolution: Property[String] = Empty,
+    rulesConfiguration: Property[RulesConfigurationType] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "AmbiguousRoleResolution" -> ambiguousRoleResolution,
+    "RulesConfiguration" -> rulesConfiguration
   )
 }

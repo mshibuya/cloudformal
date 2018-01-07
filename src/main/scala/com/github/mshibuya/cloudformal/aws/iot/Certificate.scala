@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Certificate extends Resource {
   val resourceTypeName = "AWS::IoT::Certificate"
 
-  def certificateSigningRequest: String
-  def status: String
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CertificateSigningRequest" -> Some(Formattable(certificateSigningRequest)),
-    "Status" -> Some(Formattable(status))
+  def certificateSigningRequest: NonEmptyProperty[String]
+  def status: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CertificateSigningRequest" -> certificateSigningRequest,
+    "Status" -> status
   )
 }

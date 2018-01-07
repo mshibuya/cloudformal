@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3KeyFilter(
-    rules: Seq[FilterRule]) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Rules" -> Some(Formattable(rules))
+    rules: NonEmptyProperty[Seq[FilterRule]]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Rules" -> rules
   )
 }

@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Distribution extends Resource {
   val resourceTypeName = "AWS::CloudFront::Distribution"
 
-  def distributionConfig: DistributionConfig
-  def tags: Option[Seq[Tag]] = None
+  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DistributionConfig" -> Some(Formattable(distributionConfig)),
-    "Tags" -> tags.map(Formattable(_))
+  def distributionConfig: NonEmptyProperty[DistributionConfig]
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DistributionConfig" -> distributionConfig,
+    "Tags" -> tags
   )
 }

@@ -8,24 +8,24 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MaintenanceWindowRunCommandParameters(
-    timeoutSeconds: Option[Int] = None,
-    comment: Option[String] = None,
-    outputS3KeyPrefix: Option[String] = None,
-    parameters: Option[Json] = None,
-    documentHashType: Option[String] = None,
-    serviceRoleArn: Option[String] = None,
-    notificationConfig: Option[NotificationConfig] = None,
-    outputS3BucketName: Option[String] = None,
-    documentHash: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "TimeoutSeconds" -> timeoutSeconds.map(Formattable(_)),
-    "Comment" -> comment.map(Formattable(_)),
-    "OutputS3KeyPrefix" -> outputS3KeyPrefix.map(Formattable(_)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "DocumentHashType" -> documentHashType.map(Formattable(_)),
-    "ServiceRoleArn" -> serviceRoleArn.map(Formattable(_)),
-    "NotificationConfig" -> notificationConfig.map(Formattable(_)),
-    "OutputS3BucketName" -> outputS3BucketName.map(Formattable(_)),
-    "DocumentHash" -> documentHash.map(Formattable(_))
+    timeoutSeconds: Property[Int] = Empty,
+    comment: Property[String] = Empty,
+    outputS3KeyPrefix: Property[String] = Empty,
+    parameters: Property[Json] = Empty,
+    documentHashType: Property[String] = Empty,
+    serviceRoleArn: Property[String] = Empty,
+    notificationConfig: Property[NotificationConfig] = Empty,
+    outputS3BucketName: Property[String] = Empty,
+    documentHash: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "TimeoutSeconds" -> timeoutSeconds,
+    "Comment" -> comment,
+    "OutputS3KeyPrefix" -> outputS3KeyPrefix,
+    "Parameters" -> parameters,
+    "DocumentHashType" -> documentHashType,
+    "ServiceRoleArn" -> serviceRoleArn,
+    "NotificationConfig" -> notificationConfig,
+    "OutputS3BucketName" -> outputS3BucketName,
+    "DocumentHash" -> documentHash
   )
 }

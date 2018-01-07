@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CopyCommand(
-    copyOptions: Option[String] = None,
-    dataTableColumns: Option[String] = None,
-    dataTableName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CopyOptions" -> copyOptions.map(Formattable(_)),
-    "DataTableColumns" -> dataTableColumns.map(Formattable(_)),
-    "DataTableName" -> Some(Formattable(dataTableName))
+    copyOptions: Property[String] = Empty,
+    dataTableColumns: Property[String] = Empty,
+    dataTableName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CopyOptions" -> copyOptions,
+    "DataTableColumns" -> dataTableColumns,
+    "DataTableName" -> dataTableName
   )
 }

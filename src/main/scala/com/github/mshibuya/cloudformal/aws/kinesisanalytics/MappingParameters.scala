@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MappingParameters(
-    jSONMappingParameters: Option[JSONMappingParameters] = None,
-    cSVMappingParameters: Option[CSVMappingParameters] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "JSONMappingParameters" -> jSONMappingParameters.map(Formattable(_)),
-    "CSVMappingParameters" -> cSVMappingParameters.map(Formattable(_))
+    jSONMappingParameters: Property[JSONMappingParameters] = Empty,
+    cSVMappingParameters: Property[CSVMappingParameters] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "JSONMappingParameters" -> jSONMappingParameters,
+    "CSVMappingParameters" -> cSVMappingParameters
   )
 }

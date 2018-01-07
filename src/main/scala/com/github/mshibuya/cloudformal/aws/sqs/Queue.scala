@@ -10,29 +10,32 @@ import com.github.mshibuya.cloudformal.model._
 trait Queue extends Resource {
   val resourceTypeName = "AWS::SQS::Queue"
 
-  def contentBasedDeduplication: Option[Boolean] = None
-  def delaySeconds: Option[Int] = None
-  def fifoQueue: Option[Boolean] = None
-  def kmsDataKeyReusePeriodSeconds: Option[Int] = None
-  def kmsMasterKeyId: Option[String] = None
-  def maximumMessageSize: Option[Int] = None
-  def messageRetentionPeriod: Option[Int] = None
-  def queueName: Option[String] = None
-  def receiveMessageWaitTimeSeconds: Option[Int] = None
-  def redrivePolicy: Option[Json] = None
-  def visibilityTimeout: Option[Int] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def queueNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "QueueName")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ContentBasedDeduplication" -> contentBasedDeduplication.map(Formattable(_)),
-    "DelaySeconds" -> delaySeconds.map(Formattable(_)),
-    "FifoQueue" -> fifoQueue.map(Formattable(_)),
-    "KmsDataKeyReusePeriodSeconds" -> kmsDataKeyReusePeriodSeconds.map(Formattable(_)),
-    "KmsMasterKeyId" -> kmsMasterKeyId.map(Formattable(_)),
-    "MaximumMessageSize" -> maximumMessageSize.map(Formattable(_)),
-    "MessageRetentionPeriod" -> messageRetentionPeriod.map(Formattable(_)),
-    "QueueName" -> queueName.map(Formattable(_)),
-    "ReceiveMessageWaitTimeSeconds" -> receiveMessageWaitTimeSeconds.map(Formattable(_)),
-    "RedrivePolicy" -> redrivePolicy.map(Formattable(_)),
-    "VisibilityTimeout" -> visibilityTimeout.map(Formattable(_))
+  def contentBasedDeduplication: Property[Boolean] = Empty
+  def delaySeconds: Property[Int] = Empty
+  def fifoQueue: Property[Boolean] = Empty
+  def kmsDataKeyReusePeriodSeconds: Property[Int] = Empty
+  def kmsMasterKeyId: Property[String] = Empty
+  def maximumMessageSize: Property[Int] = Empty
+  def messageRetentionPeriod: Property[Int] = Empty
+  def queueName: Property[String] = Empty
+  def receiveMessageWaitTimeSeconds: Property[Int] = Empty
+  def redrivePolicy: Property[Json] = Empty
+  def visibilityTimeout: Property[Int] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ContentBasedDeduplication" -> contentBasedDeduplication,
+    "DelaySeconds" -> delaySeconds,
+    "FifoQueue" -> fifoQueue,
+    "KmsDataKeyReusePeriodSeconds" -> kmsDataKeyReusePeriodSeconds,
+    "KmsMasterKeyId" -> kmsMasterKeyId,
+    "MaximumMessageSize" -> maximumMessageSize,
+    "MessageRetentionPeriod" -> messageRetentionPeriod,
+    "QueueName" -> queueName,
+    "ReceiveMessageWaitTimeSeconds" -> receiveMessageWaitTimeSeconds,
+    "RedrivePolicy" -> redrivePolicy,
+    "VisibilityTimeout" -> visibilityTimeout
   )
 }

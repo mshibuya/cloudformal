@@ -9,13 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait AccessKey extends Resource {
   val resourceTypeName = "AWS::IAM::AccessKey"
 
-  def serial: Option[Int] = None
-  def status: Option[String] = None
-  def userName: String
+  def secretAccessKeyAttribute: Expression[String] = Fn.GetAtt(logicalId, "SecretAccessKey")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Serial" -> serial.map(Formattable(_)),
-    "Status" -> status.map(Formattable(_)),
-    "UserName" -> Some(Formattable(userName))
+  def serial: Property[Int] = Empty
+  def status: Property[String] = Empty
+  def userName: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Serial" -> serial,
+    "Status" -> status,
+    "UserName" -> userName
   )
 }

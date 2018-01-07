@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Volume extends Resource {
   val resourceTypeName = "AWS::OpsWorks::Volume"
 
-  def ec2VolumeId: String
-  def mountPoint: Option[String] = None
-  def name: Option[String] = None
-  def stackId: String
+  def ec2VolumeId: NonEmptyProperty[String]
+  def mountPoint: Property[String] = Empty
+  def name: Property[String] = Empty
+  def stackId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Ec2VolumeId" -> Some(Formattable(ec2VolumeId)),
-    "MountPoint" -> mountPoint.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "StackId" -> Some(Formattable(stackId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Ec2VolumeId" -> ec2VolumeId,
+    "MountPoint" -> mountPoint,
+    "Name" -> name,
+    "StackId" -> stackId
   )
 }

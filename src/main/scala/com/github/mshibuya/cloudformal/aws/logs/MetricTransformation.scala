@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MetricTransformation(
-    metricName: String,
-    metricNamespace: String,
-    metricValue: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MetricName" -> Some(Formattable(metricName)),
-    "MetricNamespace" -> Some(Formattable(metricNamespace)),
-    "MetricValue" -> Some(Formattable(metricValue))
+    metricName: NonEmptyProperty[String],
+    metricNamespace: NonEmptyProperty[String],
+    metricValue: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MetricName" -> metricName,
+    "MetricNamespace" -> metricNamespace,
+    "MetricValue" -> metricValue
   )
 }

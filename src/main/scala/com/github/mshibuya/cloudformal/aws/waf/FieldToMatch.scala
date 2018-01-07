@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class FieldToMatch(
-    data: Option[String] = None,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Data" -> data.map(Formattable(_)),
-    "Type" -> Some(Formattable(`type`))
+    data: Property[String] = Empty,
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Data" -> data,
+    "Type" -> `type`
   )
 }

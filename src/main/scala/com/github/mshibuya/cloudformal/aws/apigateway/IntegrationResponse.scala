@@ -9,16 +9,16 @@ import scala.collection.immutable.ListMap
  */
 
 case class IntegrationResponse(
-    contentHandling: Option[String] = None,
-    responseParameters: Option[ListMap[String, String]] = None,
-    responseTemplates: Option[ListMap[String, String]] = None,
-    selectionPattern: Option[String] = None,
-    statusCode: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ContentHandling" -> contentHandling.map(Formattable(_)),
-    "ResponseParameters" -> responseParameters.map(Formattable(_)),
-    "ResponseTemplates" -> responseTemplates.map(Formattable(_)),
-    "SelectionPattern" -> selectionPattern.map(Formattable(_)),
-    "StatusCode" -> Some(Formattable(statusCode))
+    contentHandling: Property[String] = Empty,
+    responseParameters: Property[ListMap[String, String]] = Empty,
+    responseTemplates: Property[ListMap[String, String]] = Empty,
+    selectionPattern: Property[String] = Empty,
+    statusCode: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ContentHandling" -> contentHandling,
+    "ResponseParameters" -> responseParameters,
+    "ResponseTemplates" -> responseTemplates,
+    "SelectionPattern" -> selectionPattern,
+    "StatusCode" -> statusCode
   )
 }

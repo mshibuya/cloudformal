@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LinuxParameters(
-    capabilities: Option[KernelCapabilities] = None,
-    devices: Option[Seq[Device]] = None,
-    initProcessEnabled: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Capabilities" -> capabilities.map(Formattable(_)),
-    "Devices" -> devices.map(Formattable(_)),
-    "InitProcessEnabled" -> initProcessEnabled.map(Formattable(_))
+    capabilities: Property[KernelCapabilities] = Empty,
+    devices: Property[Seq[Device]] = Empty,
+    initProcessEnabled: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Capabilities" -> capabilities,
+    "Devices" -> devices,
+    "InitProcessEnabled" -> initProcessEnabled
   )
 }

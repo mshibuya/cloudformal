@@ -9,17 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait DeliveryChannel extends Resource {
   val resourceTypeName = "AWS::Config::DeliveryChannel"
 
-  def configSnapshotDeliveryProperties: Option[ConfigSnapshotDeliveryProperties] = None
-  def name: Option[String] = None
-  def s3BucketName: String
-  def s3KeyPrefix: Option[String] = None
-  def snsTopicARN: Option[String] = None
+  def configSnapshotDeliveryProperties: Property[ConfigSnapshotDeliveryProperties] = Empty
+  def name: Property[String] = Empty
+  def s3BucketName: NonEmptyProperty[String]
+  def s3KeyPrefix: Property[String] = Empty
+  def snsTopicARN: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ConfigSnapshotDeliveryProperties" -> configSnapshotDeliveryProperties.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "S3BucketName" -> Some(Formattable(s3BucketName)),
-    "S3KeyPrefix" -> s3KeyPrefix.map(Formattable(_)),
-    "SnsTopicARN" -> snsTopicARN.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ConfigSnapshotDeliveryProperties" -> configSnapshotDeliveryProperties,
+    "Name" -> name,
+    "S3BucketName" -> s3BucketName,
+    "S3KeyPrefix" -> s3KeyPrefix,
+    "SnsTopicARN" -> snsTopicARN
   )
 }

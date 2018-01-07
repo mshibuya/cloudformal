@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Origin(
-    originCustomHeaders: Option[Seq[OriginCustomHeader]] = None,
-    domainName: String,
-    s3OriginConfig: Option[S3OriginConfig] = None,
-    originPath: Option[String] = None,
-    id: String,
-    customOriginConfig: Option[CustomOriginConfig] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "OriginCustomHeaders" -> originCustomHeaders.map(Formattable(_)),
-    "DomainName" -> Some(Formattable(domainName)),
-    "S3OriginConfig" -> s3OriginConfig.map(Formattable(_)),
-    "OriginPath" -> originPath.map(Formattable(_)),
-    "Id" -> Some(Formattable(id)),
-    "CustomOriginConfig" -> customOriginConfig.map(Formattable(_))
+    originCustomHeaders: Property[Seq[OriginCustomHeader]] = Empty,
+    domainName: NonEmptyProperty[String],
+    s3OriginConfig: Property[S3OriginConfig] = Empty,
+    originPath: Property[String] = Empty,
+    id: NonEmptyProperty[String],
+    customOriginConfig: Property[CustomOriginConfig] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "OriginCustomHeaders" -> originCustomHeaders,
+    "DomainName" -> domainName,
+    "S3OriginConfig" -> s3OriginConfig,
+    "OriginPath" -> originPath,
+    "Id" -> id,
+    "CustomOriginConfig" -> customOriginConfig
   )
 }

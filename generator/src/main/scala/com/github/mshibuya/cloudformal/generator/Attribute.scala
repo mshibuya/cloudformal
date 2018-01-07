@@ -7,7 +7,13 @@ case class Attribute(name: String,
                      itemType: Option[String],
                      primitiveType: Option[String],
                      primitiveItemType: Option[String],
-                     attributeType: Option[String])
+                     `type`: Option[String]) extends HasType {
+  val identifier: String = s"${Inflector.camelize(name.replace(".", ""))}Attribute"
+
+  def methodValue: String = {
+    s"""  def ${identifier}: Expression[${inferredTypeName}] = Fn.GetAtt(logicalId, "${name}")"""
+  }
+}
 
 object Attribute {
   implicit def seqDecoder: DecodeJson[Seq[Attribute]] = {

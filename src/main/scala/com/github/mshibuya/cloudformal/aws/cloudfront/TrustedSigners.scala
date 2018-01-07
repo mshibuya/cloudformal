@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TrustedSigners(
-    enabled: Boolean,
-    awsAccountNumbers: Option[Seq[String]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Enabled" -> Some(Formattable(enabled)),
-    "AwsAccountNumbers" -> awsAccountNumbers.map(Formattable(_))
+    enabled: NonEmptyProperty[Boolean],
+    awsAccountNumbers: Property[Seq[String]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Enabled" -> enabled,
+    "AwsAccountNumbers" -> awsAccountNumbers
   )
 }

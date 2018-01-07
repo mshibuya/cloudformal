@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Projection(
-    nonKeyAttributes: Option[Seq[String]] = None,
-    projectionType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "NonKeyAttributes" -> nonKeyAttributes.map(Formattable(_)),
-    "ProjectionType" -> projectionType.map(Formattable(_))
+    nonKeyAttributes: Property[Seq[String]] = Empty,
+    projectionType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "NonKeyAttributes" -> nonKeyAttributes,
+    "ProjectionType" -> projectionType
   )
 }

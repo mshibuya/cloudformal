@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait SubnetCidrBlock extends Resource {
   val resourceTypeName = "AWS::EC2::SubnetCidrBlock"
 
-  def ipv6CidrBlock: String
-  def subnetId: String
+  def ipv6CidrBlock: NonEmptyProperty[String]
+  def subnetId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Ipv6CidrBlock" -> Some(Formattable(ipv6CidrBlock)),
-    "SubnetId" -> Some(Formattable(subnetId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Ipv6CidrBlock" -> ipv6CidrBlock,
+    "SubnetId" -> subnetId
   )
 }

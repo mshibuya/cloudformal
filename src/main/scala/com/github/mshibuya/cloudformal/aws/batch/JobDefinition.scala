@@ -10,17 +10,17 @@ import com.github.mshibuya.cloudformal.model._
 trait JobDefinition extends Resource {
   val resourceTypeName = "AWS::Batch::JobDefinition"
 
-  def `type`: String
-  def parameters: Option[Json] = None
-  def containerProperties: ContainerProperties
-  def jobDefinitionName: Option[String] = None
-  def retryStrategy: Option[RetryStrategy] = None
+  def `type`: NonEmptyProperty[String]
+  def parameters: Property[Json] = Empty
+  def containerProperties: NonEmptyProperty[ContainerProperties]
+  def jobDefinitionName: Property[String] = Empty
+  def retryStrategy: Property[RetryStrategy] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "ContainerProperties" -> Some(Formattable(containerProperties)),
-    "JobDefinitionName" -> jobDefinitionName.map(Formattable(_)),
-    "RetryStrategy" -> retryStrategy.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Type" -> `type`,
+    "Parameters" -> parameters,
+    "ContainerProperties" -> containerProperties,
+    "JobDefinitionName" -> jobDefinitionName,
+    "RetryStrategy" -> retryStrategy
   )
 }

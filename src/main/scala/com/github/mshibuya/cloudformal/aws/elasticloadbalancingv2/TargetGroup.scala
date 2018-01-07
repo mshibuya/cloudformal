@@ -9,39 +9,43 @@ import com.github.mshibuya.cloudformal.model._
 trait TargetGroup extends Resource {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::TargetGroup"
 
-  def healthCheckIntervalSeconds: Option[Int] = None
-  def healthCheckPath: Option[String] = None
-  def healthCheckPort: Option[String] = None
-  def healthCheckProtocol: Option[String] = None
-  def healthCheckTimeoutSeconds: Option[Int] = None
-  def healthyThresholdCount: Option[Int] = None
-  def matcher: Option[Matcher] = None
-  def name: Option[String] = None
-  def port: Int
-  def protocol: String
-  def tags: Option[Seq[Tag]] = None
-  def targetGroupAttributes: Option[Seq[TargetGroupAttribute]] = None
-  def targetType: Option[String] = None
-  def targets: Option[Seq[TargetDescription]] = None
-  def unhealthyThresholdCount: Option[Int] = None
-  def vpcId: String
+  def loadBalancerArnsAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "LoadBalancerArns")
+  def targetGroupFullNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupFullName")
+  def targetGroupNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupName")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "HealthCheckIntervalSeconds" -> healthCheckIntervalSeconds.map(Formattable(_)),
-    "HealthCheckPath" -> healthCheckPath.map(Formattable(_)),
-    "HealthCheckPort" -> healthCheckPort.map(Formattable(_)),
-    "HealthCheckProtocol" -> healthCheckProtocol.map(Formattable(_)),
-    "HealthCheckTimeoutSeconds" -> healthCheckTimeoutSeconds.map(Formattable(_)),
-    "HealthyThresholdCount" -> healthyThresholdCount.map(Formattable(_)),
-    "Matcher" -> matcher.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_)),
-    "Port" -> Some(Formattable(port)),
-    "Protocol" -> Some(Formattable(protocol)),
-    "Tags" -> tags.map(Formattable(_)),
-    "TargetGroupAttributes" -> targetGroupAttributes.map(Formattable(_)),
-    "TargetType" -> targetType.map(Formattable(_)),
-    "Targets" -> targets.map(Formattable(_)),
-    "UnhealthyThresholdCount" -> unhealthyThresholdCount.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def healthCheckIntervalSeconds: Property[Int] = Empty
+  def healthCheckPath: Property[String] = Empty
+  def healthCheckPort: Property[String] = Empty
+  def healthCheckProtocol: Property[String] = Empty
+  def healthCheckTimeoutSeconds: Property[Int] = Empty
+  def healthyThresholdCount: Property[Int] = Empty
+  def matcher: Property[Matcher] = Empty
+  def name: Property[String] = Empty
+  def port: NonEmptyProperty[Int]
+  def protocol: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
+  def targetGroupAttributes: Property[Seq[TargetGroupAttribute]] = Empty
+  def targetType: Property[String] = Empty
+  def targets: Property[Seq[TargetDescription]] = Empty
+  def unhealthyThresholdCount: Property[Int] = Empty
+  def vpcId: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "HealthCheckIntervalSeconds" -> healthCheckIntervalSeconds,
+    "HealthCheckPath" -> healthCheckPath,
+    "HealthCheckPort" -> healthCheckPort,
+    "HealthCheckProtocol" -> healthCheckProtocol,
+    "HealthCheckTimeoutSeconds" -> healthCheckTimeoutSeconds,
+    "HealthyThresholdCount" -> healthyThresholdCount,
+    "Matcher" -> matcher,
+    "Name" -> name,
+    "Port" -> port,
+    "Protocol" -> protocol,
+    "Tags" -> tags,
+    "TargetGroupAttributes" -> targetGroupAttributes,
+    "TargetType" -> targetType,
+    "Targets" -> targets,
+    "UnhealthyThresholdCount" -> unhealthyThresholdCount,
+    "VpcId" -> vpcId
   )
 }

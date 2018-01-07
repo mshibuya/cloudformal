@@ -11,31 +11,31 @@ import scala.collection.immutable.ListMap
 trait App extends Resource {
   val resourceTypeName = "AWS::OpsWorks::App"
 
-  def appSource: Option[Source] = None
-  def attributes: Option[ListMap[String, String]] = None
-  def dataSources: Option[Seq[DataSource]] = None
-  def description: Option[String] = None
-  def domains: Option[Seq[String]] = None
-  def enableSsl: Option[Boolean] = None
-  def environment: Option[Seq[EnvironmentVariable]] = None
-  def name: String
-  def shortname: Option[String] = None
-  def sslConfiguration: Option[SslConfiguration] = None
-  def stackId: String
-  def `type`: String
+  def appSource: Property[Source] = Empty
+  def attributes: Property[ListMap[String, String]] = Empty
+  def dataSources: Property[Seq[DataSource]] = Empty
+  def description: Property[String] = Empty
+  def domains: Property[Seq[String]] = Empty
+  def enableSsl: Property[Boolean] = Empty
+  def environment: Property[Seq[EnvironmentVariable]] = Empty
+  def name: NonEmptyProperty[String]
+  def shortname: Property[String] = Empty
+  def sslConfiguration: Property[SslConfiguration] = Empty
+  def stackId: NonEmptyProperty[String]
+  def `type`: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AppSource" -> appSource.map(Formattable(_)),
-    "Attributes" -> attributes.map(Formattable(_)),
-    "DataSources" -> dataSources.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "Domains" -> domains.map(Formattable(_)),
-    "EnableSsl" -> enableSsl.map(Formattable(_)),
-    "Environment" -> environment.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "Shortname" -> shortname.map(Formattable(_)),
-    "SslConfiguration" -> sslConfiguration.map(Formattable(_)),
-    "StackId" -> Some(Formattable(stackId)),
-    "Type" -> Some(Formattable(`type`))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AppSource" -> appSource,
+    "Attributes" -> attributes,
+    "DataSources" -> dataSources,
+    "Description" -> description,
+    "Domains" -> domains,
+    "EnableSsl" -> enableSsl,
+    "Environment" -> environment,
+    "Name" -> name,
+    "Shortname" -> shortname,
+    "SslConfiguration" -> sslConfiguration,
+    "StackId" -> stackId,
+    "Type" -> `type`
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RepublishAction(
-    roleArn: String,
-    topic: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "Topic" -> Some(Formattable(topic))
+    roleArn: NonEmptyProperty[String],
+    topic: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RoleArn" -> roleArn,
+    "Topic" -> topic
   )
 }

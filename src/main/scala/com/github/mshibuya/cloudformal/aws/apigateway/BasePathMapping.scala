@@ -10,15 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait BasePathMapping extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::BasePathMapping"
 
-  def basePath: Option[String] = None
-  def domainName: String
-  def restApiId: Option[String] = None
-  def stage: Option[String] = None
+  def basePath: Property[String] = Empty
+  def domainName: NonEmptyProperty[String]
+  def restApiId: Property[String] = Empty
+  def stage: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "BasePath" -> basePath.map(Formattable(_)),
-    "DomainName" -> Some(Formattable(domainName)),
-    "RestApiId" -> restApiId.map(Formattable(_)),
-    "Stage" -> stage.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "BasePath" -> basePath,
+    "DomainName" -> domainName,
+    "RestApiId" -> restApiId,
+    "Stage" -> stage
   )
 }

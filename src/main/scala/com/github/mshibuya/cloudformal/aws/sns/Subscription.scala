@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Subscription extends Resource {
   val resourceTypeName = "AWS::SNS::Subscription"
 
-  def endpoint: Option[String] = None
-  def protocol: Option[String] = None
-  def topicArn: Option[String] = None
+  def endpoint: Property[String] = Empty
+  def protocol: Property[String] = Empty
+  def topicArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Endpoint" -> endpoint.map(Formattable(_)),
-    "Protocol" -> protocol.map(Formattable(_)),
-    "TopicArn" -> topicArn.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Endpoint" -> endpoint,
+    "Protocol" -> protocol,
+    "TopicArn" -> topicArn
   )
 }

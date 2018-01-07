@@ -9,11 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait TopicRule extends Resource {
   val resourceTypeName = "AWS::IoT::TopicRule"
 
-  def ruleName: Option[String] = None
-  def topicRulePayload: TopicRulePayload
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "RuleName" -> ruleName.map(Formattable(_)),
-    "TopicRulePayload" -> Some(Formattable(topicRulePayload))
+  def ruleName: Property[String] = Empty
+  def topicRulePayload: NonEmptyProperty[TopicRulePayload]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "RuleName" -> ruleName,
+    "TopicRulePayload" -> topicRulePayload
   )
 }

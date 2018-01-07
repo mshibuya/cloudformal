@@ -9,21 +9,21 @@ import com.github.mshibuya.cloudformal.model._
 trait ScalableTarget extends Resource {
   val resourceTypeName = "AWS::ApplicationAutoScaling::ScalableTarget"
 
-  def maxCapacity: Int
-  def minCapacity: Int
-  def resourceId: String
-  def roleARN: String
-  def scalableDimension: String
-  def scheduledActions: Option[Seq[ScheduledAction]] = None
-  def serviceNamespace: String
+  def maxCapacity: NonEmptyProperty[Int]
+  def minCapacity: NonEmptyProperty[Int]
+  def resourceId: NonEmptyProperty[String]
+  def roleARN: NonEmptyProperty[String]
+  def scalableDimension: NonEmptyProperty[String]
+  def scheduledActions: Property[Seq[ScheduledAction]] = Empty
+  def serviceNamespace: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "MaxCapacity" -> Some(Formattable(maxCapacity)),
-    "MinCapacity" -> Some(Formattable(minCapacity)),
-    "ResourceId" -> Some(Formattable(resourceId)),
-    "RoleARN" -> Some(Formattable(roleARN)),
-    "ScalableDimension" -> Some(Formattable(scalableDimension)),
-    "ScheduledActions" -> scheduledActions.map(Formattable(_)),
-    "ServiceNamespace" -> Some(Formattable(serviceNamespace))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "MaxCapacity" -> maxCapacity,
+    "MinCapacity" -> minCapacity,
+    "ResourceId" -> resourceId,
+    "RoleARN" -> roleARN,
+    "ScalableDimension" -> scalableDimension,
+    "ScheduledActions" -> scheduledActions,
+    "ServiceNamespace" -> serviceNamespace
   )
 }

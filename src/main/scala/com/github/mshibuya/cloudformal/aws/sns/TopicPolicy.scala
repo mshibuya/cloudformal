@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model._
 trait TopicPolicy extends Resource {
   val resourceTypeName = "AWS::SNS::TopicPolicy"
 
-  def policyDocument: Json
-  def topics: Seq[String]
+  def policyDocument: NonEmptyProperty[Json]
+  def topics: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "PolicyDocument" -> Some(Formattable(policyDocument)),
-    "Topics" -> Some(Formattable(topics))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "PolicyDocument" -> policyDocument,
+    "Topics" -> topics
   )
 }

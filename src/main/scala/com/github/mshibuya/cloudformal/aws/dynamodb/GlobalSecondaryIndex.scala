@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GlobalSecondaryIndex(
-    indexName: String,
-    keySchema: Seq[KeySchema],
-    projection: Projection,
-    provisionedThroughput: ProvisionedThroughput) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "IndexName" -> Some(Formattable(indexName)),
-    "KeySchema" -> Some(Formattable(keySchema)),
-    "Projection" -> Some(Formattable(projection)),
-    "ProvisionedThroughput" -> Some(Formattable(provisionedThroughput))
+    indexName: NonEmptyProperty[String],
+    keySchema: NonEmptyProperty[Seq[KeySchema]],
+    projection: NonEmptyProperty[Projection],
+    provisionedThroughput: NonEmptyProperty[ProvisionedThroughput]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "IndexName" -> indexName,
+    "KeySchema" -> keySchema,
+    "Projection" -> projection,
+    "ProvisionedThroughput" -> provisionedThroughput
   )
 }

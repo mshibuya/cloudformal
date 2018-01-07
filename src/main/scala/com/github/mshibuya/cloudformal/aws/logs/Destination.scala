@@ -9,15 +9,17 @@ import com.github.mshibuya.cloudformal.model._
 trait Destination extends Resource {
   val resourceTypeName = "AWS::Logs::Destination"
 
-  def destinationName: String
-  def destinationPolicy: String
-  def roleArn: String
-  def targetArn: String
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DestinationName" -> Some(Formattable(destinationName)),
-    "DestinationPolicy" -> Some(Formattable(destinationPolicy)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "TargetArn" -> Some(Formattable(targetArn))
+  def destinationName: NonEmptyProperty[String]
+  def destinationPolicy: NonEmptyProperty[String]
+  def roleArn: NonEmptyProperty[String]
+  def targetArn: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DestinationName" -> destinationName,
+    "DestinationPolicy" -> destinationPolicy,
+    "RoleArn" -> roleArn,
+    "TargetArn" -> targetArn
   )
 }

@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ScalingRule(
-    action: ScalingAction,
-    description: Option[String] = None,
-    name: String,
-    trigger: ScalingTrigger) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Action" -> Some(Formattable(action)),
-    "Description" -> description.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "Trigger" -> Some(Formattable(trigger))
+    action: NonEmptyProperty[ScalingAction],
+    description: Property[String] = Empty,
+    name: NonEmptyProperty[String],
+    trigger: NonEmptyProperty[ScalingTrigger]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Action" -> action,
+    "Description" -> description,
+    "Name" -> name,
+    "Trigger" -> trigger
   )
 }

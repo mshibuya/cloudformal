@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MinimumHealthyHosts(
-    `type`: String,
-    value: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Value" -> Some(Formattable(value))
+    `type`: NonEmptyProperty[String],
+    value: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "Value" -> value
   )
 }

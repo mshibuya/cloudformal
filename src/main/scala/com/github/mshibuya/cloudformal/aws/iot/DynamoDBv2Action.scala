@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DynamoDBv2Action(
-    putItem: Option[PutItemInput] = None,
-    roleArn: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PutItem" -> putItem.map(Formattable(_)),
-    "RoleArn" -> roleArn.map(Formattable(_))
+    putItem: Property[PutItemInput] = Empty,
+    roleArn: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PutItem" -> putItem,
+    "RoleArn" -> roleArn
   )
 }

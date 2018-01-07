@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class GroupIdentifier(
-    groupId: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "GroupId" -> Some(Formattable(groupId))
+    groupId: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "GroupId" -> groupId
   )
 }

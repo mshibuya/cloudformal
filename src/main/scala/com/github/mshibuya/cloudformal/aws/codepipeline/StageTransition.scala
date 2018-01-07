@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StageTransition(
-    reason: String,
-    stageName: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Reason" -> Some(Formattable(reason)),
-    "StageName" -> Some(Formattable(stageName))
+    reason: NonEmptyProperty[String],
+    stageName: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Reason" -> reason,
+    "StageName" -> stageName
   )
 }

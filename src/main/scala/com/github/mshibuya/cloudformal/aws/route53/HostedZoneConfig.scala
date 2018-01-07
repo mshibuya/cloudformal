@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HostedZoneConfig(
-    comment: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Comment" -> comment.map(Formattable(_))
+    comment: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Comment" -> comment
   )
 }

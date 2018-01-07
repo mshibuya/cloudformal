@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NetworkConfiguration(
-    awsvpcConfiguration: Option[AwsVpcConfiguration] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AwsvpcConfiguration" -> awsvpcConfiguration.map(Formattable(_))
+    awsvpcConfiguration: Property[AwsVpcConfiguration] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AwsvpcConfiguration" -> awsvpcConfiguration
   )
 }

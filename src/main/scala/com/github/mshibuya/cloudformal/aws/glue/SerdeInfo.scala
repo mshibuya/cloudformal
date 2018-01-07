@@ -8,12 +8,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SerdeInfo(
-    parameters: Option[Json] = None,
-    serializationLibrary: Option[String] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Parameters" -> parameters.map(Formattable(_)),
-    "SerializationLibrary" -> serializationLibrary.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    parameters: Property[Json] = Empty,
+    serializationLibrary: Property[String] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Parameters" -> parameters,
+    "SerializationLibrary" -> serializationLibrary,
+    "Name" -> name
   )
 }

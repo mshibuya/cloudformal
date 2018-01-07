@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StageDeclaration(
-    actions: Seq[ActionDeclaration],
-    blockers: Option[Seq[BlockerDeclaration]] = None,
-    name: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Actions" -> Some(Formattable(actions)),
-    "Blockers" -> blockers.map(Formattable(_)),
-    "Name" -> Some(Formattable(name))
+    actions: NonEmptyProperty[Seq[ActionDeclaration]],
+    blockers: Property[Seq[BlockerDeclaration]] = Empty,
+    name: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Actions" -> actions,
+    "Blockers" -> blockers,
+    "Name" -> name
   )
 }

@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Listeners(
-    instancePort: String,
-    instanceProtocol: Option[String] = None,
-    loadBalancerPort: String,
-    policyNames: Option[Seq[String]] = None,
-    protocol: String,
-    sSLCertificateId: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "InstancePort" -> Some(Formattable(instancePort)),
-    "InstanceProtocol" -> instanceProtocol.map(Formattable(_)),
-    "LoadBalancerPort" -> Some(Formattable(loadBalancerPort)),
-    "PolicyNames" -> policyNames.map(Formattable(_)),
-    "Protocol" -> Some(Formattable(protocol)),
-    "SSLCertificateId" -> sSLCertificateId.map(Formattable(_))
+    instancePort: NonEmptyProperty[String],
+    instanceProtocol: Property[String] = Empty,
+    loadBalancerPort: NonEmptyProperty[String],
+    policyNames: Property[Seq[String]] = Empty,
+    protocol: NonEmptyProperty[String],
+    sSLCertificateId: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "InstancePort" -> instancePort,
+    "InstanceProtocol" -> instanceProtocol,
+    "LoadBalancerPort" -> loadBalancerPort,
+    "PolicyNames" -> policyNames,
+    "Protocol" -> protocol,
+    "SSLCertificateId" -> sSLCertificateId
   )
 }

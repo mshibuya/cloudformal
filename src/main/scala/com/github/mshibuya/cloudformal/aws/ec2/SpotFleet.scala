@@ -9,9 +9,9 @@ import com.github.mshibuya.cloudformal.model._
 trait SpotFleet extends Resource {
   val resourceTypeName = "AWS::EC2::SpotFleet"
 
-  def spotFleetRequestConfigData: SpotFleetRequestConfigData
+  def spotFleetRequestConfigData: NonEmptyProperty[SpotFleetRequestConfigData]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "SpotFleetRequestConfigData" -> Some(Formattable(spotFleetRequestConfigData))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "SpotFleetRequestConfigData" -> spotFleetRequestConfigData
   )
 }

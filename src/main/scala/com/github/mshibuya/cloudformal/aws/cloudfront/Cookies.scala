@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Cookies(
-    whitelistedNames: Option[Seq[String]] = None,
-    forward: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "WhitelistedNames" -> whitelistedNames.map(Formattable(_)),
-    "Forward" -> Some(Formattable(forward))
+    whitelistedNames: Property[Seq[String]] = Empty,
+    forward: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "WhitelistedNames" -> whitelistedNames,
+    "Forward" -> forward
   )
 }

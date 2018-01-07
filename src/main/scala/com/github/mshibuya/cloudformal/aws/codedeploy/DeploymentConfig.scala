@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait DeploymentConfig extends Resource {
   val resourceTypeName = "AWS::CodeDeploy::DeploymentConfig"
 
-  def deploymentConfigName: Option[String] = None
-  def minimumHealthyHosts: Option[MinimumHealthyHosts] = None
+  def deploymentConfigName: Property[String] = Empty
+  def minimumHealthyHosts: Property[MinimumHealthyHosts] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DeploymentConfigName" -> deploymentConfigName.map(Formattable(_)),
-    "MinimumHealthyHosts" -> minimumHealthyHosts.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DeploymentConfigName" -> deploymentConfigName,
+    "MinimumHealthyHosts" -> minimumHealthyHosts
   )
 }

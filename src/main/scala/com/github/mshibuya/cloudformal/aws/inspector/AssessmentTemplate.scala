@@ -9,17 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait AssessmentTemplate extends Resource {
   val resourceTypeName = "AWS::Inspector::AssessmentTemplate"
 
-  def assessmentTargetArn: String
-  def durationInSeconds: Int
-  def assessmentTemplateName: Option[String] = None
-  def rulesPackageArns: Seq[String]
-  def userAttributesForFindings: Option[Seq[Tag]] = None
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AssessmentTargetArn" -> Some(Formattable(assessmentTargetArn)),
-    "DurationInSeconds" -> Some(Formattable(durationInSeconds)),
-    "AssessmentTemplateName" -> assessmentTemplateName.map(Formattable(_)),
-    "RulesPackageArns" -> Some(Formattable(rulesPackageArns)),
-    "UserAttributesForFindings" -> userAttributesForFindings.map(Formattable(_))
+  def assessmentTargetArn: NonEmptyProperty[String]
+  def durationInSeconds: NonEmptyProperty[Int]
+  def assessmentTemplateName: Property[String] = Empty
+  def rulesPackageArns: NonEmptyProperty[Seq[String]]
+  def userAttributesForFindings: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssessmentTargetArn" -> assessmentTargetArn,
+    "DurationInSeconds" -> durationInSeconds,
+    "AssessmentTemplateName" -> assessmentTemplateName,
+    "RulesPackageArns" -> rulesPackageArns,
+    "UserAttributesForFindings" -> userAttributesForFindings
   )
 }

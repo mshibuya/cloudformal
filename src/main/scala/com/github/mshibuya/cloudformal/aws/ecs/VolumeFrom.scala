@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VolumeFrom(
-    readOnly: Option[Boolean] = None,
-    sourceContainer: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ReadOnly" -> readOnly.map(Formattable(_)),
-    "SourceContainer" -> sourceContainer.map(Formattable(_))
+    readOnly: Property[Boolean] = Empty,
+    sourceContainer: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ReadOnly" -> readOnly,
+    "SourceContainer" -> sourceContainer
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SnsAction(
-    messageFormat: Option[String] = None,
-    roleArn: String,
-    targetArn: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MessageFormat" -> messageFormat.map(Formattable(_)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "TargetArn" -> Some(Formattable(targetArn))
+    messageFormat: Property[String] = Empty,
+    roleArn: NonEmptyProperty[String],
+    targetArn: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MessageFormat" -> messageFormat,
+    "RoleArn" -> roleArn,
+    "TargetArn" -> targetArn
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RevisionLocation(
-    gitHubLocation: Option[GitHubLocation] = None,
-    revisionType: Option[String] = None,
-    s3Location: Option[S3Location] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "GitHubLocation" -> gitHubLocation.map(Formattable(_)),
-    "RevisionType" -> revisionType.map(Formattable(_)),
-    "S3Location" -> s3Location.map(Formattable(_))
+    gitHubLocation: Property[GitHubLocation] = Empty,
+    revisionType: Property[String] = Empty,
+    s3Location: Property[S3Location] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "GitHubLocation" -> gitHubLocation,
+    "RevisionType" -> revisionType,
+    "S3Location" -> s3Location
   )
 }

@@ -8,26 +8,26 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class TableInput(
-    owner: Option[String] = None,
-    viewOriginalText: Option[String] = None,
-    description: Option[String] = None,
-    tableType: Option[String] = None,
-    parameters: Option[Json] = None,
-    viewExpandedText: Option[String] = None,
-    storageDescriptor: Option[StorageDescriptor] = None,
-    partitionKeys: Option[Seq[Column]] = None,
-    retention: Option[Int] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Owner" -> owner.map(Formattable(_)),
-    "ViewOriginalText" -> viewOriginalText.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "TableType" -> tableType.map(Formattable(_)),
-    "Parameters" -> parameters.map(Formattable(_)),
-    "ViewExpandedText" -> viewExpandedText.map(Formattable(_)),
-    "StorageDescriptor" -> storageDescriptor.map(Formattable(_)),
-    "PartitionKeys" -> partitionKeys.map(Formattable(_)),
-    "Retention" -> retention.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    owner: Property[String] = Empty,
+    viewOriginalText: Property[String] = Empty,
+    description: Property[String] = Empty,
+    tableType: Property[String] = Empty,
+    parameters: Property[Json] = Empty,
+    viewExpandedText: Property[String] = Empty,
+    storageDescriptor: Property[StorageDescriptor] = Empty,
+    partitionKeys: Property[Seq[Column]] = Empty,
+    retention: Property[Int] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Owner" -> owner,
+    "ViewOriginalText" -> viewOriginalText,
+    "Description" -> description,
+    "TableType" -> tableType,
+    "Parameters" -> parameters,
+    "ViewExpandedText" -> viewExpandedText,
+    "StorageDescriptor" -> storageDescriptor,
+    "PartitionKeys" -> partitionKeys,
+    "Retention" -> retention,
+    "Name" -> name
   )
 }

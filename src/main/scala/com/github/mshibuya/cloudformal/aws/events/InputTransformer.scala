@@ -9,10 +9,10 @@ import scala.collection.immutable.ListMap
  */
 
 case class InputTransformer(
-    inputPathsMap: Option[ListMap[String, String]] = None,
-    inputTemplate: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "InputPathsMap" -> inputPathsMap.map(Formattable(_)),
-    "InputTemplate" -> Some(Formattable(inputTemplate))
+    inputPathsMap: Property[ListMap[String, String]] = Empty,
+    inputTemplate: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "InputPathsMap" -> inputPathsMap,
+    "InputTemplate" -> inputTemplate
   )
 }

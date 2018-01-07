@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait NetworkAcl extends Resource {
   val resourceTypeName = "AWS::EC2::NetworkAcl"
 
-  def tags: Option[Seq[Tag]] = None
-  def vpcId: String
+  def tags: Property[Seq[Tag]] = Empty
+  def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Tags" -> tags.map(Formattable(_)),
-    "VpcId" -> Some(Formattable(vpcId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Tags" -> tags,
+    "VpcId" -> vpcId
   )
 }

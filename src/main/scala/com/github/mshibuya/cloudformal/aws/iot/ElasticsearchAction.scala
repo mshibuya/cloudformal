@@ -7,16 +7,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticsearchAction(
-    endpoint: String,
-    id: String,
-    index: String,
-    roleArn: String,
-    `type`: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Endpoint" -> Some(Formattable(endpoint)),
-    "Id" -> Some(Formattable(id)),
-    "Index" -> Some(Formattable(index)),
-    "RoleArn" -> Some(Formattable(roleArn)),
-    "Type" -> Some(Formattable(`type`))
+    endpoint: NonEmptyProperty[String],
+    id: NonEmptyProperty[String],
+    index: NonEmptyProperty[String],
+    roleArn: NonEmptyProperty[String],
+    `type`: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Endpoint" -> endpoint,
+    "Id" -> id,
+    "Index" -> index,
+    "RoleArn" -> roleArn,
+    "Type" -> `type`
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CSVMappingParameters(
-    recordRowDelimiter: String,
-    recordColumnDelimiter: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "RecordRowDelimiter" -> Some(Formattable(recordRowDelimiter)),
-    "RecordColumnDelimiter" -> Some(Formattable(recordColumnDelimiter))
+    recordRowDelimiter: NonEmptyProperty[String],
+    recordColumnDelimiter: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "RecordRowDelimiter" -> recordRowDelimiter,
+    "RecordColumnDelimiter" -> recordColumnDelimiter
   )
 }

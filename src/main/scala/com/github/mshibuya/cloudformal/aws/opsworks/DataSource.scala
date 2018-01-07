@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DataSource(
-    arn: Option[String] = None,
-    databaseName: Option[String] = None,
-    `type`: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Arn" -> arn.map(Formattable(_)),
-    "DatabaseName" -> databaseName.map(Formattable(_)),
-    "Type" -> `type`.map(Formattable(_))
+    arn: Property[String] = Empty,
+    databaseName: Property[String] = Empty,
+    `type`: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Arn" -> arn,
+    "DatabaseName" -> databaseName,
+    "Type" -> `type`
   )
 }

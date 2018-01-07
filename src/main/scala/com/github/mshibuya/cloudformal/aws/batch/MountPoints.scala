@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MountPoints(
-    readOnly: Option[Boolean] = None,
-    sourceVolume: Option[String] = None,
-    containerPath: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ReadOnly" -> readOnly.map(Formattable(_)),
-    "SourceVolume" -> sourceVolume.map(Formattable(_)),
-    "ContainerPath" -> containerPath.map(Formattable(_))
+    readOnly: Property[Boolean] = Empty,
+    sourceVolume: Property[String] = Empty,
+    containerPath: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ReadOnly" -> readOnly,
+    "SourceVolume" -> sourceVolume,
+    "ContainerPath" -> containerPath
   )
 }

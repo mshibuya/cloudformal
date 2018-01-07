@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SourceAuth(
-    `type`: String,
-    resource: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Type" -> Some(Formattable(`type`)),
-    "Resource" -> resource.map(Formattable(_))
+    `type`: NonEmptyProperty[String],
+    resource: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Type" -> `type`,
+    "Resource" -> resource
   )
 }

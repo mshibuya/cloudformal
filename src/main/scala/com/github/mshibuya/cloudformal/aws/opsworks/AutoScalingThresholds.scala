@@ -7,18 +7,18 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AutoScalingThresholds(
-    cpuThreshold: Option[Double] = None,
-    ignoreMetricsTime: Option[Int] = None,
-    instanceCount: Option[Int] = None,
-    loadThreshold: Option[Double] = None,
-    memoryThreshold: Option[Double] = None,
-    thresholdsWaitTime: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CpuThreshold" -> cpuThreshold.map(Formattable(_)),
-    "IgnoreMetricsTime" -> ignoreMetricsTime.map(Formattable(_)),
-    "InstanceCount" -> instanceCount.map(Formattable(_)),
-    "LoadThreshold" -> loadThreshold.map(Formattable(_)),
-    "MemoryThreshold" -> memoryThreshold.map(Formattable(_)),
-    "ThresholdsWaitTime" -> thresholdsWaitTime.map(Formattable(_))
+    cpuThreshold: Property[Double] = Empty,
+    ignoreMetricsTime: Property[Int] = Empty,
+    instanceCount: Property[Int] = Empty,
+    loadThreshold: Property[Double] = Empty,
+    memoryThreshold: Property[Double] = Empty,
+    thresholdsWaitTime: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CpuThreshold" -> cpuThreshold,
+    "IgnoreMetricsTime" -> ignoreMetricsTime,
+    "InstanceCount" -> instanceCount,
+    "LoadThreshold" -> loadThreshold,
+    "MemoryThreshold" -> memoryThreshold,
+    "ThresholdsWaitTime" -> thresholdsWaitTime
   )
 }

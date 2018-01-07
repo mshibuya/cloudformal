@@ -9,33 +9,33 @@ import com.github.mshibuya.cloudformal.model._
 trait DeploymentGroup extends Resource {
   val resourceTypeName = "AWS::CodeDeploy::DeploymentGroup"
 
-  def alarmConfiguration: Option[AlarmConfiguration] = None
-  def applicationName: String
-  def autoRollbackConfiguration: Option[AutoRollbackConfiguration] = None
-  def autoScalingGroups: Option[Seq[String]] = None
-  def deployment: Option[Deployment] = None
-  def deploymentConfigName: Option[String] = None
-  def deploymentGroupName: Option[String] = None
-  def deploymentStyle: Option[DeploymentStyle] = None
-  def ec2TagFilters: Option[Seq[EC2TagFilter]] = None
-  def loadBalancerInfo: Option[LoadBalancerInfo] = None
-  def onPremisesInstanceTagFilters: Option[Seq[TagFilter]] = None
-  def serviceRoleArn: String
-  def triggerConfigurations: Option[Seq[TriggerConfig]] = None
+  def alarmConfiguration: Property[AlarmConfiguration] = Empty
+  def applicationName: NonEmptyProperty[String]
+  def autoRollbackConfiguration: Property[AutoRollbackConfiguration] = Empty
+  def autoScalingGroups: Property[Seq[String]] = Empty
+  def deployment: Property[Deployment] = Empty
+  def deploymentConfigName: Property[String] = Empty
+  def deploymentGroupName: Property[String] = Empty
+  def deploymentStyle: Property[DeploymentStyle] = Empty
+  def ec2TagFilters: Property[Seq[EC2TagFilter]] = Empty
+  def loadBalancerInfo: Property[LoadBalancerInfo] = Empty
+  def onPremisesInstanceTagFilters: Property[Seq[TagFilter]] = Empty
+  def serviceRoleArn: NonEmptyProperty[String]
+  def triggerConfigurations: Property[Seq[TriggerConfig]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AlarmConfiguration" -> alarmConfiguration.map(Formattable(_)),
-    "ApplicationName" -> Some(Formattable(applicationName)),
-    "AutoRollbackConfiguration" -> autoRollbackConfiguration.map(Formattable(_)),
-    "AutoScalingGroups" -> autoScalingGroups.map(Formattable(_)),
-    "Deployment" -> deployment.map(Formattable(_)),
-    "DeploymentConfigName" -> deploymentConfigName.map(Formattable(_)),
-    "DeploymentGroupName" -> deploymentGroupName.map(Formattable(_)),
-    "DeploymentStyle" -> deploymentStyle.map(Formattable(_)),
-    "Ec2TagFilters" -> ec2TagFilters.map(Formattable(_)),
-    "LoadBalancerInfo" -> loadBalancerInfo.map(Formattable(_)),
-    "OnPremisesInstanceTagFilters" -> onPremisesInstanceTagFilters.map(Formattable(_)),
-    "ServiceRoleArn" -> Some(Formattable(serviceRoleArn)),
-    "TriggerConfigurations" -> triggerConfigurations.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AlarmConfiguration" -> alarmConfiguration,
+    "ApplicationName" -> applicationName,
+    "AutoRollbackConfiguration" -> autoRollbackConfiguration,
+    "AutoScalingGroups" -> autoScalingGroups,
+    "Deployment" -> deployment,
+    "DeploymentConfigName" -> deploymentConfigName,
+    "DeploymentGroupName" -> deploymentGroupName,
+    "DeploymentStyle" -> deploymentStyle,
+    "Ec2TagFilters" -> ec2TagFilters,
+    "LoadBalancerInfo" -> loadBalancerInfo,
+    "OnPremisesInstanceTagFilters" -> onPremisesInstanceTagFilters,
+    "ServiceRoleArn" -> serviceRoleArn,
+    "TriggerConfigurations" -> triggerConfigurations
   )
 }

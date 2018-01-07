@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VersioningConfiguration(
-    status: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Status" -> Some(Formattable(status))
+    status: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Status" -> status
   )
 }

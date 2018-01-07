@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticFileSystemTag(
-    key: String,
-    value: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> Some(Formattable(key)),
-    "Value" -> Some(Formattable(value))
+    key: NonEmptyProperty[String],
+    value: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "Value" -> value
   )
 }

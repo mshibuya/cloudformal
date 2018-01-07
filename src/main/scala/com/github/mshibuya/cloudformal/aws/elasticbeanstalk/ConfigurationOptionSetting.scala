@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConfigurationOptionSetting(
-    namespace: String,
-    optionName: String,
-    resourceName: Option[String] = None,
-    value: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Namespace" -> Some(Formattable(namespace)),
-    "OptionName" -> Some(Formattable(optionName)),
-    "ResourceName" -> resourceName.map(Formattable(_)),
-    "Value" -> value.map(Formattable(_))
+    namespace: NonEmptyProperty[String],
+    optionName: NonEmptyProperty[String],
+    resourceName: Property[String] = Empty,
+    value: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Namespace" -> namespace,
+    "OptionName" -> optionName,
+    "ResourceName" -> resourceName,
+    "Value" -> value
   )
 }

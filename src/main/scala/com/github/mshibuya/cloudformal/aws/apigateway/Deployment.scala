@@ -10,15 +10,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Deployment extends model.Resource {
   val resourceTypeName = "AWS::ApiGateway::Deployment"
 
-  def description: Option[String] = None
-  def restApiId: String
-  def stageDescription: Option[StageDescription] = None
-  def stageName: Option[String] = None
+  def description: Property[String] = Empty
+  def restApiId: NonEmptyProperty[String]
+  def stageDescription: Property[StageDescription] = Empty
+  def stageName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "RestApiId" -> Some(Formattable(restApiId)),
-    "StageDescription" -> stageDescription.map(Formattable(_)),
-    "StageName" -> stageName.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "RestApiId" -> restApiId,
+    "StageDescription" -> stageDescription,
+    "StageName" -> stageName
   )
 }

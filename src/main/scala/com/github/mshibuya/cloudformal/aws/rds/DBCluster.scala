@@ -9,43 +9,47 @@ import com.github.mshibuya.cloudformal.model._
 trait DBCluster extends Resource {
   val resourceTypeName = "AWS::RDS::DBCluster"
 
-  def availabilityZones: Option[Seq[String]] = None
-  def backupRetentionPeriod: Option[Int] = None
-  def dBClusterParameterGroupName: Option[String] = None
-  def dBSubnetGroupName: Option[String] = None
-  def databaseName: Option[String] = None
-  def engine: String
-  def engineVersion: Option[String] = None
-  def kmsKeyId: Option[String] = None
-  def masterUserPassword: Option[String] = None
-  def masterUsername: Option[String] = None
-  def port: Option[Int] = None
-  def preferredBackupWindow: Option[String] = None
-  def preferredMaintenanceWindow: Option[String] = None
-  def replicationSourceIdentifier: Option[String] = None
-  def snapshotIdentifier: Option[String] = None
-  def storageEncrypted: Option[Boolean] = None
-  def tags: Option[Seq[Tag]] = None
-  def vpcSecurityGroupIds: Option[Seq[String]] = None
+  def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")
+  def endpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Port")
+  def readEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndpoint.Address")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AvailabilityZones" -> availabilityZones.map(Formattable(_)),
-    "BackupRetentionPeriod" -> backupRetentionPeriod.map(Formattable(_)),
-    "DBClusterParameterGroupName" -> dBClusterParameterGroupName.map(Formattable(_)),
-    "DBSubnetGroupName" -> dBSubnetGroupName.map(Formattable(_)),
-    "DatabaseName" -> databaseName.map(Formattable(_)),
-    "Engine" -> Some(Formattable(engine)),
-    "EngineVersion" -> engineVersion.map(Formattable(_)),
-    "KmsKeyId" -> kmsKeyId.map(Formattable(_)),
-    "MasterUserPassword" -> masterUserPassword.map(Formattable(_)),
-    "MasterUsername" -> masterUsername.map(Formattable(_)),
-    "Port" -> port.map(Formattable(_)),
-    "PreferredBackupWindow" -> preferredBackupWindow.map(Formattable(_)),
-    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow.map(Formattable(_)),
-    "ReplicationSourceIdentifier" -> replicationSourceIdentifier.map(Formattable(_)),
-    "SnapshotIdentifier" -> snapshotIdentifier.map(Formattable(_)),
-    "StorageEncrypted" -> storageEncrypted.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_)),
-    "VpcSecurityGroupIds" -> vpcSecurityGroupIds.map(Formattable(_))
+  def availabilityZones: Property[Seq[String]] = Empty
+  def backupRetentionPeriod: Property[Int] = Empty
+  def dBClusterParameterGroupName: Property[String] = Empty
+  def dBSubnetGroupName: Property[String] = Empty
+  def databaseName: Property[String] = Empty
+  def engine: NonEmptyProperty[String]
+  def engineVersion: Property[String] = Empty
+  def kmsKeyId: Property[String] = Empty
+  def masterUserPassword: Property[String] = Empty
+  def masterUsername: Property[String] = Empty
+  def port: Property[Int] = Empty
+  def preferredBackupWindow: Property[String] = Empty
+  def preferredMaintenanceWindow: Property[String] = Empty
+  def replicationSourceIdentifier: Property[String] = Empty
+  def snapshotIdentifier: Property[String] = Empty
+  def storageEncrypted: Property[Boolean] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+  def vpcSecurityGroupIds: Property[Seq[String]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AvailabilityZones" -> availabilityZones,
+    "BackupRetentionPeriod" -> backupRetentionPeriod,
+    "DBClusterParameterGroupName" -> dBClusterParameterGroupName,
+    "DBSubnetGroupName" -> dBSubnetGroupName,
+    "DatabaseName" -> databaseName,
+    "Engine" -> engine,
+    "EngineVersion" -> engineVersion,
+    "KmsKeyId" -> kmsKeyId,
+    "MasterUserPassword" -> masterUserPassword,
+    "MasterUsername" -> masterUsername,
+    "Port" -> port,
+    "PreferredBackupWindow" -> preferredBackupWindow,
+    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,
+    "ReplicationSourceIdentifier" -> replicationSourceIdentifier,
+    "SnapshotIdentifier" -> snapshotIdentifier,
+    "StorageEncrypted" -> storageEncrypted,
+    "Tags" -> tags,
+    "VpcSecurityGroupIds" -> vpcSecurityGroupIds
   )
 }

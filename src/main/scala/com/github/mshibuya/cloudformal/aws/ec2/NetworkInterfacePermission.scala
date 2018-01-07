@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait NetworkInterfacePermission extends Resource {
   val resourceTypeName = "AWS::EC2::NetworkInterfacePermission"
 
-  def awsAccountId: String
-  def networkInterfaceId: String
-  def permission: String
+  def awsAccountId: NonEmptyProperty[String]
+  def networkInterfaceId: NonEmptyProperty[String]
+  def permission: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AwsAccountId" -> Some(Formattable(awsAccountId)),
-    "NetworkInterfaceId" -> Some(Formattable(networkInterfaceId)),
-    "Permission" -> Some(Formattable(permission))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AwsAccountId" -> awsAccountId,
+    "NetworkInterfaceId" -> networkInterfaceId,
+    "Permission" -> permission
   )
 }

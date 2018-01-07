@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait WebACLAssociation extends Resource {
   val resourceTypeName = "AWS::WAFRegional::WebACLAssociation"
 
-  def resourceArn: String
-  def webACLId: String
+  def resourceArn: NonEmptyProperty[String]
+  def webACLId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ResourceArn" -> Some(Formattable(resourceArn)),
-    "WebACLId" -> Some(Formattable(webACLId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ResourceArn" -> resourceArn,
+    "WebACLId" -> webACLId
   )
 }

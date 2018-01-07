@@ -9,11 +9,14 @@ import com.github.mshibuya.cloudformal.model._
 trait PublicDnsNamespace extends Resource {
   val resourceTypeName = "AWS::ServiceDiscovery::PublicDnsNamespace"
 
-  def description: Option[String] = None
-  def name: String
+  def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "Name" -> Some(Formattable(name))
+  def description: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Name" -> name
   )
 }

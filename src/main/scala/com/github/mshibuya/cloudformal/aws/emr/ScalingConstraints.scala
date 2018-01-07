@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ScalingConstraints(
-    maxCapacity: Int,
-    minCapacity: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MaxCapacity" -> Some(Formattable(maxCapacity)),
-    "MinCapacity" -> Some(Formattable(minCapacity))
+    maxCapacity: NonEmptyProperty[Int],
+    minCapacity: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MaxCapacity" -> maxCapacity,
+    "MinCapacity" -> minCapacity
   )
 }

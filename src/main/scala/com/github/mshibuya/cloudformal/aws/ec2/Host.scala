@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Host extends Resource {
   val resourceTypeName = "AWS::EC2::Host"
 
-  def autoPlacement: Option[String] = None
-  def availabilityZone: String
-  def instanceType: String
+  def autoPlacement: Property[String] = Empty
+  def availabilityZone: NonEmptyProperty[String]
+  def instanceType: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "AutoPlacement" -> autoPlacement.map(Formattable(_)),
-    "AvailabilityZone" -> Some(Formattable(availabilityZone)),
-    "InstanceType" -> Some(Formattable(instanceType))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoPlacement" -> autoPlacement,
+    "AvailabilityZone" -> availabilityZone,
+    "InstanceType" -> instanceType
   )
 }

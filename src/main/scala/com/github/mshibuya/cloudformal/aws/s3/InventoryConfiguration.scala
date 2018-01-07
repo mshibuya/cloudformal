@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InventoryConfiguration(
-    destination: Destination,
-    enabled: Boolean,
-    id: String,
-    includedObjectVersions: String,
-    optionalFields: Option[Seq[String]] = None,
-    prefix: Option[String] = None,
-    scheduleFrequency: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Destination" -> Some(Formattable(destination)),
-    "Enabled" -> Some(Formattable(enabled)),
-    "Id" -> Some(Formattable(id)),
-    "IncludedObjectVersions" -> Some(Formattable(includedObjectVersions)),
-    "OptionalFields" -> optionalFields.map(Formattable(_)),
-    "Prefix" -> prefix.map(Formattable(_)),
-    "ScheduleFrequency" -> Some(Formattable(scheduleFrequency))
+    destination: NonEmptyProperty[Destination],
+    enabled: NonEmptyProperty[Boolean],
+    id: NonEmptyProperty[String],
+    includedObjectVersions: NonEmptyProperty[String],
+    optionalFields: Property[Seq[String]] = Empty,
+    prefix: Property[String] = Empty,
+    scheduleFrequency: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Destination" -> destination,
+    "Enabled" -> enabled,
+    "Id" -> id,
+    "IncludedObjectVersions" -> includedObjectVersions,
+    "OptionalFields" -> optionalFields,
+    "Prefix" -> prefix,
+    "ScheduleFrequency" -> scheduleFrequency
   )
 }

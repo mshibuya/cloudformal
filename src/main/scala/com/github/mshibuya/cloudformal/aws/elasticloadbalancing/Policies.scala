@@ -8,16 +8,16 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Policies(
-    attributes: Seq[Json],
-    instancePorts: Option[Seq[String]] = None,
-    loadBalancerPorts: Option[Seq[String]] = None,
-    policyName: String,
-    policyType: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Attributes" -> Some(Formattable(attributes)),
-    "InstancePorts" -> instancePorts.map(Formattable(_)),
-    "LoadBalancerPorts" -> loadBalancerPorts.map(Formattable(_)),
-    "PolicyName" -> Some(Formattable(policyName)),
-    "PolicyType" -> Some(Formattable(policyType))
+    attributes: NonEmptyProperty[Seq[Json]],
+    instancePorts: Property[Seq[String]] = Empty,
+    loadBalancerPorts: Property[Seq[String]] = Empty,
+    policyName: NonEmptyProperty[String],
+    policyType: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Attributes" -> attributes,
+    "InstancePorts" -> instancePorts,
+    "LoadBalancerPorts" -> loadBalancerPorts,
+    "PolicyName" -> policyName,
+    "PolicyType" -> policyType
   )
 }

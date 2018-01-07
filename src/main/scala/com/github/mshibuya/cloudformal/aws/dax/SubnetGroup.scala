@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait SubnetGroup extends Resource {
   val resourceTypeName = "AWS::DAX::SubnetGroup"
 
-  def description: Option[String] = None
-  def subnetGroupName: Option[String] = None
-  def subnetIds: Seq[String]
+  def description: Property[String] = Empty
+  def subnetGroupName: Property[String] = Empty
+  def subnetIds: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "SubnetGroupName" -> subnetGroupName.map(Formattable(_)),
-    "SubnetIds" -> Some(Formattable(subnetIds))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "SubnetGroupName" -> subnetGroupName,
+    "SubnetIds" -> subnetIds
   )
 }

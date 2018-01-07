@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait ClusterSecurityGroup extends Resource {
   val resourceTypeName = "AWS::Redshift::ClusterSecurityGroup"
 
-  def description: String
-  def tags: Option[Seq[Tag]] = None
+  def description: NonEmptyProperty[String]
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> Some(Formattable(description)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Tags" -> tags
   )
 }

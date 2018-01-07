@@ -7,20 +7,20 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3Settings(
-    externalTableDefinition: Option[String] = None,
-    bucketName: Option[String] = None,
-    bucketFolder: Option[String] = None,
-    csvRowDelimiter: Option[String] = None,
-    csvDelimiter: Option[String] = None,
-    serviceAccessRoleArn: Option[String] = None,
-    compressionType: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "ExternalTableDefinition" -> externalTableDefinition.map(Formattable(_)),
-    "BucketName" -> bucketName.map(Formattable(_)),
-    "BucketFolder" -> bucketFolder.map(Formattable(_)),
-    "CsvRowDelimiter" -> csvRowDelimiter.map(Formattable(_)),
-    "CsvDelimiter" -> csvDelimiter.map(Formattable(_)),
-    "ServiceAccessRoleArn" -> serviceAccessRoleArn.map(Formattable(_)),
-    "CompressionType" -> compressionType.map(Formattable(_))
+    externalTableDefinition: Property[String] = Empty,
+    bucketName: Property[String] = Empty,
+    bucketFolder: Property[String] = Empty,
+    csvRowDelimiter: Property[String] = Empty,
+    csvDelimiter: Property[String] = Empty,
+    serviceAccessRoleArn: Property[String] = Empty,
+    compressionType: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "ExternalTableDefinition" -> externalTableDefinition,
+    "BucketName" -> bucketName,
+    "BucketFolder" -> bucketFolder,
+    "CsvRowDelimiter" -> csvRowDelimiter,
+    "CsvDelimiter" -> csvDelimiter,
+    "ServiceAccessRoleArn" -> serviceAccessRoleArn,
+    "CompressionType" -> compressionType
   )
 }

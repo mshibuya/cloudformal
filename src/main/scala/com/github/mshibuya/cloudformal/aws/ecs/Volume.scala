@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Volume(
-    host: Option[HostVolumeProperties] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Host" -> host.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    host: Property[HostVolumeProperties] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Host" -> host,
+    "Name" -> name
   )
 }

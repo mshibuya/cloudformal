@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoggingConfiguration(
-    destinationBucketName: Option[String] = None,
-    logFilePrefix: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DestinationBucketName" -> destinationBucketName.map(Formattable(_)),
-    "LogFilePrefix" -> logFilePrefix.map(Formattable(_))
+    destinationBucketName: Property[String] = Empty,
+    logFilePrefix: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DestinationBucketName" -> destinationBucketName,
+    "LogFilePrefix" -> logFilePrefix
   )
 }

@@ -7,30 +7,30 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ContainerProperties(
-    mountPoints: Option[Seq[MountPoints]] = None,
-    user: Option[String] = None,
-    volumes: Option[Seq[Volumes]] = None,
-    command: Option[Seq[String]] = None,
-    memory: Int,
-    privileged: Option[Boolean] = None,
-    environment: Option[Seq[Environment]] = None,
-    jobRoleArn: Option[String] = None,
-    readonlyRootFilesystem: Option[Boolean] = None,
-    ulimits: Option[Seq[Ulimit]] = None,
-    vcpus: Int,
-    image: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MountPoints" -> mountPoints.map(Formattable(_)),
-    "User" -> user.map(Formattable(_)),
-    "Volumes" -> volumes.map(Formattable(_)),
-    "Command" -> command.map(Formattable(_)),
-    "Memory" -> Some(Formattable(memory)),
-    "Privileged" -> privileged.map(Formattable(_)),
-    "Environment" -> environment.map(Formattable(_)),
-    "JobRoleArn" -> jobRoleArn.map(Formattable(_)),
-    "ReadonlyRootFilesystem" -> readonlyRootFilesystem.map(Formattable(_)),
-    "Ulimits" -> ulimits.map(Formattable(_)),
-    "Vcpus" -> Some(Formattable(vcpus)),
-    "Image" -> Some(Formattable(image))
+    mountPoints: Property[Seq[MountPoints]] = Empty,
+    user: Property[String] = Empty,
+    volumes: Property[Seq[Volumes]] = Empty,
+    command: Property[Seq[String]] = Empty,
+    memory: NonEmptyProperty[Int],
+    privileged: Property[Boolean] = Empty,
+    environment: Property[Seq[Environment]] = Empty,
+    jobRoleArn: Property[String] = Empty,
+    readonlyRootFilesystem: Property[Boolean] = Empty,
+    ulimits: Property[Seq[Ulimit]] = Empty,
+    vcpus: NonEmptyProperty[Int],
+    image: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MountPoints" -> mountPoints,
+    "User" -> user,
+    "Volumes" -> volumes,
+    "Command" -> command,
+    "Memory" -> memory,
+    "Privileged" -> privileged,
+    "Environment" -> environment,
+    "JobRoleArn" -> jobRoleArn,
+    "ReadonlyRootFilesystem" -> readonlyRootFilesystem,
+    "Ulimits" -> ulimits,
+    "Vcpus" -> vcpus,
+    "Image" -> image
   )
 }

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InputParallelism(
-    count: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Count" -> count.map(Formattable(_))
+    count: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Count" -> count
   )
 }

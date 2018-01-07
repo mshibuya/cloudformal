@@ -9,19 +9,19 @@ import com.github.mshibuya.cloudformal.model._
 trait Permission extends Resource {
   val resourceTypeName = "AWS::Lambda::Permission"
 
-  def action: String
-  def eventSourceToken: Option[String] = None
-  def functionName: String
-  def principal: String
-  def sourceAccount: Option[String] = None
-  def sourceArn: Option[String] = None
+  def action: NonEmptyProperty[String]
+  def eventSourceToken: Property[String] = Empty
+  def functionName: NonEmptyProperty[String]
+  def principal: NonEmptyProperty[String]
+  def sourceAccount: Property[String] = Empty
+  def sourceArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Action" -> Some(Formattable(action)),
-    "EventSourceToken" -> eventSourceToken.map(Formattable(_)),
-    "FunctionName" -> Some(Formattable(functionName)),
-    "Principal" -> Some(Formattable(principal)),
-    "SourceAccount" -> sourceAccount.map(Formattable(_)),
-    "SourceArn" -> sourceArn.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Action" -> action,
+    "EventSourceToken" -> eventSourceToken,
+    "FunctionName" -> functionName,
+    "Principal" -> principal,
+    "SourceAccount" -> sourceAccount,
+    "SourceArn" -> sourceArn
   )
 }

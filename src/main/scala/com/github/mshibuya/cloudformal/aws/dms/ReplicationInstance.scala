@@ -9,35 +9,38 @@ import com.github.mshibuya.cloudformal.model._
 trait ReplicationInstance extends Resource {
   val resourceTypeName = "AWS::DMS::ReplicationInstance"
 
-  def replicationInstanceIdentifier: Option[String] = None
-  def engineVersion: Option[String] = None
-  def kmsKeyId: Option[String] = None
-  def availabilityZone: Option[String] = None
-  def preferredMaintenanceWindow: Option[String] = None
-  def autoMinorVersionUpgrade: Option[Boolean] = None
-  def replicationSubnetGroupIdentifier: Option[String] = None
-  def allocatedStorage: Option[Int] = None
-  def vpcSecurityGroupIds: Option[Seq[String]] = None
-  def allowMajorVersionUpgrade: Option[Boolean] = None
-  def replicationInstanceClass: String
-  def publiclyAccessible: Option[Boolean] = None
-  def multiAZ: Option[Boolean] = None
-  def tags: Option[Seq[Tag]] = None
+  def replicationInstancePublicIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePublicIpAddresses")
+  def replicationInstancePrivateIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePrivateIpAddresses")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ReplicationInstanceIdentifier" -> replicationInstanceIdentifier.map(Formattable(_)),
-    "EngineVersion" -> engineVersion.map(Formattable(_)),
-    "KmsKeyId" -> kmsKeyId.map(Formattable(_)),
-    "AvailabilityZone" -> availabilityZone.map(Formattable(_)),
-    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow.map(Formattable(_)),
-    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade.map(Formattable(_)),
-    "ReplicationSubnetGroupIdentifier" -> replicationSubnetGroupIdentifier.map(Formattable(_)),
-    "AllocatedStorage" -> allocatedStorage.map(Formattable(_)),
-    "VpcSecurityGroupIds" -> vpcSecurityGroupIds.map(Formattable(_)),
-    "AllowMajorVersionUpgrade" -> allowMajorVersionUpgrade.map(Formattable(_)),
-    "ReplicationInstanceClass" -> Some(Formattable(replicationInstanceClass)),
-    "PubliclyAccessible" -> publiclyAccessible.map(Formattable(_)),
-    "MultiAZ" -> multiAZ.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def replicationInstanceIdentifier: Property[String] = Empty
+  def engineVersion: Property[String] = Empty
+  def kmsKeyId: Property[String] = Empty
+  def availabilityZone: Property[String] = Empty
+  def preferredMaintenanceWindow: Property[String] = Empty
+  def autoMinorVersionUpgrade: Property[Boolean] = Empty
+  def replicationSubnetGroupIdentifier: Property[String] = Empty
+  def allocatedStorage: Property[Int] = Empty
+  def vpcSecurityGroupIds: Property[Seq[String]] = Empty
+  def allowMajorVersionUpgrade: Property[Boolean] = Empty
+  def replicationInstanceClass: NonEmptyProperty[String]
+  def publiclyAccessible: Property[Boolean] = Empty
+  def multiAZ: Property[Boolean] = Empty
+  def tags: Property[Seq[Tag]] = Empty
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ReplicationInstanceIdentifier" -> replicationInstanceIdentifier,
+    "EngineVersion" -> engineVersion,
+    "KmsKeyId" -> kmsKeyId,
+    "AvailabilityZone" -> availabilityZone,
+    "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,
+    "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,
+    "ReplicationSubnetGroupIdentifier" -> replicationSubnetGroupIdentifier,
+    "AllocatedStorage" -> allocatedStorage,
+    "VpcSecurityGroupIds" -> vpcSecurityGroupIds,
+    "AllowMajorVersionUpgrade" -> allowMajorVersionUpgrade,
+    "ReplicationInstanceClass" -> replicationInstanceClass,
+    "PubliclyAccessible" -> publiclyAccessible,
+    "MultiAZ" -> multiAZ,
+    "Tags" -> tags
   )
 }

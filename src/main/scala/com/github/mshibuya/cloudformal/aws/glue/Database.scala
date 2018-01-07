@@ -9,11 +9,11 @@ import com.github.mshibuya.cloudformal.model._
 trait Database extends Resource {
   val resourceTypeName = "AWS::Glue::Database"
 
-  def databaseInput: DatabaseInput
-  def catalogId: String
+  def databaseInput: NonEmptyProperty[DatabaseInput]
+  def catalogId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DatabaseInput" -> Some(Formattable(databaseInput)),
-    "CatalogId" -> Some(Formattable(catalogId))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DatabaseInput" -> databaseInput,
+    "CatalogId" -> catalogId
   )
 }

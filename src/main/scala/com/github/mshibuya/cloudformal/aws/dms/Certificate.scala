@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Certificate extends Resource {
   val resourceTypeName = "AWS::DMS::Certificate"
 
-  def certificateIdentifier: Option[String] = None
-  def certificatePem: Option[String] = None
-  def certificateWallet: Option[String] = None
+  def certificateIdentifier: Property[String] = Empty
+  def certificatePem: Property[String] = Empty
+  def certificateWallet: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CertificateIdentifier" -> certificateIdentifier.map(Formattable(_)),
-    "CertificatePem" -> certificatePem.map(Formattable(_)),
-    "CertificateWallet" -> certificateWallet.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CertificateIdentifier" -> certificateIdentifier,
+    "CertificatePem" -> certificatePem,
+    "CertificateWallet" -> certificateWallet
   )
 }

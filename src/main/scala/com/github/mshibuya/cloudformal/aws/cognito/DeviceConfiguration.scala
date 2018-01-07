@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DeviceConfiguration(
-    deviceOnlyRememberedOnUserPrompt: Option[Boolean] = None,
-    challengeRequiredOnNewDevice: Option[Boolean] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "DeviceOnlyRememberedOnUserPrompt" -> deviceOnlyRememberedOnUserPrompt.map(Formattable(_)),
-    "ChallengeRequiredOnNewDevice" -> challengeRequiredOnNewDevice.map(Formattable(_))
+    deviceOnlyRememberedOnUserPrompt: Property[Boolean] = Empty,
+    challengeRequiredOnNewDevice: Property[Boolean] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "DeviceOnlyRememberedOnUserPrompt" -> deviceOnlyRememberedOnUserPrompt,
+    "ChallengeRequiredOnNewDevice" -> challengeRequiredOnNewDevice
   )
 }

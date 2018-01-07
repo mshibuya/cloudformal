@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InstanceIpv6Address(
-    ipv6Address: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Ipv6Address" -> Some(Formattable(ipv6Address))
+    ipv6Address: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Ipv6Address" -> ipv6Address
   )
 }

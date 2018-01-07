@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class MetricsConfiguration(
-    id: String,
-    prefix: Option[String] = None,
-    tagFilters: Option[Seq[TagFilter]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Id" -> Some(Formattable(id)),
-    "Prefix" -> prefix.map(Formattable(_)),
-    "TagFilters" -> tagFilters.map(Formattable(_))
+    id: NonEmptyProperty[String],
+    prefix: Property[String] = Empty,
+    tagFilters: Property[Seq[TagFilter]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Id" -> id,
+    "Prefix" -> prefix,
+    "TagFilters" -> tagFilters
   )
 }

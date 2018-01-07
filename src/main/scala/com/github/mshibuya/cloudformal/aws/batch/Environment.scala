@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Environment(
-    value: Option[String] = None,
-    name: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Value" -> value.map(Formattable(_)),
-    "Name" -> name.map(Formattable(_))
+    value: Property[String] = Empty,
+    name: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Value" -> value,
+    "Name" -> name
   )
 }

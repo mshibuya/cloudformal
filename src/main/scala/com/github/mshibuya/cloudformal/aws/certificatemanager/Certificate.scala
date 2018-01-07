@@ -9,15 +9,15 @@ import com.github.mshibuya.cloudformal.model._
 trait Certificate extends Resource {
   val resourceTypeName = "AWS::CertificateManager::Certificate"
 
-  def domainName: String
-  def domainValidationOptions: Option[Seq[DomainValidationOption]] = None
-  def subjectAlternativeNames: Option[Seq[String]] = None
-  def tags: Option[Seq[Tag]] = None
+  def domainName: NonEmptyProperty[String]
+  def domainValidationOptions: Property[Seq[DomainValidationOption]] = Empty
+  def subjectAlternativeNames: Property[Seq[String]] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "DomainName" -> Some(Formattable(domainName)),
-    "DomainValidationOptions" -> domainValidationOptions.map(Formattable(_)),
-    "SubjectAlternativeNames" -> subjectAlternativeNames.map(Formattable(_)),
-    "Tags" -> tags.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "DomainName" -> domainName,
+    "DomainValidationOptions" -> domainValidationOptions,
+    "SubjectAlternativeNames" -> subjectAlternativeNames,
+    "Tags" -> tags
   )
 }

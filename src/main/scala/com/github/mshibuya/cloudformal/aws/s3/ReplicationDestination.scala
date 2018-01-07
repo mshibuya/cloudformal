@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ReplicationDestination(
-    bucket: String,
-    storageClass: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Bucket" -> Some(Formattable(bucket)),
-    "StorageClass" -> storageClass.map(Formattable(_))
+    bucket: NonEmptyProperty[String],
+    storageClass: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Bucket" -> bucket,
+    "StorageClass" -> storageClass
   )
 }

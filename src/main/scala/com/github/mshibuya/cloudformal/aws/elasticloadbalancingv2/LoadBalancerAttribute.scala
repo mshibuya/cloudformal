@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LoadBalancerAttribute(
-    key: Option[String] = None,
-    value: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Key" -> key.map(Formattable(_)),
-    "Value" -> value.map(Formattable(_))
+    key: Property[String] = Empty,
+    value: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Key" -> key,
+    "Value" -> value
   )
 }

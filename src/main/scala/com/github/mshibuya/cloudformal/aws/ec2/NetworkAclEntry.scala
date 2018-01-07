@@ -9,25 +9,25 @@ import com.github.mshibuya.cloudformal.model._
 trait NetworkAclEntry extends Resource {
   val resourceTypeName = "AWS::EC2::NetworkAclEntry"
 
-  def cidrBlock: String
-  def egress: Option[Boolean] = None
-  def icmp: Option[Icmp] = None
-  def ipv6CidrBlock: Option[String] = None
-  def networkAclId: String
-  def portRange: Option[PortRange] = None
-  def protocol: Int
-  def ruleAction: String
-  def ruleNumber: Int
+  def cidrBlock: NonEmptyProperty[String]
+  def egress: Property[Boolean] = Empty
+  def icmp: Property[Icmp] = Empty
+  def ipv6CidrBlock: Property[String] = Empty
+  def networkAclId: NonEmptyProperty[String]
+  def portRange: Property[PortRange] = Empty
+  def protocol: NonEmptyProperty[Int]
+  def ruleAction: NonEmptyProperty[String]
+  def ruleNumber: NonEmptyProperty[Int]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CidrBlock" -> Some(Formattable(cidrBlock)),
-    "Egress" -> egress.map(Formattable(_)),
-    "Icmp" -> icmp.map(Formattable(_)),
-    "Ipv6CidrBlock" -> ipv6CidrBlock.map(Formattable(_)),
-    "NetworkAclId" -> Some(Formattable(networkAclId)),
-    "PortRange" -> portRange.map(Formattable(_)),
-    "Protocol" -> Some(Formattable(protocol)),
-    "RuleAction" -> Some(Formattable(ruleAction)),
-    "RuleNumber" -> Some(Formattable(ruleNumber))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CidrBlock" -> cidrBlock,
+    "Egress" -> egress,
+    "Icmp" -> icmp,
+    "Ipv6CidrBlock" -> ipv6CidrBlock,
+    "NetworkAclId" -> networkAclId,
+    "PortRange" -> portRange,
+    "Protocol" -> protocol,
+    "RuleAction" -> ruleAction,
+    "RuleNumber" -> ruleNumber
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Rule(
-    patchFilterGroup: Option[PatchFilterGroup] = None,
-    approveAfterDays: Option[Int] = None,
-    complianceLevel: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "PatchFilterGroup" -> patchFilterGroup.map(Formattable(_)),
-    "ApproveAfterDays" -> approveAfterDays.map(Formattable(_)),
-    "ComplianceLevel" -> complianceLevel.map(Formattable(_))
+    patchFilterGroup: Property[PatchFilterGroup] = Empty,
+    approveAfterDays: Property[Int] = Empty,
+    complianceLevel: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "PatchFilterGroup" -> patchFilterGroup,
+    "ApproveAfterDays" -> approveAfterDays,
+    "ComplianceLevel" -> complianceLevel
   )
 }

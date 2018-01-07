@@ -10,19 +10,23 @@ import com.github.mshibuya.cloudformal.model._
 trait ConfigRule extends Resource {
   val resourceTypeName = "AWS::Config::ConfigRule"
 
-  def configRuleName: Option[String] = None
-  def description: Option[String] = None
-  def inputParameters: Option[Json] = None
-  def maximumExecutionFrequency: Option[String] = None
-  def scope: Option[Scope] = None
-  def source: Source
+  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  def complianceTypeAttribute: Expression[String] = Fn.GetAtt(logicalId, "Compliance.Type")
+  def configRuleIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigRuleId")
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "ConfigRuleName" -> configRuleName.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "InputParameters" -> inputParameters.map(Formattable(_)),
-    "MaximumExecutionFrequency" -> maximumExecutionFrequency.map(Formattable(_)),
-    "Scope" -> scope.map(Formattable(_)),
-    "Source" -> Some(Formattable(source))
+  def configRuleName: Property[String] = Empty
+  def description: Property[String] = Empty
+  def inputParameters: Property[Json] = Empty
+  def maximumExecutionFrequency: Property[String] = Empty
+  def scope: Property[Scope] = Empty
+  def source: NonEmptyProperty[Source]
+
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ConfigRuleName" -> configRuleName,
+    "Description" -> description,
+    "InputParameters" -> inputParameters,
+    "MaximumExecutionFrequency" -> maximumExecutionFrequency,
+    "Scope" -> scope,
+    "Source" -> source
   )
 }

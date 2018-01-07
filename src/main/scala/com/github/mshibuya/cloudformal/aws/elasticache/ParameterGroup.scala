@@ -11,13 +11,13 @@ import scala.collection.immutable.ListMap
 trait ParameterGroup extends Resource {
   val resourceTypeName = "AWS::ElastiCache::ParameterGroup"
 
-  def cacheParameterGroupFamily: String
-  def description: String
-  def properties: Option[ListMap[String, String]] = None
+  def cacheParameterGroupFamily: NonEmptyProperty[String]
+  def description: NonEmptyProperty[String]
+  def properties: Property[ListMap[String, String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "CacheParameterGroupFamily" -> Some(Formattable(cacheParameterGroupFamily)),
-    "Description" -> Some(Formattable(description)),
-    "Properties" -> properties.map(Formattable(_))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "CacheParameterGroupFamily" -> cacheParameterGroupFamily,
+    "Description" -> description,
+    "Properties" -> properties
   )
 }

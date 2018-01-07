@@ -9,13 +9,13 @@ import com.github.mshibuya.cloudformal.model._
 trait Alias extends Resource {
   val resourceTypeName = "AWS::GameLift::Alias"
 
-  def description: Option[String] = None
-  def name: String
-  def routingStrategy: RoutingStrategy
+  def description: Property[String] = Empty
+  def name: NonEmptyProperty[String]
+  def routingStrategy: NonEmptyProperty[RoutingStrategy]
 
-  def resourceProperties: FormattableMap = Formattable.opt(
-    "Description" -> description.map(Formattable(_)),
-    "Name" -> Some(Formattable(name)),
-    "RoutingStrategy" -> Some(Formattable(routingStrategy))
+  def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "Name" -> name,
+    "RoutingStrategy" -> routingStrategy
   )
 }

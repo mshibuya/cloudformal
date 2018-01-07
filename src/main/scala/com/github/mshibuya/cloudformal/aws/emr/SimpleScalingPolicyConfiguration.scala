@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SimpleScalingPolicyConfiguration(
-    adjustmentType: Option[String] = None,
-    coolDown: Option[Int] = None,
-    scalingAdjustment: Int) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "AdjustmentType" -> adjustmentType.map(Formattable(_)),
-    "CoolDown" -> coolDown.map(Formattable(_)),
-    "ScalingAdjustment" -> Some(Formattable(scalingAdjustment))
+    adjustmentType: Property[String] = Empty,
+    coolDown: Property[Int] = Empty,
+    scalingAdjustment: NonEmptyProperty[Int]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "AdjustmentType" -> adjustmentType,
+    "CoolDown" -> coolDown,
+    "ScalingAdjustment" -> scalingAdjustment
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StringAttributeConstraints(
-    minLength: Option[String] = None,
-    maxLength: Option[String] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "MinLength" -> minLength.map(Formattable(_)),
-    "MaxLength" -> maxLength.map(Formattable(_))
+    minLength: Property[String] = Empty,
+    maxLength: Property[String] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "MinLength" -> minLength,
+    "MaxLength" -> maxLength
   )
 }

@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ActivatedRule(
-    action: WafAction,
-    priority: Int,
-    ruleId: String) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "Action" -> Some(Formattable(action)),
-    "Priority" -> Some(Formattable(priority)),
-    "RuleId" -> Some(Formattable(ruleId))
+    action: NonEmptyProperty[WafAction],
+    priority: NonEmptyProperty[Int],
+    ruleId: NonEmptyProperty[String]) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "Action" -> action,
+    "Priority" -> priority,
+    "RuleId" -> ruleId
   )
 }

@@ -7,22 +7,22 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Egress(
-    cidrIp: Option[String] = None,
-    cidrIpv6: Option[String] = None,
-    description: Option[String] = None,
-    destinationPrefixListId: Option[String] = None,
-    destinationSecurityGroupId: Option[String] = None,
-    fromPort: Option[Int] = None,
-    ipProtocol: String,
-    toPort: Option[Int] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "CidrIp" -> cidrIp.map(Formattable(_)),
-    "CidrIpv6" -> cidrIpv6.map(Formattable(_)),
-    "Description" -> description.map(Formattable(_)),
-    "DestinationPrefixListId" -> destinationPrefixListId.map(Formattable(_)),
-    "DestinationSecurityGroupId" -> destinationSecurityGroupId.map(Formattable(_)),
-    "FromPort" -> fromPort.map(Formattable(_)),
-    "IpProtocol" -> Some(Formattable(ipProtocol)),
-    "ToPort" -> toPort.map(Formattable(_))
+    cidrIp: Property[String] = Empty,
+    cidrIpv6: Property[String] = Empty,
+    description: Property[String] = Empty,
+    destinationPrefixListId: Property[String] = Empty,
+    destinationSecurityGroupId: Property[String] = Empty,
+    fromPort: Property[Int] = Empty,
+    ipProtocol: NonEmptyProperty[String],
+    toPort: Property[Int] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "CidrIp" -> cidrIp,
+    "CidrIpv6" -> cidrIpv6,
+    "Description" -> description,
+    "DestinationPrefixListId" -> destinationPrefixListId,
+    "DestinationSecurityGroupId" -> destinationSecurityGroupId,
+    "FromPort" -> fromPort,
+    "IpProtocol" -> ipProtocol,
+    "ToPort" -> toPort
   )
 }

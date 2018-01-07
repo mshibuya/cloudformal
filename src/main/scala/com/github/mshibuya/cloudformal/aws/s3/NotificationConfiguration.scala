@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NotificationConfiguration(
-    lambdaConfigurations: Option[Seq[LambdaConfiguration]] = None,
-    queueConfigurations: Option[Seq[QueueConfiguration]] = None,
-    topicConfigurations: Option[Seq[TopicConfiguration]] = None) extends Renderable {
-  def render: Formattable = Formattable.opt(
-    "LambdaConfigurations" -> lambdaConfigurations.map(Formattable(_)),
-    "QueueConfigurations" -> queueConfigurations.map(Formattable(_)),
-    "TopicConfigurations" -> topicConfigurations.map(Formattable(_))
+    lambdaConfigurations: Property[Seq[LambdaConfiguration]] = Empty,
+    queueConfigurations: Property[Seq[QueueConfiguration]] = Empty,
+    topicConfigurations: Property[Seq[TopicConfiguration]] = Empty) extends Renderable {
+  def render: Formattable = Formattable.withProperties(
+    "LambdaConfigurations" -> lambdaConfigurations,
+    "QueueConfigurations" -> queueConfigurations,
+    "TopicConfigurations" -> topicConfigurations
   )
 }
