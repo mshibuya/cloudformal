@@ -7,12 +7,13 @@ trait Stack extends Renderable {
 
   def description: String
 
+  def parameters: Seq[Parameter[_]]
   def resources: Seq[Resource]
 
   def render(): FormattableMap = Formattable(
     "AWSTemplateFormatVersion" -> Formattable("2010-09-09"),
     "Description" -> Formattable(description),
-    "Parameters" -> Formattable.emptyMap,
+    "Parameters" -> Formattable(parameters.map(p => p.logicalId -> p.render()): _*),
     "Mappings" -> Formattable.emptyMap,
     "Resources" -> Formattable(resources.map(r => r.logicalId -> r.render()): _*),
     "Outputs" -> Formattable.emptyMap
