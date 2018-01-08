@@ -1,6 +1,6 @@
 package com.github.mshibuya.cloudformal.model
 
-trait Resource extends Renderable with Referenceable {
+trait Resource extends Renderable with Referenceable[String] {
   def logicalId: String
   def resourceTypeName: String
   def resourceProperties: FormattableMap

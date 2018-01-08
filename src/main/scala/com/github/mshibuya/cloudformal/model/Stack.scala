@@ -7,7 +7,7 @@ trait Stack extends Renderable {
 
   def description: String
 
-  def parameters: Seq[Parameter[_]]
+  def parameters: Seq[Parameter[_, _]]
   def mappings: Seq[Mapping]
   def resources: Seq[Resource]
   def outputs: Seq[Output[_]]

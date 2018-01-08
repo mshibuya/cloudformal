@@ -1,6 +1,6 @@
 package com.github.mshibuya.cloudformal.model
 
-trait Referenceable {
+trait Referenceable[A] {
   def logicalId: String
-  def ref: Ref[String] = Ref(logicalId)
+  def ref: Ref[A] = Ref(logicalId)
 }
