@@ -21,7 +21,7 @@ object ApplicationStack extends Stack {
 
   val appServer = new ec2.Instance {
     val logicalId = "AppServer"
-    val imageId = Fn.FindInMap(regionMap, Value("us-east-1"), Value("32"))
+    val imageId = regionMap.get(Value("us-east-1"), Value("32"))
     override val instanceType = appServerInstanceType.ref
   }
   val resources = Seq(
