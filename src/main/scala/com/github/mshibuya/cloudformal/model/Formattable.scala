@@ -41,6 +41,8 @@ object Formattable {
     }
   )
 
+  def apply[A](value: Map[String, A]): Formattable = apply(ListMap(value.toSeq: _*))
+
   def apply[A](value: ListMap[String, A]): Formattable = FormattableMap(
     value.collect {
       case (key, b:Boolean) => key -> apply(b)
@@ -51,6 +53,9 @@ object Formattable {
       case (key, j:Json) => key -> apply(j)
       case (key, t:ZonedDateTime) => key -> apply(t)
       case (key, r:Renderable) => key -> apply(r)
+      case (key, s:Seq[A]) => key -> apply(s)
+      case (key, l:Map[String, _]) => key -> apply(l)
+      case (key, l:ListMap[String, _]) => key -> apply(l)
     }
   )
 

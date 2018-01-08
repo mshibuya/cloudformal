@@ -8,17 +8,22 @@ object ApplicationStack extends Stack {
   val description = "My stack"
 
   val appServerInstanceType = StringParameter("AppServerInstanceType", default = Value("m4.large"))
-
   val parameters = Seq(
     appServerInstanceType
   )
 
+  val regionMap = StringMapping("RegionMap", Map(
+    "us-east-1" -> Map("32" -> "ami-11111111", "64" -> "ami-22222222")
+  ))
+  val mappings = Seq(
+    regionMap
+  )
+
   val appServer = new ec2.Instance {
     val logicalId = "AppServer"
-    val imageId = Value("ami-111111")
+    val imageId = Fn.FindInMap(regionMap, Value("us-east-1"), Value("32"))
     override val instanceType = appServerInstanceType.ref
   }
-
   val resources = Seq(
     appServer
   )

@@ -14,4 +14,10 @@ object Fn {
       "Fn::GetAtt" -> Formattable(Seq(logicalId, attributeName))
     )
   }
+
+  case class FindInMap[+A](mapping: Mapping, topLevelKey: NonEmptyProperty[String], secondLevelKey: NonEmptyProperty[String]) extends IntrinsicFunction[A] {
+    def render: Formattable = Formattable(
+      "Fn::FindInMap" -> Formattable(Seq(mapping.logicalId, topLevelKey, secondLevelKey))
+    )
+  }
 }
