@@ -27,4 +27,11 @@ object ApplicationStack extends Stack {
   val resources = Seq(
     appServer
   )
+
+  val appServerInstanceId = Output("AppServerInstanceId", appServer.ref)
+  val appServerPublicIp = Output("AppServerPublicIp", appServer.publicIpAttribute)
+  val outputs = Seq(
+    appServerInstanceId,
+    appServerPublicIp
+  )
 }

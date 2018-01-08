@@ -10,6 +10,7 @@ trait Stack extends Renderable {
   def parameters: Seq[Parameter[_]]
   def mappings: Seq[Mapping]
   def resources: Seq[Resource]
+  def outputs: Seq[Output[_]]
 
   def render(): FormattableMap = Formattable(
     "AWSTemplateFormatVersion" -> Formattable("2010-09-09"),
@@ -17,6 +18,6 @@ trait Stack extends Renderable {
     "Parameters" -> Formattable(parameters.map(p => p.logicalId -> p.render()): _*),
     "Mappings" -> Formattable(mappings.map(m => m.logicalId -> m.render()): _*),
     "Resources" -> Formattable(resources.map(r => r.logicalId -> r.render()): _*),
-    "Outputs" -> Formattable.emptyMap
+    "Outputs" -> Formattable(outputs.map(o => o.logicalId -> o.render()): _*)
   )
 }
