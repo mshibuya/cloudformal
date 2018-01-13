@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.config
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-deliverychannel.html
  */
 
-trait DeliveryChannel extends Resource {
+trait DeliveryChannel extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Config::DeliveryChannel"
 
   def configSnapshotDeliveryProperties: Property[ConfigSnapshotDeliveryProperties] = Empty

@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.rds
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html
  */
 
-trait DBCluster extends Resource {
+trait DBCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBCluster"
 
   def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")

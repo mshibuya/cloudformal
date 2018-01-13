@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.batch
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-computeenvironment.html
  */
 
-trait ComputeEnvironment extends Resource {
+trait ComputeEnvironment extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Batch::ComputeEnvironment"
 
   def `type`: NonEmptyProperty[String]

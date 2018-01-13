@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.rds
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-eventsubscription.html
  */
 
-trait EventSubscription extends Resource {
+trait EventSubscription extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::RDS::EventSubscription"
 
   def enabled: Property[Boolean] = Empty

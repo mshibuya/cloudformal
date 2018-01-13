@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.cognito
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html
  */
 
-trait UserPoolUser extends Resource {
+trait UserPoolUser extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPoolUser"
 
   def validationData: Property[Seq[AttributeType]] = Empty

@@ -1,6 +1,7 @@
 package com.github.mshibuya.cloudformal.aws.cloudformation
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 import scala.collection.immutable.ListMap
 
@@ -8,7 +9,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
  */
 
-trait Stack extends Resource {
+trait Stack extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::Stack"
 
   def notificationARNs: Property[Seq[String]] = Empty

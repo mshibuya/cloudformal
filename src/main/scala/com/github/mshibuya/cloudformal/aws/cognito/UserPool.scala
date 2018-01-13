@@ -2,12 +2,13 @@ package com.github.mshibuya.cloudformal.aws.cognito
 
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html
  */
 
-trait UserPool extends Resource {
+trait UserPool extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPool"
 
   def providerNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "ProviderName")

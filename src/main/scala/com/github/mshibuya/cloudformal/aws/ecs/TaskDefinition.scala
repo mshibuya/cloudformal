@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.ecs
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
  */
 
-trait TaskDefinition extends Resource {
+trait TaskDefinition extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::TaskDefinition"
 
   def containerDefinitions: Property[Seq[ContainerDefinition]] = Empty

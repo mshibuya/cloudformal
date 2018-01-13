@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.route53
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
  */
 
-trait HostedZone extends Resource {
+trait HostedZone extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Route53::HostedZone"
 
   def nameServersAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "NameServers")

@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.opsworks
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html
  */
 
-trait Instance extends Resource {
+trait Instance extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Instance"
 
   def availabilityZoneAttribute: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")

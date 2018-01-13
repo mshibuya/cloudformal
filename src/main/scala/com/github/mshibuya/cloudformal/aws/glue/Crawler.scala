@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.glue
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html
  */
 
-trait Crawler extends Resource {
+trait Crawler extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::Crawler"
 
   def role: NonEmptyProperty[String]

@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.elasticache
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
  */
 
-trait ReplicationGroup extends Resource {
+trait ReplicationGroup extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::ReplicationGroup"
 
   def configurationEndPointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Address")

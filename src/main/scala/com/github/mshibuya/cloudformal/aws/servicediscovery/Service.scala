@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.servicediscovery
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-service.html
  */
 
-trait Service extends Resource {
+trait Service extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ServiceDiscovery::Service"
 
   def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")

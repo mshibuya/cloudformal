@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.elasticache
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group-ingress.html
  */
 
-trait SecurityGroupIngress extends Resource {
+trait SecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::SecurityGroupIngress"
 
   def cacheSecurityGroupName: NonEmptyProperty[String]

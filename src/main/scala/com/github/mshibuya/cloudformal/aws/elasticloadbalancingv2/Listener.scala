@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.elasticloadbalancingv2
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listener.html
  */
 
-trait Listener extends Resource {
+trait Listener extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::Listener"
 
   def certificates: Property[Seq[Certificate]] = Empty

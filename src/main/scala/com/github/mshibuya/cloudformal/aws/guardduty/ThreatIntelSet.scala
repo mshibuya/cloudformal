@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.guardduty
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-threatintelset.html
  */
 
-trait ThreatIntelSet extends Resource {
+trait ThreatIntelSet extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::GuardDuty::ThreatIntelSet"
 
   def format: NonEmptyProperty[String]

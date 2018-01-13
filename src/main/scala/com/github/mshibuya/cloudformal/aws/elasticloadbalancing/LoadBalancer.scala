@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.elasticloadbalancing
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
  */
 
-trait LoadBalancer extends Resource {
+trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancing::LoadBalancer"
 
   def canonicalHostedZoneNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneName")

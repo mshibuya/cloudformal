@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.ssm
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
  */
 
-trait Parameter extends Resource {
+trait Parameter extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Parameter"
 
   def typeAttribute: Expression[String] = Fn.GetAtt(logicalId, "Type")

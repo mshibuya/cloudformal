@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.cloudtrail
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
  */
 
-trait Trail extends Resource {
+trait Trail extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudTrail::Trail"
 
   def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")

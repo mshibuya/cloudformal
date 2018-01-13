@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.ec2
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html
  */
 
-trait Volume extends Resource {
+trait Volume extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::EC2::Volume"
 
   def autoEnableIO: Property[Boolean] = Empty

@@ -2,12 +2,13 @@ package com.github.mshibuya.cloudformal.aws.emr
 
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html
  */
 
-trait Cluster extends Resource {
+trait Cluster extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::Cluster"
 
   def masterPublicDNSAttribute: Expression[String] = Fn.GetAtt(logicalId, "MasterPublicDNS")

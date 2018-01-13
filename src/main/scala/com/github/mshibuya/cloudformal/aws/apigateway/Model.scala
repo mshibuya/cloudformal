@@ -3,12 +3,13 @@ package com.github.mshibuya.cloudformal.aws.apigateway
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-model.html
  */
 
-trait Model extends model.Resource {
+trait Model extends model.Resource with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::Model"
 
   def contentType: Property[String] = Empty

@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.directoryservice
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-microsoftad.html
  */
 
-trait MicrosoftAD extends Resource {
+trait MicrosoftAD extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DirectoryService::MicrosoftAD"
 
   def aliasAttribute: Expression[String] = Fn.GetAtt(logicalId, "Alias")

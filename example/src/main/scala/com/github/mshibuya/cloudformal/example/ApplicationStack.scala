@@ -2,6 +2,7 @@ package com.github.mshibuya.cloudformal.example
 
 import com.github.mshibuya.cloudformal.aws.ec2
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy.{CreationPolicy, DeletionPolicy, ResourceSignal}
 
 object ApplicationStack extends Stack {
   val name = "ApplicationStack"
@@ -19,13 +20,21 @@ object ApplicationStack extends Stack {
     regionMap
   )
 
+  val dbServer = new ec2.Instance {
+    val logicalId = "DBServer"
+    val imageId = regionMap.get(Value("us-east-1"), Value("32"))
+  }
   val appServer = new ec2.Instance {
     val logicalId = "AppServer"
     val imageId = regionMap.get(Value("us-east-1"), Value("32"))
     override val instanceType = appServerInstanceType.ref
+    override val creationPolicy = Value(CreationPolicy(resourceSignal = Value(ResourceSignal(count = Value(3)))))
+    override val deletionPolicy = Value(DeletionPolicy.Retain)
+    override val dependsOn = Seq(dbServer)
   }
   val resources = Seq(
-    appServer
+    appServer,
+    dbServer
   )
 
   val appServerInstanceId = Output("AppServerInstanceId", appServer.ref)

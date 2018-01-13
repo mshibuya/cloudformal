@@ -2,6 +2,7 @@ package com.github.mshibuya.cloudformal.aws.opsworks
 
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 import scala.collection.immutable.ListMap
 
@@ -9,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html
  */
 
-trait Stack extends Resource {
+trait Stack extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Stack"
 
   def agentVersion: Property[String] = Empty

@@ -1,6 +1,7 @@
 package com.github.mshibuya.cloudformal.aws.ssm
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 import scala.collection.immutable.ListMap
 
@@ -8,7 +9,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html
  */
 
-trait Association extends Resource {
+trait Association extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Association"
 
   def documentVersion: Property[String] = Empty

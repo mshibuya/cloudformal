@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.codepipeline
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.html
  */
 
-trait CustomActionType extends Resource {
+trait CustomActionType extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodePipeline::CustomActionType"
 
   def category: NonEmptyProperty[String]

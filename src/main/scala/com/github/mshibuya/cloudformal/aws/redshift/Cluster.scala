@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.redshift
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
  */
 
-trait Cluster extends Resource {
+trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::Redshift::Cluster"
 
   def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")

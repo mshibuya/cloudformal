@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.cognito
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpoolclient.html
  */
 
-trait UserPoolClient extends Resource {
+trait UserPoolClient extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPoolClient"
 
   def clientSecretAttribute: Expression[String] = Fn.GetAtt(logicalId, "ClientSecret")

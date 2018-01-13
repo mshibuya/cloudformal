@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.autoscaling
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html
  */
 
-trait AutoScalingGroup extends Resource {
+trait AutoScalingGroup extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy with Resource.WithUpdatePolicy {
   val resourceTypeName = "AWS::AutoScaling::AutoScalingGroup"
 
   def availabilityZones: Property[Seq[String]] = Empty

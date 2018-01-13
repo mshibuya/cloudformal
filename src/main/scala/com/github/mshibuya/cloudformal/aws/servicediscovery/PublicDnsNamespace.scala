@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.servicediscovery
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-publicdnsnamespace.html
  */
 
-trait PublicDnsNamespace extends Resource {
+trait PublicDnsNamespace extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ServiceDiscovery::PublicDnsNamespace"
 
   def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")

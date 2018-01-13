@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.sns
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
  */
 
-trait Topic extends Resource {
+trait Topic extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SNS::Topic"
 
   def topicNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TopicName")

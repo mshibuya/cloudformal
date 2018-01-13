@@ -2,12 +2,13 @@ package com.github.mshibuya.cloudformal.aws.cloudformation
 
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html
  */
 
-trait WaitCondition extends Resource {
+trait WaitCondition extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::WaitCondition"
 
   def dataAttribute: Expression[Json] = Fn.GetAtt(logicalId, "Data")

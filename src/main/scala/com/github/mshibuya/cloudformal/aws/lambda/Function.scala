@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.lambda
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
  */
 
-trait Function extends Resource {
+trait Function extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Function"
 
   def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")

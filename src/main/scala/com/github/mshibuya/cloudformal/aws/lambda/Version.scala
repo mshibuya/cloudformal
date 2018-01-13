@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.lambda
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-version.html
  */
 
-trait Version extends Resource {
+trait Version extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Version"
 
   def versionAttribute: Expression[String] = Fn.GetAtt(logicalId, "Version")

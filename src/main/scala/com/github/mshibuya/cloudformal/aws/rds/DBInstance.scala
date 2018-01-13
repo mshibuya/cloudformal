@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.rds
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
  */
 
-trait DBInstance extends Resource {
+trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBInstance"
 
   def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")

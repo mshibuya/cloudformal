@@ -1,12 +1,13 @@
 package com.github.mshibuya.cloudformal.aws.autoscaling
 
 import com.github.mshibuya.cloudformal.model._
+import com.github.mshibuya.cloudformal.model.policy._
 
 /**
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-scheduledaction.html
  */
 
-trait ScheduledAction extends Resource {
+trait ScheduledAction extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::AutoScaling::ScheduledAction"
 
   def autoScalingGroupName: NonEmptyProperty[String]
