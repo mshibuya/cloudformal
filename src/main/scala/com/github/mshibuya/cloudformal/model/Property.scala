@@ -10,6 +10,14 @@ sealed abstract class Property[+A]
 
 sealed abstract class NonEmptyProperty[+A] extends Property[A] with Renderable
 
+case class ListProperty[+A](values: NonEmptyProperty[A]*) extends NonEmptyProperty[Seq[A]] {
+  def render: Formattable = Formattable(values)
+}
+
+case class MapProperty[+A](values: Tuple2[String, NonEmptyProperty[_]]*) extends NonEmptyProperty[ListMap[String, A]] {
+  def render: Formattable = Formattable(values)
+}
+
 abstract class Expression[+A] extends NonEmptyProperty[A]
 
 final case class Value[+A](value: A) extends NonEmptyProperty[A] {

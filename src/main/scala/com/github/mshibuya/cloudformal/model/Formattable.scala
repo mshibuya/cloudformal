@@ -68,8 +68,7 @@ object Formattable {
   def withProperties(values: Tuple2[String, Property[_]]*): FormattableMap =
     FormattableMap(ListMap(values: _*)
       .collect {
-        case (k, e: Expression[_]) => k -> e.render
-        case (k, v: Value[_]) => k -> v.render
+        case (k, n: NonEmptyProperty[_]) => k -> n.render
       })
 
   val emptyMap: FormattableMap = FormattableMap(ListMap.empty)
