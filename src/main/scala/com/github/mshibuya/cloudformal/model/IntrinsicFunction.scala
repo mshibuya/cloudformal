@@ -6,6 +6,7 @@ case class Ref[+A](logicalName: String) extends IntrinsicFunction[A] {
   def render: Formattable = Formattable(
     "Ref" -> Formattable(logicalName)
   )
+  def as[T]: Ref[T] = Ref[T](logicalName)
 }
 
 object Fn {
