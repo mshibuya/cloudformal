@@ -23,6 +23,7 @@ object ApplicationStack extends Stack {
   val dbServer = new ec2.Instance {
     val logicalId = "DBServer"
     val imageId = regionMap.get(Value("us-east-1"), Value("32"))
+    override val instanceType = Fn.ImportValue(Value("DBServerInstanceType"))
   }
   val appServer = new ec2.Instance {
     val logicalId = "AppServer"
@@ -38,7 +39,8 @@ object ApplicationStack extends Stack {
   )
 
   val appServerInstanceId = Output("AppServerInstanceId", appServer.ref)
-  val appServerPublicIp = Output("AppServerPublicIp", appServer.publicIpAttribute)
+  val appServerPublicIp = Output("AppServerPublicIp", appServer.publicIpAttribute,
+    export = Value(Export("PublicIp", appServer.publicIpAttribute)))
   val outputs = Seq(
     appServerInstanceId,
     appServerPublicIp

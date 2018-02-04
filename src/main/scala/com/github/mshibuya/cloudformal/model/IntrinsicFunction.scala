@@ -16,15 +16,21 @@ object Fn {
     )
   }
 
+  case class FindInMap[+A](mapping: Mapping, topLevelKey: NonEmptyProperty[String], secondLevelKey: NonEmptyProperty[String]) extends IntrinsicFunction[A] {
+    def render: Formattable = Formattable(
+      "Fn::FindInMap" -> Formattable(Seq(mapping.logicalId, topLevelKey, secondLevelKey))
+    )
+  }
+
   case class GetAtt[+A](logicalId: String, attributeName: String) extends IntrinsicFunction[A] {
     def render: Formattable = Formattable(
       "Fn::GetAtt" -> Formattable(Seq(logicalId, attributeName))
     )
   }
 
-  case class FindInMap[+A](mapping: Mapping, topLevelKey: NonEmptyProperty[String], secondLevelKey: NonEmptyProperty[String]) extends IntrinsicFunction[A] {
+  case class ImportValue(sharedValueToImport: NonEmptyProperty[String]) extends IntrinsicFunction[String] {
     def render: Formattable = Formattable(
-      "Fn::FindInMap" -> Formattable(Seq(mapping.logicalId, topLevelKey, secondLevelKey))
+      "Fn::ImportValue" -> Formattable(sharedValueToImport)
     )
   }
 
