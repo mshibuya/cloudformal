@@ -10,11 +10,15 @@ case class Source(
     `type`: NonEmptyProperty[String],
     auth: Property[SourceAuth] = Empty,
     buildSpec: Property[String] = Empty,
+    gitCloneDepth: Property[Int] = Empty,
+    insecureSsl: Property[Boolean] = Empty,
     location: Property[String] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
     "Type" -> `type`,
     "Auth" -> auth,
     "BuildSpec" -> buildSpec,
+    "GitCloneDepth" -> gitCloneDepth,
+    "InsecureSsl" -> insecureSsl,
     "Location" -> location
   )
 }

@@ -10,11 +10,13 @@ case class ReplicationRule(
     destination: NonEmptyProperty[ReplicationDestination],
     id: Property[String] = Empty,
     prefix: NonEmptyProperty[String],
+    sourceSelectionCriteria: Property[SourceSelectionCriteria] = Empty,
     status: NonEmptyProperty[String]) extends Renderable {
   def render: Formattable = Formattable.withProperties(
     "Destination" -> destination,
     "Id" -> id,
     "Prefix" -> prefix,
+    "SourceSelectionCriteria" -> sourceSelectionCriteria,
     "Status" -> status
   )
 }

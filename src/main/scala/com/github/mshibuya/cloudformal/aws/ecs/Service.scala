@@ -15,6 +15,7 @@ trait Service extends Resource with Resource.WithDeletionPolicy {
   def cluster: Property[String] = Empty
   def deploymentConfiguration: Property[DeploymentConfiguration] = Empty
   def desiredCount: Property[Int] = Empty
+  def healthCheckGracePeriodSeconds: Property[Int] = Empty
   def launchType: Property[String] = Empty
   def loadBalancers: Property[Seq[LoadBalancer]] = Empty
   def networkConfiguration: Property[NetworkConfiguration] = Empty
@@ -29,6 +30,7 @@ trait Service extends Resource with Resource.WithDeletionPolicy {
     "Cluster" -> cluster,
     "DeploymentConfiguration" -> deploymentConfiguration,
     "DesiredCount" -> desiredCount,
+    "HealthCheckGracePeriodSeconds" -> healthCheckGracePeriodSeconds,
     "LaunchType" -> launchType,
     "LoadBalancers" -> loadBalancers,
     "NetworkConfiguration" -> networkConfiguration,

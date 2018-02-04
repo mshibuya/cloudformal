@@ -20,6 +20,7 @@ trait Instance extends Resource with Resource.WithCreationPolicy with Resource.W
   def affinity: Property[String] = Empty
   def availabilityZone: Property[String] = Empty
   def blockDeviceMappings: Property[Seq[BlockDeviceMapping]] = Empty
+  def creditSpecification: Property[CreditSpecification] = Empty
   def disableApiTermination: Property[Boolean] = Empty
   def ebsOptimized: Property[Boolean] = Empty
   def elasticGpuSpecifications: Property[Seq[ElasticGpuSpecification]] = Empty
@@ -52,6 +53,7 @@ trait Instance extends Resource with Resource.WithCreationPolicy with Resource.W
     "Affinity" -> affinity,
     "AvailabilityZone" -> availabilityZone,
     "BlockDeviceMappings" -> blockDeviceMappings,
+    "CreditSpecification" -> creditSpecification,
     "DisableApiTermination" -> disableApiTermination,
     "EbsOptimized" -> ebsOptimized,
     "ElasticGpuSpecifications" -> elasticGpuSpecifications,

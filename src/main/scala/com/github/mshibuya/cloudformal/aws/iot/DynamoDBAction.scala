@@ -11,9 +11,9 @@ case class DynamoDBAction(
     hashKeyType: Property[String] = Empty,
     hashKeyValue: NonEmptyProperty[String],
     payloadField: Property[String] = Empty,
-    rangeKeyField: NonEmptyProperty[String],
+    rangeKeyField: Property[String] = Empty,
     rangeKeyType: Property[String] = Empty,
-    rangeKeyValue: NonEmptyProperty[String],
+    rangeKeyValue: Property[String] = Empty,
     roleArn: NonEmptyProperty[String],
     tableName: NonEmptyProperty[String]) extends Renderable {
   def render: Formattable = Formattable.withProperties(

@@ -11,6 +11,7 @@ trait SecurityGroup extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::SecurityGroup"
 
   def groupIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "GroupId")
+  def vpcIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "VpcId")
 
   def groupDescription: NonEmptyProperty[String]
   def groupName: Property[String] = Empty

@@ -15,12 +15,14 @@ trait Stream extends Resource with Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def retentionPeriodHours: Property[Int] = Empty
   def shardCount: NonEmptyProperty[Int]
+  def streamEncryption: Property[StreamEncryption] = Empty
   def tags: Property[Seq[Tag]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "Name" -> name,
     "RetentionPeriodHours" -> retentionPeriodHours,
     "ShardCount" -> shardCount,
+    "StreamEncryption" -> streamEncryption,
     "Tags" -> tags
   )
 }

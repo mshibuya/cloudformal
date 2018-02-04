@@ -12,6 +12,7 @@ import scala.collection.immutable.ListMap
 trait Association extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Association"
 
+  def associationName: Property[String] = Empty
   def documentVersion: Property[String] = Empty
   def instanceId: Property[String] = Empty
   def name: NonEmptyProperty[String]
@@ -20,6 +21,7 @@ trait Association extends Resource with Resource.WithDeletionPolicy {
   def targets: Property[Seq[Target]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AssociationName" -> associationName,
     "DocumentVersion" -> documentVersion,
     "InstanceId" -> instanceId,
     "Name" -> name,

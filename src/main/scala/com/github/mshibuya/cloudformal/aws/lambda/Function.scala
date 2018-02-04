@@ -20,6 +20,7 @@ trait Function extends Resource with Resource.WithDeletionPolicy {
   def handler: NonEmptyProperty[String]
   def kmsKeyArn: Property[String] = Empty
   def memorySize: Property[Int] = Empty
+  def reservedConcurrentExecutions: Property[Int] = Empty
   def role: NonEmptyProperty[String]
   def runtime: NonEmptyProperty[String]
   def tags: Property[Seq[Tag]] = Empty
@@ -36,6 +37,7 @@ trait Function extends Resource with Resource.WithDeletionPolicy {
     "Handler" -> handler,
     "KmsKeyArn" -> kmsKeyArn,
     "MemorySize" -> memorySize,
+    "ReservedConcurrentExecutions" -> reservedConcurrentExecutions,
     "Role" -> role,
     "Runtime" -> runtime,
     "Tags" -> tags,

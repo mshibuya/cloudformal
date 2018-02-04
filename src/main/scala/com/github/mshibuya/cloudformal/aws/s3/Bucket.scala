@@ -18,6 +18,7 @@ trait Bucket extends Resource with Resource.WithDeletionPolicy {
   def accelerateConfiguration: Property[AccelerateConfiguration] = Empty
   def accessControl: Property[String] = Empty
   def analyticsConfigurations: Property[Seq[AnalyticsConfiguration]] = Empty
+  def bucketEncryption: Property[BucketEncryption] = Empty
   def bucketName: Property[String] = Empty
   def corsConfiguration: Property[CorsConfiguration] = Empty
   def inventoryConfigurations: Property[Seq[InventoryConfiguration]] = Empty
@@ -34,6 +35,7 @@ trait Bucket extends Resource with Resource.WithDeletionPolicy {
     "AccelerateConfiguration" -> accelerateConfiguration,
     "AccessControl" -> accessControl,
     "AnalyticsConfigurations" -> analyticsConfigurations,
+    "BucketEncryption" -> bucketEncryption,
     "BucketName" -> bucketName,
     "CorsConfiguration" -> corsConfiguration,
     "InventoryConfigurations" -> inventoryConfigurations,
