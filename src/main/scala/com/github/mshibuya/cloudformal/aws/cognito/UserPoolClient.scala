@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait UserPoolClient extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPoolClient"
 
-  def clientSecretAttribute: Expression[String] = Fn.GetAtt(logicalId, "ClientSecret")
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val clientSecret: Expression[String] = Fn.GetAtt(logicalId, "ClientSecret")
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def generateSecret: Property[Boolean] = Empty
   def clientName: Property[String] = Empty

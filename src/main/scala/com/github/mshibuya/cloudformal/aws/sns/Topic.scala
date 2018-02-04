@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Topic extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SNS::Topic"
 
-  def topicNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TopicName")
+  object attributes {
+    val topicName: Expression[String] = Fn.GetAtt(logicalId, "TopicName")
+  }
 
   def displayName: Property[String] = Empty
   def subscription: Property[Seq[Subscription]] = Empty

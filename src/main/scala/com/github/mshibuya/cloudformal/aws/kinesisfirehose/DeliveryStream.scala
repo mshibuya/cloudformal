@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait DeliveryStream extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::KinesisFirehose::DeliveryStream"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def deliveryStreamName: Property[String] = Empty
   def deliveryStreamType: Property[String] = Empty

@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait HostedZone extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Route53::HostedZone"
 
-  def nameServersAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "NameServers")
+  object attributes {
+    val nameServers: Expression[Seq[String]] = Fn.GetAtt(logicalId, "NameServers")
+  }
 
   def hostedZoneConfig: Property[HostedZoneConfig] = Empty
   def hostedZoneTags: Property[Seq[HostedZoneTag]] = Empty

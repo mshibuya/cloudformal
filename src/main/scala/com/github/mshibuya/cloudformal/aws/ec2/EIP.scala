@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait EIP extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::EIP"
 
-  def allocationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "AllocationId")
+  object attributes {
+    val allocationId: Expression[String] = Fn.GetAtt(logicalId, "AllocationId")
+  }
 
   def domain: Property[String] = Empty
   def instanceId: Property[String] = Empty

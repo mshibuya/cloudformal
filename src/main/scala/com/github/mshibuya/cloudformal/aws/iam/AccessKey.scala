@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait AccessKey extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::AccessKey"
 
-  def secretAccessKeyAttribute: Expression[String] = Fn.GetAtt(logicalId, "SecretAccessKey")
+  object attributes {
+    val secretAccessKey: Expression[String] = Fn.GetAtt(logicalId, "SecretAccessKey")
+  }
 
   def serial: Property[Int] = Empty
   def status: Property[String] = Empty

@@ -10,10 +10,12 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Subnet extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::Subnet"
 
-  def availabilityZoneAttribute: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")
-  def ipv6CidrBlocksAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
-  def networkAclAssociationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "NetworkAclAssociationId")
-  def vpcIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "VpcId")
+  object attributes {
+    val availabilityZone: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")
+    val ipv6CidrBlocks: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
+    val networkAclAssociationId: Expression[String] = Fn.GetAtt(logicalId, "NetworkAclAssociationId")
+    val vpcId: Expression[String] = Fn.GetAtt(logicalId, "VpcId")
+  }
 
   def assignIpv6AddressOnCreation: Property[Boolean] = Empty
   def availabilityZone: Property[String] = Empty

@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Version extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Version"
 
-  def versionAttribute: Expression[String] = Fn.GetAtt(logicalId, "Version")
+  object attributes {
+    val version: Expression[String] = Fn.GetAtt(logicalId, "Version")
+  }
 
   def codeSha256: Property[String] = Empty
   def description: Property[String] = Empty

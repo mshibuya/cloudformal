@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait StateMachine extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::StepFunctions::StateMachine"
 
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def definitionString: NonEmptyProperty[String]
   def stateMachineName: Property[String] = Empty

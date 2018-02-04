@@ -10,9 +10,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Service extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ServiceDiscovery::Service"
 
-  def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val id: Expression[String] = Fn.GetAtt(logicalId, "Id")
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def description: Property[String] = Empty
   def dnsConfig: NonEmptyProperty[DnsConfig]

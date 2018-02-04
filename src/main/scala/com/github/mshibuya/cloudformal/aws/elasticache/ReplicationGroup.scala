@@ -10,14 +10,16 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait ReplicationGroup extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::ReplicationGroup"
 
-  def configurationEndPointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Address")
-  def configurationEndPointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Port")
-  def primaryEndPointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Address")
-  def primaryEndPointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Port")
-  def readEndPointAddressesAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses")
-  def readEndPointAddressesListAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses.List")
-  def readEndPointPortsAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports")
-  def readEndPointPortsListAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports.List")
+  object attributes {
+    val configurationEndPointAddress: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Address")
+    val configurationEndPointPort: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndPoint.Port")
+    val primaryEndPointAddress: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Address")
+    val primaryEndPointPort: Expression[String] = Fn.GetAtt(logicalId, "PrimaryEndPoint.Port")
+    val readEndPointAddresses: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses")
+    val readEndPointAddressesList: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Addresses.List")
+    val readEndPointPorts: Expression[String] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports")
+    val readEndPointPortsList: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReadEndPoint.Ports.List")
+  }
 
   def atRestEncryptionEnabled: Property[Boolean] = Empty
   def authToken: Property[String] = Empty

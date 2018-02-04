@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Stream extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Kinesis::Stream"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def name: Property[String] = Empty
   def retentionPeriodHours: Property[Int] = Empty

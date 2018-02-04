@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBInstance"
 
-  def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")
-  def endpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Port")
+  object attributes {
+    val endpointAddress: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")
+    val endpointPort: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Port")
+  }
 
   def allocatedStorage: Property[String] = Empty
   def allowMajorVersionUpgrade: Property[Boolean] = Empty

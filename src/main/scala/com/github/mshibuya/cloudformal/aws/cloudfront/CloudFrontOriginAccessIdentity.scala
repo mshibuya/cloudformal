@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait CloudFrontOriginAccessIdentity extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 
-  def s3CanonicalUserIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "S3CanonicalUserId")
+  object attributes {
+    val s3CanonicalUserId: Expression[String] = Fn.GetAtt(logicalId, "S3CanonicalUserId")
+  }
 
   def cloudFrontOriginAccessIdentityConfig: NonEmptyProperty[CloudFrontOriginAccessIdentityConfig]
 

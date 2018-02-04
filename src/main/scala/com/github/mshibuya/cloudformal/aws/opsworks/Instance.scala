@@ -10,11 +10,13 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Instance extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Instance"
 
-  def availabilityZoneAttribute: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")
-  def privateDnsNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrivateDnsName")
-  def privateIpAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrivateIp")
-  def publicDnsNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "PublicDnsName")
-  def publicIpAttribute: Expression[String] = Fn.GetAtt(logicalId, "PublicIp")
+  object attributes {
+    val availabilityZone: Expression[String] = Fn.GetAtt(logicalId, "AvailabilityZone")
+    val privateDnsName: Expression[String] = Fn.GetAtt(logicalId, "PrivateDnsName")
+    val privateIp: Expression[String] = Fn.GetAtt(logicalId, "PrivateIp")
+    val publicDnsName: Expression[String] = Fn.GetAtt(logicalId, "PublicDnsName")
+    val publicIp: Expression[String] = Fn.GetAtt(logicalId, "PublicIp")
+  }
 
   def agentVersion: Property[String] = Empty
   def amiId: Property[String] = Empty

@@ -10,9 +10,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait TargetGroup extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::TargetGroup"
 
-  def loadBalancerArnsAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "LoadBalancerArns")
-  def targetGroupFullNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupFullName")
-  def targetGroupNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupName")
+  object attributes {
+    val loadBalancerArns: Expression[Seq[String]] = Fn.GetAtt(logicalId, "LoadBalancerArns")
+    val targetGroupFullName: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupFullName")
+    val targetGroupName: Expression[String] = Fn.GetAtt(logicalId, "TargetGroupName")
+  }
 
   def healthCheckIntervalSeconds: Property[Int] = Empty
   def healthCheckPath: Property[String] = Empty

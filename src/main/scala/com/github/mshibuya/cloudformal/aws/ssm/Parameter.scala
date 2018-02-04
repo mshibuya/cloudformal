@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Parameter extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Parameter"
 
-  def typeAttribute: Expression[String] = Fn.GetAtt(logicalId, "Type")
-  def valueAttribute: Expression[String] = Fn.GetAtt(logicalId, "Value")
+  object attributes {
+    val `type`: Expression[String] = Fn.GetAtt(logicalId, "Type")
+    val value: Expression[String] = Fn.GetAtt(logicalId, "Value")
+  }
 
   def `type`: NonEmptyProperty[String]
   def description: Property[String] = Empty

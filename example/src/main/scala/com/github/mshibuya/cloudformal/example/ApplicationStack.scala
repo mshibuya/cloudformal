@@ -39,8 +39,8 @@ object ApplicationStack extends Stack {
   )
 
   val appServerInstanceId = Output("AppServerInstanceId", appServer.ref)
-  val appServerPublicIp = Output("AppServerPublicIp", appServer.publicIpAttribute,
-    export = Value(Export("PublicIp", appServer.publicIpAttribute)))
+  val appServerPublicIp = Output("AppServerPublicIp", appServer.attributes.publicIp,
+    export = Value(Export("PublicIp", appServer.attributes.publicIp)))
   val outputs = Seq(
     appServerInstanceId,
     appServerPublicIp

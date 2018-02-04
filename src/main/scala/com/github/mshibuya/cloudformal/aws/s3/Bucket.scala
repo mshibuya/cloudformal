@@ -10,10 +10,12 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Bucket extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::S3::Bucket"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
-  def dualStackDomainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DualStackDomainName")
-  def websiteURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "WebsiteURL")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val domainName: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+    val dualStackDomainName: Expression[String] = Fn.GetAtt(logicalId, "DualStackDomainName")
+    val websiteURL: Expression[String] = Fn.GetAtt(logicalId, "WebsiteURL")
+  }
 
   def accelerateConfiguration: Property[AccelerateConfiguration] = Empty
   def accessControl: Property[String] = Empty

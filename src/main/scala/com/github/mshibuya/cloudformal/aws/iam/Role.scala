@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Role extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::Role"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def assumeRolePolicyDocument: NonEmptyProperty[Json]
   def managedPolicyArns: Property[Seq[String]] = Empty

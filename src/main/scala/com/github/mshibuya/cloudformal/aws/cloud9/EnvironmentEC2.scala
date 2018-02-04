@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait EnvironmentEC2 extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cloud9::EnvironmentEC2"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def repositories: Property[Seq[Repository]] = Empty
   def ownerArn: Property[String] = Empty

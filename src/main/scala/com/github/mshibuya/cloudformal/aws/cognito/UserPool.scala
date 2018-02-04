@@ -11,9 +11,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait UserPool extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPool"
 
-  def providerNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "ProviderName")
-  def providerURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "ProviderURL")
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val providerName: Expression[String] = Fn.GetAtt(logicalId, "ProviderName")
+    val providerURL: Expression[String] = Fn.GetAtt(logicalId, "ProviderURL")
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def userPoolTags: Property[Json] = Empty
   def policies: Property[Policies] = Empty

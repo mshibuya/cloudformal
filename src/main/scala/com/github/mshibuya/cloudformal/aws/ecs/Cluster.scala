@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Cluster extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::Cluster"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def clusterName: Property[String] = Empty
 

@@ -14,7 +14,9 @@ import scala.collection.immutable.ListMap
 trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::RestApi"
 
-  def rootResourceIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "RootResourceId")
+  object attributes {
+    val rootResourceId: Expression[String] = Fn.GetAtt(logicalId, "RootResourceId")
+  }
 
   def binaryMediaTypes: Property[Seq[String]] = Empty
   def body: Property[Json] = Empty

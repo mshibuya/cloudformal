@@ -8,10 +8,14 @@ case class Attribute(name: String,
                      primitiveType: Option[String],
                      primitiveItemType: Option[String],
                      `type`: Option[String]) extends HasType {
-  val identifier: String = s"${Inflector.camelize(name.replace(".", ""))}Attribute"
+  val identifier: String =
+    if (name == "Type")
+      "`type`"
+    else
+      Inflector.camelize(name.replace(".", ""))
 
   def methodValue: String = {
-    s"""  def ${identifier}: Expression[${inferredTypeName}] = Fn.GetAtt(logicalId, "${name}")"""
+    s"""    val ${identifier}: Expression[${inferredTypeName}] = Fn.GetAtt(logicalId, "${name}")"""
   }
 }
 

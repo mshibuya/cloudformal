@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Environment extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticBeanstalk::Environment"
 
-  def endpointURLAttribute: Expression[String] = Fn.GetAtt(logicalId, "EndpointURL")
+  object attributes {
+    val endpointURL: Expression[String] = Fn.GetAtt(logicalId, "EndpointURL")
+  }
 
   def applicationName: NonEmptyProperty[String]
   def cNAMEPrefix: Property[String] = Empty

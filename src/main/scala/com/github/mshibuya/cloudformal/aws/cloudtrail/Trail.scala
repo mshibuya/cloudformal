@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Trail extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudTrail::Trail"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def snsTopicArnAttribute: Expression[String] = Fn.GetAtt(logicalId, "SnsTopicArn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val snsTopicArn: Expression[String] = Fn.GetAtt(logicalId, "SnsTopicArn")
+  }
 
   def cloudWatchLogsLogGroupArn: Property[String] = Empty
   def cloudWatchLogsRoleArn: Property[String] = Empty

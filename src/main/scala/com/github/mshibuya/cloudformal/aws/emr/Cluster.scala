@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Cluster extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::Cluster"
 
-  def masterPublicDNSAttribute: Expression[String] = Fn.GetAtt(logicalId, "MasterPublicDNS")
+  object attributes {
+    val masterPublicDNS: Expression[String] = Fn.GetAtt(logicalId, "MasterPublicDNS")
+  }
 
   def additionalInfo: Property[Json] = Empty
   def applications: Property[Seq[Application]] = Empty

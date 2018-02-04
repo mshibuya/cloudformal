@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Group extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::Group"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def groupName: Property[String] = Empty
   def managedPolicyArns: Property[Seq[String]] = Empty

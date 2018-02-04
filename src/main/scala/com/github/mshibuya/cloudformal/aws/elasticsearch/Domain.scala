@@ -13,8 +13,10 @@ import scala.collection.immutable.ListMap
 trait Domain extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Elasticsearch::Domain"
 
-  def domainArnAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainArn")
-  def domainEndpointAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainEndpoint")
+  object attributes {
+    val domainArn: Expression[String] = Fn.GetAtt(logicalId, "DomainArn")
+    val domainEndpoint: Expression[String] = Fn.GetAtt(logicalId, "DomainEndpoint")
+  }
 
   def accessPolicies: Property[Json] = Empty
   def advancedOptions: Property[ListMap[String, String]] = Empty

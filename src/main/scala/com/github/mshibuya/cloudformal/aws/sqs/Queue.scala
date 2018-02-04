@@ -11,8 +11,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Queue extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SQS::Queue"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def queueNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "QueueName")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val queueName: Expression[String] = Fn.GetAtt(logicalId, "QueueName")
+  }
 
   def contentBasedDeduplication: Property[Boolean] = Empty
   def delaySeconds: Property[Int] = Empty

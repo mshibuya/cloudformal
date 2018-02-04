@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Policy extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IoT::Policy"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def policyDocument: NonEmptyProperty[Json]
   def policyName: Property[String] = Empty

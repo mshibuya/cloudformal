@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait ReplicationInstance extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::ReplicationInstance"
 
-  def replicationInstancePublicIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePublicIpAddresses")
-  def replicationInstancePrivateIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePrivateIpAddresses")
+  object attributes {
+    val replicationInstancePublicIpAddresses: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePublicIpAddresses")
+    val replicationInstancePrivateIpAddresses: Expression[Seq[String]] = Fn.GetAtt(logicalId, "ReplicationInstancePrivateIpAddresses")
+  }
 
   def replicationInstanceIdentifier: Property[String] = Empty
   def engineVersion: Property[String] = Empty

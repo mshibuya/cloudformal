@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait MicrosoftAD extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DirectoryService::MicrosoftAD"
 
-  def aliasAttribute: Expression[String] = Fn.GetAtt(logicalId, "Alias")
-  def dnsIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "DnsIpAddresses")
+  object attributes {
+    val alias: Expression[String] = Fn.GetAtt(logicalId, "Alias")
+    val dnsIpAddresses: Expression[Seq[String]] = Fn.GetAtt(logicalId, "DnsIpAddresses")
+  }
 
   def createAlias: Property[Boolean] = Empty
   def enableSso: Property[Boolean] = Empty

@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait LogGroup extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Logs::LogGroup"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def logGroupName: Property[String] = Empty
   def retentionInDays: Property[Int] = Empty

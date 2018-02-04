@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait NetworkInterface extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::NetworkInterface"
 
-  def primaryPrivateIpAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "PrimaryPrivateIpAddress")
-  def secondaryPrivateIpAddressesAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecondaryPrivateIpAddresses")
+  object attributes {
+    val primaryPrivateIpAddress: Expression[String] = Fn.GetAtt(logicalId, "PrimaryPrivateIpAddress")
+    val secondaryPrivateIpAddresses: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecondaryPrivateIpAddresses")
+  }
 
   def description: Property[String] = Empty
   def groupSet: Property[Seq[String]] = Empty

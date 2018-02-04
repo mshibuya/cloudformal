@@ -10,11 +10,13 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::LoadBalancer"
 
-  def canonicalHostedZoneIDAttribute: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneID")
-  def dNSNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
-  def loadBalancerFullNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerFullName")
-  def loadBalancerNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerName")
-  def securityGroupsAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecurityGroups")
+  object attributes {
+    val canonicalHostedZoneID: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneID")
+    val dNSName: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
+    val loadBalancerFullName: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerFullName")
+    val loadBalancerName: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerName")
+    val securityGroups: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecurityGroups")
+  }
 
   def ipAddressType: Property[String] = Empty
   def loadBalancerAttributes: Property[Seq[LoadBalancerAttribute]] = Empty

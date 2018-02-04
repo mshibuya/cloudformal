@@ -10,10 +10,12 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait CacheCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::CacheCluster"
 
-  def configurationEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Address")
-  def configurationEndpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Port")
-  def redisEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Address")
-  def redisEndpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Port")
+  object attributes {
+    val configurationEndpointAddress: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Address")
+    val configurationEndpointPort: Expression[String] = Fn.GetAtt(logicalId, "ConfigurationEndpoint.Port")
+    val redisEndpointAddress: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Address")
+    val redisEndpointPort: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Port")
+  }
 
   def aZMode: Property[String] = Empty
   def autoMinorVersionUpgrade: Property[Boolean] = Empty

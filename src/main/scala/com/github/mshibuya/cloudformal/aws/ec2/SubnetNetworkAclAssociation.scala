@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait SubnetNetworkAclAssociation extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::SubnetNetworkAclAssociation"
 
-  def associationIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "AssociationId")
+  object attributes {
+    val associationId: Expression[String] = Fn.GetAtt(logicalId, "AssociationId")
+  }
 
   def networkAclId: NonEmptyProperty[String]
   def subnetId: NonEmptyProperty[String]

@@ -10,11 +10,13 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait VPC extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::VPC"
 
-  def cidrBlockAttribute: Expression[String] = Fn.GetAtt(logicalId, "CidrBlock")
-  def cidrBlockAssociationsAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "CidrBlockAssociations")
-  def defaultNetworkAclAttribute: Expression[String] = Fn.GetAtt(logicalId, "DefaultNetworkAcl")
-  def defaultSecurityGroupAttribute: Expression[String] = Fn.GetAtt(logicalId, "DefaultSecurityGroup")
-  def ipv6CidrBlocksAttribute: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
+  object attributes {
+    val cidrBlock: Expression[String] = Fn.GetAtt(logicalId, "CidrBlock")
+    val cidrBlockAssociations: Expression[Seq[String]] = Fn.GetAtt(logicalId, "CidrBlockAssociations")
+    val defaultNetworkAcl: Expression[String] = Fn.GetAtt(logicalId, "DefaultNetworkAcl")
+    val defaultSecurityGroup: Expression[String] = Fn.GetAtt(logicalId, "DefaultSecurityGroup")
+    val ipv6CidrBlocks: Expression[Seq[String]] = Fn.GetAtt(logicalId, "Ipv6CidrBlocks")
+  }
 
   def cidrBlock: NonEmptyProperty[String]
   def enableDnsHostnames: Property[Boolean] = Empty

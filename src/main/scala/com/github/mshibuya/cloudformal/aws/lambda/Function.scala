@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Function extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Function"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def code: NonEmptyProperty[Code]
   def deadLetterConfig: Property[DeadLetterConfig] = Empty

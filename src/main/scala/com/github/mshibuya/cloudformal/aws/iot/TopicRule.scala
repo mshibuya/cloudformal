@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait TopicRule extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IoT::TopicRule"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def ruleName: Property[String] = Empty
   def topicRulePayload: NonEmptyProperty[TopicRulePayload]

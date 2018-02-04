@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Distribution extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFront::Distribution"
 
-  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+  object attributes {
+    val domainName: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+  }
 
   def distributionConfig: NonEmptyProperty[DistributionConfig]
   def tags: Property[Seq[Tag]] = Empty

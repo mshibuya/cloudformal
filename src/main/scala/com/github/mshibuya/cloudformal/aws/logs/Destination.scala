@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Destination extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Logs::Destination"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def destinationName: NonEmptyProperty[String]
   def destinationPolicy: NonEmptyProperty[String]

@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Key extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::KMS::Key"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def description: Property[String] = Empty
   def enableKeyRotation: Property[Boolean] = Empty

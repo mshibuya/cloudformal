@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait IdentityPool extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::IdentityPool"
 
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def pushSync: Property[PushSync] = Empty
   def cognitoIdentityProviders: Property[Seq[CognitoIdentityProvider]] = Empty

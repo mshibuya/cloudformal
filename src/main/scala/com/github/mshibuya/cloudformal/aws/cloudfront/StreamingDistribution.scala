@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait StreamingDistribution extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFront::StreamingDistribution"
 
-  def domainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+  object attributes {
+    val domainName: Expression[String] = Fn.GetAtt(logicalId, "DomainName")
+  }
 
   def streamingDistributionConfig: NonEmptyProperty[StreamingDistributionConfig]
   def tags: NonEmptyProperty[Seq[Tag]]

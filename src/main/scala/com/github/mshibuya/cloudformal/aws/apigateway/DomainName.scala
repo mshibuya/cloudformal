@@ -11,10 +11,12 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait DomainName extends model.Resource with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::DomainName"
 
-  def distributionDomainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "DistributionDomainName")
-  def distributionHostedZoneIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "DistributionHostedZoneId")
-  def regionalDomainNameAttribute: Expression[String] = Fn.GetAtt(logicalId, "RegionalDomainName")
-  def regionalHostedZoneIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "RegionalHostedZoneId")
+  object attributes {
+    val distributionDomainName: Expression[String] = Fn.GetAtt(logicalId, "DistributionDomainName")
+    val distributionHostedZoneId: Expression[String] = Fn.GetAtt(logicalId, "DistributionHostedZoneId")
+    val regionalDomainName: Expression[String] = Fn.GetAtt(logicalId, "RegionalDomainName")
+    val regionalHostedZoneId: Expression[String] = Fn.GetAtt(logicalId, "RegionalHostedZoneId")
+  }
 
   def certificateArn: Property[String] = Empty
   def domainName: NonEmptyProperty[String]

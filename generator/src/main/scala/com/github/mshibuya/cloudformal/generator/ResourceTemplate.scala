@@ -50,8 +50,8 @@ case class ResourceTemplate(name: String, specification: ResourceSpecification) 
       |
       |trait ${traitName} extends ${resourceClassName}${policyMixins} {
       |  val resourceTypeName = "${name}"
-      |
-      |${Seq(specification.attributes.map(_.methodValue).mkString("\n"), specification.properties.map(_.methodValue).mkString("\n")).filterNot(_.isEmpty).mkString("\n\n")}
+      |${if (specification.attributes.nonEmpty) s"\n  object attributes {\n${specification.attributes.map(_.methodValue).mkString("\n")}\n  }\n" else ""}
+      |${specification.properties.map(_.methodValue).mkString("\n")}
       |
       |${propertySection}
       |}

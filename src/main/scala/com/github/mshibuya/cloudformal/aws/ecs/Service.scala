@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Service extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::Service"
 
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def cluster: Property[String] = Empty
   def deploymentConfiguration: Property[DeploymentConfiguration] = Empty

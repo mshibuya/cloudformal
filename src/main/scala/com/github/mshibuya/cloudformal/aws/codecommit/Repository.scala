@@ -10,10 +10,12 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Repository extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodeCommit::Repository"
 
-  def cloneUrlHttpAttribute: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlHttp")
-  def cloneUrlSshAttribute: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlSsh")
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def nameAttribute: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  object attributes {
+    val cloneUrlHttp: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlHttp")
+    val cloneUrlSsh: Expression[String] = Fn.GetAtt(logicalId, "CloneUrlSsh")
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val name: Expression[String] = Fn.GetAtt(logicalId, "Name")
+  }
 
   def repositoryName: NonEmptyProperty[String]
   def triggers: Property[Seq[RepositoryTrigger]] = Empty

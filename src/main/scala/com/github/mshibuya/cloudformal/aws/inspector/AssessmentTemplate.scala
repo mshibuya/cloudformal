@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait AssessmentTemplate extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Inspector::AssessmentTemplate"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def assessmentTargetArn: NonEmptyProperty[String]
   def durationInSeconds: NonEmptyProperty[Int]

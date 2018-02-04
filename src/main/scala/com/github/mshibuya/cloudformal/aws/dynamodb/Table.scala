@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Table extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DynamoDB::Table"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def streamArnAttribute: Expression[String] = Fn.GetAtt(logicalId, "StreamArn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val streamArn: Expression[String] = Fn.GetAtt(logicalId, "StreamArn")
+  }
 
   def attributeDefinitions: Property[Seq[AttributeDefinition]] = Empty
   def globalSecondaryIndexes: Property[Seq[GlobalSecondaryIndex]] = Empty

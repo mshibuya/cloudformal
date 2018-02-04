@@ -286,7 +286,7 @@ object WordPressMultiAZStack extends Stack {
     override def logicalId: String = "WebServerSecurityGroup"
     override def groupDescription: NonEmptyProperty[String] = Value("Enable HTTP access via port 80 locked down to the load balancer + SSH access")
     override def securityGroupIngress: Property[Seq[Ingress]] = Value(Seq(
-      Ingress(ipProtocol = Value("tcp"), fromPort = Value(80), toPort = Value(80), sourceSecurityGroupId = Fn.Select(0, applicationLoadBalancer.securityGroupsAttribute)),
+      Ingress(ipProtocol = Value("tcp"), fromPort = Value(80), toPort = Value(80), sourceSecurityGroupId = Fn.Select(0, applicationLoadBalancer.attributes.securityGroups)),
       Ingress(ipProtocol = Value("tcp"), fromPort = Value(22), toPort = Value(22), cidrIp = sshLocation.ref)
     ))
     override def vpcId: Property[String] = WordPressMultiAZStack.vpcId.ref
@@ -427,7 +427,7 @@ object WordPressMultiAZStack extends Stack {
     override def masterUserPassword: Property[String] = WordPressMultiAZStack.dbPassword.ref
     override def dBInstanceClass: NonEmptyProperty[String] = dbClass.ref
     override def allocatedStorage: Property[String] = dbAllocatedStorage.ref.as[String]
-    override def vPCSecurityGroups: Property[Seq[String]] = ListProperty(dbEC2SecurityGroup.groupIdAttribute)
+    override def vPCSecurityGroups: Property[Seq[String]] = ListProperty(dbEC2SecurityGroup.attributes.groupId)
   }
   val resources = Seq(
     applicationLoadBalancer,
@@ -441,7 +441,7 @@ object WordPressMultiAZStack extends Stack {
   )
 
   val websiteUrl = Output("WebsiteURL",
-    Fn.Join("", Value(Seq("http://", applicationLoadBalancer.dNSNameAttribute, "/wordpress"))),
+    Fn.Join("", Value(Seq("http://", applicationLoadBalancer.attributes.dNSName, "/wordpress"))),
     Value("WordPress Website"))
   val outputs = Seq(websiteUrl)
 }

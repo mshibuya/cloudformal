@@ -11,7 +11,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait WaitCondition extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::WaitCondition"
 
-  def dataAttribute: Expression[Json] = Fn.GetAtt(logicalId, "Data")
+  object attributes {
+    val data: Expression[Json] = Fn.GetAtt(logicalId, "Data")
+  }
 
   def count: Property[Int] = Empty
   def handle: NonEmptyProperty[String]

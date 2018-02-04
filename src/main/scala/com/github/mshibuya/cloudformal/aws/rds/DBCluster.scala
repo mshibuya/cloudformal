@@ -10,9 +10,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait DBCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBCluster"
 
-  def endpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")
-  def endpointPortAttribute: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Port")
-  def readEndpointAddressAttribute: Expression[String] = Fn.GetAtt(logicalId, "ReadEndpoint.Address")
+  object attributes {
+    val endpointAddress: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Address")
+    val endpointPort: Expression[String] = Fn.GetAtt(logicalId, "Endpoint.Port")
+    val readEndpointAddress: Expression[String] = Fn.GetAtt(logicalId, "ReadEndpoint.Address")
+  }
 
   def availabilityZones: Property[Seq[String]] = Empty
   def backupRetentionPeriod: Property[Int] = Empty

@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Endpoint extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::Endpoint"
 
-  def externalIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "ExternalId")
+  object attributes {
+    val externalId: Expression[String] = Fn.GetAtt(logicalId, "ExternalId")
+  }
 
   def kmsKeyId: Property[String] = Empty
   def port: Property[Int] = Empty

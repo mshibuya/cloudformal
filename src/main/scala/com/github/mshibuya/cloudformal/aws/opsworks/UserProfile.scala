@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait UserProfile extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::UserProfile"
 
-  def sshUsernameAttribute: Expression[String] = Fn.GetAtt(logicalId, "SshUsername")
+  object attributes {
+    val sshUsername: Expression[String] = Fn.GetAtt(logicalId, "SshUsername")
+  }
 
   def allowSelfManagement: Property[Boolean] = Empty
   def iamUserArn: NonEmptyProperty[String]

@@ -11,9 +11,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait ConfigRule extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Config::ConfigRule"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
-  def complianceTypeAttribute: Expression[String] = Fn.GetAtt(logicalId, "Compliance.Type")
-  def configRuleIdAttribute: Expression[String] = Fn.GetAtt(logicalId, "ConfigRuleId")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+    val complianceType: Expression[String] = Fn.GetAtt(logicalId, "Compliance.Type")
+    val configRuleId: Expression[String] = Fn.GetAtt(logicalId, "ConfigRuleId")
+  }
 
   def configRuleName: Property[String] = Empty
   def description: Property[String] = Empty

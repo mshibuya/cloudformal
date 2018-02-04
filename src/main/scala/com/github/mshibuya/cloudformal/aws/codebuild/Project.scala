@@ -10,7 +10,9 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Project extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodeBuild::Project"
 
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def artifacts: NonEmptyProperty[Artifacts]
   def badgeEnabled: Property[Boolean] = Empty

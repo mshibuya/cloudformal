@@ -10,8 +10,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait PublicDnsNamespace extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ServiceDiscovery::PublicDnsNamespace"
 
-  def idAttribute: Expression[String] = Fn.GetAtt(logicalId, "Id")
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val id: Expression[String] = Fn.GetAtt(logicalId, "Id")
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def description: Property[String] = Empty
   def name: NonEmptyProperty[String]

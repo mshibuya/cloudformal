@@ -11,8 +11,10 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait Cluster extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DAX::Cluster"
 
-  def clusterDiscoveryEndpointAttribute: Expression[String] = Fn.GetAtt(logicalId, "ClusterDiscoveryEndpoint")
-  def arnAttribute: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  object attributes {
+    val clusterDiscoveryEndpoint: Expression[String] = Fn.GetAtt(logicalId, "ClusterDiscoveryEndpoint")
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
+  }
 
   def description: Property[String] = Empty
   def replicationFactor: NonEmptyProperty[Int]
