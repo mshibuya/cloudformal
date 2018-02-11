@@ -17,7 +17,7 @@ trait CacheCluster extends Resource with Resource.WithSnapshotableDeletionPolicy
     val redisEndpointPort: Expression[String] = Fn.GetAtt(logicalId, "RedisEndpoint.Port")
   }
 
-  def aZMode: Property[String] = Empty
+  def azMode: Property[String] = Empty
   def autoMinorVersionUpgrade: Property[Boolean] = Empty
   def cacheNodeType: NonEmptyProperty[String]
   def cacheParameterGroupName: Property[String] = Empty
@@ -40,7 +40,7 @@ trait CacheCluster extends Resource with Resource.WithSnapshotableDeletionPolicy
   def vpcSecurityGroupIds: Property[Seq[String]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
-    "AZMode" -> aZMode,
+    "AZMode" -> azMode,
     "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,
     "CacheNodeType" -> cacheNodeType,
     "CacheParameterGroupName" -> cacheParameterGroupName,

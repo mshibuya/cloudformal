@@ -11,14 +11,14 @@ trait EIPAssociation extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::EIPAssociation"
 
   def allocationId: Property[String] = Empty
-  def eIP: Property[String] = Empty
+  def eiP: Property[String] = Empty
   def instanceId: Property[String] = Empty
   def networkInterfaceId: Property[String] = Empty
   def privateIpAddress: Property[String] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "AllocationId" -> allocationId,
-    "EIP" -> eIP,
+    "EIP" -> eiP,
     "InstanceId" -> instanceId,
     "NetworkInterfaceId" -> networkInterfaceId,
     "PrivateIpAddress" -> privateIpAddress

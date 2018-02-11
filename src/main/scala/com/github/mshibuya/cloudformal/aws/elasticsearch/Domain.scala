@@ -21,22 +21,22 @@ trait Domain extends Resource with Resource.WithDeletionPolicy {
   def accessPolicies: Property[Json] = Empty
   def advancedOptions: Property[ListMap[String, String]] = Empty
   def domainName: Property[String] = Empty
-  def eBSOptions: Property[EBSOptions] = Empty
+  def ebsOptions: Property[EBSOptions] = Empty
   def elasticsearchClusterConfig: Property[ElasticsearchClusterConfig] = Empty
   def elasticsearchVersion: Property[String] = Empty
   def snapshotOptions: Property[SnapshotOptions] = Empty
   def tags: Property[Seq[Tag]] = Empty
-  def vPCOptions: Property[VPCOptions] = Empty
+  def vpcOptions: Property[VPCOptions] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "AccessPolicies" -> accessPolicies,
     "AdvancedOptions" -> advancedOptions,
     "DomainName" -> domainName,
-    "EBSOptions" -> eBSOptions,
+    "EBSOptions" -> ebsOptions,
     "ElasticsearchClusterConfig" -> elasticsearchClusterConfig,
     "ElasticsearchVersion" -> elasticsearchVersion,
     "SnapshotOptions" -> snapshotOptions,
     "Tags" -> tags,
-    "VPCOptions" -> vPCOptions
+    "VPCOptions" -> vpcOptions
   )
 }

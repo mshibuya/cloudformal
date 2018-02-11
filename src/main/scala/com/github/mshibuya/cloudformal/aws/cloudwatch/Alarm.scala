@@ -26,7 +26,7 @@ trait Alarm extends Resource with Resource.WithDeletionPolicy {
   def insufficientDataActions: Property[Seq[String]] = Empty
   def metricName: NonEmptyProperty[String]
   def namespace: NonEmptyProperty[String]
-  def oKActions: Property[Seq[String]] = Empty
+  def okActions: Property[Seq[String]] = Empty
   def period: NonEmptyProperty[Int]
   def statistic: Property[String] = Empty
   def threshold: NonEmptyProperty[Double]
@@ -46,7 +46,7 @@ trait Alarm extends Resource with Resource.WithDeletionPolicy {
     "InsufficientDataActions" -> insufficientDataActions,
     "MetricName" -> metricName,
     "Namespace" -> namespace,
-    "OKActions" -> oKActions,
+    "OKActions" -> okActions,
     "Period" -> period,
     "Statistic" -> statistic,
     "Threshold" -> threshold,

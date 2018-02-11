@@ -13,7 +13,7 @@ trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
   object attributes {
     val canonicalHostedZoneName: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneName")
     val canonicalHostedZoneNameID: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneNameID")
-    val dNSName: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
+    val dnsName: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
     val sourceSecurityGroupGroupName: Expression[String] = Fn.GetAtt(logicalId, "SourceSecurityGroup.GroupName")
     val sourceSecurityGroupOwnerAlias: Expression[String] = Fn.GetAtt(logicalId, "SourceSecurityGroup.OwnerAlias")
   }
@@ -26,7 +26,7 @@ trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
   def crossZone: Property[Boolean] = Empty
   def healthCheck: Property[HealthCheck] = Empty
   def instances: Property[Seq[String]] = Empty
-  def lBCookieStickinessPolicy: Property[Seq[LBCookieStickinessPolicy]] = Empty
+  def lbCookieStickinessPolicy: Property[Seq[LBCookieStickinessPolicy]] = Empty
   def listeners: NonEmptyProperty[Seq[Listeners]]
   def loadBalancerName: Property[String] = Empty
   def policies: Property[Seq[Policies]] = Empty
@@ -44,7 +44,7 @@ trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
     "CrossZone" -> crossZone,
     "HealthCheck" -> healthCheck,
     "Instances" -> instances,
-    "LBCookieStickinessPolicy" -> lBCookieStickinessPolicy,
+    "LBCookieStickinessPolicy" -> lbCookieStickinessPolicy,
     "Listeners" -> listeners,
     "LoadBalancerName" -> loadBalancerName,
     "Policies" -> policies,

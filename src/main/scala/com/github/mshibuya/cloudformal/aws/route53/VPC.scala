@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VPC(
-    vPCId: NonEmptyProperty[String],
-    vPCRegion: NonEmptyProperty[String]) extends Renderable {
+    vpcId: NonEmptyProperty[String],
+    vpcRegion: NonEmptyProperty[String]) extends Renderable {
   def render: Formattable = Formattable.withProperties(
-    "VPCId" -> vPCId,
-    "VPCRegion" -> vPCRegion
+    "VPCId" -> vpcId,
+    "VPCRegion" -> vpcRegion
   )
 }

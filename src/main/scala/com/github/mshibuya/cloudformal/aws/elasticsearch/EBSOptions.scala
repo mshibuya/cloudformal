@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EBSOptions(
-    eBSEnabled: Property[Boolean] = Empty,
+    ebsEnabled: Property[Boolean] = Empty,
     iops: Property[Int] = Empty,
     volumeSize: Property[Int] = Empty,
     volumeType: Property[String] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
-    "EBSEnabled" -> eBSEnabled,
+    "EBSEnabled" -> ebsEnabled,
     "Iops" -> iops,
     "VolumeSize" -> volumeSize,
     "VolumeType" -> volumeType

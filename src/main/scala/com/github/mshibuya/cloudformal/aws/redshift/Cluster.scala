@@ -23,7 +23,7 @@ trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def clusterSubnetGroupName: Property[String] = Empty
   def clusterType: NonEmptyProperty[String]
   def clusterVersion: Property[String] = Empty
-  def dBName: NonEmptyProperty[String]
+  def dbName: NonEmptyProperty[String]
   def elasticIp: Property[String] = Empty
   def encrypted: Property[Boolean] = Empty
   def hsmClientCertificateIdentifier: Property[String] = Empty
@@ -53,7 +53,7 @@ trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
     "ClusterSubnetGroupName" -> clusterSubnetGroupName,
     "ClusterType" -> clusterType,
     "ClusterVersion" -> clusterVersion,
-    "DBName" -> dBName,
+    "DBName" -> dbName,
     "ElasticIp" -> elasticIp,
     "Encrypted" -> encrypted,
     "HsmClientCertificateIdentifier" -> hsmClientCertificateIdentifier,

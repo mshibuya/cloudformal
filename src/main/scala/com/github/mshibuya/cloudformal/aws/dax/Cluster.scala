@@ -21,7 +21,7 @@ trait Cluster extends Resource with Resource.WithDeletionPolicy {
   def parameterGroupName: Property[String] = Empty
   def availabilityZones: Property[Seq[String]] = Empty
   def nodeType: NonEmptyProperty[String]
-  def iAMRoleARN: NonEmptyProperty[String]
+  def iamRoleARN: NonEmptyProperty[String]
   def subnetGroupName: Property[String] = Empty
   def clusterName: Property[String] = Empty
   def preferredMaintenanceWindow: Property[String] = Empty
@@ -35,7 +35,7 @@ trait Cluster extends Resource with Resource.WithDeletionPolicy {
     "ParameterGroupName" -> parameterGroupName,
     "AvailabilityZones" -> availabilityZones,
     "NodeType" -> nodeType,
-    "IAMRoleARN" -> iAMRoleARN,
+    "IAMRoleARN" -> iamRoleARN,
     "SubnetGroupName" -> subnetGroupName,
     "ClusterName" -> clusterName,
     "PreferredMaintenanceWindow" -> preferredMaintenanceWindow,

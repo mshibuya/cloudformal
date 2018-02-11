@@ -11,14 +11,14 @@ trait TrunkInterfaceAssociation extends Resource with Resource.WithDeletionPolic
   val resourceTypeName = "AWS::EC2::TrunkInterfaceAssociation"
 
   def branchInterfaceId: NonEmptyProperty[String]
-  def gREKey: Property[Int] = Empty
+  def greKey: Property[Int] = Empty
   def trunkInterfaceId: NonEmptyProperty[String]
-  def vLANId: Property[Int] = Empty
+  def vlanId: Property[Int] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "BranchInterfaceId" -> branchInterfaceId,
-    "GREKey" -> gREKey,
+    "GREKey" -> greKey,
     "TrunkInterfaceId" -> trunkInterfaceId,
-    "VLANId" -> vLANId
+    "VLANId" -> vlanId
   )
 }

@@ -22,7 +22,7 @@ trait Trail extends Resource with Resource.WithDeletionPolicy {
   def includeGlobalServiceEvents: Property[Boolean] = Empty
   def isLogging: NonEmptyProperty[Boolean]
   def isMultiRegionTrail: Property[Boolean] = Empty
-  def kMSKeyId: Property[String] = Empty
+  def kmsKeyId: Property[String] = Empty
   def s3BucketName: NonEmptyProperty[String]
   def s3KeyPrefix: Property[String] = Empty
   def snsTopicName: Property[String] = Empty
@@ -37,7 +37,7 @@ trait Trail extends Resource with Resource.WithDeletionPolicy {
     "IncludeGlobalServiceEvents" -> includeGlobalServiceEvents,
     "IsLogging" -> isLogging,
     "IsMultiRegionTrail" -> isMultiRegionTrail,
-    "KMSKeyId" -> kMSKeyId,
+    "KMSKeyId" -> kmsKeyId,
     "S3BucketName" -> s3BucketName,
     "S3KeyPrefix" -> s3KeyPrefix,
     "SnsTopicName" -> snsTopicName,

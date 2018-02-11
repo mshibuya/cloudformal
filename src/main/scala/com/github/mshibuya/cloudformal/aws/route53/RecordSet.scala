@@ -21,7 +21,7 @@ trait RecordSet extends Resource with Resource.WithDeletionPolicy {
   def region: Property[String] = Empty
   def resourceRecords: Property[Seq[String]] = Empty
   def setIdentifier: Property[String] = Empty
-  def tTL: Property[String] = Empty
+  def ttL: Property[String] = Empty
   def `type`: NonEmptyProperty[String]
   def weight: Property[Int] = Empty
 
@@ -37,7 +37,7 @@ trait RecordSet extends Resource with Resource.WithDeletionPolicy {
     "Region" -> region,
     "ResourceRecords" -> resourceRecords,
     "SetIdentifier" -> setIdentifier,
-    "TTL" -> tTL,
+    "TTL" -> ttL,
     "Type" -> `type`,
     "Weight" -> weight
   )

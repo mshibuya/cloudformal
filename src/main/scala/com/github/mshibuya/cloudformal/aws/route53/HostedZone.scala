@@ -18,13 +18,13 @@ trait HostedZone extends Resource with Resource.WithDeletionPolicy {
   def hostedZoneTags: Property[Seq[HostedZoneTag]] = Empty
   def name: NonEmptyProperty[String]
   def queryLoggingConfig: Property[QueryLoggingConfig] = Empty
-  def vPCs: Property[Seq[VPC]] = Empty
+  def vpCs: Property[Seq[VPC]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "HostedZoneConfig" -> hostedZoneConfig,
     "HostedZoneTags" -> hostedZoneTags,
     "Name" -> name,
     "QueryLoggingConfig" -> queryLoggingConfig,
-    "VPCs" -> vPCs
+    "VPCs" -> vpCs
   )
 }

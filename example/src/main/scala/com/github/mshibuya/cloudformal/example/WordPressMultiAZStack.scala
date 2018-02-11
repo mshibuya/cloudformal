@@ -296,7 +296,7 @@ object WordPressMultiAZStack extends Stack {
     override def logicalId: String = "WebServerGroup"
     override def maxSize: NonEmptyProperty[String] = Value("5")
     override def minSize: NonEmptyProperty[String] = Value("1")
-    override def vPCZoneIdentifier: Property[Seq[String]] = subnets.ref
+    override def vpcZoneIdentifier: Property[Seq[String]] = subnets.ref
     override def launchConfigurationName: Property[String] = launchConfig.ref
     override def desiredCapacity: Property[String] = webServerCapacity.ref.as[String]
     override def targetGroupARNs: Property[Seq[String]] = ListProperty(albTargetGroup.ref)
@@ -420,14 +420,14 @@ object WordPressMultiAZStack extends Stack {
   val dbInstance = new DBInstance {
     override def logicalId: String = "DBInstance"
 
-    override def dBName: Property[String] = WordPressMultiAZStack.dbName.ref
+    override def dbName: Property[String] = WordPressMultiAZStack.dbName.ref
     override def engine: Property[String] = Value("MySQL")
     override def multiAZ: Property[Boolean] = multiAZDatabase.ref.as[Boolean]
     override def masterUsername: Property[String] = WordPressMultiAZStack.dbUser.ref
     override def masterUserPassword: Property[String] = WordPressMultiAZStack.dbPassword.ref
-    override def dBInstanceClass: NonEmptyProperty[String] = dbClass.ref
+    override def dbInstanceClass: NonEmptyProperty[String] = dbClass.ref
     override def allocatedStorage: Property[String] = dbAllocatedStorage.ref.as[String]
-    override def vPCSecurityGroups: Property[Seq[String]] = ListProperty(dbEC2SecurityGroup.attributes.groupId)
+    override def vpcSecurityGroups: Property[Seq[String]] = ListProperty(dbEC2SecurityGroup.attributes.groupId)
   }
   val resources = Seq(
     applicationLoadBalancer,
@@ -441,7 +441,7 @@ object WordPressMultiAZStack extends Stack {
   )
 
   val websiteUrl = Output("WebsiteURL",
-    Fn.Join("", Value(Seq("http://", applicationLoadBalancer.attributes.dNSName, "/wordpress"))),
+    Fn.Join("", Value(Seq("http://", applicationLoadBalancer.attributes.dnsName, "/wordpress"))),
     Value("WordPress Website"))
   val outputs = Seq(websiteUrl)
 }

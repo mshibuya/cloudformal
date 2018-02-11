@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Ingress(
-    cIDRIP: Property[String] = Empty,
+    cidriP: Property[String] = Empty,
     eC2SecurityGroupId: Property[String] = Empty,
     eC2SecurityGroupName: Property[String] = Empty,
     eC2SecurityGroupOwnerId: Property[String] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
-    "CIDRIP" -> cIDRIP,
+    "CIDRIP" -> cidriP,
     "EC2SecurityGroupId" -> eC2SecurityGroupId,
     "EC2SecurityGroupName" -> eC2SecurityGroupName,
     "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId

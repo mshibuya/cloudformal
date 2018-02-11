@@ -10,11 +10,11 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait IPSet extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WAF::IPSet"
 
-  def iPSetDescriptors: Property[Seq[IPSetDescriptor]] = Empty
+  def ipSetDescriptors: Property[Seq[IPSetDescriptor]] = Empty
   def name: NonEmptyProperty[String]
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
-    "IPSetDescriptors" -> iPSetDescriptors,
+    "IPSetDescriptors" -> ipSetDescriptors,
     "Name" -> name
   )
 }

@@ -7,10 +7,10 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EncryptionConfiguration(
-    kMSEncryptionConfig: Property[KMSEncryptionConfig] = Empty,
+    kmsEncryptionConfig: Property[KMSEncryptionConfig] = Empty,
     noEncryptionConfig: Property[String] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
-    "KMSEncryptionConfig" -> kMSEncryptionConfig,
+    "KMSEncryptionConfig" -> kmsEncryptionConfig,
     "NoEncryptionConfig" -> noEncryptionConfig
   )
 }

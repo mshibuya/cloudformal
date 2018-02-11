@@ -22,14 +22,14 @@ trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def backupRetentionPeriod: Property[String] = Empty
   def characterSetName: Property[String] = Empty
   def copyTagsToSnapshot: Property[Boolean] = Empty
-  def dBClusterIdentifier: Property[String] = Empty
-  def dBInstanceClass: NonEmptyProperty[String]
-  def dBInstanceIdentifier: Property[String] = Empty
-  def dBName: Property[String] = Empty
-  def dBParameterGroupName: Property[String] = Empty
-  def dBSecurityGroups: Property[Seq[String]] = Empty
-  def dBSnapshotIdentifier: Property[String] = Empty
-  def dBSubnetGroupName: Property[String] = Empty
+  def dbClusterIdentifier: Property[String] = Empty
+  def dbInstanceClass: NonEmptyProperty[String]
+  def dbInstanceIdentifier: Property[String] = Empty
+  def dbName: Property[String] = Empty
+  def dbParameterGroupName: Property[String] = Empty
+  def dbSecurityGroups: Property[Seq[String]] = Empty
+  def dbSnapshotIdentifier: Property[String] = Empty
+  def dbSubnetGroupName: Property[String] = Empty
   def domain: Property[String] = Empty
   def domainIAMRoleName: Property[String] = Empty
   def engine: Property[String] = Empty
@@ -53,7 +53,7 @@ trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def storageType: Property[String] = Empty
   def tags: Property[Seq[Tag]] = Empty
   def timezone: Property[String] = Empty
-  def vPCSecurityGroups: Property[Seq[String]] = Empty
+  def vpcSecurityGroups: Property[Seq[String]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "AllocatedStorage" -> allocatedStorage,
@@ -63,14 +63,14 @@ trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
     "BackupRetentionPeriod" -> backupRetentionPeriod,
     "CharacterSetName" -> characterSetName,
     "CopyTagsToSnapshot" -> copyTagsToSnapshot,
-    "DBClusterIdentifier" -> dBClusterIdentifier,
-    "DBInstanceClass" -> dBInstanceClass,
-    "DBInstanceIdentifier" -> dBInstanceIdentifier,
-    "DBName" -> dBName,
-    "DBParameterGroupName" -> dBParameterGroupName,
-    "DBSecurityGroups" -> dBSecurityGroups,
-    "DBSnapshotIdentifier" -> dBSnapshotIdentifier,
-    "DBSubnetGroupName" -> dBSubnetGroupName,
+    "DBClusterIdentifier" -> dbClusterIdentifier,
+    "DBInstanceClass" -> dbInstanceClass,
+    "DBInstanceIdentifier" -> dbInstanceIdentifier,
+    "DBName" -> dbName,
+    "DBParameterGroupName" -> dbParameterGroupName,
+    "DBSecurityGroups" -> dbSecurityGroups,
+    "DBSnapshotIdentifier" -> dbSnapshotIdentifier,
+    "DBSubnetGroupName" -> dbSubnetGroupName,
     "Domain" -> domain,
     "DomainIAMRoleName" -> domainIAMRoleName,
     "Engine" -> engine,
@@ -94,6 +94,6 @@ trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
     "StorageType" -> storageType,
     "Tags" -> tags,
     "Timezone" -> timezone,
-    "VPCSecurityGroups" -> vPCSecurityGroups
+    "VPCSecurityGroups" -> vpcSecurityGroups
   )
 }

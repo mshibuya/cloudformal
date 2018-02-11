@@ -20,6 +20,7 @@ trait Table extends Resource with Resource.WithDeletionPolicy {
   def keySchema: NonEmptyProperty[Seq[KeySchema]]
   def localSecondaryIndexes: Property[Seq[LocalSecondaryIndex]] = Empty
   def provisionedThroughput: NonEmptyProperty[ProvisionedThroughput]
+  def sseSpecification: Property[SSESpecification] = Empty
   def streamSpecification: Property[StreamSpecification] = Empty
   def tableName: Property[String] = Empty
   def tags: Property[Seq[Tag]] = Empty
@@ -31,6 +32,7 @@ trait Table extends Resource with Resource.WithDeletionPolicy {
     "KeySchema" -> keySchema,
     "LocalSecondaryIndexes" -> localSecondaryIndexes,
     "ProvisionedThroughput" -> provisionedThroughput,
+    "SSESpecification" -> sseSpecification,
     "StreamSpecification" -> streamSpecification,
     "TableName" -> tableName,
     "Tags" -> tags,

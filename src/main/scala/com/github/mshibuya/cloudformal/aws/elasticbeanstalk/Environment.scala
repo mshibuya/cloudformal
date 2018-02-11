@@ -15,7 +15,7 @@ trait Environment extends Resource with Resource.WithDeletionPolicy {
   }
 
   def applicationName: NonEmptyProperty[String]
-  def cNAMEPrefix: Property[String] = Empty
+  def cnamePrefix: Property[String] = Empty
   def description: Property[String] = Empty
   def environmentName: Property[String] = Empty
   def optionSettings: Property[Seq[OptionSetting]] = Empty
@@ -28,7 +28,7 @@ trait Environment extends Resource with Resource.WithDeletionPolicy {
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "ApplicationName" -> applicationName,
-    "CNAMEPrefix" -> cNAMEPrefix,
+    "CNAMEPrefix" -> cnamePrefix,
     "Description" -> description,
     "EnvironmentName" -> environmentName,
     "OptionSettings" -> optionSettings,

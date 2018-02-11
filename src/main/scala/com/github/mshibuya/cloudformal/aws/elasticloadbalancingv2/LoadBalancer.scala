@@ -12,7 +12,7 @@ trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
 
   object attributes {
     val canonicalHostedZoneID: Expression[String] = Fn.GetAtt(logicalId, "CanonicalHostedZoneID")
-    val dNSName: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
+    val dnsName: Expression[String] = Fn.GetAtt(logicalId, "DNSName")
     val loadBalancerFullName: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerFullName")
     val loadBalancerName: Expression[String] = Fn.GetAtt(logicalId, "LoadBalancerName")
     val securityGroups: Expression[Seq[String]] = Fn.GetAtt(logicalId, "SecurityGroups")

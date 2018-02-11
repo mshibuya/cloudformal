@@ -27,7 +27,7 @@ trait AutoScalingGroup extends Resource with Resource.WithCreationPolicy with Re
   def tags: Property[Seq[TagProperty]] = Empty
   def targetGroupARNs: Property[Seq[String]] = Empty
   def terminationPolicies: Property[Seq[String]] = Empty
-  def vPCZoneIdentifier: Property[Seq[String]] = Empty
+  def vpcZoneIdentifier: Property[Seq[String]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "AvailabilityZones" -> availabilityZones,
@@ -47,6 +47,6 @@ trait AutoScalingGroup extends Resource with Resource.WithCreationPolicy with Re
     "Tags" -> tags,
     "TargetGroupARNs" -> targetGroupARNs,
     "TerminationPolicies" -> terminationPolicies,
-    "VPCZoneIdentifier" -> vPCZoneIdentifier
+    "VPCZoneIdentifier" -> vpcZoneIdentifier
   )
 }

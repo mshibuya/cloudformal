@@ -18,8 +18,8 @@ trait DBCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
 
   def availabilityZones: Property[Seq[String]] = Empty
   def backupRetentionPeriod: Property[Int] = Empty
-  def dBClusterParameterGroupName: Property[String] = Empty
-  def dBSubnetGroupName: Property[String] = Empty
+  def dbClusterParameterGroupName: Property[String] = Empty
+  def dbSubnetGroupName: Property[String] = Empty
   def databaseName: Property[String] = Empty
   def engine: NonEmptyProperty[String]
   def engineVersion: Property[String] = Empty
@@ -38,8 +38,8 @@ trait DBCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "AvailabilityZones" -> availabilityZones,
     "BackupRetentionPeriod" -> backupRetentionPeriod,
-    "DBClusterParameterGroupName" -> dBClusterParameterGroupName,
-    "DBSubnetGroupName" -> dBSubnetGroupName,
+    "DBClusterParameterGroupName" -> dbClusterParameterGroupName,
+    "DBSubnetGroupName" -> dbSubnetGroupName,
     "DatabaseName" -> databaseName,
     "Engine" -> engine,
     "EngineVersion" -> engineVersion,
