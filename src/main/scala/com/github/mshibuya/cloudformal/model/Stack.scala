@@ -17,7 +17,7 @@ trait Stack extends Renderable {
     "Description" -> Formattable(description),
     "Parameters" -> Formattable(parameters.map(p => p.logicalId -> p.render()): _*),
     "Mappings" -> Formattable(mappings.map(m => m.logicalId -> m.render()): _*),
-    "Resources" -> Formattable(resources.map(r => r.logicalId -> r.render()): _*),
+    "Resources" -> Formattable(resources.map(r => r.logicalId -> r.resourcify()): _*),
     "Outputs" -> Formattable(outputs.map(o => o.logicalId -> o.render()): _*)
   )
 }

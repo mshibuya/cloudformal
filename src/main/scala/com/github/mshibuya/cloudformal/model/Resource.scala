@@ -7,11 +7,12 @@ trait Resource extends Renderable with Referenceable[String] with Resource.Depen
   def logicalId: String
   def resourceTypeName: String
   def resourceProperties: FormattableMap
+  def render(): FormattableMap = resourceProperties
   override def resourceAttributes: Seq[(String, Formattable)] = Seq(
     "Type" -> Formattable(resourceTypeName),
     "Properties" -> resourceProperties
   ) ++ super.resourceAttributes
-  def render(): FormattableMap = Formattable(resourceAttributes: _*)
+  def resourcify(): FormattableMap = Formattable(resourceAttributes: _*)
 }
 
 object Resource {
