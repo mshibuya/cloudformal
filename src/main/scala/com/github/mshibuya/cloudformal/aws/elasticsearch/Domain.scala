@@ -14,6 +14,7 @@ trait Domain extends Resource with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Elasticsearch::Domain"
 
   object attributes {
+    val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
     val domainArn: Expression[String] = Fn.GetAtt(logicalId, "DomainArn")
     val domainEndpoint: Expression[String] = Fn.GetAtt(logicalId, "DomainEndpoint")
   }

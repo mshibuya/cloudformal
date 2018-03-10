@@ -10,6 +10,7 @@ import com.github.mshibuya.cloudformal.model.policy._
 trait AutoScalingGroup extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy with Resource.WithUpdatePolicy {
   val resourceTypeName = "AWS::AutoScaling::AutoScalingGroup"
 
+  def autoScalingGroupName: Property[String] = Empty
   def availabilityZones: Property[Seq[String]] = Empty
   def cooldown: Property[String] = Empty
   def desiredCapacity: Property[String] = Empty
@@ -30,6 +31,7 @@ trait AutoScalingGroup extends Resource with Resource.WithCreationPolicy with Re
   def vpcZoneIdentifier: Property[Seq[String]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
+    "AutoScalingGroupName" -> autoScalingGroupName,
     "AvailabilityZones" -> availabilityZones,
     "Cooldown" -> cooldown,
     "DesiredCapacity" -> desiredCapacity,

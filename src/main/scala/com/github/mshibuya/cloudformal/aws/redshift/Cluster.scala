@@ -18,6 +18,7 @@ trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def allowVersionUpgrade: Property[Boolean] = Empty
   def automatedSnapshotRetentionPeriod: Property[Int] = Empty
   def availabilityZone: Property[String] = Empty
+  def clusterIdentifier: Property[String] = Empty
   def clusterParameterGroupName: Property[String] = Empty
   def clusterSecurityGroups: Property[Seq[String]] = Empty
   def clusterSubnetGroupName: Property[String] = Empty
@@ -48,6 +49,7 @@ trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
     "AllowVersionUpgrade" -> allowVersionUpgrade,
     "AutomatedSnapshotRetentionPeriod" -> automatedSnapshotRetentionPeriod,
     "AvailabilityZone" -> availabilityZone,
+    "ClusterIdentifier" -> clusterIdentifier,
     "ClusterParameterGroupName" -> clusterParameterGroupName,
     "ClusterSecurityGroups" -> clusterSecurityGroups,
     "ClusterSubnetGroupName" -> clusterSubnetGroupName,

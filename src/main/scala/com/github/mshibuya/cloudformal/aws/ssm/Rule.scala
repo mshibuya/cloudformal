@@ -7,10 +7,12 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Rule(
+    enableNonSecurity: Property[Boolean] = Empty,
     patchFilterGroup: Property[PatchFilterGroup] = Empty,
     approveAfterDays: Property[Int] = Empty,
     complianceLevel: Property[String] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
+    "EnableNonSecurity" -> enableNonSecurity,
     "PatchFilterGroup" -> patchFilterGroup,
     "ApproveAfterDays" -> approveAfterDays,
     "ComplianceLevel" -> complianceLevel

@@ -18,6 +18,7 @@ trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
     val rootResourceId: Expression[String] = Fn.GetAtt(logicalId, "RootResourceId")
   }
 
+  def apiKeySourceType: Property[String] = Empty
   def binaryMediaTypes: Property[Seq[String]] = Empty
   def body: Property[Json] = Empty
   def bodyS3Location: Property[S3Location] = Empty
@@ -25,11 +26,12 @@ trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
   def description: Property[String] = Empty
   def endpointConfiguration: Property[EndpointConfiguration] = Empty
   def failOnWarnings: Property[Boolean] = Empty
-  def mode: Property[String] = Empty
+  def minimumCompressionSize: Property[Int] = Empty
   def name: Property[String] = Empty
   def parameters: Property[ListMap[String, String]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
+    "ApiKeySourceType" -> apiKeySourceType,
     "BinaryMediaTypes" -> binaryMediaTypes,
     "Body" -> body,
     "BodyS3Location" -> bodyS3Location,
@@ -37,7 +39,7 @@ trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
     "Description" -> description,
     "EndpointConfiguration" -> endpointConfiguration,
     "FailOnWarnings" -> failOnWarnings,
-    "Mode" -> mode,
+    "MinimumCompressionSize" -> minimumCompressionSize,
     "Name" -> name,
     "Parameters" -> parameters
   )

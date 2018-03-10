@@ -21,6 +21,7 @@ case class SpotFleetLaunchSpecification(
     securityGroups: Property[Seq[GroupIdentifier]] = Empty,
     spotPrice: Property[String] = Empty,
     subnetId: Property[String] = Empty,
+    tagSpecifications: Property[Seq[SpotFleetTagSpecification]] = Empty,
     userData: Property[String] = Empty,
     weightedCapacity: Property[Double] = Empty) extends Renderable {
   def render: Formattable = Formattable.withProperties(
@@ -38,6 +39,7 @@ case class SpotFleetLaunchSpecification(
     "SecurityGroups" -> securityGroups,
     "SpotPrice" -> spotPrice,
     "SubnetId" -> subnetId,
+    "TagSpecifications" -> tagSpecifications,
     "UserData" -> userData,
     "WeightedCapacity" -> weightedCapacity
   )

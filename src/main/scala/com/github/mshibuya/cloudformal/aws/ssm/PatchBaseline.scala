@@ -15,8 +15,10 @@ trait PatchBaseline extends Resource with Resource.WithDeletionPolicy {
   def patchGroups: Property[Seq[String]] = Empty
   def description: Property[String] = Empty
   def approvedPatchesComplianceLevel: Property[String] = Empty
+  def approvedPatchesEnableNonSecurity: Property[Boolean] = Empty
   def approvalRules: Property[RuleGroup] = Empty
   def globalFilters: Property[PatchFilterGroup] = Empty
+  def sources: Property[Seq[PatchSource]] = Empty
   def name: NonEmptyProperty[String]
   def rejectedPatches: Property[Seq[String]] = Empty
 
@@ -26,8 +28,10 @@ trait PatchBaseline extends Resource with Resource.WithDeletionPolicy {
     "PatchGroups" -> patchGroups,
     "Description" -> description,
     "ApprovedPatchesComplianceLevel" -> approvedPatchesComplianceLevel,
+    "ApprovedPatchesEnableNonSecurity" -> approvedPatchesEnableNonSecurity,
     "ApprovalRules" -> approvalRules,
     "GlobalFilters" -> globalFilters,
+    "Sources" -> sources,
     "Name" -> name,
     "RejectedPatches" -> rejectedPatches
   )

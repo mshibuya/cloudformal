@@ -14,30 +14,32 @@ trait Project extends Resource with Resource.WithDeletionPolicy {
     val arn: Expression[String] = Fn.GetAtt(logicalId, "Arn")
   }
 
+  def description: Property[String] = Empty
+  def vpcConfig: Property[VpcConfig] = Empty
+  def encryptionKey: Property[String] = Empty
+  def triggers: Property[ProjectTriggers] = Empty
+  def source: NonEmptyProperty[Source]
+  def name: Property[String] = Empty
   def artifacts: NonEmptyProperty[Artifacts]
   def badgeEnabled: Property[Boolean] = Empty
-  def description: Property[String] = Empty
   def serviceRole: NonEmptyProperty[String]
-  def vpcConfig: Property[VpcConfig] = Empty
   def environment: NonEmptyProperty[Environment]
-  def encryptionKey: Property[String] = Empty
-  def source: NonEmptyProperty[Source]
   def tags: Property[Seq[Tag]] = Empty
-  def name: Property[String] = Empty
   def timeoutInMinutes: Property[Int] = Empty
   def cache: Property[ProjectCache] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
+    "Description" -> description,
+    "VpcConfig" -> vpcConfig,
+    "EncryptionKey" -> encryptionKey,
+    "Triggers" -> triggers,
+    "Source" -> source,
+    "Name" -> name,
     "Artifacts" -> artifacts,
     "BadgeEnabled" -> badgeEnabled,
-    "Description" -> description,
     "ServiceRole" -> serviceRole,
-    "VpcConfig" -> vpcConfig,
     "Environment" -> environment,
-    "EncryptionKey" -> encryptionKey,
-    "Source" -> source,
     "Tags" -> tags,
-    "Name" -> name,
     "TimeoutInMinutes" -> timeoutInMinutes,
     "Cache" -> cache
   )

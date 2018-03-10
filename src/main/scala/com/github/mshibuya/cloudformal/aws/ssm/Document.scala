@@ -13,9 +13,11 @@ trait Document extends Resource with Resource.WithDeletionPolicy {
 
   def content: NonEmptyProperty[Json]
   def documentType: Property[String] = Empty
+  def tags: Property[Seq[Tag]] = Empty
 
   def resourceProperties: FormattableMap = Formattable.withProperties(
     "Content" -> content,
-    "DocumentType" -> documentType
+    "DocumentType" -> documentType,
+    "Tags" -> tags
   )
 }
