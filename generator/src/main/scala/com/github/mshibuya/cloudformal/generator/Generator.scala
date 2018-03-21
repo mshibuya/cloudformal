@@ -30,8 +30,8 @@ case object Generator {
 
   def generateAll(speficicationUrl: String): Unit = {
     val specification = Specification.decode(Source.fromURL(speficicationUrl)("UTF-8").mkString)
-    specification.propertyTypes.foreach { case (name, property) => generateProperty(name, property)}
-    specification.resourceTypes.foreach { case (name, resource) => generateResource(name, resource)}
+    specification.eligiblePropertyTypes.foreach { case (name, property) => generateProperty(name, property)}
+    specification.eligibleResourceTypes.foreach { case (name, resource) => generateResource(name, resource)}
   }
 
   def main(args: Array[String]): Unit = {

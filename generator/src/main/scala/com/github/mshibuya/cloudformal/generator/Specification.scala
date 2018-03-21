@@ -9,7 +9,10 @@ class ParseError(message: String) extends Exception(message)
 
 case class Specification(propertyTypes: ListMap[String, PropertySpecification],
                          resourceSpecificationVersion: String,
-                         resourceTypes: ListMap[String, ResourceSpecification])
+                         resourceTypes: ListMap[String, ResourceSpecification]) {
+  val eligiblePropertyTypes = propertyTypes - "Tag"
+  val eligibleResourceTypes = resourceTypes
+}
 
 object Specification {
   implicit def decoder: DecodeJson[Specification] =
