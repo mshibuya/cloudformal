@@ -17,8 +17,8 @@ case class TableInput(
     storageDescriptor: Property[StorageDescriptor] = Empty,
     partitionKeys: Property[Seq[Column]] = Empty,
     retention: Property[Int] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[TableInput] {
+  def render: Formattable = Value(
     "Owner" -> owner,
     "ViewOriginalText" -> viewOriginalText,
     "Description" -> description,

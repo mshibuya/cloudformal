@@ -11,8 +11,8 @@ case class Recipes(
     deploy: Property[Seq[String]] = Empty,
     setup: Property[Seq[String]] = Empty,
     shutdown: Property[Seq[String]] = Empty,
-    undeploy: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    undeploy: Property[Seq[String]] = Empty) extends Expression[Recipes] {
+  def render: Formattable = Value(
     "Configure" -> configure,
     "Deploy" -> deploy,
     "Setup" -> setup,

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class KinesisFirehoseDestination(
     iamRoleARN: NonEmptyProperty[String],
-    deliveryStreamARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    deliveryStreamARN: NonEmptyProperty[String]) extends Expression[KinesisFirehoseDestination] {
+  def render: Formattable = Value(
     "IAMRoleARN" -> iamRoleARN,
     "DeliveryStreamARN" -> deliveryStreamARN
   )

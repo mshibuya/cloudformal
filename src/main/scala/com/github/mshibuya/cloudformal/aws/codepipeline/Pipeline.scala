@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-pipeline.html
  */
 
-trait Pipeline extends Resource with Resource.WithDeletionPolicy {
+trait Pipeline extends Resource[Pipeline] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodePipeline::Pipeline"
 
   def artifactStore: NonEmptyProperty[ArtifactStore]
@@ -17,7 +17,7 @@ trait Pipeline extends Resource with Resource.WithDeletionPolicy {
   def roleArn: NonEmptyProperty[String]
   def stages: NonEmptyProperty[Seq[StageDeclaration]]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ArtifactStore" -> artifactStore,
     "DisableInboundStageTransitions" -> disableInboundStageTransitions,
     "Name" -> name,

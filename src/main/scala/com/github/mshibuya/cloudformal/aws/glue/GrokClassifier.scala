@@ -10,8 +10,8 @@ case class GrokClassifier(
     customPatterns: Property[String] = Empty,
     grokPattern: NonEmptyProperty[String],
     classification: NonEmptyProperty[String],
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[GrokClassifier] {
+  def render: Formattable = Value(
     "CustomPatterns" -> customPatterns,
     "GrokPattern" -> grokPattern,
     "Classification" -> classification,

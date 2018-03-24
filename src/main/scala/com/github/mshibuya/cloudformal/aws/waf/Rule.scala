@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-rule.html
  */
 
-trait Rule extends Resource with Resource.WithDeletionPolicy {
+trait Rule extends Resource[Rule] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WAF::Rule"
 
   def metricName: NonEmptyProperty[String]
   def name: NonEmptyProperty[String]
   def predicates: Property[Seq[Predicate]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "MetricName" -> metricName,
     "Name" -> name,
     "Predicates" -> predicates

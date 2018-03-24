@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html
  */
 
-trait LifecycleHook extends Resource with Resource.WithDeletionPolicy {
+trait LifecycleHook extends Resource[LifecycleHook] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::AutoScaling::LifecycleHook"
 
   def autoScalingGroupName: NonEmptyProperty[String]
@@ -19,7 +19,7 @@ trait LifecycleHook extends Resource with Resource.WithDeletionPolicy {
   def notificationTargetARN: Property[String] = Empty
   def roleARN: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AutoScalingGroupName" -> autoScalingGroupName,
     "DefaultResult" -> defaultResult,
     "HeartbeatTimeout" -> heartbeatTimeout,

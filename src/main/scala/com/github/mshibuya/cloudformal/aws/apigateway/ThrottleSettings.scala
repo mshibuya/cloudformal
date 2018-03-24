@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ThrottleSettings(
     burstLimit: Property[Int] = Empty,
-    rateLimit: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    rateLimit: Property[Double] = Empty) extends Expression[ThrottleSettings] {
+  def render: Formattable = Value(
     "BurstLimit" -> burstLimit,
     "RateLimit" -> rateLimit
   )

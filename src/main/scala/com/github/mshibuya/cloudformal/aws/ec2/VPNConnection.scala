@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpn-connection.html
  */
 
-trait VPNConnection extends Resource with Resource.WithDeletionPolicy {
+trait VPNConnection extends Resource[VPNConnection] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::VPNConnection"
 
   def customerGatewayId: NonEmptyProperty[String]
@@ -17,7 +17,7 @@ trait VPNConnection extends Resource with Resource.WithDeletionPolicy {
   def vpnGatewayId: NonEmptyProperty[String]
   def vpnTunnelOptionsSpecifications: Property[Seq[VpnTunnelOptionsSpecification]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CustomerGatewayId" -> customerGatewayId,
     "StaticRoutesOnly" -> staticRoutesOnly,
     "Tags" -> tags,

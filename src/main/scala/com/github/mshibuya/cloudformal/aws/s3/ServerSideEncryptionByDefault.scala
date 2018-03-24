@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ServerSideEncryptionByDefault(
     kmsMasterKeyID: Property[String] = Empty,
-    sseAlgorithm: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sseAlgorithm: NonEmptyProperty[String]) extends Expression[ServerSideEncryptionByDefault] {
+  def render: Formattable = Value(
     "KMSMasterKeyID" -> kmsMasterKeyID,
     "SSEAlgorithm" -> sseAlgorithm
   )

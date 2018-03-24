@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CreditSpecification(
-    cpuCredits: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    cpuCredits: Property[String] = Empty) extends Expression[CreditSpecification] {
+  def render: Formattable = Value(
     "CPUCredits" -> cpuCredits
   )
 }

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DynamoDBv2Action(
     putItem: Property[PutItemInput] = Empty,
-    roleArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleArn: Property[String] = Empty) extends Expression[DynamoDBv2Action] {
+  def render: Formattable = Value(
     "PutItem" -> putItem,
     "RoleArn" -> roleArn
   )

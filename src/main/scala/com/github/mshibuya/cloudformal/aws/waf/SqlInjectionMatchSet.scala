@@ -7,13 +7,13 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-sqlinjectionmatchset.html
  */
 
-trait SqlInjectionMatchSet extends Resource with Resource.WithDeletionPolicy {
+trait SqlInjectionMatchSet extends Resource[SqlInjectionMatchSet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WAF::SqlInjectionMatchSet"
 
   def name: NonEmptyProperty[String]
   def sqlInjectionMatchTuples: Property[Seq[SqlInjectionMatchTuple]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Name" -> name,
     "SqlInjectionMatchTuples" -> sqlInjectionMatchTuples
   )

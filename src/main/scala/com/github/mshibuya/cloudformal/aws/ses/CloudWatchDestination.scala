@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudWatchDestination(
-    dimensionConfigurations: Property[Seq[DimensionConfiguration]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    dimensionConfigurations: Property[Seq[DimensionConfiguration]] = Empty) extends Expression[CloudWatchDestination] {
+  def render: Formattable = Value(
     "DimensionConfigurations" -> dimensionConfigurations
   )
 }

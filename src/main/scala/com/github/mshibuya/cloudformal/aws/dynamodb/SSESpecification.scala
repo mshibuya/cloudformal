@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SSESpecification(
-    sseEnabled: NonEmptyProperty[Boolean]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sseEnabled: NonEmptyProperty[Boolean]) extends Expression[SSESpecification] {
+  def render: Formattable = Value(
     "SSEEnabled" -> sseEnabled
   )
 }

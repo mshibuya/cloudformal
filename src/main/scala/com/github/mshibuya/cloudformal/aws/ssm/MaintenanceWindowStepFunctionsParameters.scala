@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class MaintenanceWindowStepFunctionsParameters(
     input: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[MaintenanceWindowStepFunctionsParameters] {
+  def render: Formattable = Value(
     "Input" -> input,
     "Name" -> name
   )

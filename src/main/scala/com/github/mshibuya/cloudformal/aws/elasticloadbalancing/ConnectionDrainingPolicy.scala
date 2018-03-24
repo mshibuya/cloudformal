@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ConnectionDrainingPolicy(
     enabled: NonEmptyProperty[Boolean],
-    timeout: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    timeout: Property[Int] = Empty) extends Expression[ConnectionDrainingPolicy] {
+  def render: Formattable = Value(
     "Enabled" -> enabled,
     "Timeout" -> timeout
   )

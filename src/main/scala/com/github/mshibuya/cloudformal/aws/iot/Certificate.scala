@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-certificate.html
  */
 
-trait Certificate extends Resource with Resource.WithDeletionPolicy {
+trait Certificate extends Resource[Certificate] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IoT::Certificate"
 
   object attributes {
@@ -17,7 +17,7 @@ trait Certificate extends Resource with Resource.WithDeletionPolicy {
   def certificateSigningRequest: NonEmptyProperty[String]
   def status: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CertificateSigningRequest" -> certificateSigningRequest,
     "Status" -> status
   )

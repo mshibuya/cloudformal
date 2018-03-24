@@ -10,8 +10,8 @@ case class ForwardedValues(
     cookies: Property[Cookies] = Empty,
     headers: Property[Seq[String]] = Empty,
     queryString: NonEmptyProperty[Boolean],
-    queryStringCacheKeys: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    queryStringCacheKeys: Property[Seq[String]] = Empty) extends Expression[ForwardedValues] {
+  def render: Formattable = Value(
     "Cookies" -> cookies,
     "Headers" -> headers,
     "QueryString" -> queryString,

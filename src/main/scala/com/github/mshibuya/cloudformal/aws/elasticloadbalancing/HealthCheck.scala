@@ -11,8 +11,8 @@ case class HealthCheck(
     interval: NonEmptyProperty[String],
     target: NonEmptyProperty[String],
     timeout: NonEmptyProperty[String],
-    unhealthyThreshold: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    unhealthyThreshold: NonEmptyProperty[String]) extends Expression[HealthCheck] {
+  def render: Formattable = Value(
     "HealthyThreshold" -> healthyThreshold,
     "Interval" -> interval,
     "Target" -> target,

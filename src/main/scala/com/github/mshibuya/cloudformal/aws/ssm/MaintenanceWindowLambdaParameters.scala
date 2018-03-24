@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MaintenanceWindowLambdaParameters(
     clientContext: Property[String] = Empty,
     qualifier: Property[String] = Empty,
-    payload: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    payload: Property[String] = Empty) extends Expression[MaintenanceWindowLambdaParameters] {
+  def render: Formattable = Value(
     "ClientContext" -> clientContext,
     "Qualifier" -> qualifier,
     "Payload" -> payload

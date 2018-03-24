@@ -22,8 +22,8 @@ case class HealthCheckConfig(
     requestInterval: Property[Int] = Empty,
     resourcePath: Property[String] = Empty,
     searchString: Property[String] = Empty,
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[HealthCheckConfig] {
+  def render: Formattable = Value(
     "AlarmIdentifier" -> alarmIdentifier,
     "ChildHealthChecks" -> childHealthChecks,
     "EnableSNI" -> enableSNI,

@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class QueueConfiguration(
     event: NonEmptyProperty[String],
     filter: Property[NotificationFilter] = Empty,
-    queue: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    queue: NonEmptyProperty[String]) extends Expression[QueueConfiguration] {
+  def render: Formattable = Value(
     "Event" -> event,
     "Filter" -> filter,
     "Queue" -> queue

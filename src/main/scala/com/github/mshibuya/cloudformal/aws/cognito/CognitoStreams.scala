@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class CognitoStreams(
     streamingStatus: Property[String] = Empty,
     streamName: Property[String] = Empty,
-    roleArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleArn: Property[String] = Empty) extends Expression[CognitoStreams] {
+  def render: Formattable = Value(
     "StreamingStatus" -> streamingStatus,
     "StreamName" -> streamName,
     "RoleArn" -> roleArn

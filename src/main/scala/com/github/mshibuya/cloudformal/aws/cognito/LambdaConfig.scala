@@ -14,8 +14,8 @@ case class LambdaConfig(
     postAuthentication: Property[String] = Empty,
     postConfirmation: Property[String] = Empty,
     customMessage: Property[String] = Empty,
-    verifyAuthChallengeResponse: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    verifyAuthChallengeResponse: Property[String] = Empty) extends Expression[LambdaConfig] {
+  def render: Formattable = Value(
     "CreateAuthChallenge" -> createAuthChallenge,
     "PreAuthentication" -> preAuthentication,
     "DefineAuthChallenge" -> defineAuthChallenge,

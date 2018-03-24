@@ -17,8 +17,8 @@ case class MongoDbSettings(
     databaseName: Property[String] = Empty,
     authType: Property[String] = Empty,
     password: Property[String] = Empty,
-    nestingLevel: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    nestingLevel: Property[String] = Empty) extends Expression[MongoDbSettings] {
+  def render: Formattable = Value(
     "AuthSource" -> authSource,
     "AuthMechanism" -> authMechanism,
     "Username" -> username,

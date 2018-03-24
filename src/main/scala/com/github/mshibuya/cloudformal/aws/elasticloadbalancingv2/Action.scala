@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Action(
     targetGroupArn: NonEmptyProperty[String],
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[Action] {
+  def render: Formattable = Value(
     "TargetGroupArn" -> targetGroupArn,
     "Type" -> `type`
   )

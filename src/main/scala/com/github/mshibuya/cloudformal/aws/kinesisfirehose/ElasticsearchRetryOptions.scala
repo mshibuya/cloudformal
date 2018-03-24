@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticsearchRetryOptions(
-    durationInSeconds: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    durationInSeconds: NonEmptyProperty[Int]) extends Expression[ElasticsearchRetryOptions] {
+  def render: Formattable = Value(
     "DurationInSeconds" -> durationInSeconds
   )
 }

@@ -10,8 +10,8 @@ case class MappingRule(
     matchType: NonEmptyProperty[String],
     value: NonEmptyProperty[String],
     claim: NonEmptyProperty[String],
-    roleARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleARN: NonEmptyProperty[String]) extends Expression[MappingRule] {
+  def render: Formattable = Value(
     "MatchType" -> matchType,
     "Value" -> value,
     "Claim" -> claim,

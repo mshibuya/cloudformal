@@ -19,8 +19,8 @@ case class Integration(
     requestParameters: Property[ListMap[String, String]] = Empty,
     requestTemplates: Property[ListMap[String, String]] = Empty,
     `type`: Property[String] = Empty,
-    uri: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    uri: Property[String] = Empty) extends Expression[Integration] {
+  def render: Formattable = Value(
     "CacheKeyParameters" -> cacheKeyParameters,
     "CacheNamespace" -> cacheNamespace,
     "ContentHandling" -> contentHandling,

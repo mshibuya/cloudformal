@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class WorkmailAction(
     topicArn: Property[String] = Empty,
-    organizationArn: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    organizationArn: NonEmptyProperty[String]) extends Expression[WorkmailAction] {
+  def render: Formattable = Value(
     "TopicArn" -> topicArn,
     "OrganizationArn" -> organizationArn
   )

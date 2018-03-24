@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DeploymentStyle(
     deploymentOption: Property[String] = Empty,
-    deploymentType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    deploymentType: Property[String] = Empty) extends Expression[DeploymentStyle] {
+  def render: Formattable = Value(
     "DeploymentOption" -> deploymentOption,
     "DeploymentType" -> deploymentType
   )

@@ -18,8 +18,8 @@ case class Action(
     republish: Property[RepublishAction] = Empty,
     s3: Property[S3Action] = Empty,
     sns: Property[SnsAction] = Empty,
-    sqs: Property[SqsAction] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sqs: Property[SqsAction] = Empty) extends Expression[Action] {
+  def render: Formattable = Value(
     "CloudwatchAlarm" -> cloudwatchAlarm,
     "CloudwatchMetric" -> cloudwatchMetric,
     "DynamoDB" -> dynamoDB,

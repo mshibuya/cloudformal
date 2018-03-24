@@ -18,8 +18,8 @@ case class ContainerProperties(
     readonlyRootFilesystem: Property[Boolean] = Empty,
     ulimits: Property[Seq[Ulimit]] = Empty,
     vcpus: NonEmptyProperty[Int],
-    image: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    image: NonEmptyProperty[String]) extends Expression[ContainerProperties] {
+  def render: Formattable = Value(
     "MountPoints" -> mountPoints,
     "User" -> user,
     "Volumes" -> volumes,

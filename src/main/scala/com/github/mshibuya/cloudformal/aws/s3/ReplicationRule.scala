@@ -11,8 +11,8 @@ case class ReplicationRule(
     id: Property[String] = Empty,
     prefix: NonEmptyProperty[String],
     sourceSelectionCriteria: Property[SourceSelectionCriteria] = Empty,
-    status: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    status: NonEmptyProperty[String]) extends Expression[ReplicationRule] {
+  def render: Formattable = Value(
     "Destination" -> destination,
     "Id" -> id,
     "Prefix" -> prefix,

@@ -12,8 +12,8 @@ case class Source(
     sshKey: Property[String] = Empty,
     `type`: Property[String] = Empty,
     url: Property[String] = Empty,
-    username: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    username: Property[String] = Empty) extends Expression[Source] {
+  def render: Formattable = Value(
     "Password" -> password,
     "Revision" -> revision,
     "SshKey" -> sshKey,

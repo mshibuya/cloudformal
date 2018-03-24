@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-security-group-egress.html
  */
 
-trait SecurityGroupEgress extends Resource with Resource.WithDeletionPolicy {
+trait SecurityGroupEgress extends Resource[SecurityGroupEgress] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::SecurityGroupEgress"
 
   def cidrIp: Property[String] = Empty
@@ -20,7 +20,7 @@ trait SecurityGroupEgress extends Resource with Resource.WithDeletionPolicy {
   def ipProtocol: NonEmptyProperty[String]
   def toPort: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CidrIp" -> cidrIp,
     "CidrIpv6" -> cidrIpv6,
     "Description" -> description,

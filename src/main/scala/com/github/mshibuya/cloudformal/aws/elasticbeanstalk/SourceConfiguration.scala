@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SourceConfiguration(
     applicationName: NonEmptyProperty[String],
-    templateName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    templateName: NonEmptyProperty[String]) extends Expression[SourceConfiguration] {
+  def render: Formattable = Value(
     "ApplicationName" -> applicationName,
     "TemplateName" -> templateName
   )

@@ -15,8 +15,8 @@ case class Ingress(
     sourceSecurityGroupId: Property[String] = Empty,
     sourceSecurityGroupName: Property[String] = Empty,
     sourceSecurityGroupOwnerId: Property[String] = Empty,
-    toPort: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    toPort: Property[Int] = Empty) extends Expression[Ingress] {
+  def render: Formattable = Value(
     "CidrIp" -> cidrIp,
     "CidrIpv6" -> cidrIpv6,
     "Description" -> description,

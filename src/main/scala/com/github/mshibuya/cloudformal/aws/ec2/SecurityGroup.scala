@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html
  */
 
-trait SecurityGroup extends Resource with Resource.WithDeletionPolicy {
+trait SecurityGroup extends Resource[SecurityGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::SecurityGroup"
 
   object attributes {
@@ -22,7 +22,7 @@ trait SecurityGroup extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def vpcId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "GroupDescription" -> groupDescription,
     "GroupName" -> groupName,
     "SecurityGroupEgress" -> securityGroupEgress,

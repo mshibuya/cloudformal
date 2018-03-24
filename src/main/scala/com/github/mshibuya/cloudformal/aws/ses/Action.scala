@@ -13,8 +13,8 @@ case class Action(
     snsAction: Property[SNSAction] = Empty,
     workmailAction: Property[WorkmailAction] = Empty,
     addHeaderAction: Property[AddHeaderAction] = Empty,
-    lambdaAction: Property[LambdaAction] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    lambdaAction: Property[LambdaAction] = Empty) extends Expression[Action] {
+  def render: Formattable = Value(
     "BounceAction" -> bounceAction,
     "S3Action" -> s3Action,
     "StopAction" -> stopAction,

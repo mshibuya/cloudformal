@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-instance.html
  */
 
-trait Instance extends Resource with Resource.WithDeletionPolicy {
+trait Instance extends Resource[Instance] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Instance"
 
   object attributes {
@@ -40,7 +40,7 @@ trait Instance extends Resource with Resource.WithDeletionPolicy {
   def virtualizationType: Property[String] = Empty
   def volumes: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AgentVersion" -> agentVersion,
     "AmiId" -> amiId,
     "Architecture" -> architecture,

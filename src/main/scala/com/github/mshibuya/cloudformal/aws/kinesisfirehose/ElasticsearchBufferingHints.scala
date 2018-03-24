@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ElasticsearchBufferingHints(
     intervalInSeconds: NonEmptyProperty[Int],
-    sizeInMBs: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sizeInMBs: NonEmptyProperty[Int]) extends Expression[ElasticsearchBufferingHints] {
+  def render: Formattable = Value(
     "IntervalInSeconds" -> intervalInSeconds,
     "SizeInMBs" -> sizeInMBs
   )

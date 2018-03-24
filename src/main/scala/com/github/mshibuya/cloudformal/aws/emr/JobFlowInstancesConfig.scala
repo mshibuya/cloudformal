@@ -20,8 +20,8 @@ case class JobFlowInstancesConfig(
     masterInstanceGroup: Property[InstanceGroupConfig] = Empty,
     placement: Property[PlacementType] = Empty,
     serviceAccessSecurityGroup: Property[String] = Empty,
-    terminationProtected: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    terminationProtected: Property[Boolean] = Empty) extends Expression[JobFlowInstancesConfig] {
+  def render: Formattable = Value(
     "AdditionalMasterSecurityGroups" -> additionalMasterSecurityGroups,
     "AdditionalSlaveSecurityGroups" -> additionalSlaveSecurityGroups,
     "CoreInstanceFleet" -> coreInstanceFleet,

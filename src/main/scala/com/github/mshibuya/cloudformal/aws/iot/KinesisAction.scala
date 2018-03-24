@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class KinesisAction(
     partitionKey: Property[String] = Empty,
     roleArn: NonEmptyProperty[String],
-    streamName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    streamName: NonEmptyProperty[String]) extends Expression[KinesisAction] {
+  def render: Formattable = Value(
     "PartitionKey" -> partitionKey,
     "RoleArn" -> roleArn,
     "StreamName" -> streamName

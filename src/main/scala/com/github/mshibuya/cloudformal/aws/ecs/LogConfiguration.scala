@@ -10,8 +10,8 @@ import scala.collection.immutable.ListMap
 
 case class LogConfiguration(
     logDriver: NonEmptyProperty[String],
-    options: Property[ListMap[String, String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    options: Property[ListMap[String, String]] = Empty) extends Expression[LogConfiguration] {
+  def render: Formattable = Value(
     "LogDriver" -> logDriver,
     "Options" -> options
   )

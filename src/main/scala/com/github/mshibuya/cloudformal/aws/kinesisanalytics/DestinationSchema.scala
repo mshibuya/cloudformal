@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DestinationSchema(
-    recordFormatType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    recordFormatType: Property[String] = Empty) extends Expression[DestinationSchema] {
+  def render: Formattable = Value(
     "RecordFormatType" -> recordFormatType
   )
 }

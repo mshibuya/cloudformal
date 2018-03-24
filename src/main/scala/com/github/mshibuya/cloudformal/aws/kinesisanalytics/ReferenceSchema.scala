@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class ReferenceSchema(
     recordEncoding: Property[String] = Empty,
     recordColumns: NonEmptyProperty[Seq[RecordColumn]],
-    recordFormat: NonEmptyProperty[RecordFormat]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    recordFormat: NonEmptyProperty[RecordFormat]) extends Expression[ReferenceSchema] {
+  def render: Formattable = Value(
     "RecordEncoding" -> recordEncoding,
     "RecordColumns" -> recordColumns,
     "RecordFormat" -> recordFormat

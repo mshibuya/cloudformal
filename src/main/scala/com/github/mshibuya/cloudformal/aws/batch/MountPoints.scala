@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MountPoints(
     readOnly: Property[Boolean] = Empty,
     sourceVolume: Property[String] = Empty,
-    containerPath: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    containerPath: Property[String] = Empty) extends Expression[MountPoints] {
+  def render: Formattable = Value(
     "ReadOnly" -> readOnly,
     "SourceVolume" -> sourceVolume,
     "ContainerPath" -> containerPath

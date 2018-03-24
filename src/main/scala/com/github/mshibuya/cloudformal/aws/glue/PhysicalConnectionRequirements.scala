@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class PhysicalConnectionRequirements(
     availabilityZone: Property[String] = Empty,
     securityGroupIdList: Property[Seq[String]] = Empty,
-    subnetId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    subnetId: Property[String] = Empty) extends Expression[PhysicalConnectionRequirements] {
+  def render: Formattable = Value(
     "AvailabilityZone" -> availabilityZone,
     "SecurityGroupIdList" -> securityGroupIdList,
     "SubnetId" -> subnetId

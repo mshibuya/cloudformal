@@ -11,8 +11,8 @@ import scala.collection.immutable.ListMap
 case class Configuration(
     classification: Property[String] = Empty,
     configurationProperties: Property[ListMap[String, String]] = Empty,
-    configurations: Property[Seq[Configuration]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    configurations: Property[Seq[Configuration]] = Empty) extends Expression[Configuration] {
+  def render: Formattable = Value(
     "Classification" -> classification,
     "ConfigurationProperties" -> configurationProperties,
     "Configurations" -> configurations

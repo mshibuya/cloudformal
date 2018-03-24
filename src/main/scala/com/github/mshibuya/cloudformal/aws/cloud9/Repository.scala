@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Repository(
     pathComponent: NonEmptyProperty[String],
-    repositoryUrl: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    repositoryUrl: NonEmptyProperty[String]) extends Expression[Repository] {
+  def render: Formattable = Value(
     "PathComponent" -> pathComponent,
     "RepositoryUrl" -> repositoryUrl
   )

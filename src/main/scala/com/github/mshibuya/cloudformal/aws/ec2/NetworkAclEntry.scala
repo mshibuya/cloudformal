@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-network-acl-entry.html
  */
 
-trait NetworkAclEntry extends Resource with Resource.WithDeletionPolicy {
+trait NetworkAclEntry extends Resource[NetworkAclEntry] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::NetworkAclEntry"
 
   def cidrBlock: NonEmptyProperty[String]
@@ -20,7 +20,7 @@ trait NetworkAclEntry extends Resource with Resource.WithDeletionPolicy {
   def ruleAction: NonEmptyProperty[String]
   def ruleNumber: NonEmptyProperty[Int]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CidrBlock" -> cidrBlock,
     "Egress" -> egress,
     "Icmp" -> icmp,

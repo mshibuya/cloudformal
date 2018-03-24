@@ -8,12 +8,12 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-account.html
  */
 
-trait Account extends model.Resource with model.Resource.WithDeletionPolicy {
+trait Account extends model.Resource[Account] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::Account"
 
   def cloudWatchRoleArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CloudWatchRoleArn" -> cloudWatchRoleArn
   )
 }

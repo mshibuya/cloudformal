@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-maintenancewindowtask.html
  */
 
-trait MaintenanceWindowTask extends Resource with Resource.WithDeletionPolicy {
+trait MaintenanceWindowTask extends Resource[MaintenanceWindowTask] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::MaintenanceWindowTask"
 
   def maxErrors: NonEmptyProperty[String]
@@ -25,7 +25,7 @@ trait MaintenanceWindowTask extends Resource with Resource.WithDeletionPolicy {
   def taskType: NonEmptyProperty[String]
   def loggingInfo: Property[LoggingInfo] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "MaxErrors" -> maxErrors,
     "Description" -> description,
     "ServiceRoleArn" -> serviceRoleArn,

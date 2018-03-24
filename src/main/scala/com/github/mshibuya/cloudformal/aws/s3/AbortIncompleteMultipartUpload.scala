@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AbortIncompleteMultipartUpload(
-    daysAfterInitiation: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    daysAfterInitiation: NonEmptyProperty[Int]) extends Expression[AbortIncompleteMultipartUpload] {
+  def render: Formattable = Value(
     "DaysAfterInitiation" -> daysAfterInitiation
   )
 }

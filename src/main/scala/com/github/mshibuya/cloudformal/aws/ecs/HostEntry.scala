@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class HostEntry(
     hostname: NonEmptyProperty[String],
-    ipAddress: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    ipAddress: NonEmptyProperty[String]) extends Expression[HostEntry] {
+  def render: Formattable = Value(
     "Hostname" -> hostname,
     "IpAddress" -> ipAddress
   )

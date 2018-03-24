@@ -16,8 +16,8 @@ case class ExtendedS3DestinationConfiguration(
     processingConfiguration: Property[ProcessingConfiguration] = Empty,
     roleARN: NonEmptyProperty[String],
     s3BackupConfiguration: Property[S3DestinationConfiguration] = Empty,
-    s3BackupMode: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    s3BackupMode: Property[String] = Empty) extends Expression[ExtendedS3DestinationConfiguration] {
+  def render: Formattable = Value(
     "BucketARN" -> bucketARN,
     "BufferingHints" -> bufferingHints,
     "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,

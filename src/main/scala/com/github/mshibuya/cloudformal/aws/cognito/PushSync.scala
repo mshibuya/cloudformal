@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PushSync(
     applicationArns: Property[Seq[String]] = Empty,
-    roleArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleArn: Property[String] = Empty) extends Expression[PushSync] {
+  def render: Formattable = Value(
     "ApplicationArns" -> applicationArns,
     "RoleArn" -> roleArn
   )

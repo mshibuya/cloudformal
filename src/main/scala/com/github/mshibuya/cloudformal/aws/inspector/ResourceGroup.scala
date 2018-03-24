@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-resourcegroup.html
  */
 
-trait ResourceGroup extends Resource with Resource.WithDeletionPolicy {
+trait ResourceGroup extends Resource[ResourceGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Inspector::ResourceGroup"
 
   object attributes {
@@ -16,7 +16,7 @@ trait ResourceGroup extends Resource with Resource.WithDeletionPolicy {
 
   def resourceGroupTags: NonEmptyProperty[Seq[Tag]]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ResourceGroupTags" -> resourceGroupTags
   )
 }

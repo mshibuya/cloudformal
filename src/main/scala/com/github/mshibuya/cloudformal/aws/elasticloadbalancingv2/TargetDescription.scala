@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class TargetDescription(
     availabilityZone: Property[String] = Empty,
     id: NonEmptyProperty[String],
-    port: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    port: Property[Int] = Empty) extends Expression[TargetDescription] {
+  def render: Formattable = Value(
     "AvailabilityZone" -> availabilityZone,
     "Id" -> id,
     "Port" -> port

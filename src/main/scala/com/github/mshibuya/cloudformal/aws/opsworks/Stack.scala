@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-stack.html
  */
 
-trait Stack extends Resource with Resource.WithDeletionPolicy {
+trait Stack extends Resource[Stack] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Stack"
 
   def agentVersion: Property[String] = Empty
@@ -39,7 +39,7 @@ trait Stack extends Resource with Resource.WithDeletionPolicy {
   def useOpsworksSecurityGroups: Property[Boolean] = Empty
   def vpcId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AgentVersion" -> agentVersion,
     "Attributes" -> attributes,
     "ChefConfiguration" -> chefConfiguration,

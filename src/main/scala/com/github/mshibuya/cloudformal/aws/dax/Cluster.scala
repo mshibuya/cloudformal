@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dax-cluster.html
  */
 
-trait Cluster extends Resource with Resource.WithDeletionPolicy {
+trait Cluster extends Resource[Cluster] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DAX::Cluster"
 
   object attributes {
@@ -29,7 +29,7 @@ trait Cluster extends Resource with Resource.WithDeletionPolicy {
   def securityGroupIds: Property[Seq[String]] = Empty
   def tags: Property[Json] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "ReplicationFactor" -> replicationFactor,
     "ParameterGroupName" -> parameterGroupName,

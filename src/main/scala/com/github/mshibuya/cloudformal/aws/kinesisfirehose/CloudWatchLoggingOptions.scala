@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class CloudWatchLoggingOptions(
     enabled: Property[Boolean] = Empty,
     logGroupName: Property[String] = Empty,
-    logStreamName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    logStreamName: Property[String] = Empty) extends Expression[CloudWatchLoggingOptions] {
+  def render: Formattable = Value(
     "Enabled" -> enabled,
     "LogGroupName" -> logGroupName,
     "LogStreamName" -> logStreamName

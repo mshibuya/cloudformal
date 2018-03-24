@@ -13,8 +13,8 @@ case class IntegrationResponse(
     responseParameters: Property[ListMap[String, String]] = Empty,
     responseTemplates: Property[ListMap[String, String]] = Empty,
     selectionPattern: Property[String] = Empty,
-    statusCode: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    statusCode: NonEmptyProperty[String]) extends Expression[IntegrationResponse] {
+  def render: Formattable = Value(
     "ContentHandling" -> contentHandling,
     "ResponseParameters" -> responseParameters,
     "ResponseTemplates" -> responseTemplates,

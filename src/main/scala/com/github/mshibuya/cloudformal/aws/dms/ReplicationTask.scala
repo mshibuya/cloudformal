@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationtask.html
  */
 
-trait ReplicationTask extends Resource with Resource.WithDeletionPolicy {
+trait ReplicationTask extends Resource[ReplicationTask] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::ReplicationTask"
 
   def replicationTaskSettings: Property[String] = Empty
@@ -20,7 +20,7 @@ trait ReplicationTask extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def cdcStartTime: Property[Double] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ReplicationTaskSettings" -> replicationTaskSettings,
     "TableMappings" -> tableMappings,
     "ReplicationTaskIdentifier" -> replicationTaskIdentifier,

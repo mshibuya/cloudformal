@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Alarm(
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[Alarm] {
+  def render: Formattable = Value(
     "Name" -> name
   )
 }

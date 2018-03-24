@@ -13,8 +13,8 @@ case class InventoryConfiguration(
     includedObjectVersions: NonEmptyProperty[String],
     optionalFields: Property[Seq[String]] = Empty,
     prefix: Property[String] = Empty,
-    scheduleFrequency: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    scheduleFrequency: NonEmptyProperty[String]) extends Expression[InventoryConfiguration] {
+  def render: Formattable = Value(
     "Destination" -> destination,
     "Enabled" -> enabled,
     "Id" -> id,

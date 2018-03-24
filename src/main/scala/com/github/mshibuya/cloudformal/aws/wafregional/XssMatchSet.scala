@@ -7,13 +7,13 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-wafregional-xssmatchset.html
  */
 
-trait XssMatchSet extends Resource with Resource.WithDeletionPolicy {
+trait XssMatchSet extends Resource[XssMatchSet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WAFRegional::XssMatchSet"
 
   def xssMatchTuples: Property[Seq[XssMatchTuple]] = Empty
   def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "XssMatchTuples" -> xssMatchTuples,
     "Name" -> name
   )

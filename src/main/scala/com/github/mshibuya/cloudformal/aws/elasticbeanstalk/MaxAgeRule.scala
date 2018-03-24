@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MaxAgeRule(
     deleteSourceFromS3: Property[Boolean] = Empty,
     enabled: Property[Boolean] = Empty,
-    maxAgeInDays: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxAgeInDays: Property[Int] = Empty) extends Expression[MaxAgeRule] {
+  def render: Formattable = Value(
     "DeleteSourceFromS3" -> deleteSourceFromS3,
     "Enabled" -> enabled,
     "MaxAgeInDays" -> maxAgeInDays

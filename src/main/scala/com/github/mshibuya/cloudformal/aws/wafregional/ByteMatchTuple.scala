@@ -11,8 +11,8 @@ case class ByteMatchTuple(
     targetStringBase64: Property[String] = Empty,
     positionalConstraint: NonEmptyProperty[String],
     textTransformation: NonEmptyProperty[String],
-    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Expression[ByteMatchTuple] {
+  def render: Formattable = Value(
     "TargetString" -> targetString,
     "TargetStringBase64" -> targetStringBase64,
     "PositionalConstraint" -> positionalConstraint,

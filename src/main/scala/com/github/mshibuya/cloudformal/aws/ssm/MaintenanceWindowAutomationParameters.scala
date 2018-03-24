@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class MaintenanceWindowAutomationParameters(
     parameters: Property[Json] = Empty,
-    documentVersion: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    documentVersion: Property[String] = Empty) extends Expression[MaintenanceWindowAutomationParameters] {
+  def render: Formattable = Value(
     "Parameters" -> parameters,
     "DocumentVersion" -> documentVersion
   )

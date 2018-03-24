@@ -15,8 +15,8 @@ case class Target(
     inputTransformer: Property[InputTransformer] = Empty,
     kinesisParameters: Property[KinesisParameters] = Empty,
     roleArn: Property[String] = Empty,
-    runCommandParameters: Property[RunCommandParameters] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    runCommandParameters: Property[RunCommandParameters] = Empty) extends Expression[Target] {
+  def render: Formattable = Value(
     "Arn" -> arn,
     "EcsParameters" -> ecsParameters,
     "Id" -> id,

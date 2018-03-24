@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ApiStage(
     apiId: Property[String] = Empty,
-    stage: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stage: Property[String] = Empty) extends Expression[ApiStage] {
+  def render: Formattable = Value(
     "ApiId" -> apiId,
     "Stage" -> stage
   )

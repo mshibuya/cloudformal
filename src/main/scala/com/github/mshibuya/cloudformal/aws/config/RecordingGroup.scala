@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class RecordingGroup(
     allSupported: Property[Boolean] = Empty,
     includeGlobalResourceTypes: Property[Boolean] = Empty,
-    resourceTypes: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    resourceTypes: Property[Seq[String]] = Empty) extends Expression[RecordingGroup] {
+  def render: Formattable = Value(
     "AllSupported" -> allSupported,
     "IncludeGlobalResourceTypes" -> includeGlobalResourceTypes,
     "ResourceTypes" -> resourceTypes

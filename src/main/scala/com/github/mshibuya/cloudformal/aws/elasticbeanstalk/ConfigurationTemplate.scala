@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticbeanstalk-configurationtemplate.html
  */
 
-trait ConfigurationTemplate extends Resource with Resource.WithDeletionPolicy {
+trait ConfigurationTemplate extends Resource[ConfigurationTemplate] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticBeanstalk::ConfigurationTemplate"
 
   def applicationName: NonEmptyProperty[String]
@@ -18,7 +18,7 @@ trait ConfigurationTemplate extends Resource with Resource.WithDeletionPolicy {
   def solutionStackName: Property[String] = Empty
   def sourceConfiguration: Property[SourceConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ApplicationName" -> applicationName,
     "Description" -> description,
     "EnvironmentId" -> environmentId,

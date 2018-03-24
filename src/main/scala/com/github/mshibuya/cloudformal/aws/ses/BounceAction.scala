@@ -11,8 +11,8 @@ case class BounceAction(
     smtpReplyCode: NonEmptyProperty[String],
     message: NonEmptyProperty[String],
     topicArn: Property[String] = Empty,
-    statusCode: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    statusCode: Property[String] = Empty) extends Expression[BounceAction] {
+  def render: Formattable = Value(
     "Sender" -> sender,
     "SmtpReplyCode" -> smtpReplyCode,
     "Message" -> message,

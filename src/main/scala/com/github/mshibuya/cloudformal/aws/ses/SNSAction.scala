@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SNSAction(
     topicArn: Property[String] = Empty,
-    encoding: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    encoding: Property[String] = Empty) extends Expression[SNSAction] {
+  def render: Formattable = Value(
     "TopicArn" -> topicArn,
     "Encoding" -> encoding
   )

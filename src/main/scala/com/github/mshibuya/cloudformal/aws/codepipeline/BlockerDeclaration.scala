@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class BlockerDeclaration(
     name: NonEmptyProperty[String],
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[BlockerDeclaration] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Type" -> `type`
   )

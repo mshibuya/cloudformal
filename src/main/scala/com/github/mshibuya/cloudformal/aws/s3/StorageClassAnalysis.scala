@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StorageClassAnalysis(
-    dataExport: Property[DataExport] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    dataExport: Property[DataExport] = Empty) extends Expression[StorageClassAnalysis] {
+  def render: Formattable = Value(
     "DataExport" -> dataExport
   )
 }

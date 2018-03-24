@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InstanceFleetProvisioningSpecifications(
-    spotSpecification: NonEmptyProperty[SpotProvisioningSpecification]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    spotSpecification: NonEmptyProperty[SpotProvisioningSpecification]) extends Expression[InstanceFleetProvisioningSpecifications] {
+  def render: Formattable = Value(
     "SpotSpecification" -> spotSpecification
   )
 }

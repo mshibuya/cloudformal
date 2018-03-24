@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class OriginCustomHeader(
     headerValue: NonEmptyProperty[String],
-    headerName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    headerName: NonEmptyProperty[String]) extends Expression[OriginCustomHeader] {
+  def render: Formattable = Value(
     "HeaderValue" -> headerValue,
     "HeaderName" -> headerName
   )

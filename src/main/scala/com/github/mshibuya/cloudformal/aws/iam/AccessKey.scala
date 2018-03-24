@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
  */
 
-trait AccessKey extends Resource with Resource.WithDeletionPolicy {
+trait AccessKey extends Resource[AccessKey] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::AccessKey"
 
   object attributes {
@@ -18,7 +18,7 @@ trait AccessKey extends Resource with Resource.WithDeletionPolicy {
   def status: Property[String] = Empty
   def userName: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Serial" -> serial,
     "Status" -> status,
     "UserName" -> userName

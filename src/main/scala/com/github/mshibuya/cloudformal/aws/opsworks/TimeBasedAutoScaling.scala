@@ -15,8 +15,8 @@ case class TimeBasedAutoScaling(
     sunday: Property[ListMap[String, String]] = Empty,
     thursday: Property[ListMap[String, String]] = Empty,
     tuesday: Property[ListMap[String, String]] = Empty,
-    wednesday: Property[ListMap[String, String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    wednesday: Property[ListMap[String, String]] = Empty) extends Expression[TimeBasedAutoScaling] {
+  def render: Formattable = Value(
     "Friday" -> friday,
     "Monday" -> monday,
     "Saturday" -> saturday,

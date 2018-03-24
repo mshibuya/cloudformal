@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class SnsAction(
     messageFormat: Property[String] = Empty,
     roleArn: NonEmptyProperty[String],
-    targetArn: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    targetArn: NonEmptyProperty[String]) extends Expression[SnsAction] {
+  def render: Formattable = Value(
     "MessageFormat" -> messageFormat,
     "RoleArn" -> roleArn,
     "TargetArn" -> targetArn

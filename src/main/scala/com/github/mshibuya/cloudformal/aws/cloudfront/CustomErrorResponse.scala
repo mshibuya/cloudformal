@@ -10,8 +10,8 @@ case class CustomErrorResponse(
     responseCode: Property[Int] = Empty,
     errorCachingMinTTL: Property[Double] = Empty,
     errorCode: NonEmptyProperty[Int],
-    responsePagePath: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    responsePagePath: Property[String] = Empty) extends Expression[CustomErrorResponse] {
+  def render: Formattable = Value(
     "ResponseCode" -> responseCode,
     "ErrorCachingMinTTL" -> errorCachingMinTTL,
     "ErrorCode" -> errorCode,

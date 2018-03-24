@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html
  */
 
-trait Queue extends Resource with Resource.WithDeletionPolicy {
+trait Queue extends Resource[Queue] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SQS::Queue"
 
   object attributes {
@@ -28,7 +28,7 @@ trait Queue extends Resource with Resource.WithDeletionPolicy {
   def redrivePolicy: Property[Json] = Empty
   def visibilityTimeout: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ContentBasedDeduplication" -> contentBasedDeduplication,
     "DelaySeconds" -> delaySeconds,
     "FifoQueue" -> fifoQueue,

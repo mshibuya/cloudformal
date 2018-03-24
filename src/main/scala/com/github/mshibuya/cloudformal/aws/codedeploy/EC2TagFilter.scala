@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class EC2TagFilter(
     key: Property[String] = Empty,
     `type`: Property[String] = Empty,
-    value: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: Property[String] = Empty) extends Expression[EC2TagFilter] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Type" -> `type`,
     "Value" -> value

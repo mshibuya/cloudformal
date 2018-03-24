@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html
  */
 
-trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
+trait LoadBalancer extends Resource[LoadBalancer] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancing::LoadBalancer"
 
   object attributes {
@@ -35,7 +35,7 @@ trait LoadBalancer extends Resource with Resource.WithDeletionPolicy {
   def subnets: Property[Seq[String]] = Empty
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AccessLoggingPolicy" -> accessLoggingPolicy,
     "AppCookieStickinessPolicy" -> appCookieStickinessPolicy,
     "AvailabilityZones" -> availabilityZones,

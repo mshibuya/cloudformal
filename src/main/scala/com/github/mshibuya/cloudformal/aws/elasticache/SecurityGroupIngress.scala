@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-security-group-ingress.html
  */
 
-trait SecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
+trait SecurityGroupIngress extends Resource[SecurityGroupIngress] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::SecurityGroupIngress"
 
   def cacheSecurityGroupName: NonEmptyProperty[String]
   def eC2SecurityGroupName: NonEmptyProperty[String]
   def eC2SecurityGroupOwnerId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CacheSecurityGroupName" -> cacheSecurityGroupName,
     "EC2SecurityGroupName" -> eC2SecurityGroupName,
     "EC2SecurityGroupOwnerId" -> eC2SecurityGroupOwnerId

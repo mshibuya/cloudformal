@@ -12,8 +12,8 @@ case class Rule(
     actions: Property[Seq[Action]] = Empty,
     enabled: Property[Boolean] = Empty,
     name: Property[String] = Empty,
-    tlsPolicy: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    tlsPolicy: Property[String] = Empty) extends Expression[Rule] {
+  def render: Formattable = Value(
     "ScanEnabled" -> scanEnabled,
     "Recipients" -> recipients,
     "Actions" -> actions,

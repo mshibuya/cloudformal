@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
  */
 
-trait InstanceProfile extends Resource with Resource.WithDeletionPolicy {
+trait InstanceProfile extends Resource[InstanceProfile] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::InstanceProfile"
 
   object attributes {
@@ -18,7 +18,7 @@ trait InstanceProfile extends Resource with Resource.WithDeletionPolicy {
   def path: Property[String] = Empty
   def roles: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "InstanceProfileName" -> instanceProfileName,
     "Path" -> path,
     "Roles" -> roles

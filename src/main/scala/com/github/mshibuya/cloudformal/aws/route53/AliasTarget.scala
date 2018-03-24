@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class AliasTarget(
     dnsName: NonEmptyProperty[String],
     evaluateTargetHealth: Property[Boolean] = Empty,
-    hostedZoneId: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    hostedZoneId: NonEmptyProperty[String]) extends Expression[AliasTarget] {
+  def render: Formattable = Value(
     "DNSName" -> dnsName,
     "EvaluateTargetHealth" -> evaluateTargetHealth,
     "HostedZoneId" -> hostedZoneId

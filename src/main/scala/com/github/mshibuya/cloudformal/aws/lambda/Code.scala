@@ -10,8 +10,8 @@ case class Code(
     s3Bucket: Property[String] = Empty,
     s3Key: Property[String] = Empty,
     s3ObjectVersion: Property[String] = Empty,
-    zipFile: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    zipFile: Property[String] = Empty) extends Expression[Code] {
+  def render: Formattable = Value(
     "S3Bucket" -> s3Bucket,
     "S3Key" -> s3Key,
     "S3ObjectVersion" -> s3ObjectVersion,

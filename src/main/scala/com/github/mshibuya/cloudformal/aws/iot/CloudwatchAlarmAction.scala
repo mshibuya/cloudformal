@@ -10,8 +10,8 @@ case class CloudwatchAlarmAction(
     alarmName: NonEmptyProperty[String],
     roleArn: NonEmptyProperty[String],
     stateReason: NonEmptyProperty[String],
-    stateValue: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stateValue: NonEmptyProperty[String]) extends Expression[CloudwatchAlarmAction] {
+  def render: Formattable = Value(
     "AlarmName" -> alarmName,
     "RoleArn" -> roleArn,
     "StateReason" -> stateReason,

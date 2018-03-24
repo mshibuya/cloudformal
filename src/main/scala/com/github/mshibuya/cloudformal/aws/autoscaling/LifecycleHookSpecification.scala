@@ -13,8 +13,8 @@ case class LifecycleHookSpecification(
     lifecycleTransition: NonEmptyProperty[String],
     notificationMetadata: Property[String] = Empty,
     notificationTargetARN: Property[String] = Empty,
-    roleARN: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleARN: Property[String] = Empty) extends Expression[LifecycleHookSpecification] {
+  def render: Formattable = Value(
     "DefaultResult" -> defaultResult,
     "HeartbeatTimeout" -> heartbeatTimeout,
     "LifecycleHookName" -> lifecycleHookName,

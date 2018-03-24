@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-security-group.html
  */
 
-trait DBSecurityGroup extends Resource with Resource.WithDeletionPolicy {
+trait DBSecurityGroup extends Resource[DBSecurityGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBSecurityGroup"
 
   def dbSecurityGroupIngress: NonEmptyProperty[Seq[Ingress]]
@@ -15,7 +15,7 @@ trait DBSecurityGroup extends Resource with Resource.WithDeletionPolicy {
   def groupDescription: NonEmptyProperty[String]
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DBSecurityGroupIngress" -> dbSecurityGroupIngress,
     "EC2VpcId" -> eC2VpcId,
     "GroupDescription" -> groupDescription,

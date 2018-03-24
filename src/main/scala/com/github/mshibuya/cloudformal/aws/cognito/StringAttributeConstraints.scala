@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class StringAttributeConstraints(
     minLength: Property[String] = Empty,
-    maxLength: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxLength: Property[String] = Empty) extends Expression[StringAttributeConstraints] {
+  def render: Formattable = Value(
     "MinLength" -> minLength,
     "MaxLength" -> maxLength
   )

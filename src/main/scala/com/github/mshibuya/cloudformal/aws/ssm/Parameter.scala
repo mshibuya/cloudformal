@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-parameter.html
  */
 
-trait Parameter extends Resource with Resource.WithDeletionPolicy {
+trait Parameter extends Resource[Parameter] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Parameter"
 
   object attributes {
@@ -21,7 +21,7 @@ trait Parameter extends Resource with Resource.WithDeletionPolicy {
   def value: NonEmptyProperty[String]
   def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Type" -> `type`,
     "Description" -> description,
     "AllowedPattern" -> allowedPattern,

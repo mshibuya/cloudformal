@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-launchconfig.html
  */
 
-trait LaunchConfiguration extends Resource with Resource.WithDeletionPolicy {
+trait LaunchConfiguration extends Resource[LaunchConfiguration] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::AutoScaling::LaunchConfiguration"
 
   def associatePublicIpAddress: Property[Boolean] = Empty
@@ -28,7 +28,7 @@ trait LaunchConfiguration extends Resource with Resource.WithDeletionPolicy {
   def spotPrice: Property[String] = Empty
   def userData: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AssociatePublicIpAddress" -> associatePublicIpAddress,
     "BlockDeviceMappings" -> blockDeviceMappings,
     "ClassicLinkVPCId" -> classicLinkVPCId,

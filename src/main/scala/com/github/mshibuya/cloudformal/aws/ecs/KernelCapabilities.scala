@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class KernelCapabilities(
     add: Property[Seq[String]] = Empty,
-    drop: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    drop: Property[Seq[String]] = Empty) extends Expression[KernelCapabilities] {
+  def render: Formattable = Value(
     "Add" -> add,
     "Drop" -> drop
   )

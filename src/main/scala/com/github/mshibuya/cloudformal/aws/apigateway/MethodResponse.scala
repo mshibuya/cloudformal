@@ -11,8 +11,8 @@ import scala.collection.immutable.ListMap
 case class MethodResponse(
     responseModels: Property[ListMap[String, String]] = Empty,
     responseParameters: Property[ListMap[String, Boolean]] = Empty,
-    statusCode: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    statusCode: NonEmptyProperty[String]) extends Expression[MethodResponse] {
+  def render: Formattable = Value(
     "ResponseModels" -> responseModels,
     "ResponseParameters" -> responseParameters,
     "StatusCode" -> statusCode

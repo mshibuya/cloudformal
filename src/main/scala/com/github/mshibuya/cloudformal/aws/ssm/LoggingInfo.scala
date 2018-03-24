@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class LoggingInfo(
     s3Bucket: NonEmptyProperty[String],
     region: NonEmptyProperty[String],
-    s3Prefix: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    s3Prefix: Property[String] = Empty) extends Expression[LoggingInfo] {
+  def render: Formattable = Value(
     "S3Bucket" -> s3Bucket,
     "Region" -> region,
     "S3Prefix" -> s3Prefix

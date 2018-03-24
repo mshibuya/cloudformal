@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class S3ReferenceDataSource(
     bucketARN: NonEmptyProperty[String],
     fileKey: NonEmptyProperty[String],
-    referenceRoleARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    referenceRoleARN: NonEmptyProperty[String]) extends Expression[S3ReferenceDataSource] {
+  def render: Formattable = Value(
     "BucketARN" -> bucketARN,
     "FileKey" -> fileKey,
     "ReferenceRoleARN" -> referenceRoleARN

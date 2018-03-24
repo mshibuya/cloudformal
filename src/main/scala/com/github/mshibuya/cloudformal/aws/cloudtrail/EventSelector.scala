@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class EventSelector(
     dataResources: Property[Seq[DataResource]] = Empty,
     includeManagementEvents: Property[Boolean] = Empty,
-    readWriteType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    readWriteType: Property[String] = Empty) extends Expression[EventSelector] {
+  def render: Formattable = Value(
     "DataResources" -> dataResources,
     "IncludeManagementEvents" -> includeManagementEvents,
     "ReadWriteType" -> readWriteType

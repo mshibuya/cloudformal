@@ -8,8 +8,8 @@ case class AutoScalingRollingUpdate(
     minSuccessfulInstancesPercent: Property[Int] = Empty,
     pauseTime: Property[String] = Empty,
     suspendProcesses: Property[String] = Empty,
-    waitOnResourceSignals: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    waitOnResourceSignals: Property[Boolean] = Empty) extends Expression[AutoScalingRollingUpdate] {
+  def render: Formattable = Value(
     "MaxBatchSize" -> maxBatchSize,
     "MinInstancesInService" -> minInstancesInService,
     "MinSuccessfulInstancesPercent" -> minSuccessfulInstancesPercent,

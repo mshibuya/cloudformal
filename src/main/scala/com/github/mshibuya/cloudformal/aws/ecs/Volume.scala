@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Volume(
     host: Property[HostVolumeProperties] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[Volume] {
+  def render: Formattable = Value(
     "Host" -> host,
     "Name" -> name
   )

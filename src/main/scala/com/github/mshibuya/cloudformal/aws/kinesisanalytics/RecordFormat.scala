@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RecordFormat(
     mappingParameters: Property[MappingParameters] = Empty,
-    recordFormatType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    recordFormatType: NonEmptyProperty[String]) extends Expression[RecordFormat] {
+  def render: Formattable = Value(
     "MappingParameters" -> mappingParameters,
     "RecordFormatType" -> recordFormatType
   )

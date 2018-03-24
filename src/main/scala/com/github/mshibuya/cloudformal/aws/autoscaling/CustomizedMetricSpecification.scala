@@ -11,8 +11,8 @@ case class CustomizedMetricSpecification(
     metricName: NonEmptyProperty[String],
     namespace: NonEmptyProperty[String],
     statistic: NonEmptyProperty[String],
-    unit: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    unit: Property[String] = Empty) extends Expression[CustomizedMetricSpecification] {
+  def render: Formattable = Value(
     "Dimensions" -> dimensions,
     "MetricName" -> metricName,
     "Namespace" -> namespace,

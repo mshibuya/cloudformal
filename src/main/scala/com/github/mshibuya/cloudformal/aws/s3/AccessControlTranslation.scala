@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AccessControlTranslation(
-    owner: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    owner: NonEmptyProperty[String]) extends Expression[AccessControlTranslation] {
+  def render: Formattable = Value(
     "Owner" -> owner
   )
 }

@@ -17,8 +17,8 @@ case class InstanceNetworkInterfaceSpecification(
     networkInterfaceId: Property[String] = Empty,
     privateIpAddresses: Property[Seq[PrivateIpAddressSpecification]] = Empty,
     secondaryPrivateIpAddressCount: Property[Int] = Empty,
-    subnetId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    subnetId: Property[String] = Empty) extends Expression[InstanceNetworkInterfaceSpecification] {
+  def render: Formattable = Value(
     "AssociatePublicIpAddress" -> associatePublicIpAddress,
     "DeleteOnTermination" -> deleteOnTermination,
     "Description" -> description,

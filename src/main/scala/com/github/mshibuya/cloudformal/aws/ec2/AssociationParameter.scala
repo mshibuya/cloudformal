@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AssociationParameter(
     key: NonEmptyProperty[String],
-    value: NonEmptyProperty[Seq[String]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[Seq[String]]) extends Expression[AssociationParameter] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Value" -> value
   )

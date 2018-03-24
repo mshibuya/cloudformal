@@ -11,8 +11,8 @@ case class PasswordPolicy(
     minimumLength: Property[Int] = Empty,
     requireUppercase: Property[Boolean] = Empty,
     requireLowercase: Property[Boolean] = Empty,
-    requireSymbols: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    requireSymbols: Property[Boolean] = Empty) extends Expression[PasswordPolicy] {
+  def render: Formattable = Value(
     "RequireNumbers" -> requireNumbers,
     "MinimumLength" -> minimumLength,
     "RequireUppercase" -> requireUppercase,

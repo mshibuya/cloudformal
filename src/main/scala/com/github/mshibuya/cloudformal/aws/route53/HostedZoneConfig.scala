@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class HostedZoneConfig(
-    comment: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    comment: Property[String] = Empty) extends Expression[HostedZoneConfig] {
+  def render: Formattable = Value(
     "Comment" -> comment
   )
 }

@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class NotificationConfiguration(
     lambdaConfigurations: Property[Seq[LambdaConfiguration]] = Empty,
     queueConfigurations: Property[Seq[QueueConfiguration]] = Empty,
-    topicConfigurations: Property[Seq[TopicConfiguration]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    topicConfigurations: Property[Seq[TopicConfiguration]] = Empty) extends Expression[NotificationConfiguration] {
+  def render: Formattable = Value(
     "LambdaConfigurations" -> lambdaConfigurations,
     "QueueConfigurations" -> queueConfigurations,
     "TopicConfigurations" -> topicConfigurations

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class GitHubLocation(
     commitId: NonEmptyProperty[String],
-    repository: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    repository: NonEmptyProperty[String]) extends Expression[GitHubLocation] {
+  def render: Formattable = Value(
     "CommitId" -> commitId,
     "Repository" -> repository
   )

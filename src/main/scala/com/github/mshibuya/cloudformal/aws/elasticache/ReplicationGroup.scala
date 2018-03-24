@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticache-replicationgroup.html
  */
 
-trait ReplicationGroup extends Resource with Resource.WithSnapshotableDeletionPolicy {
+trait ReplicationGroup extends Resource[ReplicationGroup] with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::ReplicationGroup"
 
   object attributes {
@@ -51,7 +51,7 @@ trait ReplicationGroup extends Resource with Resource.WithSnapshotableDeletionPo
   def tags: Property[Seq[Tag]] = Empty
   def transitEncryptionEnabled: Property[Boolean] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AtRestEncryptionEnabled" -> atRestEncryptionEnabled,
     "AuthToken" -> authToken,
     "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,

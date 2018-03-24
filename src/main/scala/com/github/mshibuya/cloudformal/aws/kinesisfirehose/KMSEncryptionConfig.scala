@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class KMSEncryptionConfig(
-    awskmsKeyARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    awskmsKeyARN: NonEmptyProperty[String]) extends Expression[KMSEncryptionConfig] {
+  def render: Formattable = Value(
     "AWSKMSKeyARN" -> awskmsKeyARN
   )
 }

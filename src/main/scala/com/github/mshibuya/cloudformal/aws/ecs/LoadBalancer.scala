@@ -10,8 +10,8 @@ case class LoadBalancer(
     containerName: Property[String] = Empty,
     containerPort: NonEmptyProperty[Int],
     loadBalancerName: Property[String] = Empty,
-    targetGroupArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    targetGroupArn: Property[String] = Empty) extends Expression[LoadBalancer] {
+  def render: Formattable = Value(
     "ContainerName" -> containerName,
     "ContainerPort" -> containerPort,
     "LoadBalancerName" -> loadBalancerName,

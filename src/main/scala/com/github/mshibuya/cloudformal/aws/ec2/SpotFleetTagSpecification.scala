@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SpotFleetTagSpecification(
-    resourceType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    resourceType: Property[String] = Empty) extends Expression[SpotFleetTagSpecification] {
+  def render: Formattable = Value(
     "ResourceType" -> resourceType
   )
 }

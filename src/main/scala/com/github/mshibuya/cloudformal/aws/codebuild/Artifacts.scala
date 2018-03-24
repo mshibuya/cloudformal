@@ -12,8 +12,8 @@ case class Artifacts(
     packaging: Property[String] = Empty,
     location: Property[String] = Empty,
     name: Property[String] = Empty,
-    namespaceType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    namespaceType: Property[String] = Empty) extends Expression[Artifacts] {
+  def render: Formattable = Value(
     "Path" -> path,
     "Type" -> `type`,
     "Packaging" -> packaging,

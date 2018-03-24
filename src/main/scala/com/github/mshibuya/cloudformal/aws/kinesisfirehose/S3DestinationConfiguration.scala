@@ -13,8 +13,8 @@ case class S3DestinationConfiguration(
     compressionFormat: NonEmptyProperty[String],
     encryptionConfiguration: Property[EncryptionConfiguration] = Empty,
     prefix: Property[String] = Empty,
-    roleARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleARN: NonEmptyProperty[String]) extends Expression[S3DestinationConfiguration] {
+  def render: Formattable = Value(
     "BucketARN" -> bucketARN,
     "BufferingHints" -> bufferingHints,
     "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,

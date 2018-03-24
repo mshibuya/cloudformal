@@ -12,8 +12,8 @@ case class Input(
     kinesisStreamsInput: Property[KinesisStreamsInput] = Empty,
     kinesisFirehoseInput: Property[KinesisFirehoseInput] = Empty,
     inputProcessingConfiguration: Property[InputProcessingConfiguration] = Empty,
-    inputParallelism: Property[InputParallelism] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    inputParallelism: Property[InputParallelism] = Empty) extends Expression[Input] {
+  def render: Formattable = Value(
     "NamePrefix" -> namePrefix,
     "InputSchema" -> inputSchema,
     "KinesisStreamsInput" -> kinesisStreamsInput,

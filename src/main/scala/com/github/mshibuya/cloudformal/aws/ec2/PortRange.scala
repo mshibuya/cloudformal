@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PortRange(
     from: Property[Int] = Empty,
-    to: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    to: Property[Int] = Empty) extends Expression[PortRange] {
+  def render: Formattable = Value(
     "From" -> from,
     "To" -> to
   )

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
  */
 
-trait Instance extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
+trait Instance extends Resource[Instance] with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::Instance"
 
   object attributes {
@@ -50,7 +50,7 @@ trait Instance extends Resource with Resource.WithCreationPolicy with Resource.W
   def userData: Property[String] = Empty
   def volumes: Property[Seq[Volume]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AdditionalInfo" -> additionalInfo,
     "Affinity" -> affinity,
     "AvailabilityZone" -> availabilityZone,

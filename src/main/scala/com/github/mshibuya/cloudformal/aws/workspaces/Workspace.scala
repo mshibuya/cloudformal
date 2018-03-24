@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-workspaces-workspace.html
  */
 
-trait Workspace extends Resource with Resource.WithDeletionPolicy {
+trait Workspace extends Resource[Workspace] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WorkSpaces::Workspace"
 
   def bundleId: NonEmptyProperty[String]
@@ -17,7 +17,7 @@ trait Workspace extends Resource with Resource.WithDeletionPolicy {
   def userVolumeEncryptionEnabled: Property[Boolean] = Empty
   def volumeEncryptionKey: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "BundleId" -> bundleId,
     "DirectoryId" -> directoryId,
     "RootVolumeEncryptionEnabled" -> rootVolumeEncryptionEnabled,

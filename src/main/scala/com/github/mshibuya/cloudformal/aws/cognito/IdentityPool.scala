@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-identitypool.html
  */
 
-trait IdentityPool extends Resource with Resource.WithDeletionPolicy {
+trait IdentityPool extends Resource[IdentityPool] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::IdentityPool"
 
   object attributes {
@@ -26,7 +26,7 @@ trait IdentityPool extends Resource with Resource.WithDeletionPolicy {
   def samlProviderARNs: Property[Seq[String]] = Empty
   def openIdConnectProviderARNs: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "PushSync" -> pushSync,
     "CognitoIdentityProviders" -> cognitoIdentityProviders,
     "CognitoEvents" -> cognitoEvents,

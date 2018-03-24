@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-security-group-ingress.html
  */
 
-trait DBSecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
+trait DBSecurityGroupIngress extends Resource[DBSecurityGroupIngress] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBSecurityGroupIngress"
 
   def cidriP: Property[String] = Empty
@@ -16,7 +16,7 @@ trait DBSecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
   def eC2SecurityGroupName: Property[String] = Empty
   def eC2SecurityGroupOwnerId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CIDRIP" -> cidriP,
     "DBSecurityGroupName" -> dbSecurityGroupName,
     "EC2SecurityGroupId" -> eC2SecurityGroupId,

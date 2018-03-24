@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configrule.html
  */
 
-trait ConfigRule extends Resource with Resource.WithDeletionPolicy {
+trait ConfigRule extends Resource[ConfigRule] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Config::ConfigRule"
 
   object attributes {
@@ -24,7 +24,7 @@ trait ConfigRule extends Resource with Resource.WithDeletionPolicy {
   def scope: Property[Scope] = Empty
   def source: NonEmptyProperty[Source]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ConfigRuleName" -> configRuleName,
     "Description" -> description,
     "InputParameters" -> inputParameters,

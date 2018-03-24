@@ -11,8 +11,8 @@ case class EventDestination(
     enabled: Property[Boolean] = Empty,
     matchingEventTypes: NonEmptyProperty[Seq[String]],
     name: Property[String] = Empty,
-    kinesisFirehoseDestination: Property[KinesisFirehoseDestination] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    kinesisFirehoseDestination: Property[KinesisFirehoseDestination] = Empty) extends Expression[EventDestination] {
+  def render: Formattable = Value(
     "CloudWatchDestination" -> cloudWatchDestination,
     "Enabled" -> enabled,
     "MatchingEventTypes" -> matchingEventTypes,

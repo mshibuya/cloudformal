@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class LifecyclePolicy(
     lifecyclePolicyText: Property[String] = Empty,
-    registryId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    registryId: Property[String] = Empty) extends Expression[LifecyclePolicy] {
+  def render: Formattable = Value(
     "LifecyclePolicyText" -> lifecyclePolicyText,
     "RegistryId" -> registryId
   )

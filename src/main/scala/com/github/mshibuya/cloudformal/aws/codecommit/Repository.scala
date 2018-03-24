@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codecommit-repository.html
  */
 
-trait Repository extends Resource with Resource.WithDeletionPolicy {
+trait Repository extends Resource[Repository] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodeCommit::Repository"
 
   object attributes {
@@ -21,7 +21,7 @@ trait Repository extends Resource with Resource.WithDeletionPolicy {
   def triggers: Property[Seq[RepositoryTrigger]] = Empty
   def repositoryDescription: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "RepositoryName" -> repositoryName,
     "Triggers" -> triggers,
     "RepositoryDescription" -> repositoryDescription

@@ -12,8 +12,8 @@ case class OptionConfiguration(
     optionSettings: Property[OptionSetting] = Empty,
     optionVersion: Property[String] = Empty,
     port: Property[Int] = Empty,
-    vpcSecurityGroupMemberships: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    vpcSecurityGroupMemberships: Property[Seq[String]] = Empty) extends Expression[OptionConfiguration] {
+  def render: Formattable = Value(
     "DBSecurityGroupMemberships" -> dbSecurityGroupMemberships,
     "OptionName" -> optionName,
     "OptionSettings" -> optionSettings,

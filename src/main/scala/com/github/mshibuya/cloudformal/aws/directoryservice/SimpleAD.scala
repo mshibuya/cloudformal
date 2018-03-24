@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html
  */
 
-trait SimpleAD extends Resource with Resource.WithDeletionPolicy {
+trait SimpleAD extends Resource[SimpleAD] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DirectoryService::SimpleAD"
 
   object attributes {
@@ -24,7 +24,7 @@ trait SimpleAD extends Resource with Resource.WithDeletionPolicy {
   def size: NonEmptyProperty[String]
   def vpcSettings: NonEmptyProperty[VpcSettings]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CreateAlias" -> createAlias,
     "Description" -> description,
     "EnableSso" -> enableSso,

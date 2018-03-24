@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-elasticache-cache-cluster.html
  */
 
-trait CacheCluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
+trait CacheCluster extends Resource[CacheCluster] with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::ElastiCache::CacheCluster"
 
   object attributes {
@@ -39,7 +39,7 @@ trait CacheCluster extends Resource with Resource.WithSnapshotableDeletionPolicy
   def tags: Property[Seq[Tag]] = Empty
   def vpcSecurityGroupIds: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AZMode" -> azMode,
     "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,
     "CacheNodeType" -> cacheNodeType,

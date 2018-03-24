@@ -1,6 +1,6 @@
 package com.github.mshibuya.cloudformal.model
 
-trait Parameter[ItemType, ResultType] extends Renderable with Referenceable[ResultType] {
+trait Parameter[ItemType, ResultType] extends Expression[Parameter[ItemType, ResultType]] with Referenceable[ResultType] {
   def logicalId: String
   def dataType: String
   def constraintDescription: Property[String]
@@ -21,7 +21,7 @@ case class StringParameter(
     noEcho: Property[Boolean] = Empty) extends Parameter[String, String] {
   def dataType: String = "String"
 
-  def render(): Formattable = Formattable.withProperties(
+  def render(): Formattable = Value(
     "Type" -> Value(dataType),
     "AllowedPattern" -> allowedPattern,
     "AllowedValues" -> allowedValues,
@@ -46,12 +46,12 @@ case class CommaDelimitedListParameter(
     noEcho: Property[Boolean] = Empty) extends Parameter[String, Seq[String]] {
   def dataType: String = "CommaDelimitedList"
   def defaultAsCommaSeparated: Property[String] = default match {
-    case Value(v) => Value(v.mkString(","))
+    case SeqValue(v) => Value(v.mkString(","))
     case e: Expression[Seq[String]] => Fn.Join(",", e)
     case _ => Empty
   }
 
-  def render(): Formattable = Formattable.withProperties(
+  def render(): Formattable = Value(
     "Type" -> Value(dataType),
     "AllowedPattern" -> allowedPattern,
     "AllowedValues" -> allowedValues,
@@ -73,7 +73,7 @@ trait AbstractNumberParameter[ItemType, ResultType] extends Parameter[ItemType, 
   def minValue: Property[ItemType]
   def noEcho: Property[Boolean]
 
-  def render(): Formattable = Formattable.withProperties(
+  def render(): Formattable = Value(
     "Type" -> Value(dataType),
     "AllowedValues" -> allowedValues,
     "ConstraintDescription" -> constraintDescription,
@@ -117,7 +117,7 @@ trait AbstractTypedParameter[A] extends Parameter[A, A] {
   def description: Property[String]
   def noEcho: Property[Boolean]
 
-  def render(): Formattable = Formattable.withProperties(
+  def render(): Formattable = Value(
     "Type" -> Value(dataType),
     "AllowedPattern" -> allowedPattern,
     "AllowedValues" -> allowedValues,

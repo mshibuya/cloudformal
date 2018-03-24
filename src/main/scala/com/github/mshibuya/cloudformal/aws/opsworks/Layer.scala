@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-layer.html
  */
 
-trait Layer extends Resource with Resource.WithDeletionPolicy {
+trait Layer extends Resource[Layer] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Layer"
 
   def attributes: Property[ListMap[String, String]] = Empty
@@ -33,7 +33,7 @@ trait Layer extends Resource with Resource.WithDeletionPolicy {
   def useEbsOptimizedInstances: Property[Boolean] = Empty
   def volumeConfigurations: Property[Seq[VolumeConfiguration]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Attributes" -> attributes,
     "AutoAssignElasticIps" -> autoAssignElasticIps,
     "AutoAssignPublicIps" -> autoAssignPublicIps,

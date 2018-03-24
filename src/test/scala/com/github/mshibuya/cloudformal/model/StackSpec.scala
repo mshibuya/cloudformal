@@ -12,6 +12,6 @@ class StackSpec extends FunSpec with MustMatchers {
     def outputs = Nil
   }
   it("works") {
-    TestStack.render().value("Resources") mustBe Formattable.emptyMap
+    TestStack.render().value("Resources") mustBe FormattableMap()
   }
 }

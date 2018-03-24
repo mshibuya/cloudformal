@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SnapshotOptions(
-    automatedSnapshotStartHour: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    automatedSnapshotStartHour: Property[Int] = Empty) extends Expression[SnapshotOptions] {
+  def render: Formattable = Value(
     "AutomatedSnapshotStartHour" -> automatedSnapshotStartHour
   )
 }

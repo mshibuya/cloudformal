@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
  */
 
-trait Table extends Resource with Resource.WithDeletionPolicy {
+trait Table extends Resource[Table] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DynamoDB::Table"
 
   object attributes {
@@ -26,7 +26,7 @@ trait Table extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def timeToLiveSpecification: Property[TimeToLiveSpecification] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AttributeDefinitions" -> attributeDefinitions,
     "GlobalSecondaryIndexes" -> globalSecondaryIndexes,
     "KeySchema" -> keySchema,

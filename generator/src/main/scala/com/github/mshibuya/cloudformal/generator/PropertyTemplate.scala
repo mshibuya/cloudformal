@@ -7,9 +7,9 @@ case class PropertyTemplate(name: String, specification: PropertySpecification) 
   def fileName = s"${nameParts.last}.scala"
   def renderSection: String =
     if (specification.properties.isEmpty) {
-      s"""  def render: Formattable = Formattable.emptyMap"""
+      s"""  def render: Formattable = Value()"""
     } else {
-      s"""  def render: Formattable = Formattable.withProperties(
+      s"""  def render: Formattable = Value(
          |${specification.properties.map(_.renderedValue).mkString(",\n")}
          |  )""".stripMargin
     }
@@ -24,7 +24,7 @@ case class PropertyTemplate(name: String, specification: PropertySpecification) 
       | */
       |
       |case class ${className}(
-      |${specification.properties.map(_.argumentValue).mkString(",\n")}) extends Renderable {
+      |${specification.properties.map(_.argumentValue).mkString(",\n")}) extends Expression[${className}] {
       |${renderSection}
       |}
       |""".stripMargin

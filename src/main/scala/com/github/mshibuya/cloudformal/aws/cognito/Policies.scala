@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Policies(
-    passwordPolicy: Property[PasswordPolicy] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    passwordPolicy: Property[PasswordPolicy] = Empty) extends Expression[Policies] {
+  def render: Formattable = Value(
     "PasswordPolicy" -> passwordPolicy
   )
 }

@@ -14,8 +14,8 @@ case class Egress(
     destinationSecurityGroupId: Property[String] = Empty,
     fromPort: Property[Int] = Empty,
     ipProtocol: NonEmptyProperty[String],
-    toPort: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    toPort: Property[Int] = Empty) extends Expression[Egress] {
+  def render: Formattable = Value(
     "CidrIp" -> cidrIp,
     "CidrIpv6" -> cidrIpv6,
     "Description" -> description,

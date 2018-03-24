@@ -12,8 +12,8 @@ case class CustomOriginConfig(
     originKeepaliveTimeout: Property[Int] = Empty,
     originSSLProtocols: Property[Seq[String]] = Empty,
     httpPort: Property[Int] = Empty,
-    originProtocolPolicy: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    originProtocolPolicy: NonEmptyProperty[String]) extends Expression[CustomOriginConfig] {
+  def render: Formattable = Value(
     "OriginReadTimeout" -> originReadTimeout,
     "HTTPSPort" -> httpsPort,
     "OriginKeepaliveTimeout" -> originKeepaliveTimeout,

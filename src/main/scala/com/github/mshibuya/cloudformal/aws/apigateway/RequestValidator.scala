@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-requestvalidator.html
  */
 
-trait RequestValidator extends model.Resource with model.Resource.WithDeletionPolicy {
+trait RequestValidator extends model.Resource[RequestValidator] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::RequestValidator"
 
   def name: Property[String] = Empty
@@ -16,7 +16,7 @@ trait RequestValidator extends model.Resource with model.Resource.WithDeletionPo
   def validateRequestBody: Property[Boolean] = Empty
   def validateRequestParameters: Property[Boolean] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Name" -> name,
     "RestApiId" -> restApiId,
     "ValidateRequestBody" -> validateRequestBody,

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class InputArtifact(
-    name: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: NonEmptyProperty[String]) extends Expression[InputArtifact] {
+  def render: Formattable = Value(
     "Name" -> name
   )
 }

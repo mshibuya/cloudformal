@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-volume.html
  */
 
-trait Volume extends Resource with Resource.WithDeletionPolicy {
+trait Volume extends Resource[Volume] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::Volume"
 
   def ec2VolumeId: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait Volume extends Resource with Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def stackId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Ec2VolumeId" -> ec2VolumeId,
     "MountPoint" -> mountPoint,
     "Name" -> name,

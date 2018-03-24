@@ -12,8 +12,8 @@ case class Ebs(
     iops: Property[Int] = Empty,
     snapshotId: Property[String] = Empty,
     volumeSize: Property[Int] = Empty,
-    volumeType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    volumeType: Property[String] = Empty) extends Expression[Ebs] {
+  def render: Formattable = Value(
     "DeleteOnTermination" -> deleteOnTermination,
     "Encrypted" -> encrypted,
     "Iops" -> iops,

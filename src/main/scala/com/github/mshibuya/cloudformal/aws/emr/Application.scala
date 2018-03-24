@@ -12,8 +12,8 @@ case class Application(
     additionalInfo: Property[ListMap[String, String]] = Empty,
     args: Property[Seq[String]] = Empty,
     name: Property[String] = Empty,
-    version: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    version: Property[String] = Empty) extends Expression[Application] {
+  def render: Formattable = Value(
     "AdditionalInfo" -> additionalInfo,
     "Args" -> args,
     "Name" -> name,

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AppCookieStickinessPolicy(
     cookieName: NonEmptyProperty[String],
-    policyName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    policyName: NonEmptyProperty[String]) extends Expression[AppCookieStickinessPolicy] {
+  def render: Formattable = Value(
     "CookieName" -> cookieName,
     "PolicyName" -> policyName
   )

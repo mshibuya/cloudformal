@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class EmailConfiguration(
     replyToEmailAddress: Property[String] = Empty,
-    sourceArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sourceArn: Property[String] = Empty) extends Expression[EmailConfiguration] {
+  def render: Formattable = Value(
     "ReplyToEmailAddress" -> replyToEmailAddress,
     "SourceArn" -> sourceArn
   )

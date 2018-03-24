@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html
  */
 
-trait Function extends Resource with Resource.WithDeletionPolicy {
+trait Function extends Resource[Function] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Function"
 
   object attributes {
@@ -30,7 +30,7 @@ trait Function extends Resource with Resource.WithDeletionPolicy {
   def tracingConfig: Property[TracingConfig] = Empty
   def vpcConfig: Property[VpcConfig] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Code" -> code,
     "DeadLetterConfig" -> deadLetterConfig,
     "Description" -> description,

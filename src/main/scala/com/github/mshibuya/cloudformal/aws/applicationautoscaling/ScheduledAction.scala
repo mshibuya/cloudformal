@@ -11,8 +11,8 @@ case class ScheduledAction(
     scalableTargetAction: Property[ScalableTargetAction] = Empty,
     schedule: NonEmptyProperty[String],
     scheduledActionName: NonEmptyProperty[String],
-    startTime: Property[java.time.ZonedDateTime] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    startTime: Property[java.time.ZonedDateTime] = Empty) extends Expression[ScheduledAction] {
+  def render: Formattable = Value(
     "EndTime" -> endTime,
     "ScalableTargetAction" -> scalableTargetAction,
     "Schedule" -> schedule,

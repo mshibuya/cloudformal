@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesisfirehose-deliverystream.html
  */
 
-trait DeliveryStream extends Resource with Resource.WithDeletionPolicy {
+trait DeliveryStream extends Resource[DeliveryStream] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::KinesisFirehose::DeliveryStream"
 
   object attributes {
@@ -22,7 +22,7 @@ trait DeliveryStream extends Resource with Resource.WithDeletionPolicy {
   def redshiftDestinationConfiguration: Property[RedshiftDestinationConfiguration] = Empty
   def s3DestinationConfiguration: Property[S3DestinationConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DeliveryStreamName" -> deliveryStreamName,
     "DeliveryStreamType" -> deliveryStreamType,
     "ElasticsearchDestinationConfiguration" -> elasticsearchDestinationConfiguration,

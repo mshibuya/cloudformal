@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
  */
 
-trait User extends Resource with Resource.WithDeletionPolicy {
+trait User extends Resource[User] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::User"
 
   object attributes {
@@ -21,7 +21,7 @@ trait User extends Resource with Resource.WithDeletionPolicy {
   def policies: Property[Seq[Policy]] = Empty
   def userName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Groups" -> groups,
     "LoginProfile" -> loginProfile,
     "ManagedPolicyArns" -> managedPolicyArns,

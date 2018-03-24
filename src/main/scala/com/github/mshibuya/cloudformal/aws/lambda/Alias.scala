@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-alias.html
  */
 
-trait Alias extends Resource with Resource.WithDeletionPolicy with Resource.WithUpdatePolicy {
+trait Alias extends Resource[Alias] with Resource.WithDeletionPolicy with Resource.WithUpdatePolicy {
   val resourceTypeName = "AWS::Lambda::Alias"
 
   def description: Property[String] = Empty
@@ -16,7 +16,7 @@ trait Alias extends Resource with Resource.WithDeletionPolicy with Resource.With
   def name: NonEmptyProperty[String]
   def routingConfig: Property[AliasRoutingConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "FunctionName" -> functionName,
     "FunctionVersion" -> functionVersion,

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class VolumesHost(
-    sourcePath: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sourcePath: Property[String] = Empty) extends Expression[VolumesHost] {
+  def render: Formattable = Value(
     "SourcePath" -> sourcePath
   )
 }

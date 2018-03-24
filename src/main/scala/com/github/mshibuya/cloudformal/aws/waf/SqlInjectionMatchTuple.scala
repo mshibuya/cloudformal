@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SqlInjectionMatchTuple(
     fieldToMatch: NonEmptyProperty[FieldToMatch],
-    textTransformation: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    textTransformation: NonEmptyProperty[String]) extends Expression[SqlInjectionMatchTuple] {
+  def render: Formattable = Value(
     "FieldToMatch" -> fieldToMatch,
     "TextTransformation" -> textTransformation
   )

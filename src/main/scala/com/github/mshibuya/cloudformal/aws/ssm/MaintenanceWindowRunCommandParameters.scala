@@ -16,8 +16,8 @@ case class MaintenanceWindowRunCommandParameters(
     serviceRoleArn: Property[String] = Empty,
     notificationConfig: Property[NotificationConfig] = Empty,
     outputS3BucketName: Property[String] = Empty,
-    documentHash: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    documentHash: Property[String] = Empty) extends Expression[MaintenanceWindowRunCommandParameters] {
+  def render: Formattable = Value(
     "TimeoutSeconds" -> timeoutSeconds,
     "Comment" -> comment,
     "OutputS3KeyPrefix" -> outputS3KeyPrefix,

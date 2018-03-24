@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SpotPlacement(
     availabilityZone: Property[String] = Empty,
-    groupName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    groupName: Property[String] = Empty) extends Expression[SpotPlacement] {
+  def render: Formattable = Value(
     "AvailabilityZone" -> availabilityZone,
     "GroupName" -> groupName
   )

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AutoScalingPolicy(
     constraints: NonEmptyProperty[ScalingConstraints],
-    rules: NonEmptyProperty[Seq[ScalingRule]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    rules: NonEmptyProperty[Seq[ScalingRule]]) extends Expression[AutoScalingPolicy] {
+  def render: Formattable = Value(
     "Constraints" -> constraints,
     "Rules" -> rules
   )

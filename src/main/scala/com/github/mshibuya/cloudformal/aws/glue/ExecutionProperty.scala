@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ExecutionProperty(
-    maxConcurrentRuns: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxConcurrentRuns: Property[Double] = Empty) extends Expression[ExecutionProperty] {
+  def render: Formattable = Value(
     "MaxConcurrentRuns" -> maxConcurrentRuns
   )
 }

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Targets(
     s3Targets: Property[Seq[S3Target]] = Empty,
-    jdbcTargets: Property[Seq[JdbcTarget]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    jdbcTargets: Property[Seq[JdbcTarget]] = Empty) extends Expression[Targets] {
+  def render: Formattable = Value(
     "S3Targets" -> s3Targets,
     "JdbcTargets" -> jdbcTargets
   )

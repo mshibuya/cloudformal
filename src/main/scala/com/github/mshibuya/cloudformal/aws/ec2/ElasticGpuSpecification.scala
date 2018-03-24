@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ElasticGpuSpecification(
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[ElasticGpuSpecification] {
+  def render: Formattable = Value(
     "Type" -> `type`
   )
 }

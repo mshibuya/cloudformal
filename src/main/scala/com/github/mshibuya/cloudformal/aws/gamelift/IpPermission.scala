@@ -10,8 +10,8 @@ case class IpPermission(
     fromPort: NonEmptyProperty[Int],
     ipRange: NonEmptyProperty[String],
     protocol: NonEmptyProperty[String],
-    toPort: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    toPort: NonEmptyProperty[Int]) extends Expression[IpPermission] {
+  def render: Formattable = Value(
     "FromPort" -> fromPort,
     "IpRange" -> ipRange,
     "Protocol" -> protocol,

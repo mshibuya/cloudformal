@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Logging(
     includeCookies: Property[Boolean] = Empty,
     bucket: NonEmptyProperty[String],
-    prefix: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    prefix: Property[String] = Empty) extends Expression[Logging] {
+  def render: Formattable = Value(
     "IncludeCookies" -> includeCookies,
     "Bucket" -> bucket,
     "Prefix" -> prefix

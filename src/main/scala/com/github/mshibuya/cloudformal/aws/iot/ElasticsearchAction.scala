@@ -11,8 +11,8 @@ case class ElasticsearchAction(
     id: NonEmptyProperty[String],
     index: NonEmptyProperty[String],
     roleArn: NonEmptyProperty[String],
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[ElasticsearchAction] {
+  def render: Formattable = Value(
     "Endpoint" -> endpoint,
     "Id" -> id,
     "Index" -> index,

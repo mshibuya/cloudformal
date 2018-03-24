@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ScalableTargetAction(
     maxCapacity: Property[Int] = Empty,
-    minCapacity: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    minCapacity: Property[Int] = Empty) extends Expression[ScalableTargetAction] {
+  def render: Formattable = Value(
     "MaxCapacity" -> maxCapacity,
     "MinCapacity" -> minCapacity
   )

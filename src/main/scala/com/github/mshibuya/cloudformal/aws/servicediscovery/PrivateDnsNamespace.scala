@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicediscovery-privatednsnamespace.html
  */
 
-trait PrivateDnsNamespace extends Resource with Resource.WithDeletionPolicy {
+trait PrivateDnsNamespace extends Resource[PrivateDnsNamespace] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ServiceDiscovery::PrivateDnsNamespace"
 
   object attributes {
@@ -19,7 +19,7 @@ trait PrivateDnsNamespace extends Resource with Resource.WithDeletionPolicy {
   def vpc: NonEmptyProperty[String]
   def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "Vpc" -> vpc,
     "Name" -> name

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codebuild-project.html
  */
 
-trait Project extends Resource with Resource.WithDeletionPolicy {
+trait Project extends Resource[Project] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodeBuild::Project"
 
   object attributes {
@@ -28,7 +28,7 @@ trait Project extends Resource with Resource.WithDeletionPolicy {
   def timeoutInMinutes: Property[Int] = Empty
   def cache: Property[ProjectCache] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "VpcConfig" -> vpcConfig,
     "EncryptionKey" -> encryptionKey,

@@ -13,8 +13,8 @@ case class S3Settings(
     csvRowDelimiter: Property[String] = Empty,
     csvDelimiter: Property[String] = Empty,
     serviceAccessRoleArn: Property[String] = Empty,
-    compressionType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    compressionType: Property[String] = Empty) extends Expression[S3Settings] {
+  def render: Formattable = Value(
     "ExternalTableDefinition" -> externalTableDefinition,
     "BucketName" -> bucketName,
     "BucketFolder" -> bucketFolder,

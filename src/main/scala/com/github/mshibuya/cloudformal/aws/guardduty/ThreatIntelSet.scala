@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-threatintelset.html
  */
 
-trait ThreatIntelSet extends Resource with Resource.WithDeletionPolicy {
+trait ThreatIntelSet extends Resource[ThreatIntelSet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::GuardDuty::ThreatIntelSet"
 
   def format: NonEmptyProperty[String]
@@ -16,7 +16,7 @@ trait ThreatIntelSet extends Resource with Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def location: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Format" -> format,
     "Activate" -> activate,
     "DetectorId" -> detectorId,

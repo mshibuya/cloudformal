@@ -16,8 +16,8 @@ case class MethodSetting(
     metricsEnabled: Property[Boolean] = Empty,
     resourcePath: Property[String] = Empty,
     throttlingBurstLimit: Property[Int] = Empty,
-    throttlingRateLimit: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    throttlingRateLimit: Property[Double] = Empty) extends Expression[MethodSetting] {
+  def render: Formattable = Value(
     "CacheDataEncrypted" -> cacheDataEncrypted,
     "CacheTtlInSeconds" -> cacheTtlInSeconds,
     "CachingEnabled" -> cachingEnabled,

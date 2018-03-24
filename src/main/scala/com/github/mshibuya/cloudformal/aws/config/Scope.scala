@@ -10,8 +10,8 @@ case class Scope(
     complianceResourceId: Property[String] = Empty,
     complianceResourceTypes: Property[Seq[String]] = Empty,
     tagKey: Property[String] = Empty,
-    tagValue: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    tagValue: Property[String] = Empty) extends Expression[Scope] {
+  def render: Formattable = Value(
     "ComplianceResourceId" -> complianceResourceId,
     "ComplianceResourceTypes" -> complianceResourceTypes,
     "TagKey" -> tagKey,

@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-managedpolicy.html
  */
 
-trait ManagedPolicy extends Resource with Resource.WithDeletionPolicy {
+trait ManagedPolicy extends Resource[ManagedPolicy] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::ManagedPolicy"
 
   def description: Property[String] = Empty
@@ -19,7 +19,7 @@ trait ManagedPolicy extends Resource with Resource.WithDeletionPolicy {
   def roles: Property[Seq[String]] = Empty
   def users: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "Groups" -> groups,
     "ManagedPolicyName" -> managedPolicyName,

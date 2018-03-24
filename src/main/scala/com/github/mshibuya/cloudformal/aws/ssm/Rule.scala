@@ -10,8 +10,8 @@ case class Rule(
     enableNonSecurity: Property[Boolean] = Empty,
     patchFilterGroup: Property[PatchFilterGroup] = Empty,
     approveAfterDays: Property[Int] = Empty,
-    complianceLevel: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    complianceLevel: Property[String] = Empty) extends Expression[Rule] {
+  def render: Formattable = Value(
     "EnableNonSecurity" -> enableNonSecurity,
     "PatchFilterGroup" -> patchFilterGroup,
     "ApproveAfterDays" -> approveAfterDays,

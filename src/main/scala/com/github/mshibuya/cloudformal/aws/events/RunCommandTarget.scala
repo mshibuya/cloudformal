@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RunCommandTarget(
     key: NonEmptyProperty[String],
-    values: NonEmptyProperty[Seq[String]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    values: NonEmptyProperty[Seq[String]]) extends Expression[RunCommandTarget] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Values" -> values
   )

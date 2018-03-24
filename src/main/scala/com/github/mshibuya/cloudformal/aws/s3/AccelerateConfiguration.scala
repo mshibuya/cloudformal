@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class AccelerateConfiguration(
-    accelerationStatus: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    accelerationStatus: NonEmptyProperty[String]) extends Expression[AccelerateConfiguration] {
+  def render: Formattable = Value(
     "AccelerationStatus" -> accelerationStatus
   )
 }

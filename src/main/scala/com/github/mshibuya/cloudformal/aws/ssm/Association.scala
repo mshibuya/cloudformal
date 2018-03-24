@@ -9,7 +9,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-association.html
  */
 
-trait Association extends Resource with Resource.WithDeletionPolicy {
+trait Association extends Resource[Association] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::Association"
 
   def associationName: Property[String] = Empty
@@ -20,7 +20,7 @@ trait Association extends Resource with Resource.WithDeletionPolicy {
   def scheduleExpression: Property[String] = Empty
   def targets: Property[Seq[Target]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AssociationName" -> associationName,
     "DocumentVersion" -> documentVersion,
     "InstanceId" -> instanceId,

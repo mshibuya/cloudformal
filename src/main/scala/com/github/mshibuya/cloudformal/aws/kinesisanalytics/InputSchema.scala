@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class InputSchema(
     recordEncoding: Property[String] = Empty,
     recordColumns: NonEmptyProperty[Seq[RecordColumn]],
-    recordFormat: NonEmptyProperty[RecordFormat]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    recordFormat: NonEmptyProperty[RecordFormat]) extends Expression[InputSchema] {
+  def render: Formattable = Value(
     "RecordEncoding" -> recordEncoding,
     "RecordColumns" -> recordColumns,
     "RecordFormat" -> recordFormat

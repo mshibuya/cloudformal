@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class ArtifactStore(
     encryptionKey: Property[EncryptionKey] = Empty,
     location: NonEmptyProperty[String],
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[ArtifactStore] {
+  def render: Formattable = Value(
     "EncryptionKey" -> encryptionKey,
     "Location" -> location,
     "Type" -> `type`

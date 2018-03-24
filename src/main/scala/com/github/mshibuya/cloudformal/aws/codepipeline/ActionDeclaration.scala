@@ -14,8 +14,8 @@ case class ActionDeclaration(
     name: NonEmptyProperty[String],
     outputArtifacts: Property[Seq[OutputArtifact]] = Empty,
     roleArn: Property[String] = Empty,
-    runOrder: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    runOrder: Property[Int] = Empty) extends Expression[ActionDeclaration] {
+  def render: Formattable = Value(
     "ActionTypeId" -> actionTypeId,
     "Configuration" -> configuration,
     "InputArtifacts" -> inputArtifacts,

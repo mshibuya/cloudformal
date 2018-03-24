@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-userprofile.html
  */
 
-trait UserProfile extends Resource with Resource.WithDeletionPolicy {
+trait UserProfile extends Resource[UserProfile] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::UserProfile"
 
   object attributes {
@@ -19,7 +19,7 @@ trait UserProfile extends Resource with Resource.WithDeletionPolicy {
   def sshPublicKey: Property[String] = Empty
   def sshUsername: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AllowSelfManagement" -> allowSelfManagement,
     "IamUserArn" -> iamUserArn,
     "SshPublicKey" -> sshPublicKey,

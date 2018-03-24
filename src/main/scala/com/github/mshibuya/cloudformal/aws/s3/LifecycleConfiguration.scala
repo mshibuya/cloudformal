@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LifecycleConfiguration(
-    rules: NonEmptyProperty[Seq[Rule]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    rules: NonEmptyProperty[Seq[Rule]]) extends Expression[LifecycleConfiguration] {
+  def render: Formattable = Value(
     "Rules" -> rules
   )
 }

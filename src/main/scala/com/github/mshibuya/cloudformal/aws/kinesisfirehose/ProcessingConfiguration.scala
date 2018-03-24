@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ProcessingConfiguration(
     enabled: NonEmptyProperty[Boolean],
-    processors: NonEmptyProperty[Seq[Processor]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    processors: NonEmptyProperty[Seq[Processor]]) extends Expression[ProcessingConfiguration] {
+  def render: Formattable = Value(
     "Enabled" -> enabled,
     "Processors" -> processors
   )

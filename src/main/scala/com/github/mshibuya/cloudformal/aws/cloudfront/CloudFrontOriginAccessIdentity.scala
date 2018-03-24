@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-cloudfrontoriginaccessidentity.html
  */
 
-trait CloudFrontOriginAccessIdentity extends Resource with Resource.WithDeletionPolicy {
+trait CloudFrontOriginAccessIdentity extends Resource[CloudFrontOriginAccessIdentity] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 
   object attributes {
@@ -16,7 +16,7 @@ trait CloudFrontOriginAccessIdentity extends Resource with Resource.WithDeletion
 
   def cloudFrontOriginAccessIdentityConfig: NonEmptyProperty[CloudFrontOriginAccessIdentityConfig]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CloudFrontOriginAccessIdentityConfig" -> cloudFrontOriginAccessIdentityConfig
   )
 }

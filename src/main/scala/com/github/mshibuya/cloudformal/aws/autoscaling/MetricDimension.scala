@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class MetricDimension(
     name: NonEmptyProperty[String],
-    value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[String]) extends Expression[MetricDimension] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Value" -> value
   )

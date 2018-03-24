@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class GeoLocation(
     continentCode: Property[String] = Empty,
     countryCode: Property[String] = Empty,
-    subdivisionCode: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    subdivisionCode: Property[String] = Empty) extends Expression[GeoLocation] {
+  def render: Formattable = Value(
     "ContinentCode" -> continentCode,
     "CountryCode" -> countryCode,
     "SubdivisionCode" -> subdivisionCode

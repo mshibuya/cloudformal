@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Deployment(
     description: Property[String] = Empty,
     ignoreApplicationStopFailures: Property[Boolean] = Empty,
-    revision: NonEmptyProperty[RevisionLocation]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    revision: NonEmptyProperty[RevisionLocation]) extends Expression[Deployment] {
+  def render: Formattable = Value(
     "Description" -> description,
     "IgnoreApplicationStopFailures" -> ignoreApplicationStopFailures,
     "Revision" -> revision

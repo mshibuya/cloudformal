@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html
  */
 
-trait MountTarget extends Resource with Resource.WithDeletionPolicy {
+trait MountTarget extends Resource[MountTarget] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EFS::MountTarget"
 
   def fileSystemId: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait MountTarget extends Resource with Resource.WithDeletionPolicy {
   def securityGroups: NonEmptyProperty[Seq[String]]
   def subnetId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "FileSystemId" -> fileSystemId,
     "IpAddress" -> ipAddress,
     "SecurityGroups" -> securityGroups,

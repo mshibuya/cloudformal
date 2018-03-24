@@ -10,8 +10,8 @@ import com.github.mshibuya.cloudformal.model._
 case class SerdeInfo(
     parameters: Property[Json] = Empty,
     serializationLibrary: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[SerdeInfo] {
+  def render: Formattable = Value(
     "Parameters" -> parameters,
     "SerializationLibrary" -> serializationLibrary,
     "Name" -> name

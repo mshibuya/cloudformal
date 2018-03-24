@@ -10,8 +10,8 @@ case class GlobalSecondaryIndex(
     indexName: NonEmptyProperty[String],
     keySchema: NonEmptyProperty[Seq[KeySchema]],
     projection: NonEmptyProperty[Projection],
-    provisionedThroughput: NonEmptyProperty[ProvisionedThroughput]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    provisionedThroughput: NonEmptyProperty[ProvisionedThroughput]) extends Expression[GlobalSecondaryIndex] {
+  def render: Formattable = Value(
     "IndexName" -> indexName,
     "KeySchema" -> keySchema,
     "Projection" -> projection,

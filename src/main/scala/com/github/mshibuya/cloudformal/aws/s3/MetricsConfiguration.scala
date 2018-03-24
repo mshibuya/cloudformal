@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MetricsConfiguration(
     id: NonEmptyProperty[String],
     prefix: Property[String] = Empty,
-    tagFilters: Property[Seq[TagFilter]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    tagFilters: Property[Seq[TagFilter]] = Empty) extends Expression[MetricsConfiguration] {
+  def render: Formattable = Value(
     "Id" -> id,
     "Prefix" -> prefix,
     "TagFilters" -> tagFilters

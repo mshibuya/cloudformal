@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Certificate(
-    certificateArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    certificateArn: Property[String] = Empty) extends Expression[Certificate] {
+  def render: Formattable = Value(
     "CertificateArn" -> certificateArn
   )
 }

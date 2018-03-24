@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Schedule(
-    scheduleExpression: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    scheduleExpression: Property[String] = Empty) extends Expression[Schedule] {
+  def render: Formattable = Value(
     "ScheduleExpression" -> scheduleExpression
   )
 }

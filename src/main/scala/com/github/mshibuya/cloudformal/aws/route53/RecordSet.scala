@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-recordset.html
  */
 
-trait RecordSet extends Resource with Resource.WithDeletionPolicy {
+trait RecordSet extends Resource[RecordSet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Route53::RecordSet"
 
   def aliasTarget: Property[AliasTarget] = Empty
@@ -25,7 +25,7 @@ trait RecordSet extends Resource with Resource.WithDeletionPolicy {
   def `type`: NonEmptyProperty[String]
   def weight: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AliasTarget" -> aliasTarget,
     "Comment" -> comment,
     "Failover" -> failover,

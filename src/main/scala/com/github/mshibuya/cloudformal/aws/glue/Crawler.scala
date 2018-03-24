@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-crawler.html
  */
 
-trait Crawler extends Resource with Resource.WithDeletionPolicy {
+trait Crawler extends Resource[Crawler] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::Crawler"
 
   def role: NonEmptyProperty[String]
@@ -20,7 +20,7 @@ trait Crawler extends Resource with Resource.WithDeletionPolicy {
   def tablePrefix: Property[String] = Empty
   def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Role" -> role,
     "Classifiers" -> classifiers,
     "Description" -> description,

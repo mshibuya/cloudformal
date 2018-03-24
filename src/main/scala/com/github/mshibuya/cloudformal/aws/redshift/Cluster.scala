@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-cluster.html
  */
 
-trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
+trait Cluster extends Resource[Cluster] with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::Redshift::Cluster"
 
   object attributes {
@@ -45,7 +45,7 @@ trait Cluster extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def vpcSecurityGroupIds: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AllowVersionUpgrade" -> allowVersionUpgrade,
     "AutomatedSnapshotRetentionPeriod" -> automatedSnapshotRetentionPeriod,
     "AvailabilityZone" -> availabilityZone,

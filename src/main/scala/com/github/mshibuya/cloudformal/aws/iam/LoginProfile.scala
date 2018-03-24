@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class LoginProfile(
     password: NonEmptyProperty[String],
-    passwordResetRequired: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    passwordResetRequired: Property[Boolean] = Empty) extends Expression[LoginProfile] {
+  def render: Formattable = Value(
     "Password" -> password,
     "PasswordResetRequired" -> passwordResetRequired
   )

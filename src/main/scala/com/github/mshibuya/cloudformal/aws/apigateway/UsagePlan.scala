@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html
  */
 
-trait UsagePlan extends model.Resource with model.Resource.WithDeletionPolicy {
+trait UsagePlan extends model.Resource[UsagePlan] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::UsagePlan"
 
   def apiStages: Property[Seq[ApiStage]] = Empty
@@ -17,7 +17,7 @@ trait UsagePlan extends model.Resource with model.Resource.WithDeletionPolicy {
   def throttle: Property[ThrottleSettings] = Empty
   def usagePlanName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ApiStages" -> apiStages,
     "Description" -> description,
     "Quota" -> quota,

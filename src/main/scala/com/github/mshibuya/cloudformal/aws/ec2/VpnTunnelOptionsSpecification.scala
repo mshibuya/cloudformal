@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class VpnTunnelOptionsSpecification(
     preSharedKey: Property[String] = Empty,
-    tunnelInsideCidr: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    tunnelInsideCidr: Property[String] = Empty) extends Expression[VpnTunnelOptionsSpecification] {
+  def render: Formattable = Value(
     "PreSharedKey" -> preSharedKey,
     "TunnelInsideCidr" -> tunnelInsideCidr
   )

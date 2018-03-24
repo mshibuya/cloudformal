@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class LambdaAction(
-    functionArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    functionArn: Property[String] = Empty) extends Expression[LambdaAction] {
+  def render: Formattable = Value(
     "FunctionArn" -> functionArn
   )
 }

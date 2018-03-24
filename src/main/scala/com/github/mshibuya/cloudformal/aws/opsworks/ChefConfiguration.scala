@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ChefConfiguration(
     berkshelfVersion: Property[String] = Empty,
-    manageBerkshelf: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    manageBerkshelf: Property[Boolean] = Empty) extends Expression[ChefConfiguration] {
+  def render: Formattable = Value(
     "BerkshelfVersion" -> berkshelfVersion,
     "ManageBerkshelf" -> manageBerkshelf
   )

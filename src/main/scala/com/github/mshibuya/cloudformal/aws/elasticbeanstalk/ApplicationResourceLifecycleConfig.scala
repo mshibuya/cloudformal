@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ApplicationResourceLifecycleConfig(
     serviceRole: Property[String] = Empty,
-    versionLifecycleConfig: Property[ApplicationVersionLifecycleConfig] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    versionLifecycleConfig: Property[ApplicationVersionLifecycleConfig] = Empty) extends Expression[ApplicationResourceLifecycleConfig] {
+  def render: Formattable = Value(
     "ServiceRole" -> serviceRole,
     "VersionLifecycleConfig" -> versionLifecycleConfig
   )

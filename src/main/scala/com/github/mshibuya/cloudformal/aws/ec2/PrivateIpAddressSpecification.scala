@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PrivateIpAddressSpecification(
     primary: NonEmptyProperty[Boolean],
-    privateIpAddress: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    privateIpAddress: NonEmptyProperty[String]) extends Expression[PrivateIpAddressSpecification] {
+  def render: Formattable = Value(
     "Primary" -> primary,
     "PrivateIpAddress" -> privateIpAddress
   )

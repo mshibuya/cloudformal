@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-cluster.html
  */
 
-trait Cluster extends Resource with Resource.WithDeletionPolicy {
+trait Cluster extends Resource[Cluster] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::Cluster"
 
   object attributes {
@@ -16,7 +16,7 @@ trait Cluster extends Resource with Resource.WithDeletionPolicy {
 
   def clusterName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ClusterName" -> clusterName
   )
 }

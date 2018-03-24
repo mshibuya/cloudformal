@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RuleCondition(
     field: Property[String] = Empty,
-    values: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    values: Property[Seq[String]] = Empty) extends Expression[RuleCondition] {
+  def render: Formattable = Value(
     "Field" -> field,
     "Values" -> values
   )

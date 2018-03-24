@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConnectionsList(
-    connections: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    connections: Property[Seq[String]] = Empty) extends Expression[ConnectionsList] {
+  def render: Formattable = Value(
     "Connections" -> connections
   )
 }

@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class RoutingStrategy(
     fleetId: Property[String] = Empty,
     message: Property[String] = Empty,
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[RoutingStrategy] {
+  def render: Formattable = Value(
     "FleetId" -> fleetId,
     "Message" -> message,
     "Type" -> `type`

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip-association.html
  */
 
-trait EIPAssociation extends Resource with Resource.WithDeletionPolicy {
+trait EIPAssociation extends Resource[EIPAssociation] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::EIPAssociation"
 
   def allocationId: Property[String] = Empty
@@ -16,7 +16,7 @@ trait EIPAssociation extends Resource with Resource.WithDeletionPolicy {
   def networkInterfaceId: Property[String] = Empty
   def privateIpAddress: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AllocationId" -> allocationId,
     "EIP" -> eiP,
     "InstanceId" -> instanceId,

@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MetricTransformation(
     metricName: NonEmptyProperty[String],
     metricNamespace: NonEmptyProperty[String],
-    metricValue: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    metricValue: NonEmptyProperty[String]) extends Expression[MetricTransformation] {
+  def render: Formattable = Value(
     "MetricName" -> metricName,
     "MetricNamespace" -> metricNamespace,
     "MetricValue" -> metricValue

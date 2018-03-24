@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class EnvironmentVariable(
     key: NonEmptyProperty[String],
     secure: Property[Boolean] = Empty,
-    value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[String]) extends Expression[EnvironmentVariable] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Secure" -> secure,
     "Value" -> value

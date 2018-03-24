@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class RdsDbInstance(
     dbPassword: NonEmptyProperty[String],
     dbUser: NonEmptyProperty[String],
-    rdsDbInstanceArn: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    rdsDbInstanceArn: NonEmptyProperty[String]) extends Expression[RdsDbInstance] {
+  def render: Formattable = Value(
     "DbPassword" -> dbPassword,
     "DbUser" -> dbUser,
     "RdsDbInstanceArn" -> rdsDbInstanceArn

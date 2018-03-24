@@ -38,7 +38,7 @@ object WordPressMultiAZStack extends Stack {
     logicalId = "InstanceType",
     description = Value("WebServer EC2 instance type"),
     default = Value("t2.small"),
-    allowedValues = Value(Seq("t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "g2.2xlarge", "g2.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "cr1.8xlarge", "cc2.8xlarge", "cg1.4xlarge")),
+    allowedValues = Value(Seq("t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "g2.2xlarge", "g2.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "cr1.8xlarge", "cc2.8xlarge", "cg1.4xlarge").map(Value(_))),
     constraintDescription = Value("must be a valid EC2 instance type.")
   )
   val sshLocation = StringParameter(
@@ -54,7 +54,7 @@ object WordPressMultiAZStack extends Stack {
     logicalId = "DBClass",
     description = Value("Database instance class"),
     default = Value("db.t2.small"),
-    allowedValues = Value(Seq("db.t1.micro", "db.m1.small", "db.m1.medium", "db.m1.large", "db.m1.xlarge", "db.m2.xlarge", "db.m2.2xlarge", "db.m2.4xlarge", "db.m3.medium", "db.m3.large", "db.m3.xlarge", "db.m3.2xlarge", "db.m4.large", "db.m4.xlarge", "db.m4.2xlarge", "db.m4.4xlarge", "db.m4.10xlarge", "db.r3.large", "db.r3.xlarge", "db.r3.2xlarge", "db.r3.4xlarge", "db.r3.8xlarge", "db.m2.xlarge", "db.m2.2xlarge", "db.m2.4xlarge", "db.cr1.8xlarge", "db.t2.micro", "db.t2.small", "db.t2.medium", "db.t2.large")),
+    allowedValues = Value(Seq("db.t1.micro", "db.m1.small", "db.m1.medium", "db.m1.large", "db.m1.xlarge", "db.m2.xlarge", "db.m2.2xlarge", "db.m2.4xlarge", "db.m3.medium", "db.m3.large", "db.m3.xlarge", "db.m3.2xlarge", "db.m4.large", "db.m4.xlarge", "db.m4.2xlarge", "db.m4.4xlarge", "db.m4.10xlarge", "db.r3.large", "db.r3.xlarge", "db.r3.2xlarge", "db.r3.4xlarge", "db.r3.8xlarge", "db.m2.xlarge", "db.m2.2xlarge", "db.m2.4xlarge", "db.cr1.8xlarge", "db.t2.micro", "db.t2.small", "db.t2.medium", "db.t2.large").map(Value(_))),
     constraintDescription = Value("must select a valid database instance type.")
   )
   val dbName = StringParameter(
@@ -88,7 +88,7 @@ object WordPressMultiAZStack extends Stack {
     logicalId = "MultiAZDatabase",
     default = Value("false"),
     description = Value("Create a Multi-AZ MySQL Amazon RDS database instance"),
-    allowedValues = Value(Seq("true", "false")),
+    allowedValues = Value(Seq("true", "false").map(Value(_))),
     constraintDescription = Value("must be either true or false.")
   )
   val webServerCapacity = NumberParameter(
@@ -299,11 +299,11 @@ object WordPressMultiAZStack extends Stack {
     override def vpcZoneIdentifier: Property[Seq[String]] = subnets.ref
     override def launchConfigurationName: Property[String] = launchConfig.ref
     override def desiredCapacity: Property[String] = webServerCapacity.ref.as[String]
-    override def targetGroupARNs: Property[Seq[String]] = ListProperty(albTargetGroup.ref)
-    override def creationPolicy: Property[CreationPolicy] = Value(CreationPolicy(resourceSignal = Value(ResourceSignal(timeout = Value("PT15M")))))
-    override def updatePolicy: Property[UpdatePolicy] = Value(UpdatePolicy(autoScalingRollingUpdate = Value(AutoScalingRollingUpdate(
+    override def targetGroupARNs: Property[Seq[String]] = Value(Seq(albTargetGroup.ref))
+    override def creationPolicy: Property[CreationPolicy] = CreationPolicy(resourceSignal = ResourceSignal(timeout = Value("PT15M")))
+    override def updatePolicy: Property[UpdatePolicy] = UpdatePolicy(autoScalingRollingUpdate = AutoScalingRollingUpdate(
       minInstancesInService = Value(1), maxBatchSize = Value(1), pauseTime = Value("PT15M"), waitOnResourceSignals = Value(true)
-    ))))
+    ))
   }
   val launchConfig = new LaunchConfiguration {
     override def logicalId: String = "LaunchConfig"
@@ -393,20 +393,20 @@ object WordPressMultiAZStack extends Stack {
     override def imageId: NonEmptyProperty[String] = awsRegionArch2AMI.get(Ref("AWS::Region"),
       awsInstanceType2Arch.get(WordPressMultiAZStack.instanceType.ref, Value("Arch")))
     override def instanceType: NonEmptyProperty[String] = WordPressMultiAZStack.instanceType.ref
-    override def securityGroups: Property[Seq[String]] = ListProperty(webServerSecurityGroup.ref)
+    override def securityGroups: Property[Seq[String]] = Value(Seq(webServerSecurityGroup.ref))
     override def keyName: Property[String] = WordPressMultiAZStack.keyName.ref
     override def userData: Property[String] = Fn.Base64(Fn.Join("", Value(Seq(
-      "#!/bin/bash -xe\n",
-      "yum update -y aws-cfn-bootstrap\n",
-      "/opt/aws/bin/cfn-init -v ",
-      "         --stack ", Ref("AWS::StackName"),
-      "         --resource LaunchConfig ",
-      "         --configsets wordpress_install ",
-      "         --region ", Ref("AWS::Region"), "\n",
-      "/opt/aws/bin/cfn-signal -e $? ",
-      "         --stack ", Ref("AWS::StackName"),
-      "         --resource WebServerGroup ",
-      "         --region ", Ref("AWS::Region"), "\n"
+      Value("#!/bin/bash -xe\n"),
+      Value("yum update -y aws-cfn-bootstrap\n"),
+      Value("/opt/aws/bin/cfn-init -v "),
+      Value("         --stack "), Ref("AWS::StackName"),
+      Value("         --resource LaunchConfig "),
+      Value("         --configsets wordpress_install "),
+      Value("         --region "), Ref("AWS::Region"), Value("\n"),
+      Value("/opt/aws/bin/cfn-signal -e $? "),
+      Value("         --stack "), Ref("AWS::StackName"),
+      Value("         --resource WebServerGroup "),
+      Value("         --region "), Ref("AWS::Region"), Value("\n")
     ))))
   }
   val dbEC2SecurityGroup = new SecurityGroup {
@@ -427,7 +427,7 @@ object WordPressMultiAZStack extends Stack {
     override def masterUserPassword: Property[String] = WordPressMultiAZStack.dbPassword.ref
     override def dbInstanceClass: NonEmptyProperty[String] = dbClass.ref
     override def allocatedStorage: Property[String] = dbAllocatedStorage.ref.as[String]
-    override def vpcSecurityGroups: Property[Seq[String]] = ListProperty(dbEC2SecurityGroup.attributes.groupId)
+    override def vpcSecurityGroups: Property[Seq[String]] = Value(Seq(dbEC2SecurityGroup.attributes.groupId))
   }
   val resources = Seq(
     applicationLoadBalancer,
@@ -441,7 +441,7 @@ object WordPressMultiAZStack extends Stack {
   )
 
   val websiteUrl = Output("WebsiteURL",
-    Fn.Join("", Value(Seq("http://", applicationLoadBalancer.attributes.dnsName, "/wordpress"))),
+    Fn.Join("", Value(Seq(Value("http://"), applicationLoadBalancer.attributes.dnsName, Value("/wordpress")))),
     Value("WordPress Website"))
   val outputs = Seq(websiteUrl)
 }

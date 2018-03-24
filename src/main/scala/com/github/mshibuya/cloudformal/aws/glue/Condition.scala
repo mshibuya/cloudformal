@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Condition(
     state: Property[String] = Empty,
     logicalOperator: Property[String] = Empty,
-    jobName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    jobName: Property[String] = Empty) extends Expression[Condition] {
+  def render: Formattable = Value(
     "State" -> state,
     "LogicalOperator" -> logicalOperator,
     "JobName" -> jobName

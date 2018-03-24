@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-subnet.html
  */
 
-trait Subnet extends Resource with Resource.WithDeletionPolicy {
+trait Subnet extends Resource[Subnet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::Subnet"
 
   object attributes {
@@ -25,7 +25,7 @@ trait Subnet extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AssignIpv6AddressOnCreation" -> assignIpv6AddressOnCreation,
     "AvailabilityZone" -> availabilityZone,
     "CidrBlock" -> cidrBlock,

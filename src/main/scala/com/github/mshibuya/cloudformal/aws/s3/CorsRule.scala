@@ -12,8 +12,8 @@ case class CorsRule(
     allowedOrigins: NonEmptyProperty[Seq[String]],
     exposedHeaders: Property[Seq[String]] = Empty,
     id: Property[String] = Empty,
-    maxAge: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxAge: Property[Int] = Empty) extends Expression[CorsRule] {
+  def render: Formattable = Value(
     "AllowedHeaders" -> allowedHeaders,
     "AllowedMethods" -> allowedMethods,
     "AllowedOrigins" -> allowedOrigins,

@@ -18,8 +18,8 @@ case class DefaultCacheBehavior(
     minTTL: Property[Double] = Empty,
     maxTTL: Property[Double] = Empty,
     trustedSigners: Property[Seq[String]] = Empty,
-    defaultTTL: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    defaultTTL: Property[Double] = Empty) extends Expression[DefaultCacheBehavior] {
+  def render: Formattable = Value(
     "Compress" -> compress,
     "AllowedMethods" -> allowedMethods,
     "CachedMethods" -> cachedMethods,

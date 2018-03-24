@@ -15,8 +15,8 @@ case class CloudWatchAlarmDefinition(
     period: NonEmptyProperty[Int],
     statistic: Property[String] = Empty,
     threshold: NonEmptyProperty[Double],
-    unit: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    unit: Property[String] = Empty) extends Expression[CloudWatchAlarmDefinition] {
+  def render: Formattable = Value(
     "ComparisonOperator" -> comparisonOperator,
     "Dimensions" -> dimensions,
     "EvaluationPeriods" -> evaluationPeriods,

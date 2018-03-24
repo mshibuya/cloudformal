@@ -1,7 +1,7 @@
 package com.github.mshibuya.cloudformal.model
 
-case class Tag(key: NonEmptyProperty[String], value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+case class Tag(key: NonEmptyProperty[String], value: NonEmptyProperty[String]) extends Expression[Tag] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Value" -> value
   )

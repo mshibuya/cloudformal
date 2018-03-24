@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class IpFilter(
     policy: NonEmptyProperty[String],
-    cidr: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    cidr: NonEmptyProperty[String]) extends Expression[IpFilter] {
+  def render: Formattable = Value(
     "Policy" -> policy,
     "Cidr" -> cidr
   )

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ProjectCache(
     `type`: NonEmptyProperty[String],
-    location: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    location: Property[String] = Empty) extends Expression[ProjectCache] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "Location" -> location
   )

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DataResource(
     `type`: NonEmptyProperty[String],
-    values: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    values: Property[Seq[String]] = Empty) extends Expression[DataResource] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "Values" -> values
   )

@@ -12,8 +12,8 @@ case class InstanceTypeConfig(
     configurations: Property[Seq[Configuration]] = Empty,
     ebsConfiguration: Property[EbsConfiguration] = Empty,
     instanceType: NonEmptyProperty[String],
-    weightedCapacity: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    weightedCapacity: Property[Int] = Empty) extends Expression[InstanceTypeConfig] {
+  def render: Formattable = Value(
     "BidPrice" -> bidPrice,
     "BidPriceAsPercentageOfOnDemandPrice" -> bidPriceAsPercentageOfOnDemandPrice,
     "Configurations" -> configurations,

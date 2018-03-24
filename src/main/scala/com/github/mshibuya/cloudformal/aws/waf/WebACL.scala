@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-waf-webacl.html
  */
 
-trait WebACL extends Resource with Resource.WithDeletionPolicy {
+trait WebACL extends Resource[WebACL] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::WAF::WebACL"
 
   def defaultAction: NonEmptyProperty[WafAction]
@@ -15,7 +15,7 @@ trait WebACL extends Resource with Resource.WithDeletionPolicy {
   def name: NonEmptyProperty[String]
   def rules: Property[Seq[ActivatedRule]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DefaultAction" -> defaultAction,
     "MetricName" -> metricName,
     "Name" -> name,

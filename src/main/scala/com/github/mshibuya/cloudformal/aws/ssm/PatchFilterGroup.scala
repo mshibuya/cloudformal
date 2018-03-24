@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PatchFilterGroup(
-    patchFilters: Property[Seq[PatchFilter]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    patchFilters: Property[Seq[PatchFilter]] = Empty) extends Expression[PatchFilterGroup] {
+  def render: Formattable = Value(
     "PatchFilters" -> patchFilters
   )
 }

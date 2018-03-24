@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Column(
     comment: Property[String] = Empty,
     `type`: Property[String] = Empty,
-    name: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: NonEmptyProperty[String]) extends Expression[Column] {
+  def render: Formattable = Value(
     "Comment" -> comment,
     "Type" -> `type`,
     "Name" -> name

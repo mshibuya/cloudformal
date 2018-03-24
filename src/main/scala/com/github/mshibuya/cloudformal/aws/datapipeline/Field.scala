@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Field(
     key: NonEmptyProperty[String],
     refValue: Property[String] = Empty,
-    stringValue: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stringValue: Property[String] = Empty) extends Expression[Field] {
+  def render: Formattable = Value(
     "Key" -> key,
     "RefValue" -> refValue,
     "StringValue" -> stringValue

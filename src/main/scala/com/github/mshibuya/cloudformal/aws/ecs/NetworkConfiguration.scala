@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NetworkConfiguration(
-    awsvpcConfiguration: Property[AwsVpcConfiguration] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    awsvpcConfiguration: Property[AwsVpcConfiguration] = Empty) extends Expression[NetworkConfiguration] {
+  def render: Formattable = Value(
     "AwsvpcConfiguration" -> awsvpcConfiguration
   )
 }

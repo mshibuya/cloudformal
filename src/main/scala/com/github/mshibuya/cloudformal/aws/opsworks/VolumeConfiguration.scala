@@ -12,8 +12,8 @@ case class VolumeConfiguration(
     numberOfDisks: Property[Int] = Empty,
     raidLevel: Property[Int] = Empty,
     size: Property[Int] = Empty,
-    volumeType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    volumeType: Property[String] = Empty) extends Expression[VolumeConfiguration] {
+  def render: Formattable = Value(
     "Iops" -> iops,
     "MountPoint" -> mountPoint,
     "NumberOfDisks" -> numberOfDisks,

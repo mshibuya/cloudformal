@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class TopicConfiguration(
     event: NonEmptyProperty[String],
     filter: Property[NotificationFilter] = Empty,
-    topic: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    topic: NonEmptyProperty[String]) extends Expression[TopicConfiguration] {
+  def render: Formattable = Value(
     "Event" -> event,
     "Filter" -> filter,
     "Topic" -> topic

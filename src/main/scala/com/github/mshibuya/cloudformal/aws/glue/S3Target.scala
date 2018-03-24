@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class S3Target(
     path: Property[String] = Empty,
-    exclusions: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    exclusions: Property[Seq[String]] = Empty) extends Expression[S3Target] {
+  def render: Formattable = Value(
     "Path" -> path,
     "Exclusions" -> exclusions
   )

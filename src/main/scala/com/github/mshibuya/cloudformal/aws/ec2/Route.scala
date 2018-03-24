@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-route.html
  */
 
-trait Route extends Resource with Resource.WithDeletionPolicy {
+trait Route extends Resource[Route] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::Route"
 
   def destinationCidrBlock: Property[String] = Empty
@@ -20,7 +20,7 @@ trait Route extends Resource with Resource.WithDeletionPolicy {
   def routeTableId: NonEmptyProperty[String]
   def vpcPeeringConnectionId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DestinationCidrBlock" -> destinationCidrBlock,
     "DestinationIpv6CidrBlock" -> destinationIpv6CidrBlock,
     "EgressOnlyInternetGatewayId" -> egressOnlyInternetGatewayId,

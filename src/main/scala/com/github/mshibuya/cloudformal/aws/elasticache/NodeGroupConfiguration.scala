@@ -10,8 +10,8 @@ case class NodeGroupConfiguration(
     primaryAvailabilityZone: Property[String] = Empty,
     replicaAvailabilityZones: Property[Seq[String]] = Empty,
     replicaCount: Property[Int] = Empty,
-    slots: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    slots: Property[String] = Empty) extends Expression[NodeGroupConfiguration] {
+  def render: Formattable = Value(
     "PrimaryAvailabilityZone" -> primaryAvailabilityZone,
     "ReplicaAvailabilityZones" -> replicaAvailabilityZones,
     "ReplicaCount" -> replicaCount,

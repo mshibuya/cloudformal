@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class PatchSource(
     products: Property[Seq[String]] = Empty,
     configuration: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[PatchSource] {
+  def render: Formattable = Value(
     "Products" -> products,
     "Configuration" -> configuration,
     "Name" -> name

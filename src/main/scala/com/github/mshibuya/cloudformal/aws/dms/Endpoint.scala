@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-endpoint.html
  */
 
-trait Endpoint extends Resource with Resource.WithDeletionPolicy {
+trait Endpoint extends Resource[Endpoint] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::Endpoint"
 
   object attributes {
@@ -31,7 +31,7 @@ trait Endpoint extends Resource with Resource.WithDeletionPolicy {
   def certificateArn: Property[String] = Empty
   def mongoDbSettings: Property[MongoDbSettings] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "KmsKeyId" -> kmsKeyId,
     "Port" -> port,
     "DatabaseName" -> databaseName,

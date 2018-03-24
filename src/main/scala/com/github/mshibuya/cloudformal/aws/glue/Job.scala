@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-job.html
  */
 
-trait Job extends Resource with Resource.WithDeletionPolicy {
+trait Job extends Resource[Job] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::Job"
 
   def role: NonEmptyProperty[String]
@@ -22,7 +22,7 @@ trait Job extends Resource with Resource.WithDeletionPolicy {
   def executionProperty: Property[ExecutionProperty] = Empty
   def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Role" -> role,
     "DefaultArguments" -> defaultArguments,
     "Connections" -> connections,

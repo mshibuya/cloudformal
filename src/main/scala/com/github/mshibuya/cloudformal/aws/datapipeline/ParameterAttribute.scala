@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ParameterAttribute(
     key: NonEmptyProperty[String],
-    stringValue: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stringValue: NonEmptyProperty[String]) extends Expression[ParameterAttribute] {
+  def render: Formattable = Value(
     "Key" -> key,
     "StringValue" -> stringValue
   )

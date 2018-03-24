@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloud9-environmentec2.html
  */
 
-trait EnvironmentEC2 extends Resource with Resource.WithDeletionPolicy {
+trait EnvironmentEC2 extends Resource[EnvironmentEC2] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cloud9::EnvironmentEC2"
 
   object attributes {
@@ -23,7 +23,7 @@ trait EnvironmentEC2 extends Resource with Resource.WithDeletionPolicy {
   def instanceType: NonEmptyProperty[String]
   def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Repositories" -> repositories,
     "OwnerArn" -> ownerArn,
     "Description" -> description,

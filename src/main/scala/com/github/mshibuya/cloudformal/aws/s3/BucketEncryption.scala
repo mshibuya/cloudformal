@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class BucketEncryption(
-    serverSideEncryptionConfiguration: NonEmptyProperty[Seq[ServerSideEncryptionRule]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    serverSideEncryptionConfiguration: NonEmptyProperty[Seq[ServerSideEncryptionRule]]) extends Expression[BucketEncryption] {
+  def render: Formattable = Value(
     "ServerSideEncryptionConfiguration" -> serverSideEncryptionConfiguration
   )
 }

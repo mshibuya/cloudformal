@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class PlacementType(
-    availabilityZone: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    availabilityZone: NonEmptyProperty[String]) extends Expression[PlacementType] {
+  def render: Formattable = Value(
     "AvailabilityZone" -> availabilityZone
   )
 }

@@ -10,8 +10,8 @@ case class Destination(
     bucketAccountId: Property[String] = Empty,
     bucketArn: NonEmptyProperty[String],
     format: NonEmptyProperty[String],
-    prefix: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    prefix: Property[String] = Empty) extends Expression[Destination] {
+  def render: Formattable = Value(
     "BucketAccountId" -> bucketAccountId,
     "BucketArn" -> bucketArn,
     "Format" -> format,

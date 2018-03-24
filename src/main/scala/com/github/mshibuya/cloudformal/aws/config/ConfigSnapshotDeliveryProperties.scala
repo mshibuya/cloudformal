@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConfigSnapshotDeliveryProperties(
-    deliveryFrequency: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    deliveryFrequency: Property[String] = Empty) extends Expression[ConfigSnapshotDeliveryProperties] {
+  def render: Formattable = Value(
     "DeliveryFrequency" -> deliveryFrequency
   )
 }

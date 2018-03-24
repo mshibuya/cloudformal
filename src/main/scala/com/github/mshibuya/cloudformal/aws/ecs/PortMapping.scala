@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class PortMapping(
     containerPort: Property[Int] = Empty,
     hostPort: Property[Int] = Empty,
-    protocol: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    protocol: Property[String] = Empty) extends Expression[PortMapping] {
+  def render: Formattable = Value(
     "ContainerPort" -> containerPort,
     "HostPort" -> hostPort,
     "Protocol" -> protocol

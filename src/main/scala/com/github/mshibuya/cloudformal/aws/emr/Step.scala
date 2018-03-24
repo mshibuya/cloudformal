@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-step.html
  */
 
-trait Step extends Resource with Resource.WithDeletionPolicy {
+trait Step extends Resource[Step] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::Step"
 
   def actionOnFailure: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait Step extends Resource with Resource.WithDeletionPolicy {
   def jobFlowId: NonEmptyProperty[String]
   def name: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ActionOnFailure" -> actionOnFailure,
     "HadoopJarStep" -> hadoopJarStep,
     "JobFlowId" -> jobFlowId,

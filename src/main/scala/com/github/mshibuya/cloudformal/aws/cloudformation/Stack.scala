@@ -9,7 +9,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-stack.html
  */
 
-trait Stack extends Resource with Resource.WithDeletionPolicy {
+trait Stack extends Resource[Stack] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::Stack"
 
   def notificationARNs: Property[Seq[String]] = Empty
@@ -18,7 +18,7 @@ trait Stack extends Resource with Resource.WithDeletionPolicy {
   def templateURL: NonEmptyProperty[String]
   def timeoutInMinutes: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "NotificationARNs" -> notificationARNs,
     "Parameters" -> parameters,
     "Tags" -> tags,

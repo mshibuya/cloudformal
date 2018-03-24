@@ -9,8 +9,8 @@ import scala.collection.immutable.ListMap
  */
 
 case class AttributePayload(
-    attributes: Property[ListMap[String, String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    attributes: Property[ListMap[String, String]] = Empty) extends Expression[AttributePayload] {
+  def render: Formattable = Value(
     "Attributes" -> attributes
   )
 }

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ShutdownEventConfiguration(
     delayUntilElbConnectionsDrained: Property[Boolean] = Empty,
-    executionTimeout: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    executionTimeout: Property[Int] = Empty) extends Expression[ShutdownEventConfiguration] {
+  def render: Formattable = Value(
     "DelayUntilElbConnectionsDrained" -> delayUntilElbConnectionsDrained,
     "ExecutionTimeout" -> executionTimeout
   )

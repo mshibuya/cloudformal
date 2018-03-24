@@ -10,8 +10,8 @@ case class BlockDeviceMapping(
     deviceName: NonEmptyProperty[String],
     ebs: Property[BlockDevice] = Empty,
     noDevice: Property[Boolean] = Empty,
-    virtualName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    virtualName: Property[String] = Empty) extends Expression[BlockDeviceMapping] {
+  def render: Formattable = Value(
     "DeviceName" -> deviceName,
     "Ebs" -> ebs,
     "NoDevice" -> noDevice,

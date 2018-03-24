@@ -14,8 +14,8 @@ case class RedshiftDestinationConfiguration(
     processingConfiguration: Property[ProcessingConfiguration] = Empty,
     roleARN: NonEmptyProperty[String],
     s3Configuration: NonEmptyProperty[S3DestinationConfiguration],
-    username: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    username: NonEmptyProperty[String]) extends Expression[RedshiftDestinationConfiguration] {
+  def render: Formattable = Value(
     "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,
     "ClusterJDBCURL" -> clusterJDBCURL,
     "CopyCommand" -> copyCommand,

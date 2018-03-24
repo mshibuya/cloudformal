@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iot-topicrule.html
  */
 
-trait TopicRule extends Resource with Resource.WithDeletionPolicy {
+trait TopicRule extends Resource[TopicRule] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IoT::TopicRule"
 
   object attributes {
@@ -17,7 +17,7 @@ trait TopicRule extends Resource with Resource.WithDeletionPolicy {
   def ruleName: Property[String] = Empty
   def topicRulePayload: NonEmptyProperty[TopicRulePayload]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "RuleName" -> ruleName,
     "TopicRulePayload" -> topicRulePayload
   )

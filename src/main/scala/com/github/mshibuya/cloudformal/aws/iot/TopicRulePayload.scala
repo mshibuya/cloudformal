@@ -11,8 +11,8 @@ case class TopicRulePayload(
     awsIotSqlVersion: Property[String] = Empty,
     description: Property[String] = Empty,
     ruleDisabled: NonEmptyProperty[Boolean],
-    sql: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sql: NonEmptyProperty[String]) extends Expression[TopicRulePayload] {
+  def render: Formattable = Value(
     "Actions" -> actions,
     "AwsIotSqlVersion" -> awsIotSqlVersion,
     "Description" -> description,

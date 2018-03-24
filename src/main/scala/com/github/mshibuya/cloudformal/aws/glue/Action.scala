@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Action(
     jobName: Property[String] = Empty,
-    arguments: Property[Json] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    arguments: Property[Json] = Empty) extends Expression[Action] {
+  def render: Formattable = Value(
     "JobName" -> jobName,
     "Arguments" -> arguments
   )

@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class RecordColumn(
     mapping: Property[String] = Empty,
     sqlType: NonEmptyProperty[String],
-    name: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: NonEmptyProperty[String]) extends Expression[RecordColumn] {
+  def render: Formattable = Value(
     "Mapping" -> mapping,
     "SqlType" -> sqlType,
     "Name" -> name

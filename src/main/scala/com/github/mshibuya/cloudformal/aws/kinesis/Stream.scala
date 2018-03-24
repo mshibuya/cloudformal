@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-kinesis-stream.html
  */
 
-trait Stream extends Resource with Resource.WithDeletionPolicy {
+trait Stream extends Resource[Stream] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Kinesis::Stream"
 
   object attributes {
@@ -20,7 +20,7 @@ trait Stream extends Resource with Resource.WithDeletionPolicy {
   def streamEncryption: Property[StreamEncryption] = Empty
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Name" -> name,
     "RetentionPeriodHours" -> retentionPeriodHours,
     "ShardCount" -> shardCount,

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-policy.html
  */
 
-trait ScalingPolicy extends Resource with Resource.WithDeletionPolicy {
+trait ScalingPolicy extends Resource[ScalingPolicy] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::AutoScaling::ScalingPolicy"
 
   def adjustmentType: Property[String] = Empty
@@ -21,7 +21,7 @@ trait ScalingPolicy extends Resource with Resource.WithDeletionPolicy {
   def stepAdjustments: Property[Seq[StepAdjustment]] = Empty
   def targetTrackingConfiguration: Property[TargetTrackingConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AdjustmentType" -> adjustmentType,
     "AutoScalingGroupName" -> autoScalingGroupName,
     "Cooldown" -> cooldown,

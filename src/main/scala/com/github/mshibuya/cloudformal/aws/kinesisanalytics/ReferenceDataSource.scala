@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class ReferenceDataSource(
     referenceSchema: NonEmptyProperty[ReferenceSchema],
     tableName: Property[String] = Empty,
-    s3ReferenceDataSource: Property[S3ReferenceDataSource] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    s3ReferenceDataSource: Property[S3ReferenceDataSource] = Empty) extends Expression[ReferenceDataSource] {
+  def render: Formattable = Value(
     "ReferenceSchema" -> referenceSchema,
     "TableName" -> tableName,
     "S3ReferenceDataSource" -> s3ReferenceDataSource

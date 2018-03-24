@@ -23,8 +23,8 @@ case class SpotFleetLaunchSpecification(
     subnetId: Property[String] = Empty,
     tagSpecifications: Property[Seq[SpotFleetTagSpecification]] = Empty,
     userData: Property[String] = Empty,
-    weightedCapacity: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    weightedCapacity: Property[Double] = Empty) extends Expression[SpotFleetLaunchSpecification] {
+  def render: Formattable = Value(
     "BlockDeviceMappings" -> blockDeviceMappings,
     "EbsOptimized" -> ebsOptimized,
     "IamInstanceProfile" -> iamInstanceProfile,

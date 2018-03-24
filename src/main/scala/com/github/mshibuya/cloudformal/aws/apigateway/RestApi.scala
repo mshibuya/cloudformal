@@ -11,7 +11,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-restapi.html
  */
 
-trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
+trait RestApi extends model.Resource[RestApi] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::RestApi"
 
   object attributes {
@@ -30,7 +30,7 @@ trait RestApi extends model.Resource with model.Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def parameters: Property[ListMap[String, String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ApiKeySourceType" -> apiKeySourceType,
     "BinaryMediaTypes" -> binaryMediaTypes,
     "Body" -> body,

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-microsoftad.html
  */
 
-trait MicrosoftAD extends Resource with Resource.WithDeletionPolicy {
+trait MicrosoftAD extends Resource[MicrosoftAD] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DirectoryService::MicrosoftAD"
 
   object attributes {
@@ -22,7 +22,7 @@ trait MicrosoftAD extends Resource with Resource.WithDeletionPolicy {
   def shortName: Property[String] = Empty
   def vpcSettings: NonEmptyProperty[VpcSettings]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CreateAlias" -> createAlias,
     "EnableSso" -> enableSso,
     "Name" -> name,

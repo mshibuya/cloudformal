@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-flowlog.html
  */
 
-trait FlowLog extends Resource with Resource.WithDeletionPolicy {
+trait FlowLog extends Resource[FlowLog] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::FlowLog"
 
   def deliverLogsPermissionArn: NonEmptyProperty[String]
@@ -16,7 +16,7 @@ trait FlowLog extends Resource with Resource.WithDeletionPolicy {
   def resourceType: NonEmptyProperty[String]
   def trafficType: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DeliverLogsPermissionArn" -> deliverLogsPermissionArn,
     "LogGroupName" -> logGroupName,
     "ResourceId" -> resourceId,

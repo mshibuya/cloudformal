@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
  */
 
-trait Permission extends Resource with Resource.WithDeletionPolicy {
+trait Permission extends Resource[Permission] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Permission"
 
   def action: NonEmptyProperty[String]
@@ -17,7 +17,7 @@ trait Permission extends Resource with Resource.WithDeletionPolicy {
   def sourceAccount: Property[String] = Empty
   def sourceArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Action" -> action,
     "EventSourceToken" -> eventSourceToken,
     "FunctionName" -> functionName,

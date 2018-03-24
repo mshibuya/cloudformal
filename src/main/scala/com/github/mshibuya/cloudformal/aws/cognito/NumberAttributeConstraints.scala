@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class NumberAttributeConstraints(
     minValue: Property[String] = Empty,
-    maxValue: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxValue: Property[String] = Empty) extends Expression[NumberAttributeConstraints] {
+  def render: Formattable = Value(
     "MinValue" -> minValue,
     "MaxValue" -> maxValue
   )

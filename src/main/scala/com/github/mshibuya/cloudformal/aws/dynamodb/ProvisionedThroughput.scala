@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ProvisionedThroughput(
     readCapacityUnits: NonEmptyProperty[Long],
-    writeCapacityUnits: NonEmptyProperty[Long]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    writeCapacityUnits: NonEmptyProperty[Long]) extends Expression[ProvisionedThroughput] {
+  def render: Formattable = Value(
     "ReadCapacityUnits" -> readCapacityUnits,
     "WriteCapacityUnits" -> writeCapacityUnits
   )

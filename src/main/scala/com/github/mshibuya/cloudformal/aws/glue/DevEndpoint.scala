@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-devendpoint.html
  */
 
-trait DevEndpoint extends Resource with Resource.WithDeletionPolicy {
+trait DevEndpoint extends Resource[DevEndpoint] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::DevEndpoint"
 
   def extraJarsS3Path: Property[String] = Empty
@@ -19,7 +19,7 @@ trait DevEndpoint extends Resource with Resource.WithDeletionPolicy {
   def securityGroupIds: Property[Seq[String]] = Empty
   def roleArn: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ExtraJarsS3Path" -> extraJarsS3Path,
     "EndpointName" -> endpointName,
     "PublicKey" -> publicKey,

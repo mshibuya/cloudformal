@@ -12,8 +12,8 @@ case class Source(
     buildSpec: Property[String] = Empty,
     gitCloneDepth: Property[Int] = Empty,
     insecureSsl: Property[Boolean] = Empty,
-    location: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    location: Property[String] = Empty) extends Expression[Source] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "Auth" -> auth,
     "BuildSpec" -> buildSpec,

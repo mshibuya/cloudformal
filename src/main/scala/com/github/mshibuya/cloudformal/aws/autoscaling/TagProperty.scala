@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class TagProperty(
     key: NonEmptyProperty[String],
     propagateAtLaunch: NonEmptyProperty[Boolean],
-    value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[String]) extends Expression[TagProperty] {
+  def render: Formattable = Value(
     "Key" -> key,
     "PropagateAtLaunch" -> propagateAtLaunch,
     "Value" -> value

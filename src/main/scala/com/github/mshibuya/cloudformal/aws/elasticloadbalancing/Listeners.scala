@@ -12,8 +12,8 @@ case class Listeners(
     loadBalancerPort: NonEmptyProperty[String],
     policyNames: Property[Seq[String]] = Empty,
     protocol: NonEmptyProperty[String],
-    sslCertificateId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sslCertificateId: Property[String] = Empty) extends Expression[Listeners] {
+  def render: Formattable = Value(
     "InstancePort" -> instancePort,
     "InstanceProtocol" -> instanceProtocol,
     "LoadBalancerPort" -> loadBalancerPort,

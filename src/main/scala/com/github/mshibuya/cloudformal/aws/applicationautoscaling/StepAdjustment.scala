@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class StepAdjustment(
     metricIntervalLowerBound: Property[Double] = Empty,
     metricIntervalUpperBound: Property[Double] = Empty,
-    scalingAdjustment: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    scalingAdjustment: NonEmptyProperty[Int]) extends Expression[StepAdjustment] {
+  def render: Formattable = Value(
     "MetricIntervalLowerBound" -> metricIntervalLowerBound,
     "MetricIntervalUpperBound" -> metricIntervalUpperBound,
     "ScalingAdjustment" -> scalingAdjustment

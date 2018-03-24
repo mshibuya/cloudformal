@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-eventsubscription.html
  */
 
-trait EventSubscription extends Resource with Resource.WithDeletionPolicy {
+trait EventSubscription extends Resource[EventSubscription] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::EventSubscription"
 
   def sourceType: Property[String] = Empty
@@ -18,7 +18,7 @@ trait EventSubscription extends Resource with Resource.WithDeletionPolicy {
   def sourceIds: Property[Seq[String]] = Empty
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "SourceType" -> sourceType,
     "EventCategories" -> eventCategories,
     "Enabled" -> enabled,

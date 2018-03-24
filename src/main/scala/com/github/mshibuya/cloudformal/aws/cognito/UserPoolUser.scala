@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpooluser.html
  */
 
-trait UserPoolUser extends Resource with Resource.WithDeletionPolicy {
+trait UserPoolUser extends Resource[UserPoolUser] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Cognito::UserPoolUser"
 
   def validationData: Property[Seq[AttributeType]] = Empty
@@ -18,7 +18,7 @@ trait UserPoolUser extends Resource with Resource.WithDeletionPolicy {
   def forceAliasCreation: Property[Boolean] = Empty
   def userAttributes: Property[Seq[AttributeType]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ValidationData" -> validationData,
     "UserPoolId" -> userPoolId,
     "Username" -> username,

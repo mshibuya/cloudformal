@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class S3OriginConfig(
-    originAccessIdentity: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    originAccessIdentity: Property[String] = Empty) extends Expression[S3OriginConfig] {
+  def render: Formattable = Value(
     "OriginAccessIdentity" -> originAccessIdentity
   )
 }

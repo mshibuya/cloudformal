@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ElasticIp(
     ip: NonEmptyProperty[String],
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[ElasticIp] {
+  def render: Formattable = Value(
     "Ip" -> ip,
     "Name" -> name
   )

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
  */
 
-trait Service extends Resource with Resource.WithDeletionPolicy {
+trait Service extends Resource[Service] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::Service"
 
   object attributes {
@@ -28,7 +28,7 @@ trait Service extends Resource with Resource.WithDeletionPolicy {
   def serviceName: Property[String] = Empty
   def taskDefinition: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Cluster" -> cluster,
     "DeploymentConfiguration" -> deploymentConfiguration,
     "DesiredCount" -> desiredCount,

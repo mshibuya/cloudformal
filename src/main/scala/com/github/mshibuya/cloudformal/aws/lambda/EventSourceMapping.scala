@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html
  */
 
-trait EventSourceMapping extends Resource with Resource.WithDeletionPolicy {
+trait EventSourceMapping extends Resource[EventSourceMapping] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::EventSourceMapping"
 
   def batchSize: Property[Int] = Empty
@@ -16,7 +16,7 @@ trait EventSourceMapping extends Resource with Resource.WithDeletionPolicy {
   def functionName: NonEmptyProperty[String]
   def startingPosition: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "BatchSize" -> batchSize,
     "Enabled" -> enabled,
     "EventSourceArn" -> eventSourceArn,

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class StageTransition(
     reason: NonEmptyProperty[String],
-    stageName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stageName: NonEmptyProperty[String]) extends Expression[StageTransition] {
+  def render: Formattable = Value(
     "Reason" -> reason,
     "StageName" -> stageName
   )

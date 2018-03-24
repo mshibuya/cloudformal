@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class KinesisStreamsOutput(
     resourceARN: NonEmptyProperty[String],
-    roleARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleARN: NonEmptyProperty[String]) extends Expression[KinesisStreamsOutput] {
+  def render: Formattable = Value(
     "ResourceARN" -> resourceARN,
     "RoleARN" -> roleARN
   )

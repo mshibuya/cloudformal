@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class StopAction(
     scope: NonEmptyProperty[String],
-    topicArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    topicArn: Property[String] = Empty) extends Expression[StopAction] {
+  def render: Formattable = Value(
     "Scope" -> scope,
     "TopicArn" -> topicArn
   )

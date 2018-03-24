@@ -10,8 +10,8 @@ case class HadoopJarStepConfig(
     args: Property[Seq[String]] = Empty,
     jar: NonEmptyProperty[String],
     mainClass: Property[String] = Empty,
-    stepProperties: Property[Seq[KeyValue]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stepProperties: Property[Seq[KeyValue]] = Empty) extends Expression[HadoopJarStepConfig] {
+  def render: Formattable = Value(
     "Args" -> args,
     "Jar" -> jar,
     "MainClass" -> mainClass,

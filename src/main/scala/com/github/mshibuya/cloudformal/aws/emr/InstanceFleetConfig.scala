@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-instancefleetconfig.html
  */
 
-trait InstanceFleetConfig extends Resource with Resource.WithDeletionPolicy {
+trait InstanceFleetConfig extends Resource[InstanceFleetConfig] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::InstanceFleetConfig"
 
   def clusterId: NonEmptyProperty[String]
@@ -18,7 +18,7 @@ trait InstanceFleetConfig extends Resource with Resource.WithDeletionPolicy {
   def targetOnDemandCapacity: Property[Int] = Empty
   def targetSpotCapacity: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ClusterId" -> clusterId,
     "InstanceFleetType" -> instanceFleetType,
     "InstanceTypeConfigs" -> instanceTypeConfigs,

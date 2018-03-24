@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Tier(
     name: Property[String] = Empty,
     `type`: Property[String] = Empty,
-    version: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    version: Property[String] = Empty) extends Expression[Tier] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Type" -> `type`,
     "Version" -> version

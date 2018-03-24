@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ScalingAction(
     market: Property[String] = Empty,
-    simpleScalingPolicyConfiguration: NonEmptyProperty[SimpleScalingPolicyConfiguration]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    simpleScalingPolicyConfiguration: NonEmptyProperty[SimpleScalingPolicyConfiguration]) extends Expression[ScalingAction] {
+  def render: Formattable = Value(
     "Market" -> market,
     "SimpleScalingPolicyConfiguration" -> simpleScalingPolicyConfiguration
   )

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-gamelift-fleet.html
  */
 
-trait Fleet extends Resource with Resource.WithDeletionPolicy {
+trait Fleet extends Resource[Fleet] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::GameLift::Fleet"
 
   def buildId: NonEmptyProperty[String]
@@ -22,7 +22,7 @@ trait Fleet extends Resource with Resource.WithDeletionPolicy {
   def serverLaunchParameters: Property[String] = Empty
   def serverLaunchPath: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "BuildId" -> buildId,
     "Description" -> description,
     "DesiredEC2Instances" -> desiredEC2Instances,

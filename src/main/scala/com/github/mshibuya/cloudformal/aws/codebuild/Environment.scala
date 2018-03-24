@@ -11,8 +11,8 @@ case class Environment(
     environmentVariables: Property[Seq[EnvironmentVariable]] = Empty,
     privilegedMode: Property[Boolean] = Empty,
     image: NonEmptyProperty[String],
-    computeType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    computeType: NonEmptyProperty[String]) extends Expression[Environment] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "EnvironmentVariables" -> environmentVariables,
     "PrivilegedMode" -> privilegedMode,

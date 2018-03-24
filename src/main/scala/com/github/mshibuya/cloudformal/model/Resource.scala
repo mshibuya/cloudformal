@@ -3,61 +3,59 @@ package com.github.mshibuya.cloudformal.model
 import argonaut.Json
 import com.github.mshibuya.cloudformal.model.policy._
 
-trait Resource extends Renderable with Referenceable[String] with Resource.Dependency with Resource.Metadata {
+trait Resource[A] extends Expression[A] with Referenceable[String] with Resource.Dependency with Resource.Metadata {
   def logicalId: String
   def resourceTypeName: String
-  def resourceProperties: FormattableMap
-  def render(): FormattableMap = resourceProperties
-  override def resourceAttributes: Seq[(String, Formattable)] = Seq(
-    "Type" -> Formattable(resourceTypeName),
-    "Properties" -> resourceProperties
-  ) ++ super.resourceAttributes
-  def resourcify(): FormattableMap = Formattable(resourceAttributes: _*)
+  def render(): MapValue[_]
+  override def resourcify(): MapValue[_] = Value(
+    "Type" -> Value(resourceTypeName),
+    "Properties" -> render()
+  ) ++ super.resourcify
 }
 
 object Resource {
   trait Attribute {
-    def resourceAttributes: Seq[(String, Formattable)] = Nil
+    def resourcify: MapValue[_] = Value()
   }
   trait WithCreationPolicy extends Attribute {
     def creationPolicy: Property[CreationPolicy] = Empty
-    override def resourceAttributes: Seq[(String, Formattable)] =  super.resourceAttributes ++ (creationPolicy match {
-      case n: NonEmptyProperty[_] => Seq("CreationPolicy" -> n.render())
+    override def resourcify: MapValue[_] =  super.resourcify ++ Value((creationPolicy match {
+      case n: NonEmptyProperty[_] => Seq("CreationPolicy" -> n)
       case _ => Nil
-    })
+    }): _*)
   }
   trait WithDeletionPolicy extends Attribute {
     def deletionPolicy: Property[DeletionPolicy.Standard] = Empty
-    override def resourceAttributes: Seq[(String, Formattable)] = super.resourceAttributes ++ (deletionPolicy match {
-      case p: NonEmptyProperty[_] => Seq("DeletionPolicy" -> p.render())
+    override def resourcify: MapValue[_] = super.resourcify ++ Value((deletionPolicy match {
+      case p: NonEmptyProperty[_] => Seq("DeletionPolicy" -> p)
       case _ => Nil
-    })
+    }): _*)
   }
   trait WithSnapshotableDeletionPolicy extends Attribute {
     def deletionPolicy: Property[DeletionPolicy.Snapshotable] = Empty
-    override def resourceAttributes: Seq[(String, Formattable)] = super.resourceAttributes ++ (deletionPolicy match {
-      case p: NonEmptyProperty[_] => Seq("DeletionPolicy" -> p.render())
+    override def resourcify: MapValue[_] = super.resourcify ++ Value((deletionPolicy match {
+      case p: NonEmptyProperty[_] => Seq("DeletionPolicy" -> p)
       case _ => Nil
-    })
+    }): _*)
   }
   trait Dependency extends Attribute {
-    def dependsOn: Seq[Resource] = Nil
-    override def resourceAttributes: Seq[(String, Formattable)] = super.resourceAttributes ++ dependsOn.headOption.map { _ =>
-      Seq("DependsOn" -> Formattable(dependsOn.map(_.logicalId)))
-    }.getOrElse(Nil)
+    def dependsOn: Seq[Resource[_]] = Nil
+    override def resourcify: MapValue[_] = super.resourcify ++ Value(dependsOn.headOption.map { _ =>
+      Seq("DependsOn" -> Value(dependsOn.map(v => Value(v.logicalId))))
+    }.getOrElse(Nil): _*)
   }
   trait Metadata extends Attribute {
     def metadata: Property[Json] = Empty
-    override def resourceAttributes: Seq[(String, Formattable)] = super.resourceAttributes ++ (metadata match {
-      case p: NonEmptyProperty[_] => Seq("Metadata" -> p.render())
+    override def resourcify: MapValue[_] = super.resourcify ++ Value((metadata match {
+      case p: NonEmptyProperty[_] => Seq("Metadata" -> p)
       case _ => Nil
-    })
+    }): _*)
   }
   trait WithUpdatePolicy extends Attribute {
     def updatePolicy: Property[UpdatePolicy] = Empty
-    override def resourceAttributes: Seq[(String, Formattable)] = super.resourceAttributes ++ (updatePolicy match {
-      case p: NonEmptyProperty[_] => Seq("UpdatePolicy" -> p.render())
+    override def resourcify: MapValue[_] = super.resourcify ++ Value((updatePolicy match {
+      case p: NonEmptyProperty[_] => Seq("UpdatePolicy" -> p)
       case _ => Nil
-    })
+    }): _*)
   }
 }

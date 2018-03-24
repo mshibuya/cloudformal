@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html
  */
 
-trait Topic extends Resource with Resource.WithDeletionPolicy {
+trait Topic extends Resource[Topic] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SNS::Topic"
 
   object attributes {
@@ -18,7 +18,7 @@ trait Topic extends Resource with Resource.WithDeletionPolicy {
   def subscription: Property[Seq[Subscription]] = Empty
   def topicName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DisplayName" -> displayName,
     "Subscription" -> subscription,
     "TopicName" -> topicName

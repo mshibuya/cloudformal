@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ssm-patchbaseline.html
  */
 
-trait PatchBaseline extends Resource with Resource.WithDeletionPolicy {
+trait PatchBaseline extends Resource[PatchBaseline] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::SSM::PatchBaseline"
 
   def operatingSystem: Property[String] = Empty
@@ -22,7 +22,7 @@ trait PatchBaseline extends Resource with Resource.WithDeletionPolicy {
   def name: NonEmptyProperty[String]
   def rejectedPatches: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "OperatingSystem" -> operatingSystem,
     "ApprovedPatches" -> approvedPatches,
     "PatchGroups" -> patchGroups,

@@ -10,8 +10,8 @@ case class TargetTrackingConfiguration(
     customizedMetricSpecification: Property[CustomizedMetricSpecification] = Empty,
     disableScaleIn: Property[Boolean] = Empty,
     predefinedMetricSpecification: Property[PredefinedMetricSpecification] = Empty,
-    targetValue: NonEmptyProperty[Double]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    targetValue: NonEmptyProperty[Double]) extends Expression[TargetTrackingConfiguration] {
+  def render: Formattable = Value(
     "CustomizedMetricSpecification" -> customizedMetricSpecification,
     "DisableScaleIn" -> disableScaleIn,
     "PredefinedMetricSpecification" -> predefinedMetricSpecification,

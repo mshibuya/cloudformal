@@ -21,8 +21,8 @@ case class DistributionConfig(
     webACLId: Property[String] = Empty,
     httpVersion: Property[String] = Empty,
     restrictions: Property[Restrictions] = Empty,
-    cacheBehaviors: Property[Seq[CacheBehavior]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    cacheBehaviors: Property[Seq[CacheBehavior]] = Empty) extends Expression[DistributionConfig] {
+  def render: Formattable = Value(
     "Logging" -> logging,
     "Comment" -> comment,
     "DefaultRootObject" -> defaultRootObject,

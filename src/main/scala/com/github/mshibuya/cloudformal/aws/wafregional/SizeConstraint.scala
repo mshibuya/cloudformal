@@ -10,8 +10,8 @@ case class SizeConstraint(
     comparisonOperator: NonEmptyProperty[String],
     size: NonEmptyProperty[Int],
     textTransformation: NonEmptyProperty[String],
-    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    fieldToMatch: NonEmptyProperty[FieldToMatch]) extends Expression[SizeConstraint] {
+  def render: Formattable = Value(
     "ComparisonOperator" -> comparisonOperator,
     "Size" -> size,
     "TextTransformation" -> textTransformation,

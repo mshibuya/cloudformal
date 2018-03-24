@@ -10,8 +10,8 @@ import com.github.mshibuya.cloudformal.model._
 case class PartitionInput(
     parameters: Property[Json] = Empty,
     storageDescriptor: Property[StorageDescriptor] = Empty,
-    values: NonEmptyProperty[Seq[String]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    values: NonEmptyProperty[Seq[String]]) extends Expression[PartitionInput] {
+  def render: Formattable = Value(
     "Parameters" -> parameters,
     "StorageDescriptor" -> storageDescriptor,
     "Values" -> values

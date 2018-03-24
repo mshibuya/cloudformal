@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-subscriptionfilter.html
  */
 
-trait SubscriptionFilter extends Resource with Resource.WithDeletionPolicy {
+trait SubscriptionFilter extends Resource[SubscriptionFilter] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Logs::SubscriptionFilter"
 
   def destinationArn: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait SubscriptionFilter extends Resource with Resource.WithDeletionPolicy {
   def logGroupName: NonEmptyProperty[String]
   def roleArn: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DestinationArn" -> destinationArn,
     "FilterPattern" -> filterPattern,
     "LogGroupName" -> logGroupName,

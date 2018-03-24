@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class QuotaSettings(
     limit: Property[Int] = Empty,
     offset: Property[Int] = Empty,
-    period: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    period: Property[String] = Empty) extends Expression[QuotaSettings] {
+  def render: Formattable = Value(
     "Limit" -> limit,
     "Offset" -> offset,
     "Period" -> period

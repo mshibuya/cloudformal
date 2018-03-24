@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CorsConfiguration(
-    corsRules: NonEmptyProperty[Seq[CorsRule]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    corsRules: NonEmptyProperty[Seq[CorsRule]]) extends Expression[CorsConfiguration] {
+  def render: Formattable = Value(
     "CorsRules" -> corsRules
   )
 }

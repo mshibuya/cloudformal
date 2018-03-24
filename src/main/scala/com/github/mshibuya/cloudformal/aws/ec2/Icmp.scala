@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Icmp(
     code: Property[Int] = Empty,
-    `type`: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: Property[Int] = Empty) extends Expression[Icmp] {
+  def render: Formattable = Value(
     "Code" -> code,
     "Type" -> `type`
   )

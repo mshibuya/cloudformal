@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class TriggerConfig(
     triggerEvents: Property[Seq[String]] = Empty,
     triggerName: Property[String] = Empty,
-    triggerTargetArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    triggerTargetArn: Property[String] = Empty) extends Expression[TriggerConfig] {
+  def render: Formattable = Value(
     "TriggerEvents" -> triggerEvents,
     "TriggerName" -> triggerName,
     "TriggerTargetArn" -> triggerTargetArn

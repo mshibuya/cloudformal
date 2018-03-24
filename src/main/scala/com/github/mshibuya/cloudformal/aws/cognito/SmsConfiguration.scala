@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SmsConfiguration(
     externalId: Property[String] = Empty,
-    snsCallerArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    snsCallerArn: Property[String] = Empty) extends Expression[SmsConfiguration] {
+  def render: Formattable = Value(
     "ExternalId" -> externalId,
     "SnsCallerArn" -> snsCallerArn
   )

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class IamInstanceProfileSpecification(
-    arn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    arn: Property[String] = Empty) extends Expression[IamInstanceProfileSpecification] {
+  def render: Formattable = Value(
     "Arn" -> arn
   )
 }

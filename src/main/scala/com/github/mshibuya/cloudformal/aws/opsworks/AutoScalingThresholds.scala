@@ -12,8 +12,8 @@ case class AutoScalingThresholds(
     instanceCount: Property[Int] = Empty,
     loadThreshold: Property[Double] = Empty,
     memoryThreshold: Property[Double] = Empty,
-    thresholdsWaitTime: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    thresholdsWaitTime: Property[Int] = Empty) extends Expression[AutoScalingThresholds] {
+  def render: Formattable = Value(
     "CpuThreshold" -> cpuThreshold,
     "IgnoreMetricsTime" -> ignoreMetricsTime,
     "InstanceCount" -> instanceCount,

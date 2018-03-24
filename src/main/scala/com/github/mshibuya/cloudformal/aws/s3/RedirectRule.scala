@@ -11,8 +11,8 @@ case class RedirectRule(
     httpRedirectCode: Property[String] = Empty,
     protocol: Property[String] = Empty,
     replaceKeyPrefixWith: Property[String] = Empty,
-    replaceKeyWith: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    replaceKeyWith: Property[String] = Empty) extends Expression[RedirectRule] {
+  def render: Formattable = Value(
     "HostName" -> hostName,
     "HttpRedirectCode" -> httpRedirectCode,
     "Protocol" -> protocol,

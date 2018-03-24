@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-inspector-assessmenttemplate.html
  */
 
-trait AssessmentTemplate extends Resource with Resource.WithDeletionPolicy {
+trait AssessmentTemplate extends Resource[AssessmentTemplate] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Inspector::AssessmentTemplate"
 
   object attributes {
@@ -20,7 +20,7 @@ trait AssessmentTemplate extends Resource with Resource.WithDeletionPolicy {
   def rulesPackageArns: NonEmptyProperty[Seq[String]]
   def userAttributesForFindings: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AssessmentTargetArn" -> assessmentTargetArn,
     "DurationInSeconds" -> durationInSeconds,
     "AssessmentTemplateName" -> assessmentTemplateName,

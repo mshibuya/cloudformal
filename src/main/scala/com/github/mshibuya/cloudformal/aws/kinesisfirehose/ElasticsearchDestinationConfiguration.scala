@@ -17,8 +17,8 @@ case class ElasticsearchDestinationConfiguration(
     roleARN: NonEmptyProperty[String],
     s3BackupMode: NonEmptyProperty[String],
     s3Configuration: NonEmptyProperty[S3DestinationConfiguration],
-    typeName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    typeName: NonEmptyProperty[String]) extends Expression[ElasticsearchDestinationConfiguration] {
+  def render: Formattable = Value(
     "BufferingHints" -> bufferingHints,
     "CloudWatchLoggingOptions" -> cloudWatchLoggingOptions,
     "DomainARN" -> domainARN,

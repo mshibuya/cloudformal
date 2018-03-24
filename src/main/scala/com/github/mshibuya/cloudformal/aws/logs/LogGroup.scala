@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
  */
 
-trait LogGroup extends Resource with Resource.WithDeletionPolicy {
+trait LogGroup extends Resource[LogGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Logs::LogGroup"
 
   object attributes {
@@ -17,7 +17,7 @@ trait LogGroup extends Resource with Resource.WithDeletionPolicy {
   def logGroupName: Property[String] = Empty
   def retentionInDays: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "LogGroupName" -> logGroupName,
     "RetentionInDays" -> retentionInDays
   )

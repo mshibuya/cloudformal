@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RetryStrategy(
-    attempts: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    attempts: Property[Int] = Empty) extends Expression[RetryStrategy] {
+  def render: Formattable = Value(
     "Attempts" -> attempts
   )
 }

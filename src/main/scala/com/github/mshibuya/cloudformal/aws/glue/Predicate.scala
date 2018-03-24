@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Predicate(
     logical: Property[String] = Empty,
-    conditions: Property[Seq[Condition]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    conditions: Property[Seq[Condition]] = Empty) extends Expression[Predicate] {
+  def render: Formattable = Value(
     "Logical" -> logical,
     "Conditions" -> conditions
   )

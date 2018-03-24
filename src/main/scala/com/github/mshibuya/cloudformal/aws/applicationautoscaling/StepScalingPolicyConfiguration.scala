@@ -11,8 +11,8 @@ case class StepScalingPolicyConfiguration(
     cooldown: Property[Int] = Empty,
     metricAggregationType: Property[String] = Empty,
     minAdjustmentMagnitude: Property[Int] = Empty,
-    stepAdjustments: Property[Seq[StepAdjustment]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    stepAdjustments: Property[Seq[StepAdjustment]] = Empty) extends Expression[StepScalingPolicyConfiguration] {
+  def render: Formattable = Value(
     "AdjustmentType" -> adjustmentType,
     "Cooldown" -> cooldown,
     "MetricAggregationType" -> metricAggregationType,

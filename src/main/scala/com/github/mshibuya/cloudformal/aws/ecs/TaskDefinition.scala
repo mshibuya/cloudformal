@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
  */
 
-trait TaskDefinition extends Resource with Resource.WithDeletionPolicy {
+trait TaskDefinition extends Resource[TaskDefinition] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECS::TaskDefinition"
 
   def containerDefinitions: Property[Seq[ContainerDefinition]] = Empty
@@ -21,7 +21,7 @@ trait TaskDefinition extends Resource with Resource.WithDeletionPolicy {
   def taskRoleArn: Property[String] = Empty
   def volumes: Property[Seq[Volume]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ContainerDefinitions" -> containerDefinitions,
     "Cpu" -> cpu,
     "ExecutionRoleArn" -> executionRoleArn,

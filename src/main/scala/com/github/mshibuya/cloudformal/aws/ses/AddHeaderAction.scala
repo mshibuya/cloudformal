@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AddHeaderAction(
     headerValue: NonEmptyProperty[String],
-    headerName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    headerName: NonEmptyProperty[String]) extends Expression[AddHeaderAction] {
+  def render: Formattable = Value(
     "HeaderValue" -> headerValue,
     "HeaderName" -> headerName
   )

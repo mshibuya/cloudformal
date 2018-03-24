@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class FirehoseAction(
     deliveryStreamName: NonEmptyProperty[String],
     roleArn: NonEmptyProperty[String],
-    separator: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    separator: Property[String] = Empty) extends Expression[FirehoseAction] {
+  def render: Formattable = Value(
     "DeliveryStreamName" -> deliveryStreamName,
     "RoleArn" -> roleArn,
     "Separator" -> separator

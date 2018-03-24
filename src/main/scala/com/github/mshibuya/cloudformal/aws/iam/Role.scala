@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
  */
 
-trait Role extends Resource with Resource.WithDeletionPolicy {
+trait Role extends Resource[Role] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::Role"
 
   object attributes {
@@ -21,7 +21,7 @@ trait Role extends Resource with Resource.WithDeletionPolicy {
   def policies: Property[Seq[Policy]] = Empty
   def roleName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AssumeRolePolicyDocument" -> assumeRolePolicyDocument,
     "ManagedPolicyArns" -> managedPolicyArns,
     "Path" -> path,

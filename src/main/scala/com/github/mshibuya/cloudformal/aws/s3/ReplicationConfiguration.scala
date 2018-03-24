@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ReplicationConfiguration(
     role: NonEmptyProperty[String],
-    rules: NonEmptyProperty[Seq[ReplicationRule]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    rules: NonEmptyProperty[Seq[ReplicationRule]]) extends Expression[ReplicationConfiguration] {
+  def render: Formattable = Value(
     "Role" -> role,
     "Rules" -> rules
   )

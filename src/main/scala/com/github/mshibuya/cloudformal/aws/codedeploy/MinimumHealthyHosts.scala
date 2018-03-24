@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class MinimumHealthyHosts(
     `type`: NonEmptyProperty[String],
-    value: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[Int]) extends Expression[MinimumHealthyHosts] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "Value" -> value
   )

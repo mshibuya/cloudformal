@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-route53-hostedzone.html
  */
 
-trait HostedZone extends Resource with Resource.WithDeletionPolicy {
+trait HostedZone extends Resource[HostedZone] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Route53::HostedZone"
 
   object attributes {
@@ -20,7 +20,7 @@ trait HostedZone extends Resource with Resource.WithDeletionPolicy {
   def queryLoggingConfig: Property[QueryLoggingConfig] = Empty
   def vpCs: Property[Seq[VPC]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "HostedZoneConfig" -> hostedZoneConfig,
     "HostedZoneTags" -> hostedZoneTags,
     "Name" -> name,

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PredefinedMetricSpecification(
     predefinedMetricType: NonEmptyProperty[String],
-    resourceLabel: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    resourceLabel: Property[String] = Empty) extends Expression[PredefinedMetricSpecification] {
+  def render: Formattable = Value(
     "PredefinedMetricType" -> predefinedMetricType,
     "ResourceLabel" -> resourceLabel
   )

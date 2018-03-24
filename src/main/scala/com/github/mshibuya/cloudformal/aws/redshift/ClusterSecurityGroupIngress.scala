@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-redshift-clustersecuritygroupingress.html
  */
 
-trait ClusterSecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
+trait ClusterSecurityGroupIngress extends Resource[ClusterSecurityGroupIngress] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Redshift::ClusterSecurityGroupIngress"
 
   def cidriP: Property[String] = Empty
@@ -15,7 +15,7 @@ trait ClusterSecurityGroupIngress extends Resource with Resource.WithDeletionPol
   def eC2SecurityGroupName: Property[String] = Empty
   def eC2SecurityGroupOwnerId: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CIDRIP" -> cidriP,
     "ClusterSecurityGroupName" -> clusterSecurityGroupName,
     "EC2SecurityGroupName" -> eC2SecurityGroupName,

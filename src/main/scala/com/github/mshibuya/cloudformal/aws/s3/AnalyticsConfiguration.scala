@@ -10,8 +10,8 @@ case class AnalyticsConfiguration(
     id: NonEmptyProperty[String],
     prefix: Property[String] = Empty,
     storageClassAnalysis: NonEmptyProperty[StorageClassAnalysis],
-    tagFilters: Property[Seq[TagFilter]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    tagFilters: Property[Seq[TagFilter]] = Empty) extends Expression[AnalyticsConfiguration] {
+  def render: Formattable = Value(
     "Id" -> id,
     "Prefix" -> prefix,
     "StorageClassAnalysis" -> storageClassAnalysis,

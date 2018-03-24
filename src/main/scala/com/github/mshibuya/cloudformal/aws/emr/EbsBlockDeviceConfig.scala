@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class EbsBlockDeviceConfig(
     volumeSpecification: NonEmptyProperty[VolumeSpecification],
-    volumesPerInstance: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    volumesPerInstance: Property[Int] = Empty) extends Expression[EbsBlockDeviceConfig] {
+  def render: Formattable = Value(
     "VolumeSpecification" -> volumeSpecification,
     "VolumesPerInstance" -> volumesPerInstance
   )

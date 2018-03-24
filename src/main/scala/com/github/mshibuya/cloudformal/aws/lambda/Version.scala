@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-version.html
  */
 
-trait Version extends Resource with Resource.WithDeletionPolicy {
+trait Version extends Resource[Version] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Lambda::Version"
 
   object attributes {
@@ -18,7 +18,7 @@ trait Version extends Resource with Resource.WithDeletionPolicy {
   def description: Property[String] = Empty
   def functionName: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CodeSha256" -> codeSha256,
     "Description" -> description,
     "FunctionName" -> functionName

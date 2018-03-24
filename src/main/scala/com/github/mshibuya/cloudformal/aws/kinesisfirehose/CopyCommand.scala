@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class CopyCommand(
     copyOptions: Property[String] = Empty,
     dataTableColumns: Property[String] = Empty,
-    dataTableName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    dataTableName: NonEmptyProperty[String]) extends Expression[CopyCommand] {
+  def render: Formattable = Value(
     "CopyOptions" -> copyOptions,
     "DataTableColumns" -> dataTableColumns,
     "DataTableName" -> dataTableName

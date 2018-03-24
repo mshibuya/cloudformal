@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class MaxCountRule(
     deleteSourceFromS3: Property[Boolean] = Empty,
     enabled: Property[Boolean] = Empty,
-    maxCount: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxCount: Property[Int] = Empty) extends Expression[MaxCountRule] {
+  def render: Formattable = Value(
     "DeleteSourceFromS3" -> deleteSourceFromS3,
     "Enabled" -> enabled,
     "MaxCount" -> maxCount

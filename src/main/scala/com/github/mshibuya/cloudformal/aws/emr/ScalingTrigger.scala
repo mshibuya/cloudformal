@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ScalingTrigger(
-    cloudWatchAlarmDefinition: NonEmptyProperty[CloudWatchAlarmDefinition]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    cloudWatchAlarmDefinition: NonEmptyProperty[CloudWatchAlarmDefinition]) extends Expression[ScalingTrigger] {
+  def render: Formattable = Value(
     "CloudWatchAlarmDefinition" -> cloudWatchAlarmDefinition
   )
 }

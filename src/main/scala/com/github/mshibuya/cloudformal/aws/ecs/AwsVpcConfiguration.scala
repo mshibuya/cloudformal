@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class AwsVpcConfiguration(
     assignPublicIp: Property[String] = Empty,
     securityGroups: Property[Seq[String]] = Empty,
-    subnets: NonEmptyProperty[Seq[String]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    subnets: NonEmptyProperty[Seq[String]]) extends Expression[AwsVpcConfiguration] {
+  def render: Formattable = Value(
     "AssignPublicIp" -> assignPublicIp,
     "SecurityGroups" -> securityGroups,
     "Subnets" -> subnets

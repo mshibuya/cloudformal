@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class RevisionLocation(
     gitHubLocation: Property[GitHubLocation] = Empty,
     revisionType: Property[String] = Empty,
-    s3Location: Property[S3Location] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    s3Location: Property[S3Location] = Empty) extends Expression[RevisionLocation] {
+  def render: Formattable = Value(
     "GitHubLocation" -> gitHubLocation,
     "RevisionType" -> revisionType,
     "S3Location" -> s3Location

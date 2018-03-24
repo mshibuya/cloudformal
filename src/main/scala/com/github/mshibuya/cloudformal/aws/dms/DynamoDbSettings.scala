@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class DynamoDbSettings(
-    serviceAccessRoleArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    serviceAccessRoleArn: Property[String] = Empty) extends Expression[DynamoDbSettings] {
+  def render: Formattable = Value(
     "ServiceAccessRoleArn" -> serviceAccessRoleArn
   )
 }

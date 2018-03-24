@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-gatewayresponse.html
  */
 
-trait GatewayResponse extends model.Resource with model.Resource.WithDeletionPolicy {
+trait GatewayResponse extends model.Resource[GatewayResponse] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::GatewayResponse"
 
   def responseParameters: Property[ListMap[String, String]] = Empty
@@ -19,7 +19,7 @@ trait GatewayResponse extends model.Resource with model.Resource.WithDeletionPol
   def restApiId: NonEmptyProperty[String]
   def statusCode: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ResponseParameters" -> responseParameters,
     "ResponseTemplates" -> responseTemplates,
     "ResponseType" -> responseType,

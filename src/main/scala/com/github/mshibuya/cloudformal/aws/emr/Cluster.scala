@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticmapreduce-cluster.html
  */
 
-trait Cluster extends Resource with Resource.WithDeletionPolicy {
+trait Cluster extends Resource[Cluster] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::Cluster"
 
   object attributes {
@@ -33,7 +33,7 @@ trait Cluster extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def visibleToAllUsers: Property[Boolean] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AdditionalInfo" -> additionalInfo,
     "Applications" -> applications,
     "AutoScalingRole" -> autoScalingRole,

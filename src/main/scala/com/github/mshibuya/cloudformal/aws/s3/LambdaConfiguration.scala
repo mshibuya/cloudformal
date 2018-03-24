@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class LambdaConfiguration(
     event: NonEmptyProperty[String],
     filter: Property[NotificationFilter] = Empty,
-    function: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    function: NonEmptyProperty[String]) extends Expression[LambdaConfiguration] {
+  def render: Formattable = Value(
     "Event" -> event,
     "Filter" -> filter,
     "Function" -> function

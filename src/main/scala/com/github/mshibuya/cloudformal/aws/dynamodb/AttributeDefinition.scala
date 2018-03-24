@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AttributeDefinition(
     attributeName: NonEmptyProperty[String],
-    attributeType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    attributeType: NonEmptyProperty[String]) extends Expression[AttributeDefinition] {
+  def render: Formattable = Value(
     "AttributeName" -> attributeName,
     "AttributeType" -> attributeType
   )

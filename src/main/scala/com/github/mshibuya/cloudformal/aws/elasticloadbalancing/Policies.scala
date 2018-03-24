@@ -12,8 +12,8 @@ case class Policies(
     instancePorts: Property[Seq[String]] = Empty,
     loadBalancerPorts: Property[Seq[String]] = Empty,
     policyName: NonEmptyProperty[String],
-    policyType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    policyType: NonEmptyProperty[String]) extends Expression[Policies] {
+  def render: Formattable = Value(
     "Attributes" -> attributes,
     "InstancePorts" -> instancePorts,
     "LoadBalancerPorts" -> loadBalancerPorts,

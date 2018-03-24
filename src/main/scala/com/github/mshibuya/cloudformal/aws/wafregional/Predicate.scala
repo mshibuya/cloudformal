@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Predicate(
     `type`: NonEmptyProperty[String],
     dataId: NonEmptyProperty[String],
-    negated: NonEmptyProperty[Boolean]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    negated: NonEmptyProperty[Boolean]) extends Expression[Predicate] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "DataId" -> dataId,
     "Negated" -> negated

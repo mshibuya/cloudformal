@@ -29,8 +29,8 @@ object ApplicationStack extends Stack {
     val logicalId = "AppServer"
     val imageId = regionMap.get(Value("us-east-1"), Value("32"))
     override val instanceType = appServerInstanceType.ref
-    override val creationPolicy = Value(CreationPolicy(resourceSignal = Value(ResourceSignal(count = Value(3)))))
-    override val deletionPolicy = Value(DeletionPolicy.Retain)
+    override val creationPolicy = CreationPolicy(resourceSignal = ResourceSignal(count = Value(3)))
+    override val deletionPolicy = DeletionPolicy.Retain
     override val dependsOn = Seq(dbServer)
   }
   val resources = Seq(
@@ -40,7 +40,7 @@ object ApplicationStack extends Stack {
 
   val appServerInstanceId = Output("AppServerInstanceId", appServer.ref)
   val appServerPublicIp = Output("AppServerPublicIp", appServer.attributes.publicIp,
-    export = Value(Export("PublicIp", appServer.attributes.publicIp)))
+    export = Export("PublicIp", appServer.attributes.publicIp))
   val outputs = Seq(
     appServerInstanceId,
     appServerPublicIp

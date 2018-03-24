@@ -19,8 +19,8 @@ case class StorageDescriptor(
     serdeInfo: Property[SerdeInfo] = Empty,
     sortColumns: Property[Seq[Order]] = Empty,
     compressed: Property[Boolean] = Empty,
-    location: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    location: Property[String] = Empty) extends Expression[StorageDescriptor] {
+  def render: Formattable = Value(
     "StoredAsSubDirectories" -> storedAsSubDirectories,
     "Parameters" -> parameters,
     "BucketColumns" -> bucketColumns,

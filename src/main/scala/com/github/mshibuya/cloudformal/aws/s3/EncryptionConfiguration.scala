@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EncryptionConfiguration(
-    replicaKmsKeyID: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    replicaKmsKeyID: NonEmptyProperty[String]) extends Expression[EncryptionConfiguration] {
+  def render: Formattable = Value(
     "ReplicaKmsKeyID" -> replicaKmsKeyID
   )
 }

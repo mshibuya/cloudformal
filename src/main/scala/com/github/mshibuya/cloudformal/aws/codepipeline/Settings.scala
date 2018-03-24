@@ -10,8 +10,8 @@ case class Settings(
     entityUrlTemplate: Property[String] = Empty,
     executionUrlTemplate: Property[String] = Empty,
     revisionUrlTemplate: Property[String] = Empty,
-    thirdPartyConfigurationUrl: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    thirdPartyConfigurationUrl: Property[String] = Empty) extends Expression[Settings] {
+  def render: Formattable = Value(
     "EntityUrlTemplate" -> entityUrlTemplate,
     "ExecutionUrlTemplate" -> executionUrlTemplate,
     "RevisionUrlTemplate" -> revisionUrlTemplate,

@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html
  */
 
-trait Stage extends model.Resource with model.Resource.WithDeletionPolicy {
+trait Stage extends model.Resource[Stage] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::Stage"
 
   def cacheClusterEnabled: Property[Boolean] = Empty
@@ -24,7 +24,7 @@ trait Stage extends model.Resource with model.Resource.WithDeletionPolicy {
   def stageName: Property[String] = Empty
   def variables: Property[ListMap[String, String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CacheClusterEnabled" -> cacheClusterEnabled,
     "CacheClusterSize" -> cacheClusterSize,
     "ClientCertificateId" -> clientCertificateId,

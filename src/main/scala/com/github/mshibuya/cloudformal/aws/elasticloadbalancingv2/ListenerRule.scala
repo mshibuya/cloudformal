@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html
  */
 
-trait ListenerRule extends Resource with Resource.WithDeletionPolicy {
+trait ListenerRule extends Resource[ListenerRule] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::ListenerRule"
 
   def actions: NonEmptyProperty[Seq[Action]]
@@ -15,7 +15,7 @@ trait ListenerRule extends Resource with Resource.WithDeletionPolicy {
   def listenerArn: NonEmptyProperty[String]
   def priority: NonEmptyProperty[Int]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Actions" -> actions,
     "Conditions" -> conditions,
     "ListenerArn" -> listenerArn,

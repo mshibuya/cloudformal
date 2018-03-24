@@ -12,8 +12,8 @@ case class ElasticsearchClusterConfig(
     dedicatedMasterType: Property[String] = Empty,
     instanceCount: Property[Int] = Empty,
     instanceType: Property[String] = Empty,
-    zoneAwarenessEnabled: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    zoneAwarenessEnabled: Property[Boolean] = Empty) extends Expression[ElasticsearchClusterConfig] {
+  def render: Formattable = Value(
     "DedicatedMasterCount" -> dedicatedMasterCount,
     "DedicatedMasterEnabled" -> dedicatedMasterEnabled,
     "DedicatedMasterType" -> dedicatedMasterType,

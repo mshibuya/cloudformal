@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DataExport(
     destination: NonEmptyProperty[Destination],
-    outputSchemaVersion: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    outputSchemaVersion: NonEmptyProperty[String]) extends Expression[DataExport] {
+  def render: Formattable = Value(
     "Destination" -> destination,
     "OutputSchemaVersion" -> outputSchemaVersion
   )

@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html
  */
 
-trait Method extends model.Resource with model.Resource.WithDeletionPolicy {
+trait Method extends model.Resource[Method] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::Method"
 
   def apiKeyRequired: Property[Boolean] = Empty
@@ -26,7 +26,7 @@ trait Method extends model.Resource with model.Resource.WithDeletionPolicy {
   def resourceId: NonEmptyProperty[String]
   def restApiId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ApiKeyRequired" -> apiKeyRequired,
     "AuthorizationType" -> authorizationType,
     "AuthorizerId" -> authorizerId,

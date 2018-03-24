@@ -13,8 +13,8 @@ case class StreamingDistributionConfig(
     s3Origin: NonEmptyProperty[S3Origin],
     enabled: NonEmptyProperty[Boolean],
     aliases: Property[Seq[String]] = Empty,
-    trustedSigners: NonEmptyProperty[TrustedSigners]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    trustedSigners: NonEmptyProperty[TrustedSigners]) extends Expression[StreamingDistributionConfig] {
+  def render: Formattable = Value(
     "Logging" -> logging,
     "Comment" -> comment,
     "PriceClass" -> priceClass,

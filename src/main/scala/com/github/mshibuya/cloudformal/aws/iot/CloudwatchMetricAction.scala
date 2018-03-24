@@ -12,8 +12,8 @@ case class CloudwatchMetricAction(
     metricTimestamp: Property[String] = Empty,
     metricUnit: NonEmptyProperty[String],
     metricValue: NonEmptyProperty[String],
-    roleArn: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    roleArn: NonEmptyProperty[String]) extends Expression[CloudwatchMetricAction] {
+  def render: Formattable = Value(
     "MetricName" -> metricName,
     "MetricNamespace" -> metricNamespace,
     "MetricTimestamp" -> metricTimestamp,

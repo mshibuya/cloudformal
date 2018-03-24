@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
  */
 
-trait Group extends Resource with Resource.WithDeletionPolicy {
+trait Group extends Resource[Group] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::Group"
 
   object attributes {
@@ -19,7 +19,7 @@ trait Group extends Resource with Resource.WithDeletionPolicy {
   def path: Property[String] = Empty
   def policies: Property[Seq[Policy]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "GroupName" -> groupName,
     "ManagedPolicyArns" -> managedPolicyArns,
     "Path" -> path,

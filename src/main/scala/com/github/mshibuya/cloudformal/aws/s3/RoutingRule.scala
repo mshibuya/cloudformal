@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RoutingRule(
     redirectRule: NonEmptyProperty[RedirectRule],
-    routingRuleCondition: Property[RoutingRuleCondition] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    routingRuleCondition: Property[RoutingRuleCondition] = Empty) extends Expression[RoutingRule] {
+  def render: Formattable = Value(
     "RedirectRule" -> redirectRule,
     "RoutingRuleCondition" -> routingRuleCondition
   )

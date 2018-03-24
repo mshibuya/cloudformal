@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class NotificationConfiguration(
     notificationTypes: Property[Seq[String]] = Empty,
-    topicARN: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    topicARN: NonEmptyProperty[String]) extends Expression[NotificationConfiguration] {
+  def render: Formattable = Value(
     "NotificationTypes" -> notificationTypes,
     "TopicARN" -> topicARN
   )

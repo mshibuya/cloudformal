@@ -10,8 +10,8 @@ case class S3Action(
     bucketName: NonEmptyProperty[String],
     kmsKeyArn: Property[String] = Empty,
     topicArn: Property[String] = Empty,
-    objectKeyPrefix: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    objectKeyPrefix: Property[String] = Empty) extends Expression[S3Action] {
+  def render: Formattable = Value(
     "BucketName" -> bucketName,
     "KmsKeyArn" -> kmsKeyArn,
     "TopicArn" -> topicArn,

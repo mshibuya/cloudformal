@@ -9,7 +9,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-opsworks-app.html
  */
 
-trait App extends Resource with Resource.WithDeletionPolicy {
+trait App extends Resource[App] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::OpsWorks::App"
 
   def appSource: Property[Source] = Empty
@@ -25,7 +25,7 @@ trait App extends Resource with Resource.WithDeletionPolicy {
   def stackId: NonEmptyProperty[String]
   def `type`: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AppSource" -> appSource,
     "Attributes" -> attributes,
     "DataSources" -> dataSources,

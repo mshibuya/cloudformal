@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Source(
     owner: NonEmptyProperty[String],
     sourceDetails: Property[Seq[SourceDetail]] = Empty,
-    sourceIdentifier: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sourceIdentifier: NonEmptyProperty[String]) extends Expression[Source] {
+  def render: Formattable = Value(
     "Owner" -> owner,
     "SourceDetails" -> sourceDetails,
     "SourceIdentifier" -> sourceIdentifier

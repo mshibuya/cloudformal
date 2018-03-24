@@ -10,8 +10,8 @@ case class ScalingRule(
     action: NonEmptyProperty[ScalingAction],
     description: Property[String] = Empty,
     name: NonEmptyProperty[String],
-    trigger: NonEmptyProperty[ScalingTrigger]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    trigger: NonEmptyProperty[ScalingTrigger]) extends Expression[ScalingRule] {
+  def render: Formattable = Value(
     "Action" -> action,
     "Description" -> description,
     "Name" -> name,

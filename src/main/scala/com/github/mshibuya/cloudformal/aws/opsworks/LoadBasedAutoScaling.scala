@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class LoadBasedAutoScaling(
     downScaling: Property[AutoScalingThresholds] = Empty,
     enable: Property[Boolean] = Empty,
-    upScaling: Property[AutoScalingThresholds] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    upScaling: Property[AutoScalingThresholds] = Empty) extends Expression[LoadBasedAutoScaling] {
+  def render: Formattable = Value(
     "DownScaling" -> downScaling,
     "Enable" -> enable,
     "UpScaling" -> upScaling

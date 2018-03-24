@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class VolumeFrom(
     readOnly: Property[Boolean] = Empty,
-    sourceContainer: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sourceContainer: Property[String] = Empty) extends Expression[VolumeFrom] {
+  def render: Formattable = Value(
     "ReadOnly" -> readOnly,
     "SourceContainer" -> sourceContainer
   )

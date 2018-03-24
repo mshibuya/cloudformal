@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudtrail-trail.html
  */
 
-trait Trail extends Resource with Resource.WithDeletionPolicy {
+trait Trail extends Resource[Trail] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudTrail::Trail"
 
   object attributes {
@@ -29,7 +29,7 @@ trait Trail extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def trailName: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CloudWatchLogsLogGroupArn" -> cloudWatchLogsLogGroupArn,
     "CloudWatchLogsRoleArn" -> cloudWatchLogsRoleArn,
     "EnableLogFileValidation" -> enableLogFileValidation,

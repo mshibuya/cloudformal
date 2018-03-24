@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class SourceSelectionCriteria(
-    sseKmsEncryptedObjects: NonEmptyProperty[SseKmsEncryptedObjects]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sseKmsEncryptedObjects: NonEmptyProperty[SseKmsEncryptedObjects]) extends Expression[SourceSelectionCriteria] {
+  def render: Formattable = Value(
     "SseKmsEncryptedObjects" -> sseKmsEncryptedObjects
   )
 }

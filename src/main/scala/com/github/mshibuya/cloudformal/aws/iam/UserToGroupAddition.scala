@@ -7,13 +7,13 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
  */
 
-trait UserToGroupAddition extends Resource with Resource.WithDeletionPolicy {
+trait UserToGroupAddition extends Resource[UserToGroupAddition] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::IAM::UserToGroupAddition"
 
   def groupName: NonEmptyProperty[String]
   def users: NonEmptyProperty[Seq[String]]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "GroupName" -> groupName,
     "Users" -> users
   )

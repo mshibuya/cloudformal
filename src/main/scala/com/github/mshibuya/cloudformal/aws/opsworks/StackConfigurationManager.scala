@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class StackConfigurationManager(
     name: Property[String] = Empty,
-    version: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    version: Property[String] = Empty) extends Expression[StackConfigurationManager] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Version" -> version
   )

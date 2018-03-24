@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html
  */
 
-trait Rule extends Resource with Resource.WithDeletionPolicy {
+trait Rule extends Resource[Rule] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Events::Rule"
 
   object attributes {
@@ -23,7 +23,7 @@ trait Rule extends Resource with Resource.WithDeletionPolicy {
   def state: Property[String] = Empty
   def targets: Property[Seq[Target]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Description" -> description,
     "EventPattern" -> eventPattern,
     "Name" -> name,

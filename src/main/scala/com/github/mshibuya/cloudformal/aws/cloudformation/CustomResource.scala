@@ -7,12 +7,12 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cfn-customresource.html
  */
 
-trait CustomResource extends Resource with Resource.WithDeletionPolicy {
+trait CustomResource extends Resource[CustomResource] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::CustomResource"
 
   def serviceToken: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ServiceToken" -> serviceToken
   )
 }

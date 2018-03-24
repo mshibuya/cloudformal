@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ConnectionSettings(
-    idleTimeout: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    idleTimeout: NonEmptyProperty[Int]) extends Expression[ConnectionSettings] {
+  def render: Formattable = Value(
     "IdleTimeout" -> idleTimeout
   )
 }

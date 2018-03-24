@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class EbsConfiguration(
     ebsBlockDeviceConfigs: Property[Seq[EbsBlockDeviceConfig]] = Empty,
-    ebsOptimized: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    ebsOptimized: Property[Boolean] = Empty) extends Expression[EbsConfiguration] {
+  def render: Formattable = Value(
     "EbsBlockDeviceConfigs" -> ebsBlockDeviceConfigs,
     "EbsOptimized" -> ebsOptimized
   )

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RedirectAllRequestsTo(
     hostName: NonEmptyProperty[String],
-    protocol: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    protocol: Property[String] = Empty) extends Expression[RedirectAllRequestsTo] {
+  def render: Formattable = Value(
     "HostName" -> hostName,
     "Protocol" -> protocol
   )

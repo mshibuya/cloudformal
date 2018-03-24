@@ -10,8 +10,8 @@ case class WebsiteConfiguration(
     errorDocument: Property[String] = Empty,
     indexDocument: Property[String] = Empty,
     redirectAllRequestsTo: Property[RedirectAllRequestsTo] = Empty,
-    routingRules: Property[Seq[RoutingRule]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    routingRules: Property[Seq[RoutingRule]] = Empty) extends Expression[WebsiteConfiguration] {
+  def render: Formattable = Value(
     "ErrorDocument" -> errorDocument,
     "IndexDocument" -> indexDocument,
     "RedirectAllRequestsTo" -> redirectAllRequestsTo,

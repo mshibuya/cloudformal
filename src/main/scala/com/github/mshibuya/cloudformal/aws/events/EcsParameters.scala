@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class EcsParameters(
     taskCount: Property[Int] = Empty,
-    taskDefinitionArn: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    taskDefinitionArn: NonEmptyProperty[String]) extends Expression[EcsParameters] {
+  def render: Formattable = Value(
     "TaskCount" -> taskCount,
     "TaskDefinitionArn" -> taskDefinitionArn
   )

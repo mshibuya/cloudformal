@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ArtifactDetails(
     maximumCount: NonEmptyProperty[Int],
-    minimumCount: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    minimumCount: NonEmptyProperty[Int]) extends Expression[ArtifactDetails] {
+  def render: Formattable = Value(
     "MaximumCount" -> maximumCount,
     "MinimumCount" -> minimumCount
   )

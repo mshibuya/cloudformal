@@ -18,8 +18,8 @@ case class Rule(
     status: NonEmptyProperty[String],
     tagFilters: Property[Seq[TagFilter]] = Empty,
     transition: Property[Transition] = Empty,
-    transitions: Property[Seq[Transition]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    transitions: Property[Seq[Transition]] = Empty) extends Expression[Rule] {
+  def render: Formattable = Value(
     "AbortIncompleteMultipartUpload" -> abortIncompleteMultipartUpload,
     "ExpirationDate" -> expirationDate,
     "ExpirationInDays" -> expirationInDays,

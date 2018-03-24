@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class AlarmIdentifier(
     name: NonEmptyProperty[String],
-    region: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    region: NonEmptyProperty[String]) extends Expression[AlarmIdentifier] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Region" -> region
   )

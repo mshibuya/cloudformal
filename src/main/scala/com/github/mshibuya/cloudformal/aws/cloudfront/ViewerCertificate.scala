@@ -11,8 +11,8 @@ case class ViewerCertificate(
     sslSupportMethod: Property[String] = Empty,
     minimumProtocolVersion: Property[String] = Empty,
     cloudFrontDefaultCertificate: Property[Boolean] = Empty,
-    acmCertificateArn: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    acmCertificateArn: Property[String] = Empty) extends Expression[ViewerCertificate] {
+  def render: Formattable = Value(
     "IamCertificateId" -> iamCertificateId,
     "SslSupportMethod" -> sslSupportMethod,
     "MinimumProtocolVersion" -> minimumProtocolVersion,

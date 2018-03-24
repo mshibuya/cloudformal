@@ -10,8 +10,8 @@ case class AccessLoggingPolicy(
     emitInterval: Property[Int] = Empty,
     enabled: NonEmptyProperty[Boolean],
     s3BucketName: NonEmptyProperty[String],
-    s3BucketPrefix: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    s3BucketPrefix: Property[String] = Empty) extends Expression[AccessLoggingPolicy] {
+  def render: Formattable = Value(
     "EmitInterval" -> emitInterval,
     "Enabled" -> enabled,
     "S3BucketName" -> s3BucketName,

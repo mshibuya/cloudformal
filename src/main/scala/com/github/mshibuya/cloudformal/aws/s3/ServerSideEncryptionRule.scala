@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ServerSideEncryptionRule(
-    serverSideEncryptionByDefault: Property[ServerSideEncryptionByDefault] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    serverSideEncryptionByDefault: Property[ServerSideEncryptionByDefault] = Empty) extends Expression[ServerSideEncryptionRule] {
+  def render: Formattable = Value(
     "ServerSideEncryptionByDefault" -> serverSideEncryptionByDefault
   )
 }

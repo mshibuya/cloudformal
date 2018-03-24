@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class TagFilter(
     key: NonEmptyProperty[String],
-    value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[String]) extends Expression[TagFilter] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Value" -> value
   )

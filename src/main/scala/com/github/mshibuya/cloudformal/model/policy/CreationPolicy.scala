@@ -4,8 +4,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class CreationPolicy(
     autoScalingCreationPolicy: Property[AutoScalingCreationPolicy] = Empty,
-    resourceSignal: Property[ResourceSignal] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    resourceSignal: Property[ResourceSignal] = Empty) extends Expression[CreationPolicy] {
+  def render: Formattable = Value(
     "AutoScalingCreationPolicy" -> autoScalingCreationPolicy,
     "ResourceSignal" -> resourceSignal
   )

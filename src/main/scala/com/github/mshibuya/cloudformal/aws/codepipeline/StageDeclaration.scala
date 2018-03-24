@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class StageDeclaration(
     actions: NonEmptyProperty[Seq[ActionDeclaration]],
     blockers: Property[Seq[BlockerDeclaration]] = Empty,
-    name: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: NonEmptyProperty[String]) extends Expression[StageDeclaration] {
+  def render: Formattable = Value(
     "Actions" -> actions,
     "Blockers" -> blockers,
     "Name" -> name

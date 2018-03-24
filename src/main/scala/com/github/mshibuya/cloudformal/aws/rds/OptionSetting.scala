@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class OptionSetting(
     name: Property[String] = Empty,
-    value: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: Property[String] = Empty) extends Expression[OptionSetting] {
+  def render: Formattable = Value(
     "Name" -> name,
     "Value" -> value
   )

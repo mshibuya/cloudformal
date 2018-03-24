@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class LinuxParameters(
     capabilities: Property[KernelCapabilities] = Empty,
     devices: Property[Seq[Device]] = Empty,
-    initProcessEnabled: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    initProcessEnabled: Property[Boolean] = Empty) extends Expression[LinuxParameters] {
+  def render: Formattable = Value(
     "Capabilities" -> capabilities,
     "Devices" -> devices,
     "InitProcessEnabled" -> initProcessEnabled

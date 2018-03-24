@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class HealthCheckConfig(
     `type`: NonEmptyProperty[String],
     resourcePath: Property[String] = Empty,
-    failureThreshold: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    failureThreshold: Property[Double] = Empty) extends Expression[HealthCheckConfig] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "ResourcePath" -> resourcePath,
     "FailureThreshold" -> failureThreshold

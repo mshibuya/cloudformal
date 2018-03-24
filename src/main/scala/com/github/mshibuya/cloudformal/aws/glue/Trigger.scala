@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-trigger.html
  */
 
-trait Trigger extends Resource with Resource.WithDeletionPolicy {
+trait Trigger extends Resource[Trigger] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::Trigger"
 
   def `type`: NonEmptyProperty[String]
@@ -17,7 +17,7 @@ trait Trigger extends Resource with Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def predicate: Property[Predicate] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Type" -> `type`,
     "Description" -> description,
     "Actions" -> actions,

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
  */
 
-trait Bucket extends Resource with Resource.WithDeletionPolicy {
+trait Bucket extends Resource[Bucket] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::S3::Bucket"
 
   object attributes {
@@ -33,7 +33,7 @@ trait Bucket extends Resource with Resource.WithDeletionPolicy {
   def versioningConfiguration: Property[VersioningConfiguration] = Empty
   def websiteConfiguration: Property[WebsiteConfiguration] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AccelerateConfiguration" -> accelerateConfiguration,
     "AccessControl" -> accessControl,
     "AnalyticsConfigurations" -> analyticsConfigurations,

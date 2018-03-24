@@ -13,8 +13,8 @@ case class ConfigurationProperties(
     queryable: Property[Boolean] = Empty,
     required: NonEmptyProperty[Boolean],
     secret: NonEmptyProperty[Boolean],
-    `type`: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: Property[String] = Empty) extends Expression[ConfigurationProperties] {
+  def render: Formattable = Value(
     "Description" -> description,
     "Key" -> key,
     "Name" -> name,

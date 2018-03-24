@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class SourceAuth(
     `type`: NonEmptyProperty[String],
-    resource: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    resource: Property[String] = Empty) extends Expression[SourceAuth] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "Resource" -> resource
   )

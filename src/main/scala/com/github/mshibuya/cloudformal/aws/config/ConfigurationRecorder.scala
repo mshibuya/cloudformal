@@ -7,14 +7,14 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-config-configurationrecorder.html
  */
 
-trait ConfigurationRecorder extends Resource with Resource.WithDeletionPolicy {
+trait ConfigurationRecorder extends Resource[ConfigurationRecorder] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Config::ConfigurationRecorder"
 
   def name: Property[String] = Empty
   def recordingGroup: Property[RecordingGroup] = Empty
   def roleARN: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Name" -> name,
     "RecordingGroup" -> recordingGroup,
     "RoleARN" -> roleARN

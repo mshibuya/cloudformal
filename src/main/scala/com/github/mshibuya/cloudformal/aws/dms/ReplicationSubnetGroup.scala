@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dms-replicationsubnetgroup.html
  */
 
-trait ReplicationSubnetGroup extends Resource with Resource.WithDeletionPolicy {
+trait ReplicationSubnetGroup extends Resource[ReplicationSubnetGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DMS::ReplicationSubnetGroup"
 
   def replicationSubnetGroupDescription: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait ReplicationSubnetGroup extends Resource with Resource.WithDeletionPolicy {
   def subnetIds: NonEmptyProperty[Seq[String]]
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ReplicationSubnetGroupDescription" -> replicationSubnetGroupDescription,
     "ReplicationSubnetGroupIdentifier" -> replicationSubnetGroupIdentifier,
     "SubnetIds" -> subnetIds,

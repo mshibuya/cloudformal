@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class StreamEncryption(
     encryptionType: NonEmptyProperty[String],
-    keyId: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    keyId: NonEmptyProperty[String]) extends Expression[StreamEncryption] {
+  def render: Formattable = Value(
     "EncryptionType" -> encryptionType,
     "KeyId" -> keyId
   )

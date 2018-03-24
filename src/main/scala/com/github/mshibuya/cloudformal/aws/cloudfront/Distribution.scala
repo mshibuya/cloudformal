@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-distribution.html
  */
 
-trait Distribution extends Resource with Resource.WithDeletionPolicy {
+trait Distribution extends Resource[Distribution] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFront::Distribution"
 
   object attributes {
@@ -17,7 +17,7 @@ trait Distribution extends Resource with Resource.WithDeletionPolicy {
   def distributionConfig: NonEmptyProperty[DistributionConfig]
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DistributionConfig" -> distributionConfig,
     "Tags" -> tags
   )

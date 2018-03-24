@@ -17,8 +17,8 @@ case class SpotFleetRequestConfigData(
     terminateInstancesWithExpiration: Property[Boolean] = Empty,
     `type`: Property[String] = Empty,
     validFrom: Property[String] = Empty,
-    validUntil: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    validUntil: Property[String] = Empty) extends Expression[SpotFleetRequestConfigData] {
+  def render: Formattable = Value(
     "AllocationStrategy" -> allocationStrategy,
     "ExcessCapacityTerminationPolicy" -> excessCapacityTerminationPolicy,
     "IamFleetRole" -> iamFleetRole,

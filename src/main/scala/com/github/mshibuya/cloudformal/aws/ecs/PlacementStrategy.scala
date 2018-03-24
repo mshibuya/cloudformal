@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PlacementStrategy(
     field: Property[String] = Empty,
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[PlacementStrategy] {
+  def render: Formattable = Value(
     "Field" -> field,
     "Type" -> `type`
   )

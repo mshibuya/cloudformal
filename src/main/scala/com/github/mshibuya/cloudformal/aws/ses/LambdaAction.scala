@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class LambdaAction(
     functionArn: NonEmptyProperty[String],
     topicArn: Property[String] = Empty,
-    invocationType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    invocationType: Property[String] = Empty) extends Expression[LambdaAction] {
+  def render: Formattable = Value(
     "FunctionArn" -> functionArn,
     "TopicArn" -> topicArn,
     "InvocationType" -> invocationType

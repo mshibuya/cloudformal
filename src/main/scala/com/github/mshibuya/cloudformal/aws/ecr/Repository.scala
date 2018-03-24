@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecr-repository.html
  */
 
-trait Repository extends Resource with Resource.WithDeletionPolicy {
+trait Repository extends Resource[Repository] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ECR::Repository"
 
   object attributes {
@@ -19,7 +19,7 @@ trait Repository extends Resource with Resource.WithDeletionPolicy {
   def repositoryName: Property[String] = Empty
   def repositoryPolicyText: Property[Json] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "LifecyclePolicy" -> lifecyclePolicy,
     "RepositoryName" -> repositoryName,
     "RepositoryPolicyText" -> repositoryPolicyText

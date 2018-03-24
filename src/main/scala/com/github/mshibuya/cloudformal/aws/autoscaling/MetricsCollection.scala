@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class MetricsCollection(
     granularity: NonEmptyProperty[String],
-    metrics: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    metrics: Property[Seq[String]] = Empty) extends Expression[MetricsCollection] {
+  def render: Formattable = Value(
     "Granularity" -> granularity,
     "Metrics" -> metrics
   )

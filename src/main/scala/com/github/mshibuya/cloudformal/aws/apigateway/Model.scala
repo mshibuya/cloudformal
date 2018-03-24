@@ -9,7 +9,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-model.html
  */
 
-trait Model extends model.Resource with model.Resource.WithDeletionPolicy {
+trait Model extends model.Resource[Model] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::Model"
 
   def contentType: Property[String] = Empty
@@ -18,7 +18,7 @@ trait Model extends model.Resource with model.Resource.WithDeletionPolicy {
   def restApiId: NonEmptyProperty[String]
   def schema: Property[Json] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "ContentType" -> contentType,
     "Description" -> description,
     "Name" -> name,

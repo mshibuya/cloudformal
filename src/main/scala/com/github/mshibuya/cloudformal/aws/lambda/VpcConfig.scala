@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class VpcConfig(
     securityGroupIds: NonEmptyProperty[Seq[String]],
-    subnetIds: NonEmptyProperty[Seq[String]]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    subnetIds: NonEmptyProperty[Seq[String]]) extends Expression[VpcConfig] {
+  def render: Formattable = Value(
     "SecurityGroupIds" -> securityGroupIds,
     "SubnetIds" -> subnetIds
   )

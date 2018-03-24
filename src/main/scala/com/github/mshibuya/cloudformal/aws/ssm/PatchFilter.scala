@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class PatchFilter(
     values: Property[Seq[String]] = Empty,
-    key: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    key: Property[String] = Empty) extends Expression[PatchFilter] {
+  def render: Formattable = Value(
     "Values" -> values,
     "Key" -> key
   )

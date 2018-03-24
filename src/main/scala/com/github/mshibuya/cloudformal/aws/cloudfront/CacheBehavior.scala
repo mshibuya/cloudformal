@@ -19,8 +19,8 @@ case class CacheBehavior(
     smoothStreaming: Property[Boolean] = Empty,
     forwardedValues: NonEmptyProperty[ForwardedValues],
     minTTL: Property[Double] = Empty,
-    maxTTL: Property[Double] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxTTL: Property[Double] = Empty) extends Expression[CacheBehavior] {
+  def render: Formattable = Value(
     "Compress" -> compress,
     "LambdaFunctionAssociations" -> lambdaFunctionAssociations,
     "TargetOriginId" -> targetOriginId,

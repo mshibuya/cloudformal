@@ -6,8 +6,8 @@ case class CodeDeployLambdaAliasUpdate(
     afterAllowTrafficHook: Property[String] = Empty,
     applicationName: Property[String] = Empty,
     beforeAllowTrafficHook: Property[String] = Empty,
-    deploymentGroupName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    deploymentGroupName: Property[String] = Empty) extends Expression[CodeDeployLambdaAliasUpdate] {
+  def render: Formattable = Value(
     "AfterAllowTrafficHook" -> afterAllowTrafficHook,
     "ApplicationName" -> applicationName,
     "BeforeAllowTrafficHook" -> beforeAllowTrafficHook,

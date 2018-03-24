@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codedeploy-deploymentgroup.html
  */
 
-trait DeploymentGroup extends Resource with Resource.WithDeletionPolicy {
+trait DeploymentGroup extends Resource[DeploymentGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CodeDeploy::DeploymentGroup"
 
   def alarmConfiguration: Property[AlarmConfiguration] = Empty
@@ -24,7 +24,7 @@ trait DeploymentGroup extends Resource with Resource.WithDeletionPolicy {
   def serviceRoleArn: NonEmptyProperty[String]
   def triggerConfigurations: Property[Seq[TriggerConfig]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AlarmConfiguration" -> alarmConfiguration,
     "ApplicationName" -> applicationName,
     "AutoRollbackConfiguration" -> autoRollbackConfiguration,

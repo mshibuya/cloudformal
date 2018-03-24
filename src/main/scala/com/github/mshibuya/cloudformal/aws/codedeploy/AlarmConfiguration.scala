@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class AlarmConfiguration(
     alarms: Property[Seq[Alarm]] = Empty,
     enabled: Property[Boolean] = Empty,
-    ignorePollAlarmFailure: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    ignorePollAlarmFailure: Property[Boolean] = Empty) extends Expression[AlarmConfiguration] {
+  def render: Formattable = Value(
     "Alarms" -> alarms,
     "Enabled" -> enabled,
     "IgnorePollAlarmFailure" -> ignorePollAlarmFailure

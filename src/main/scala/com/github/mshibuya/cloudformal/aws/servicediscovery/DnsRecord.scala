@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DnsRecord(
     `type`: NonEmptyProperty[String],
-    ttL: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    ttL: NonEmptyProperty[String]) extends Expression[DnsRecord] {
+  def render: Formattable = Value(
     "Type" -> `type`,
     "TTL" -> ttL
   )

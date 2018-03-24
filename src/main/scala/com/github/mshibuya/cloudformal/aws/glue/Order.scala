@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Order(
     column: NonEmptyProperty[String],
-    sortOrder: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    sortOrder: NonEmptyProperty[Int]) extends Expression[Order] {
+  def render: Formattable = Value(
     "Column" -> column,
     "SortOrder" -> sortOrder
   )

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalabletarget.html
  */
 
-trait ScalableTarget extends Resource with Resource.WithDeletionPolicy {
+trait ScalableTarget extends Resource[ScalableTarget] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApplicationAutoScaling::ScalableTarget"
 
   def maxCapacity: NonEmptyProperty[Int]
@@ -18,7 +18,7 @@ trait ScalableTarget extends Resource with Resource.WithDeletionPolicy {
   def scheduledActions: Property[Seq[ScheduledAction]] = Empty
   def serviceNamespace: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "MaxCapacity" -> maxCapacity,
     "MinCapacity" -> minCapacity,
     "ResourceId" -> resourceId,

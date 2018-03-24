@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Device(
     containerPath: Property[String] = Empty,
     hostPath: NonEmptyProperty[String],
-    permissions: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    permissions: Property[Seq[String]] = Empty) extends Expression[Device] {
+  def render: Formattable = Value(
     "ContainerPath" -> containerPath,
     "HostPath" -> hostPath,
     "Permissions" -> permissions

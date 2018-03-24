@@ -10,8 +10,8 @@ case class Ingress(
     cidriP: Property[String] = Empty,
     eC2SecurityGroupId: Property[String] = Empty,
     eC2SecurityGroupName: Property[String] = Empty,
-    eC2SecurityGroupOwnerId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    eC2SecurityGroupOwnerId: Property[String] = Empty) extends Expression[Ingress] {
+  def render: Formattable = Value(
     "CIDRIP" -> cidriP,
     "EC2SecurityGroupId" -> eC2SecurityGroupId,
     "EC2SecurityGroupName" -> eC2SecurityGroupName,

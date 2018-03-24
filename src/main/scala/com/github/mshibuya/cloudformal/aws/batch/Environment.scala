@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Environment(
     value: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[Environment] {
+  def render: Formattable = Value(
     "Value" -> value,
     "Name" -> name
   )

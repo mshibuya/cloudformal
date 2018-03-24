@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-glue-partition.html
  */
 
-trait Partition extends Resource with Resource.WithDeletionPolicy {
+trait Partition extends Resource[Partition] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Glue::Partition"
 
   def tableName: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait Partition extends Resource with Resource.WithDeletionPolicy {
   def catalogId: NonEmptyProperty[String]
   def partitionInput: NonEmptyProperty[PartitionInput]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "TableName" -> tableName,
     "DatabaseName" -> databaseName,
     "CatalogId" -> catalogId,

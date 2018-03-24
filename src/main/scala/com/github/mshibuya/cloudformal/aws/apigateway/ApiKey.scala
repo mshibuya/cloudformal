@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-apikey.html
  */
 
-trait ApiKey extends model.Resource with model.Resource.WithDeletionPolicy {
+trait ApiKey extends model.Resource[ApiKey] with model.Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ApiGateway::ApiKey"
 
   def customerId: Property[String] = Empty
@@ -18,7 +18,7 @@ trait ApiKey extends model.Resource with model.Resource.WithDeletionPolicy {
   def name: Property[String] = Empty
   def stageKeys: Property[Seq[StageKey]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CustomerId" -> customerId,
     "Description" -> description,
     "Enabled" -> enabled,

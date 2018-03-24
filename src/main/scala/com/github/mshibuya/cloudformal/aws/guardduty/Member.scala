@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-guardduty-member.html
  */
 
-trait Member extends Resource with Resource.WithDeletionPolicy {
+trait Member extends Resource[Member] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::GuardDuty::Member"
 
   def status: Property[String] = Empty
@@ -16,7 +16,7 @@ trait Member extends Resource with Resource.WithDeletionPolicy {
   def message: Property[String] = Empty
   def detectorId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Status" -> status,
     "MemberId" -> memberId,
     "Email" -> email,

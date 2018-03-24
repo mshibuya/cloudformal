@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class Restrictions(
-    geoRestriction: NonEmptyProperty[GeoRestriction]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    geoRestriction: NonEmptyProperty[GeoRestriction]) extends Expression[Restrictions] {
+  def render: Formattable = Value(
     "GeoRestriction" -> geoRestriction
   )
 }

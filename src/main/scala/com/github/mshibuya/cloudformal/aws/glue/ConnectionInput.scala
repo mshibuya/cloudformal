@@ -13,8 +13,8 @@ case class ConnectionInput(
     matchCriteria: Property[Seq[String]] = Empty,
     physicalConnectionRequirements: Property[PhysicalConnectionRequirements] = Empty,
     connectionProperties: NonEmptyProperty[Json],
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[ConnectionInput] {
+  def render: Formattable = Value(
     "Description" -> description,
     "ConnectionType" -> connectionType,
     "MatchCriteria" -> matchCriteria,

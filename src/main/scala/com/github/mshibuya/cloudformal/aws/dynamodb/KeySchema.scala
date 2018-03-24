@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class KeySchema(
     attributeName: NonEmptyProperty[String],
-    keyType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    keyType: NonEmptyProperty[String]) extends Expression[KeySchema] {
+  def render: Formattable = Value(
     "AttributeName" -> attributeName,
     "KeyType" -> keyType
   )

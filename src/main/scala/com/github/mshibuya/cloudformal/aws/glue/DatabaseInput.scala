@@ -11,8 +11,8 @@ case class DatabaseInput(
     locationUri: Property[String] = Empty,
     description: Property[String] = Empty,
     parameters: Property[Json] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[DatabaseInput] {
+  def render: Formattable = Value(
     "LocationUri" -> locationUri,
     "Description" -> description,
     "Parameters" -> parameters,

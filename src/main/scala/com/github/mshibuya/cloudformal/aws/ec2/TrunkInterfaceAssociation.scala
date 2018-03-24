@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-trunkinterfaceassociation.html
  */
 
-trait TrunkInterfaceAssociation extends Resource with Resource.WithDeletionPolicy {
+trait TrunkInterfaceAssociation extends Resource[TrunkInterfaceAssociation] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::TrunkInterfaceAssociation"
 
   def branchInterfaceId: NonEmptyProperty[String]
@@ -15,7 +15,7 @@ trait TrunkInterfaceAssociation extends Resource with Resource.WithDeletionPolic
   def trunkInterfaceId: NonEmptyProperty[String]
   def vlanId: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "BranchInterfaceId" -> branchInterfaceId,
     "GREKey" -> greKey,
     "TrunkInterfaceId" -> trunkInterfaceId,

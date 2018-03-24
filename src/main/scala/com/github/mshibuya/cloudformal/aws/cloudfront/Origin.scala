@@ -12,8 +12,8 @@ case class Origin(
     s3OriginConfig: Property[S3OriginConfig] = Empty,
     originPath: Property[String] = Empty,
     id: NonEmptyProperty[String],
-    customOriginConfig: Property[CustomOriginConfig] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    customOriginConfig: Property[CustomOriginConfig] = Empty) extends Expression[Origin] {
+  def render: Formattable = Value(
     "OriginCustomHeaders" -> originCustomHeaders,
     "DomainName" -> domainName,
     "S3OriginConfig" -> s3OriginConfig,

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-stepfunctions-statemachine.html
  */
 
-trait StateMachine extends Resource with Resource.WithDeletionPolicy {
+trait StateMachine extends Resource[StateMachine] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::StepFunctions::StateMachine"
 
   object attributes {
@@ -18,7 +18,7 @@ trait StateMachine extends Resource with Resource.WithDeletionPolicy {
   def stateMachineName: Property[String] = Empty
   def roleArn: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "DefinitionString" -> definitionString,
     "StateMachineName" -> stateMachineName,
     "RoleArn" -> roleArn

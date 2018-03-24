@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class DataSource(
     arn: Property[String] = Empty,
     databaseName: Property[String] = Empty,
-    `type`: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: Property[String] = Empty) extends Expression[DataSource] {
+  def render: Formattable = Value(
     "Arn" -> arn,
     "DatabaseName" -> databaseName,
     "Type" -> `type`

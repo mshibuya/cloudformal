@@ -20,8 +20,8 @@ case class ComputeResources(
     instanceTypes: NonEmptyProperty[Seq[String]],
     ec2KeyPair: Property[String] = Empty,
     tags: Property[Json] = Empty,
-    desiredvCpus: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    desiredvCpus: Property[Int] = Empty) extends Expression[ComputeResources] {
+  def render: Formattable = Value(
     "SpotIamFleetRole" -> spotIamFleetRole,
     "MaxvCpus" -> maxvCpus,
     "BidPercentage" -> bidPercentage,

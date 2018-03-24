@@ -11,8 +11,8 @@ case class ReplicationDestination(
     account: Property[String] = Empty,
     bucket: NonEmptyProperty[String],
     encryptionConfiguration: Property[EncryptionConfiguration] = Empty,
-    storageClass: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    storageClass: Property[String] = Empty) extends Expression[ReplicationDestination] {
+  def render: Formattable = Value(
     "AccessControlTranslation" -> accessControlTranslation,
     "Account" -> account,
     "Bucket" -> bucket,

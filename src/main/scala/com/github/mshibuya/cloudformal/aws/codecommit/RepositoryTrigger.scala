@@ -11,8 +11,8 @@ case class RepositoryTrigger(
     branches: Property[Seq[String]] = Empty,
     customData: Property[String] = Empty,
     destinationArn: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[RepositoryTrigger] {
+  def render: Formattable = Value(
     "Events" -> events,
     "Branches" -> branches,
     "CustomData" -> customData,

@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
  */
 
-trait TargetGroup extends Resource with Resource.WithDeletionPolicy {
+trait TargetGroup extends Resource[TargetGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::ElasticLoadBalancingV2::TargetGroup"
 
   object attributes {
@@ -33,7 +33,7 @@ trait TargetGroup extends Resource with Resource.WithDeletionPolicy {
   def unhealthyThresholdCount: Property[Int] = Empty
   def vpcId: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "HealthCheckIntervalSeconds" -> healthCheckIntervalSeconds,
     "HealthCheckPath" -> healthCheckPath,
     "HealthCheckPort" -> healthCheckPort,

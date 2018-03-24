@@ -11,8 +11,8 @@ case class Output(
     lambdaOutput: Property[LambdaOutput] = Empty,
     kinesisFirehoseOutput: Property[KinesisFirehoseOutput] = Empty,
     kinesisStreamsOutput: Property[KinesisStreamsOutput] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[Output] {
+  def render: Formattable = Value(
     "DestinationSchema" -> destinationSchema,
     "LambdaOutput" -> lambdaOutput,
     "KinesisFirehoseOutput" -> kinesisFirehoseOutput,

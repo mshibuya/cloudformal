@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class ProjectTriggers(
-    webhook: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    webhook: Property[Boolean] = Empty) extends Expression[ProjectTriggers] {
+  def render: Formattable = Value(
     "Webhook" -> webhook
   )
 }

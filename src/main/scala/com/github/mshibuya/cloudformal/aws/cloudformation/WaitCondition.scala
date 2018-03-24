@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-waitcondition.html
  */
 
-trait WaitCondition extends Resource with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
+trait WaitCondition extends Resource[WaitCondition] with Resource.WithCreationPolicy with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::CloudFormation::WaitCondition"
 
   object attributes {
@@ -19,7 +19,7 @@ trait WaitCondition extends Resource with Resource.WithCreationPolicy with Resou
   def handle: NonEmptyProperty[String]
   def timeout: NonEmptyProperty[String]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Count" -> count,
     "Handle" -> handle,
     "Timeout" -> timeout

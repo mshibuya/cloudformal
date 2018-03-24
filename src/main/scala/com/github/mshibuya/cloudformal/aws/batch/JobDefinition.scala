@@ -8,7 +8,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-batch-jobdefinition.html
  */
 
-trait JobDefinition extends Resource with Resource.WithDeletionPolicy {
+trait JobDefinition extends Resource[JobDefinition] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Batch::JobDefinition"
 
   def `type`: NonEmptyProperty[String]
@@ -17,7 +17,7 @@ trait JobDefinition extends Resource with Resource.WithDeletionPolicy {
   def jobDefinitionName: Property[String] = Empty
   def retryStrategy: Property[RetryStrategy] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Type" -> `type`,
     "Parameters" -> parameters,
     "ContainerProperties" -> containerProperties,

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class CloudFrontOriginAccessIdentityConfig(
-    comment: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    comment: NonEmptyProperty[String]) extends Expression[CloudFrontOriginAccessIdentityConfig] {
+  def render: Formattable = Value(
     "Comment" -> comment
   )
 }

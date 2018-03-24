@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class LBCookieStickinessPolicy(
     cookieExpirationPeriod: Property[String] = Empty,
-    policyName: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    policyName: Property[String] = Empty) extends Expression[LBCookieStickinessPolicy] {
+  def render: Formattable = Value(
     "CookieExpirationPeriod" -> cookieExpirationPeriod,
     "PolicyName" -> policyName
   )

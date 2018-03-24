@@ -2,9 +2,9 @@ package com.github.mshibuya.cloudformal.model
 
 case class Export[A](
     name: String,
-    value: NonEmptyProperty[A]) extends Renderable {
+    value: NonEmptyProperty[A]) extends Expression[Export[A]] {
 
-  def render(): Formattable = Formattable.withProperties(
+  def render(): Formattable = Value(
     name -> value
   )
 

@@ -11,8 +11,8 @@ case class Location(
     name: Property[String] = Empty,
     path: Property[String] = Empty,
     statusCode: Property[String] = Empty,
-    `type`: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: Property[String] = Empty) extends Expression[Location] {
+  def render: Formattable = Value(
     "Method" -> method,
     "Name" -> name,
     "Path" -> path,

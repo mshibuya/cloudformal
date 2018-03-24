@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-instancegroupconfig.html
  */
 
-trait InstanceGroupConfig extends Resource with Resource.WithDeletionPolicy {
+trait InstanceGroupConfig extends Resource[InstanceGroupConfig] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::InstanceGroupConfig"
 
   def autoScalingPolicy: Property[AutoScalingPolicy] = Empty
@@ -21,7 +21,7 @@ trait InstanceGroupConfig extends Resource with Resource.WithDeletionPolicy {
   def market: Property[String] = Empty
   def name: Property[String] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AutoScalingPolicy" -> autoScalingPolicy,
     "BidPrice" -> bidPrice,
     "Configurations" -> configurations,

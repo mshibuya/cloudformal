@@ -7,6 +7,6 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class NoDevice(
-) extends Renderable {
-  def render: Formattable = Formattable.emptyMap
+) extends Expression[NoDevice] {
+  def render: Formattable = Value()
 }

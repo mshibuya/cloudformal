@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class JobCommand(
     scriptLocation: Property[String] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[JobCommand] {
+  def render: Formattable = Value(
     "ScriptLocation" -> scriptLocation,
     "Name" -> name
   )

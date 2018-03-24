@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class Target(
     values: Property[Seq[String]] = Empty,
-    key: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    key: NonEmptyProperty[String]) extends Expression[Target] {
+  def render: Formattable = Value(
     "Values" -> values,
     "Key" -> key
   )

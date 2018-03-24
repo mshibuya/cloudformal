@@ -31,9 +31,9 @@ case class ResourceTemplate(name: String, specification: ResourceSpecification) 
   ).mkString("")
   def propertySection: String =
     if (specification.properties.isEmpty) {
-      s"""  def resourceProperties: FormattableMap = Formattable.emptyMap"""
+      s"""  def render(): MapValue[_] = Value()"""
     } else {
-      s"""  def resourceProperties: FormattableMap = Formattable.withProperties(
+      s"""  def render(): MapValue[_] = Value(
          |${specification.properties.map(_.renderedValue).mkString(",\n")}
          |  )""".stripMargin
     }
@@ -48,7 +48,7 @@ case class ResourceTemplate(name: String, specification: ResourceSpecification) 
       | * ${specification.documentation}
       | */
       |
-      |trait ${traitName} extends ${resourceClassName}${policyMixins} {
+      |trait ${traitName} extends ${resourceClassName}[${traitName}]${policyMixins} {
       |  val resourceTypeName = "${name}"
       |${if (specification.attributes.nonEmpty) s"\n  object attributes {\n${specification.attributes.map(_.methodValue).mkString("\n")}\n  }\n" else ""}
       |${specification.properties.map(_.methodValue).mkString("\n")}

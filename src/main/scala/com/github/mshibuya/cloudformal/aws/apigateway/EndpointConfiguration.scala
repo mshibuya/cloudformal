@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class EndpointConfiguration(
-    types: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    types: Property[Seq[String]] = Empty) extends Expression[EndpointConfiguration] {
+  def render: Formattable = Value(
     "Types" -> types
   )
 }

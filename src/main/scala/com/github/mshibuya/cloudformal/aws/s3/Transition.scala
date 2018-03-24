@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class Transition(
     storageClass: NonEmptyProperty[String],
     transitionDate: Property[java.time.ZonedDateTime] = Empty,
-    transitionInDays: Property[Int] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    transitionInDays: Property[Int] = Empty) extends Expression[Transition] {
+  def render: Formattable = Value(
     "StorageClass" -> storageClass,
     "TransitionDate" -> transitionDate,
     "TransitionInDays" -> transitionInDays

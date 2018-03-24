@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class CognitoIdentityProvider(
     serverSideTokenCheck: Property[Boolean] = Empty,
     providerName: Property[String] = Empty,
-    clientId: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    clientId: Property[String] = Empty) extends Expression[CognitoIdentityProvider] {
+  def render: Formattable = Value(
     "ServerSideTokenCheck" -> serverSideTokenCheck,
     "ProviderName" -> providerName,
     "ClientId" -> clientId

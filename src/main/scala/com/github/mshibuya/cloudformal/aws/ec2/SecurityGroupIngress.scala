@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html
  */
 
-trait SecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
+trait SecurityGroupIngress extends Resource[SecurityGroupIngress] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EC2::SecurityGroupIngress"
 
   def cidrIp: Property[String] = Empty
@@ -22,7 +22,7 @@ trait SecurityGroupIngress extends Resource with Resource.WithDeletionPolicy {
   def sourceSecurityGroupOwnerId: Property[String] = Empty
   def toPort: Property[Int] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "CidrIp" -> cidrIp,
     "CidrIpv6" -> cidrIpv6,
     "Description" -> description,

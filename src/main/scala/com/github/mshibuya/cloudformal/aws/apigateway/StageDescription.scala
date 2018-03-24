@@ -23,8 +23,8 @@ case class StageDescription(
     metricsEnabled: Property[Boolean] = Empty,
     throttlingBurstLimit: Property[Int] = Empty,
     throttlingRateLimit: Property[Double] = Empty,
-    variables: Property[ListMap[String, String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    variables: Property[ListMap[String, String]] = Empty) extends Expression[StageDescription] {
+  def render: Formattable = Value(
     "CacheClusterEnabled" -> cacheClusterEnabled,
     "CacheClusterSize" -> cacheClusterSize,
     "CacheDataEncrypted" -> cacheDataEncrypted,

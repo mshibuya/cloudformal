@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class DnsConfig(
     dnsRecords: NonEmptyProperty[Seq[DnsRecord]],
-    namespaceId: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    namespaceId: NonEmptyProperty[String]) extends Expression[DnsConfig] {
+  def render: Formattable = Value(
     "DnsRecords" -> dnsRecords,
     "NamespaceId" -> namespaceId
   )

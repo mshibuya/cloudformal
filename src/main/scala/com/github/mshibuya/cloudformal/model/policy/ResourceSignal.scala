@@ -4,8 +4,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ResourceSignal(
     count: Property[Int] = Empty,
-    timeout: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    timeout: Property[String] = Empty) extends Expression[ResourceSignal] {
+  def render: Formattable = Value(
     "Count" -> count,
     "Timeout" -> timeout
   )

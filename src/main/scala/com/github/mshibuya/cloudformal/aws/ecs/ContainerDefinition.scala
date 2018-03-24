@@ -35,8 +35,8 @@ case class ContainerDefinition(
     ulimits: Property[Seq[Ulimit]] = Empty,
     user: Property[String] = Empty,
     volumesFrom: Property[Seq[VolumeFrom]] = Empty,
-    workingDirectory: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    workingDirectory: Property[String] = Empty) extends Expression[ContainerDefinition] {
+  def render: Formattable = Value(
     "Command" -> command,
     "Cpu" -> cpu,
     "DisableNetworking" -> disableNetworking,

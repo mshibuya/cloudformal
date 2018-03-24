@@ -11,8 +11,8 @@ case class S3Location(
     bundleType: Property[String] = Empty,
     eTag: Property[String] = Empty,
     key: NonEmptyProperty[String],
-    version: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    version: Property[String] = Empty) extends Expression[S3Location] {
+  def render: Formattable = Value(
     "Bucket" -> bucket,
     "BundleType" -> bundleType,
     "ETag" -> eTag,

@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class RuleGroup(
-    patchRules: Property[Seq[Rule]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    patchRules: Property[Seq[Rule]] = Empty) extends Expression[RuleGroup] {
+  def render: Formattable = Value(
     "PatchRules" -> patchRules
   )
 }

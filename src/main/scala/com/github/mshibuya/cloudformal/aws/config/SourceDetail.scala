@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class SourceDetail(
     eventSource: NonEmptyProperty[String],
     maximumExecutionFrequency: Property[String] = Empty,
-    messageType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    messageType: NonEmptyProperty[String]) extends Expression[SourceDetail] {
+  def render: Formattable = Value(
     "EventSource" -> eventSource,
     "MaximumExecutionFrequency" -> maximumExecutionFrequency,
     "MessageType" -> messageType

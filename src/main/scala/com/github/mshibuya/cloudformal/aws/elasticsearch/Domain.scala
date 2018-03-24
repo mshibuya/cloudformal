@@ -10,7 +10,7 @@ import scala.collection.immutable.ListMap
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticsearch-domain.html
  */
 
-trait Domain extends Resource with Resource.WithDeletionPolicy {
+trait Domain extends Resource[Domain] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::Elasticsearch::Domain"
 
   object attributes {
@@ -29,7 +29,7 @@ trait Domain extends Resource with Resource.WithDeletionPolicy {
   def tags: Property[Seq[Tag]] = Empty
   def vpcOptions: Property[VPCOptions] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AccessPolicies" -> accessPolicies,
     "AdvancedOptions" -> advancedOptions,
     "DomainName" -> domainName,

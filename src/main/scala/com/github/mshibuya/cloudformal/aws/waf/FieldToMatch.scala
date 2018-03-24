@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class FieldToMatch(
     data: Property[String] = Empty,
-    `type`: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    `type`: NonEmptyProperty[String]) extends Expression[FieldToMatch] {
+  def render: Formattable = Value(
     "Data" -> data,
     "Type" -> `type`
   )

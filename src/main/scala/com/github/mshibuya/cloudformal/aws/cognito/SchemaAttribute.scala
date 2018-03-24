@@ -13,8 +13,8 @@ case class SchemaAttribute(
     stringAttributeConstraints: Property[StringAttributeConstraints] = Empty,
     required: Property[Boolean] = Empty,
     numberAttributeConstraints: Property[NumberAttributeConstraints] = Empty,
-    name: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    name: Property[String] = Empty) extends Expression[SchemaAttribute] {
+  def render: Formattable = Value(
     "DeveloperOnlyAttribute" -> developerOnlyAttribute,
     "Mutable" -> mutable,
     "AttributeDataType" -> attributeDataType,

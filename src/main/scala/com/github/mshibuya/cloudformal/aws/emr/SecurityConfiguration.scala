@@ -8,13 +8,13 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-emr-securityconfiguration.html
  */
 
-trait SecurityConfiguration extends Resource with Resource.WithDeletionPolicy {
+trait SecurityConfiguration extends Resource[SecurityConfiguration] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::EMR::SecurityConfiguration"
 
   def name: Property[String] = Empty
   def securityConfiguration: NonEmptyProperty[Json]
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Name" -> name,
     "SecurityConfiguration" -> securityConfiguration
   )

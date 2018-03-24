@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class JdbcTarget(
     connectionName: Property[String] = Empty,
     path: Property[String] = Empty,
-    exclusions: Property[Seq[String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    exclusions: Property[Seq[String]] = Empty) extends Expression[JdbcTarget] {
+  def render: Formattable = Value(
     "ConnectionName" -> connectionName,
     "Path" -> path,
     "Exclusions" -> exclusions

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ScalingConstraints(
     maxCapacity: NonEmptyProperty[Int],
-    minCapacity: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    minCapacity: NonEmptyProperty[Int]) extends Expression[ScalingConstraints] {
+  def render: Formattable = Value(
     "MaxCapacity" -> maxCapacity,
     "MinCapacity" -> minCapacity
   )

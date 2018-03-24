@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class DimensionConfiguration(
     dimensionValueSource: NonEmptyProperty[String],
     defaultDimensionValue: NonEmptyProperty[String],
-    dimensionName: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    dimensionName: NonEmptyProperty[String]) extends Expression[DimensionConfiguration] {
+  def render: Formattable = Value(
     "DimensionValueSource" -> dimensionValueSource,
     "DefaultDimensionValue" -> defaultDimensionValue,
     "DimensionName" -> dimensionName

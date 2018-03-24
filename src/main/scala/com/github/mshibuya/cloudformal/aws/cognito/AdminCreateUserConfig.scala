@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class AdminCreateUserConfig(
     inviteMessageTemplate: Property[InviteMessageTemplate] = Empty,
     unusedAccountValidityDays: Property[Double] = Empty,
-    allowAdminCreateUserOnly: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    allowAdminCreateUserOnly: Property[Boolean] = Empty) extends Expression[AdminCreateUserConfig] {
+  def render: Formattable = Value(
     "InviteMessageTemplate" -> inviteMessageTemplate,
     "UnusedAccountValidityDays" -> unusedAccountValidityDays,
     "AllowAdminCreateUserOnly" -> allowAdminCreateUserOnly

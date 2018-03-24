@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-datapipeline-pipeline.html
  */
 
-trait Pipeline extends Resource with Resource.WithDeletionPolicy {
+trait Pipeline extends Resource[Pipeline] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::DataPipeline::Pipeline"
 
   def activate: Property[Boolean] = Empty
@@ -18,7 +18,7 @@ trait Pipeline extends Resource with Resource.WithDeletionPolicy {
   def pipelineObjects: Property[Seq[PipelineObject]] = Empty
   def pipelineTags: Property[Seq[PipelineTag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "Activate" -> activate,
     "Description" -> description,
     "Name" -> name,

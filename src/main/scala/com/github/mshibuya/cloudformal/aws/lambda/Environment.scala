@@ -9,8 +9,8 @@ import scala.collection.immutable.ListMap
  */
 
 case class Environment(
-    variables: Property[ListMap[String, String]] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    variables: Property[ListMap[String, String]] = Empty) extends Expression[Environment] {
+  def render: Formattable = Value(
     "Variables" -> variables
   )
 }

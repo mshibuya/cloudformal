@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class BootstrapActionConfig(
     name: NonEmptyProperty[String],
-    scriptBootstrapAction: NonEmptyProperty[ScriptBootstrapActionConfig]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    scriptBootstrapAction: NonEmptyProperty[ScriptBootstrapActionConfig]) extends Expression[BootstrapActionConfig] {
+  def render: Formattable = Value(
     "Name" -> name,
     "ScriptBootstrapAction" -> scriptBootstrapAction
   )

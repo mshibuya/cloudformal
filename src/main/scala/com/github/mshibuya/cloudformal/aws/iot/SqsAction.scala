@@ -9,8 +9,8 @@ import com.github.mshibuya.cloudformal.model._
 case class SqsAction(
     queueUrl: NonEmptyProperty[String],
     roleArn: NonEmptyProperty[String],
-    useBase64: Property[Boolean] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    useBase64: Property[Boolean] = Empty) extends Expression[SqsAction] {
+  def render: Formattable = Value(
     "QueueUrl" -> queueUrl,
     "RoleArn" -> roleArn,
     "UseBase64" -> useBase64

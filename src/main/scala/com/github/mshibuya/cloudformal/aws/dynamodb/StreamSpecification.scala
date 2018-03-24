@@ -7,8 +7,8 @@ import com.github.mshibuya.cloudformal.model._
  */
 
 case class StreamSpecification(
-    streamViewType: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    streamViewType: NonEmptyProperty[String]) extends Expression[StreamSpecification] {
+  def render: Formattable = Value(
     "StreamViewType" -> streamViewType
   )
 }

@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class LoadBalancerAttribute(
     key: Property[String] = Empty,
-    value: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: Property[String] = Empty) extends Expression[LoadBalancerAttribute] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Value" -> value
   )

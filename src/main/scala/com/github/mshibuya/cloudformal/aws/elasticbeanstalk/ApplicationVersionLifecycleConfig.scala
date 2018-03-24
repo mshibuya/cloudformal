@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ApplicationVersionLifecycleConfig(
     maxAgeRule: Property[MaxAgeRule] = Empty,
-    maxCountRule: Property[MaxCountRule] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    maxCountRule: Property[MaxCountRule] = Empty) extends Expression[ApplicationVersionLifecycleConfig] {
+  def render: Formattable = Value(
     "MaxAgeRule" -> maxAgeRule,
     "MaxCountRule" -> maxCountRule
   )

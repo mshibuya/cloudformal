@@ -10,8 +10,8 @@ case class EBSOptions(
     ebsEnabled: Property[Boolean] = Empty,
     iops: Property[Int] = Empty,
     volumeSize: Property[Int] = Empty,
-    volumeType: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    volumeType: Property[String] = Empty) extends Expression[EBSOptions] {
+  def render: Formattable = Value(
     "EBSEnabled" -> ebsEnabled,
     "Iops" -> iops,
     "VolumeSize" -> volumeSize,

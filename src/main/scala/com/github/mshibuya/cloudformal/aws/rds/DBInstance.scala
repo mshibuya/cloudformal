@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html
  */
 
-trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
+trait DBInstance extends Resource[DBInstance] with Resource.WithSnapshotableDeletionPolicy {
   val resourceTypeName = "AWS::RDS::DBInstance"
 
   object attributes {
@@ -55,7 +55,7 @@ trait DBInstance extends Resource with Resource.WithSnapshotableDeletionPolicy {
   def timezone: Property[String] = Empty
   def vpcSecurityGroups: Property[Seq[String]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "AllocatedStorage" -> allocatedStorage,
     "AllowMajorVersionUpgrade" -> allowMajorVersionUpgrade,
     "AutoMinorVersionUpgrade" -> autoMinorVersionUpgrade,

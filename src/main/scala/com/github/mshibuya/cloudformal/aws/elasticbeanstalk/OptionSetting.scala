@@ -10,8 +10,8 @@ case class OptionSetting(
     namespace: NonEmptyProperty[String],
     optionName: NonEmptyProperty[String],
     resourceName: Property[String] = Empty,
-    value: Property[String] = Empty) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: Property[String] = Empty) extends Expression[OptionSetting] {
+  def render: Formattable = Value(
     "Namespace" -> namespace,
     "OptionName" -> optionName,
     "ResourceName" -> resourceName,

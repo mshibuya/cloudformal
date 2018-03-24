@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class RepublishAction(
     roleArn: NonEmptyProperty[String],
-    topic: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    topic: NonEmptyProperty[String]) extends Expression[RepublishAction] {
+  def render: Formattable = Value(
     "RoleArn" -> roleArn,
     "Topic" -> topic
   )

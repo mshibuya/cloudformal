@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class ComputeEnvironmentOrder(
     computeEnvironment: NonEmptyProperty[String],
-    order: NonEmptyProperty[Int]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    order: NonEmptyProperty[Int]) extends Expression[ComputeEnvironmentOrder] {
+  def render: Formattable = Value(
     "ComputeEnvironment" -> computeEnvironment,
     "Order" -> order
   )

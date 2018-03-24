@@ -7,7 +7,7 @@ import com.github.mshibuya.cloudformal.model.policy._
  * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-optiongroup.html
  */
 
-trait OptionGroup extends Resource with Resource.WithDeletionPolicy {
+trait OptionGroup extends Resource[OptionGroup] with Resource.WithDeletionPolicy {
   val resourceTypeName = "AWS::RDS::OptionGroup"
 
   def engineName: NonEmptyProperty[String]
@@ -16,7 +16,7 @@ trait OptionGroup extends Resource with Resource.WithDeletionPolicy {
   def optionGroupDescription: NonEmptyProperty[String]
   def tags: Property[Seq[Tag]] = Empty
 
-  def resourceProperties: FormattableMap = Formattable.withProperties(
+  def render(): MapValue[_] = Value(
     "EngineName" -> engineName,
     "MajorEngineVersion" -> majorEngineVersion,
     "OptionConfigurations" -> optionConfigurations,

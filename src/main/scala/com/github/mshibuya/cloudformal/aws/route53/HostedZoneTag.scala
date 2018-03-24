@@ -8,8 +8,8 @@ import com.github.mshibuya.cloudformal.model._
 
 case class HostedZoneTag(
     key: NonEmptyProperty[String],
-    value: NonEmptyProperty[String]) extends Renderable {
-  def render: Formattable = Formattable.withProperties(
+    value: NonEmptyProperty[String]) extends Expression[HostedZoneTag] {
+  def render: Formattable = Value(
     "Key" -> key,
     "Value" -> value
   )
