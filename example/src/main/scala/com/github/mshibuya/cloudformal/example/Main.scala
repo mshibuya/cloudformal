@@ -1,10 +1,7 @@
 package com.github.mshibuya.cloudformal.example
 
-import com.github.mshibuya.cloudformal.Writer
+import com.github.mshibuya.cloudformal.CLI
 
-object Main {
-  def main(args: Array[String]): Unit = {
-    Writer().write(ApplicationStack)
-    Writer().write(WordPressMultiAZStack)
-  }
+object Main extends CLI {
+  def main(args: Array[String]): Unit = run(args)
 }
