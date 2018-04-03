@@ -2,6 +2,8 @@
 
 A type-safe CloudFormation DSL written in Scala, which you can apply changes casually!
 
+[![Build Status](https://travis-ci.org/mshibuya/cloudformal.svg?branch=master)](https://travis-ci.org/mshibuya/cloudformal)
+
 ## Motivation
 
 In this DevOps and Infrastructure as Code age, Infrastructure automation is unavoidable. Such a automation has a dangerous pitfall - if something goes wrong in automated operation, the automation can cause devastating effect, such as sweeping all of your production servers.
