@@ -1,9 +1,12 @@
 package com.github.mshibuya.cloudformal
 
+import java.io.File
+
 import com.github.mshibuya.cloudformal.command._
 
 trait CLI {
   case class Config(command: Option[Command] = None,
+                    output: Option[File] = None,
                     stackName: Option[String] = None)
 
   val parser = new scopt.OptionParser[Config]("cloudformal") {
@@ -13,8 +16,11 @@ trait CLI {
       c.copy(command = Some(Convert))
     }.text("Converts and outputs given stack to CloudFormation template.")
       .children(
+        opt[File]('o', "output").valueName("<file>").
+          action( (x, c) => c.copy(output = Some(x)) ).
+          text("Filename to output. If not given, STDOUT is used."),
         arg[String]("<className>").action( (x, c) =>
-          c.copy(stackName = Some(x)) ).text("Fully classified class name of a Stack to process.")
+        c.copy(stackName = Some(x)) ).text("Fully classified class name of a Stack to process.")
       )
   }
 
@@ -22,7 +28,7 @@ trait CLI {
     parser.parse(args, Config()) match {
       case Some(config) => {
         config match {
-          case Config(Some(Convert), Some(stackName)) => Convert.execute(stackName)
+          case Config(Some(Convert), output, Some(stackName)) => Convert.execute(stackName, output)
           case _ => {
             println(s"Not enough arguments.")
             System.exit(1)
