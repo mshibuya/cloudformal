@@ -12,8 +12,8 @@ trait CLI {
   val parser = new scopt.OptionParser[Config]("cloudformal") {
     help("help").text("Prints this help message.")
 
-    cmd("convert").action { (_, c) =>
-      c.copy(command = Some(Convert))
+    cmd("generate").action { (_, c) =>
+      c.copy(command = Some(Generate))
     }.text("Converts and outputs given stack to CloudFormation template.")
       .children(
         opt[File]('o', "output").valueName("<file>").
@@ -28,7 +28,7 @@ trait CLI {
     parser.parse(args, Config()) match {
       case Some(config) => {
         config match {
-          case Config(Some(Convert), output, Some(stackName)) => Convert.execute(stackName, output)
+          case Config(Some(Generate), output, Some(stackName)) => Generate.execute(stackName, output)
           case _ => {
             println(s"Not enough arguments.")
             System.exit(1)

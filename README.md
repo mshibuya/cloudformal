@@ -71,7 +71,7 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
       val outputs = Nil
     }
     ```
-1. Running `sbt run convert com.example.YourStack` will produce the CloudFormation template output.
+1. Running `sbt "run generate com.example.YourStack"` will produce the CloudFormation template output.
 
     ```
     {
@@ -80,6 +80,8 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
       ...
     }
     ```
+
+1. See `sbt "run --help"` for more commands and options.
 
 ## Alternatives
 

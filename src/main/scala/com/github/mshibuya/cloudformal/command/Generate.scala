@@ -6,7 +6,7 @@ import com.github.mshibuya.cloudformal.Writer
 
 import scala.util.Try
 
-object Convert extends Command {
+object Generate extends Command {
   def execute(name: String, output: Option[File]): Try[Unit] = {
     loadStack(name).map { stack =>
       val writer = output.fold(new PrintWriter(System.out))(f => new PrintWriter(f))
