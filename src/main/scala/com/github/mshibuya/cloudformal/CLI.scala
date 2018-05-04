@@ -5,40 +5,51 @@ import java.io.File
 import com.github.mshibuya.cloudformal.command._
 
 trait CLI {
-  case class Config(command: Option[Command] = None,
-                    output: Option[File] = None,
-                    stackName: Option[String] = None)
-
   val parser = new scopt.OptionParser[Config]("cloudformal") {
     help("help").text("Prints this help message.")
 
+    opt[String]("profile").action( (str, c) =>
+      c.copy(profile = Some(str))).text("Use a specific profile from your aws credential file.")
+
+    opt[String]("region").action( (str, c) =>
+      c.copy(region = Some(str))).text("The aws region to use. Overrides config/env settings.")
+
     cmd("generate").action { (_, c) =>
       c.copy(command = Some(Generate))
-    }.text("Converts and outputs given stack to CloudFormation template.")
+    }.text("Generates and outputs given stack to CloudFormation template.")
       .children(
         opt[File]('o', "output").valueName("<file>").
-          action( (x, c) => c.copy(output = Some(x)) ).
-          text("Filename to output. If not given, STDOUT is used."),
-        arg[String]("<className>").action( (x, c) =>
-        c.copy(stackName = Some(x)) ).text("Fully classified class name of a Stack to process.")
+          action { (file, c) =>
+            c.copy(output = Some(file))
+          }.text("Filename to output. If not given, STDOUT is used."),
+        arg[String]("<className>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+      )
+
+    cmd("get").action { (_, c) =>
+      c.copy(command = Some(Get))
+    }.text("Gets and outputs current CloudFormation template.")
+      .children(
+        opt[File]('o', "output").valueName("<file>").
+          action { (file, c) =>
+            c.copy(output = Some(file))
+          }.text("Filename to output. If not given, STDOUT is used."),
+        arg[String]("<stackName>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Name of CloudFormation Stack to process.")
       )
   }
 
   def run(args: Array[String]): Unit = {
     parser.parse(args, Config()) match {
-      case Some(config) => {
-        config match {
-          case Config(Some(Generate), output, Some(stackName)) => Generate.execute(stackName, output)
-          case _ => {
-            println(s"Not enough arguments.")
-            System.exit(1)
-          }
-        }
-      }
-      case None => {
+      case Some(config) =>
+        config.command.foreach(_.execute(config).get)
+      case None =>
         println(s"Unable to parse arguments: ${args.mkString(" ")}")
         System.exit(1)
-      }
     }
   }
 }

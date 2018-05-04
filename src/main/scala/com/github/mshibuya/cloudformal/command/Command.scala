@@ -9,4 +9,6 @@ abstract class Command {
     val klass = Class.forName(s"${name}$$")
     klass.getField("MODULE$").get(classOf[Stack]).asInstanceOf[Stack]
   }
+
+  def execute(config: Config): Try[Unit]
 }
