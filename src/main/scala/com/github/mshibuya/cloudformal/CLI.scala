@@ -14,6 +14,24 @@ trait CLI {
     opt[String]("region").action( (str, c) =>
       c.copy(region = Some(str))).text("The aws region to use. Overrides config/env settings.")
 
+    cmd("create").action { (_, c) =>
+      c.copy(command = Some(Create))
+    }.text("Creates a stack using given template.")
+      .children(
+        opt[String]("parameters").valueName("<list of parameters>").
+          action { (str, c) =>
+            c.copy(rawParameters = Some(str))
+          }.text("Parameters to use, in format of --parameters key1=value1,key2=value2"),
+        opt[String]("tags").valueName("<list of tags>").
+          action { (str, c) =>
+            c.copy(rawParameters = Some(str))
+          }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
+        arg[String]("<className>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+      )
+
     cmd("generate").action { (_, c) =>
       c.copy(command = Some(Generate))
     }.text("Generates and outputs given stack to CloudFormation template.")
