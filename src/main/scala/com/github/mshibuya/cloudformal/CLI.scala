@@ -73,6 +73,16 @@ trait CLI {
             c.copy(stackName = Some(str))
           }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
       )
+
+    cmd("validate").action { (_, c) =>
+      c.copy(command = Some(Validate))
+    }.text("Validates given template.")
+      .children(
+        arg[String]("<className>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+      )
   }
 
   def run(args: Array[String]): Unit = {
