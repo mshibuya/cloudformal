@@ -32,6 +32,20 @@ trait CLI {
           }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
       )
 
+    cmd("diff").action { (_, c) =>
+      c.copy(command = Some(Diff))
+    }.text("Shows diff of current and generated templates of given stack.")
+      .children(
+        opt[File]("backend").valueName("<command line>").
+          action { (file, c) =>
+            c.copy(output = Some(file))
+          }.text("Diff backend to use. If not given, 'git diff' is used."),
+        arg[String]("<className>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+      )
+
     cmd("generate").action { (_, c) =>
       c.copy(command = Some(Generate))
     }.text("Generates and outputs given stack to CloudFormation template.")
@@ -43,7 +57,7 @@ trait CLI {
         arg[String]("<className>").
           action { (str, c) =>
             c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+          }.maxOccurs(1).text("Fully classified class name of a Stack class to process.")
       )
 
     cmd("get").action { (_, c) =>
@@ -54,10 +68,10 @@ trait CLI {
           action { (file, c) =>
             c.copy(output = Some(file))
           }.text("Filename to output. If not given, STDOUT is used."),
-        arg[String]("<stackName>").
+        arg[String]("<className or stackName>").
           action { (str, c) =>
             c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Name of CloudFormation Stack to process.")
+          }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
       )
   }
 

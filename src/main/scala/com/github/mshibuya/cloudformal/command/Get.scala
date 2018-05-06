@@ -9,7 +9,7 @@ import scala.util.Try
 case object Get extends Command {
   def execute(config: Config): Try[Unit] = {
     val client = config.cloudFormationClient
-    val name = config.stackName.get
+    val name = loadStack(config.stackName.get).map(_.name).getOrElse(config.stackName.get)
     val output = config.output
 
     Try {

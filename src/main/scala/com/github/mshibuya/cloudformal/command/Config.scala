@@ -14,6 +14,7 @@ case class Config(profile: Option[String] = None,
                   command: Option[Command] = None,
                   rawParameters: Option[String] = None,
                   rawTags: Option[String] = None,
+                  diffBackend: Option[String] = None,
                   stackName: Option[String] = None,
                   output: Option[File] = None) {
   lazy val credentialsProvider: AWSCredentialsProvider = profile
@@ -47,4 +48,6 @@ case class Config(profile: Option[String] = None,
       }
     }
   }.getOrElse(Nil)
+
+  lazy val diffBackendOrDefault: String = diffBackend.getOrElse("git diff --no-index --color=always")
 }
