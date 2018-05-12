@@ -84,6 +84,24 @@ trait CLI {
           }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
       )
 
+    cmd("update").action { (_, c) =>
+      c.copy(command = Some(Update))
+    }.text("Updates a stack using given template.")
+      .children(
+        opt[String]("parameters").valueName("<list of parameters>").
+          action { (str, c) =>
+            c.copy(rawParameters = Some(str))
+          }.text("Parameters to use, in format of --parameters key1=value1,key2=value2"),
+        opt[String]("tags").valueName("<list of tags>").
+          action { (str, c) =>
+            c.copy(rawParameters = Some(str))
+          }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
+        arg[String]("<className>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+      )
+
     cmd("validate").action { (_, c) =>
       c.copy(command = Some(Validate))
     }.text("Validates given template.")
