@@ -32,6 +32,16 @@ trait CLI {
           }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
       )
 
+    cmd("delete").action { (_, c) =>
+      c.copy(command = Some(Delete))
+    }.text("Deletes a given stack.")
+      .children(
+        arg[String]("<className or stackName>").
+          action { (str, c) =>
+            c.copy(stackName = Some(str))
+          }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
+      )
+
     cmd("diff").action { (_, c) =>
       c.copy(command = Some(Diff))
     }.text("Shows diff of current and generated templates of given stack.")
