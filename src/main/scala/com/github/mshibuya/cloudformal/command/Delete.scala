@@ -12,11 +12,13 @@ case object Delete extends Command {
     val name = loadStack(config.stackName.get).map(_.name).getOrElse(config.stackName.get)
     val output = config.output
 
-    Try {
-      val request = new DeleteStackRequest()
-      request.setStackName(name)
-      client.deleteStack(request)
-      System.out.println(s"Initiated deletion of stack: ${name}")
+    prompt(config, s"Deleting stack: $name. Are you sure?"){
+      Try {
+        val request = new DeleteStackRequest()
+        request.setStackName(name)
+        client.deleteStack(request)
+        System.out.println(s"Initiated deletion of stack: ${name}")
+      }
     }
   }
 }

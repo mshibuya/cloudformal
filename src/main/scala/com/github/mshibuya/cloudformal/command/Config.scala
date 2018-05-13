@@ -11,9 +11,11 @@ import scala.util.Properties
 
 case class Config(profile: Option[String] = None,
                   region: Option[String] = None,
+                  force: Boolean = false,
                   command: Option[Command] = None,
                   rawParameters: Option[String] = None,
                   rawTags: Option[String] = None,
+                  noChangeSet: Boolean = false,
                   diffBackend: Option[String] = None,
                   stackName: Option[String] = None,
                   output: Option[File] = None) {

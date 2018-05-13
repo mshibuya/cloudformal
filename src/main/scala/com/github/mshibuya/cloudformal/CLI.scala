@@ -14,6 +14,9 @@ trait CLI {
     opt[String]("region").action( (str, c) =>
       c.copy(region = Some(str))).text("The aws region to use. Overrides config/env settings.")
 
+    opt[Unit]('f', "force").action( (_, c) =>
+      c.copy(force = true) ).text("Executes operation without prompting for confirmation.")
+
     cmd("create").action { (_, c) =>
       c.copy(command = Some(Create))
     }.text("Creates a stack using given template.")
@@ -26,6 +29,8 @@ trait CLI {
           action { (str, c) =>
             c.copy(rawParameters = Some(str))
           }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
+        opt[Unit]("no-change-set").action( (_, c) =>
+          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly"),
         arg[String]("<className>").
           action { (str, c) =>
             c.copy(stackName = Some(str))
@@ -96,6 +101,8 @@ trait CLI {
           action { (str, c) =>
             c.copy(rawParameters = Some(str))
           }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
+        opt[Unit]("no-change-set").action( (_, c) =>
+          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly"),
         arg[String]("<className>").
           action { (str, c) =>
             c.copy(stackName = Some(str))
