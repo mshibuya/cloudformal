@@ -9,9 +9,8 @@ import scala.util.Try
 case object Create extends Command with ChangeSetOperation {
   def execute(config: Config): Try[Unit] = {
     val client = config.cloudFormationClient
-    val name = config.stackName.get
 
-    loadStack(name).flatMap { stack =>
+    loadStack(config.stackName.get).flatMap { stack =>
       Try {
         if (config.noChangeSet) {
           val request = new CreateStackRequest()

@@ -8,11 +8,9 @@ import scala.util.Try
 case object Validate extends Command {
   def execute(config: Config): Try[Unit] = {
     val client = config.cloudFormationClient
-    val name = config.stackName.get
-    val output = config.output
 
     for {
-      stack <- loadStack(name)
+      stack <- loadStack(config.stackName.get)
       result <- Try {
         val request = new ValidateTemplateRequest()
         request.setTemplateBody(new Writer().write(stack)) // TODO: support upload to s3

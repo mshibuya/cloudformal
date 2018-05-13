@@ -8,9 +8,9 @@ import scala.util.Try
 
 case object Generate extends Command {
   def execute(config: Config): Try[Unit] = {
-    val name = config.stackName.get
     val output = config.output
-    loadStack(name).map { stack =>
+
+    loadStack(config.stackName.get).map { stack =>
       val writer = output.fold(new PrintWriter(System.out))(f => new PrintWriter(f))
       try {
         writer.write(new Writer().write(stack))

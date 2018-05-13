@@ -17,6 +17,11 @@ trait CLI {
     opt[Unit]('f', "force").action( (_, c) =>
       c.copy(force = true) ).text("Executes operation without prompting for confirmation.")
 
+    arg[String]("<className>").
+      action { (str, c) =>
+        c.copy(stackName = Some(str))
+      }.maxOccurs(1).text("Class name or stack name of a cloudformal Stack class to process. Wildcard(*) can be used.")
+
     cmd("create").action { (_, c) =>
       c.copy(command = Some(Create))
     }.text("Creates a stack using given template.")
@@ -30,22 +35,12 @@ trait CLI {
             c.copy(rawParameters = Some(str))
           }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
         opt[Unit]("no-change-set").action( (_, c) =>
-          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly"),
-        arg[String]("<className>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly")
       )
 
     cmd("delete").action { (_, c) =>
       c.copy(command = Some(Delete))
     }.text("Deletes a given stack.")
-      .children(
-        arg[String]("<className or stackName>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
-      )
 
     cmd("diff").action { (_, c) =>
       c.copy(command = Some(Diff))
@@ -54,11 +49,7 @@ trait CLI {
         opt[File]("backend").valueName("<command line>").
           action { (file, c) =>
             c.copy(output = Some(file))
-          }.text("Diff backend to use. If not given, 'git diff' is used."),
-        arg[String]("<className>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+          }.text("Diff backend to use. If not given, 'git diff' is used.")
       )
 
     cmd("generate").action { (_, c) =>
@@ -68,11 +59,7 @@ trait CLI {
         opt[File]('o', "output").valueName("<file>").
           action { (file, c) =>
             c.copy(output = Some(file))
-          }.text("Filename to output. If not given, STDOUT is used."),
-        arg[String]("<className>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack class to process.")
+          }.text("Filename to output. If not given, STDOUT is used.")
       )
 
     cmd("get").action { (_, c) =>
@@ -82,11 +69,7 @@ trait CLI {
         opt[File]('o', "output").valueName("<file>").
           action { (file, c) =>
             c.copy(output = Some(file))
-          }.text("Filename to output. If not given, STDOUT is used."),
-        arg[String]("<className or stackName>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack class or a CloudFormation stack name to process.")
+          }.text("Filename to output. If not given, STDOUT is used.")
       )
 
     cmd("update").action { (_, c) =>
@@ -102,28 +85,20 @@ trait CLI {
             c.copy(rawParameters = Some(str))
           }.text("Tags to set, in format of --tags key1=value1,key2=value2"),
         opt[Unit]("no-change-set").action( (_, c) =>
-          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly"),
-        arg[String]("<className>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
+          c.copy(noChangeSet = true) ).text("Skip creation of a changeset and apply directly")
       )
 
     cmd("validate").action { (_, c) =>
       c.copy(command = Some(Validate))
     }.text("Validates given template.")
-      .children(
-        arg[String]("<className>").
-          action { (str, c) =>
-            c.copy(stackName = Some(str))
-          }.maxOccurs(1).text("Fully classified class name of a Stack to process.")
-      )
   }
 
   def run(args: Array[String]): Unit = {
     parser.parse(args, Config()) match {
       case Some(config) =>
-        config.command.foreach(_.execute(config).get)
+        config.command.foreach(_.execute(config).recover {
+          case e: StackLoadException => System.out.println(e.message)
+        }.get)
       case None =>
         println(s"Unable to parse arguments: ${args.mkString(" ")}")
         System.exit(1)

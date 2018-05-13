@@ -1,9 +1,6 @@
 package com.github.mshibuya.cloudformal.command
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-
-import com.amazonaws.services.cloudformation.model.{CreateChangeSetRequest, DescribeChangeSetRequest, UpdateStackRequest}
+import com.amazonaws.services.cloudformation.model.UpdateStackRequest
 import com.github.mshibuya.cloudformal.Writer
 
 import scala.collection.JavaConverters._
@@ -12,9 +9,8 @@ import scala.util.Try
 case object Update extends Command with ChangeSetOperation {
   def execute(config: Config): Try[Unit] = {
     val client = config.cloudFormationClient
-    val name = config.stackName.get
 
-    loadStack(name).flatMap { stack =>
+    loadStack(config.stackName.get).flatMap { stack =>
       Try {
         if (config.noChangeSet) {
           val request = new UpdateStackRequest()

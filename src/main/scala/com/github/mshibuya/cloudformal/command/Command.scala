@@ -8,8 +8,11 @@ import scala.util.{Success, Try}
 
 abstract class Command {
   def loadStack(name: String): Try[Stack] = Try {
-    val klass = Class.forName(s"${name}$$")
-    klass.getField("MODULE$").get(classOf[Stack]).asInstanceOf[Stack]
+    StackLoader().findStacksBy(name) match {
+      case Nil => throw new StackLoadException(s"No stack found to match: $name")
+      case Seq(e) => e
+      case stacks => throw new StackLoadException(s"Ambiguous match: ${stacks.mkString(",")}")
+    }
   }
 
   def prompt(config: Config, message: String)(op: => Try[Unit]): Try[Unit] = {

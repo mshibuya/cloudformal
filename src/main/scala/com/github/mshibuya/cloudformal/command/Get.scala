@@ -9,16 +9,17 @@ import scala.util.Try
 case object Get extends Command {
   def execute(config: Config): Try[Unit] = {
     val client = config.cloudFormationClient
-    val name = loadStack(config.stackName.get).map(_.name).getOrElse(config.stackName.get)
     val output = config.output
 
-    Try {
-      val writer = output.fold(new PrintWriter(System.out))(f => new PrintWriter(f))
-      try {
-        val result = client.getTemplate(new GetTemplateRequest().withStackName(name))
-        writer.write(result.getTemplateBody)
-      } finally {
-        output.fold(writer.flush())(_ => writer.close())
+    loadStack(config.stackName.get).flatMap { stack =>
+      Try {
+        val writer = output.fold(new PrintWriter(System.out))(f => new PrintWriter(f))
+        try {
+          val result = client.getTemplate(new GetTemplateRequest().withStackName(stack.name))
+          writer.write(result.getTemplateBody)
+        } finally {
+          output.fold(writer.flush())(_ => writer.close())
+        }
       }
     }
   }
