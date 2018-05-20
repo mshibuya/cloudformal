@@ -108,10 +108,6 @@ object WordPressMultiAZStack extends Stack {
     maxValue = 1024,
     constraintDescription = "must be between 5 and 1024Gb."
   )
-  val parameters = Seq(
-    vpcId, subnets, keyName, instanceType, sshLocation,
-    dbClass, dbName, dbUser, dbPassword, multiAZDatabase, webServerCapacity, dbAllocatedStorage
-  )
 
   val awsInstanceType2Arch = StringMapping(
     logicalId = "AWSInstanceType2Arch",
@@ -250,9 +246,6 @@ object WordPressMultiAZStack extends Stack {
       "cn-north-1"       -> Map("PV64" -> "ami-77559f1a", "HVM64" -> "ami-8e6aa0e3", "HVMG2" -> "NOT_SUPPORTED"),
       "cn-northwest-1"   -> Map("PV64" -> "ami-80707be2", "HVM64" -> "ami-cb858fa9", "HVMG2" -> "NOT_SUPPORTED")
     ))
-  val mappings = Seq(
-    awsInstanceType2Arch, awsInstanceType2NATArch, awsRegionArch2AMI
-  )
 
   val applicationLoadBalancer = new LoadBalancer {
     override def logicalId: String = "ApplicationLoadBalancer"
@@ -430,19 +423,13 @@ object WordPressMultiAZStack extends Stack {
     override def allocatedStorage: Property[String] = dbAllocatedStorage.ref.as[String]
     override def vpcSecurityGroups: Property[Seq[String]] = Seq(dbEC2SecurityGroup.attributes.groupId)
   }
-  val resources = Seq(
-    applicationLoadBalancer,
-    albListener,
-    albTargetGroup,
-    webServerSecurityGroup,
-    webServerGroup,
-    launchConfig,
-    dbEC2SecurityGroup,
-    dbInstance
-  )
 
   val websiteUrl = Output("WebsiteURL",
     Fn.Join("", Seq[Property[String]]("http://", applicationLoadBalancer.attributes.dnsName, "/wordpress")),
     "WordPress Website")
-  val outputs = Seq(websiteUrl)
+
+  val parameters: Seq[Parameter[_, _]] = autoMembers[this.type, Parameter[_, _]]()
+  val mappings: Seq[Mapping] = autoMembers[this.type, Mapping]()
+  val resources: Seq[Resource[_]] = autoMembers[this.type, Resource[_]]()
+  val outputs: Seq[Output[_]] = autoMembers[this.type, Output[_]]()
 }

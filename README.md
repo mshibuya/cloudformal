@@ -23,7 +23,7 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
 1. Create your sbt project:
 
     build.sbt
-    ```
+    ```scala
     lazy val root = (project in file(".")).
       settings(
         inThisBuild(List(
@@ -37,7 +37,7 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
     ```
 
     src/main/scala/com/example/Main.scala
-    ```
+    ```scala
     package com.example
 
     import com.github.mshibuya.cloudformal.CLI
@@ -51,7 +51,7 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
 1. Describe your CloudFormation stacks:
 
     src/main/scala/com/example/YourStack.scala
-    ```
+    ```scala
     package com.example
 
     import com.github.mshibuya.cloudformal.aws.ec2
@@ -61,14 +61,18 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
       val name = "YourStack"
       val description = "Example stack"
 
-      val parameters = Nil
-      val mappings = Nil
       val myServer = new ec2.Instance {
         val logicalId = "MyServer"
         val imageId = Value("ami-97785bed")
       }
-      val resources = Seq(myServer)
-      val outputs = Nil
+
+      // There are macros which will pick up all members of corresponding type:
+      val parameters: Seq[Parameter[_, _]] = autoMembers[this.type, Parameter[_, _]]()
+      val mappings: Seq[Mapping] = autoMembers[this.type, Mapping]()
+      val resources: Seq[Resource[_]] = autoMembers[this.type, Resource[_]]()
+      val outputs: Seq[Output[_]] = autoMembers[this.type, Output[_]]()
+      // Instead, you can do it manually like:
+      //   val resources: Seq[Resource[_]] = Seq(myServer)
     }
     ```
 1. Running `sbt "run generate com.example.YourStack"` will produce the CloudFormation template output.

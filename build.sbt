@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "cloudformal",
-    libraryDependencies ++= Seq(argonaut, scopt, awsCloudFormation, reflections, scalaTest % Test)
+    libraryDependencies ++= Seq(argonaut, scopt, awsCloudFormation, reflections, scalaReflect, scalaTest % Test)
   )
 
 lazy val generator = (project in file("generator")).
