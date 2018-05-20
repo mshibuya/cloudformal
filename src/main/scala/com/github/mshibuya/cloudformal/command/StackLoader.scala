@@ -6,14 +6,31 @@ import scala.collection.JavaConverters._
 import scala.util.matching.Regex
 
 case class StackLoader(packagePrefix: String = "") {
-  val reflections = new org.reflections.Reflections(packagePrefix)
+  private lazy val reflections = new org.reflections.Reflections(packagePrefix)
 
   def stackClasses: Seq[Class[_ <: Stack]] = reflections.getSubTypesOf(classOf[Stack]).asScala.toSeq
-  def stacks: Seq[Stack] = stackClasses.map(_.getField("MODULE$").get(classOf[Stack]).asInstanceOf[Stack])
+
+  import scala.reflect.runtime.{universe => ru}
+  import scala.reflect.runtime.{currentMirror => cm}
+  private lazy val universeMirror = ru.runtimeMirror(getClass.getClassLoader)
+
+  def stacks: Seq[Stack] = {
+    val moduleSymbols = stackClasses.map(cm.moduleSymbol)
+    moduleSymbols.flatMap { s =>
+      try {
+        Some(universeMirror.reflectModule(s).instance.asInstanceOf[Stack])
+      } catch {
+        case e: ScalaReflectionException => None
+      }
+    }
+  }
 
   def findStacksBy(pattern: String): Seq[Stack] = stacks.filter { stack =>
-    val compiled: Regex = pattern.split("\\*").map(Regex.quote).mkString(".*").r
-    compiled.findFirstIn(stack.getClass.getName).isDefined ||
+    val fullyQualifiedClassName = stack.getClass.getName.replaceFirst("\\$$", "")
+    val stackName = stack.name
+    val compiled: Regex = s"^${pattern.split("\\*", -1).map(Regex.quote).mkString(".*")}$$".r
+
+    compiled.findFirstIn(fullyQualifiedClassName).isDefined ||
       compiled.findFirstIn(stack.name).isDefined
   }
 }
