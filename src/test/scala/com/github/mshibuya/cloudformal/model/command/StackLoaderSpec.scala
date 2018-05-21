@@ -21,6 +21,16 @@ object MyTestStack extends Stack {
   def outputs = Nil
 }
 
+class StackWithParameter(val stage: String) extends Stack {
+  val name = "stack-with-parameter"
+  def description: String = "description"
+  def parameters = Nil
+  def mappings = Nil
+  def resources = Nil
+  def outputs = Nil
+}
+object ProductionStack extends StackWithParameter(stage = "production")
+
 class StackLoaderSpec extends FunSpec with MustMatchers {
   object InnerStack extends Stack {
     val name = "Inner"
@@ -44,7 +54,7 @@ class StackLoaderSpec extends FunSpec with MustMatchers {
   }
 
   it("supports wildcard") {
-    StackLoader().findStacksBy("*Stack") mustBe Seq(MyTestStack)
+    StackLoader().findStacksBy("*Stack") mustBe Seq(MyTestStack, ProductionStack)
     StackLoader().findStacksBy("*My*") mustBe Seq(MyTestStack)
   }
 
@@ -54,5 +64,13 @@ class StackLoaderSpec extends FunSpec with MustMatchers {
 
   it("performs whole match on stack class name") {
     StackLoader().findStacksBy("*Test") mustBe Seq(Test)
+  }
+
+  it("ignores classes inheriting from a stack") {
+    StackLoader().findStacksBy("*StackWithParameter") mustBe Nil
+  }
+
+  it("loads a stack inheriting indirectly") {
+    StackLoader().findStacksBy("*ProductionStack") mustBe Seq(ProductionStack)
   }
 }

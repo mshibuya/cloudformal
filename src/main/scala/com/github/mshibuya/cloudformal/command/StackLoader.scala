@@ -15,12 +15,11 @@ case class StackLoader(packagePrefix: String = "") {
   private lazy val universeMirror = ru.runtimeMirror(getClass.getClassLoader)
 
   def stacks: Seq[Stack] = {
-    val moduleSymbols = stackClasses.map(cm.moduleSymbol)
-    moduleSymbols.flatMap { s =>
+    stackClasses.flatMap { s =>
       try {
-        Some(universeMirror.reflectModule(s).instance.asInstanceOf[Stack])
+        Some(universeMirror.reflectModule(cm.moduleSymbol(s)).instance.asInstanceOf[Stack])
       } catch {
-        case e: ScalaReflectionException => None
+        case e @ (_: ScalaReflectionException | _: ClassNotFoundException) => None
       }
     }
   }
