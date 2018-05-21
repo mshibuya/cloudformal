@@ -3,22 +3,24 @@ package com.github.mshibuya.cloudformal.aws.ec2
 import com.github.mshibuya.cloudformal.model._
 
 /**
- * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-blockdev-template.html
+ * http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-blockdevicemapping-ebs.html
  */
 
 case class Ebs(
-    deleteOnTermination: Property[Boolean] = Empty,
+    snapshotId: Property[String] = Empty,
+    volumeType: Property[String] = Empty,
+    kmsKeyId: Property[String] = Empty,
     encrypted: Property[Boolean] = Empty,
     iops: Property[Int] = Empty,
-    snapshotId: Property[String] = Empty,
     volumeSize: Property[Int] = Empty,
-    volumeType: Property[String] = Empty) extends Expression[Ebs] {
+    deleteOnTermination: Property[Boolean] = Empty) extends Expression[Ebs] {
   def render: Formattable = Value(
-    "DeleteOnTermination" -> deleteOnTermination,
+    "SnapshotId" -> snapshotId,
+    "VolumeType" -> volumeType,
+    "KmsKeyId" -> kmsKeyId,
     "Encrypted" -> encrypted,
     "Iops" -> iops,
-    "SnapshotId" -> snapshotId,
     "VolumeSize" -> volumeSize,
-    "VolumeType" -> volumeType
+    "DeleteOnTermination" -> deleteOnTermination
   )
 }

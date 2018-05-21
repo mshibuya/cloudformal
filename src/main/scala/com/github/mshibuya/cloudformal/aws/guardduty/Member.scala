@@ -14,6 +14,7 @@ trait Member extends Resource[Member] with Resource.WithDeletionPolicy {
   def memberId: NonEmptyProperty[String]
   def email: NonEmptyProperty[String]
   def message: Property[String] = Empty
+  def disableEmailNotification: Property[Boolean] = Empty
   def detectorId: NonEmptyProperty[String]
 
   def render(): MapValue[_] = Value(
@@ -21,6 +22,7 @@ trait Member extends Resource[Member] with Resource.WithDeletionPolicy {
     "MemberId" -> memberId,
     "Email" -> email,
     "Message" -> message,
+    "DisableEmailNotification" -> disableEmailNotification,
     "DetectorId" -> detectorId
   )
 }

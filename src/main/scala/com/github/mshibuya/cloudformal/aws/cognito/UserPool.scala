@@ -30,6 +30,7 @@ trait UserPool extends Resource[UserPool] with Resource.WithDeletionPolicy {
   def aliasAttributes: Property[Seq[String]] = Empty
   def emailVerificationSubject: Property[String] = Empty
   def lambdaConfig: Property[LambdaConfig] = Empty
+  def usernameAttributes: Property[Seq[String]] = Empty
   def autoVerifiedAttributes: Property[Seq[String]] = Empty
   def deviceConfiguration: Property[DeviceConfiguration] = Empty
   def emailVerificationMessage: Property[String] = Empty
@@ -48,6 +49,7 @@ trait UserPool extends Resource[UserPool] with Resource.WithDeletionPolicy {
     "AliasAttributes" -> aliasAttributes,
     "EmailVerificationSubject" -> emailVerificationSubject,
     "LambdaConfig" -> lambdaConfig,
+    "UsernameAttributes" -> usernameAttributes,
     "AutoVerifiedAttributes" -> autoVerifiedAttributes,
     "DeviceConfiguration" -> deviceConfiguration,
     "EmailVerificationMessage" -> emailVerificationMessage
