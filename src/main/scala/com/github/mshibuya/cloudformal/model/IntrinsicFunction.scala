@@ -28,7 +28,7 @@ object Fn {
     )
   }
 
-  case class ImportValue(sharedValueToImport: NonEmptyProperty[String]) extends IntrinsicFunction[String] {
+  case class ImportValue[A](sharedValueToImport: NonEmptyProperty[String]) extends IntrinsicFunction[A] {
     def render: Formattable = Value(
       "Fn::ImportValue" -> sharedValueToImport
     )
