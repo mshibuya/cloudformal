@@ -46,9 +46,9 @@ trait CLI {
       c.copy(command = Some(Diff))
     }.text("Shows diff of current and generated templates of given stack.")
       .children(
-        opt[File]("backend").valueName("<command line>").
-          action { (file, c) =>
-            c.copy(output = Some(file))
+        opt[String]("backend").valueName("<command line>").
+          action { (backend, c) =>
+            c.copy(diffBackend = Some(backend))
           }.text("Diff backend to use. If not given, 'git diff' is used.")
       )
 
