@@ -11,8 +11,8 @@ case object Update extends Command with ChangeSetOperation {
     val client = config.cloudFormationClient
 
     loadStack(config.stackName.get).flatMap { stack =>
-      Try {
-        if (config.noChangeSet) {
+      if (config.noChangeSet) {
+        Try {
           val request = new UpdateStackRequest()
           request.setStackName(stack.name)
           request.setParameters(config.parameters.asJava)
@@ -21,9 +21,9 @@ case object Update extends Command with ChangeSetOperation {
           client.updateStack(request)
 
           System.out.println(s"Initiated update of stack: ${stack.name}")
-        } else {
-          reviewAndApplyChanges(config, "UPDATE")
         }
+      } else {
+        reviewAndApplyChanges(config, "UPDATE")
       }
     }
   }

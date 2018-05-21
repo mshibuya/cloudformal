@@ -11,8 +11,8 @@ case object Create extends Command with ChangeSetOperation {
     val client = config.cloudFormationClient
 
     loadStack(config.stackName.get).flatMap { stack =>
-      Try {
-        if (config.noChangeSet) {
+      if (config.noChangeSet) {
+        Try {
           val request = new CreateStackRequest()
           request.setStackName(stack.name)
           request.setParameters(config.parameters.asJava)
@@ -21,9 +21,9 @@ case object Create extends Command with ChangeSetOperation {
           client.createStack(request)
 
           System.out.println(s"Initiated creation of stack: ${stack.name}")
-        } else {
-          reviewAndApplyChanges(config, "CREATE")
         }
+      } else {
+        reviewAndApplyChanges(config, "CREATE")
       }
     }
   }
