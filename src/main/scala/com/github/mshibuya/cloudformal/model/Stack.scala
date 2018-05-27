@@ -1,6 +1,6 @@
 package com.github.mshibuya.cloudformal.model
 
-trait Stack extends Renderable {
+trait Stack extends Renderable with SubStack {
   def name: String
 
   def filename: String = name

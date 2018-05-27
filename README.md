@@ -66,11 +66,11 @@ What can we do now? My idea is to enforce strict type-checking to infrastructure
         val imageId = Value("ami-97785bed")
       }
 
-      // There are macros which will pick up all members of corresponding type:
-      val parameters: Seq[Parameter[_, _]] = autoMembers[this.type, Parameter[_, _]]()
-      val mappings: Seq[Mapping] = autoMembers[this.type, Mapping]()
-      val resources: Seq[Resource[_]] = autoMembers[this.type, Resource[_]]()
-      val outputs: Seq[Output[_]] = autoMembers[this.type, Output[_]]()
+      // These are macros which will pick up all members of corresponding type:
+      val parameters: Seq[Parameter[_, _]] = Macros.parametersIn(this)
+      val mappings: Seq[Mapping] = Macros.mappingsIn(this)
+      val resources: Seq[Resource[_]] = Macros.resourcesIn(this)
+      val outputs: Seq[Output[_]] = Macros.outputsIn(this)
       // Instead, you can do it manually like:
       //   val resources: Seq[Resource[_]] = Seq(myServer)
     }

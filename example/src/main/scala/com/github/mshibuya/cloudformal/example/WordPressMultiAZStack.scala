@@ -428,8 +428,8 @@ object WordPressMultiAZStack extends Stack {
     Fn.Join("", Seq[Property[String]]("http://", applicationLoadBalancer.attributes.dnsName, "/wordpress")),
     "WordPress Website")
 
-  val parameters: Seq[Parameter[_, _]] = autoMembers[this.type, Parameter[_, _]]()
-  val mappings: Seq[Mapping] = autoMembers[this.type, Mapping]()
-  val resources: Seq[Resource[_]] = autoMembers[this.type, Resource[_]]()
-  val outputs: Seq[Output[_]] = autoMembers[this.type, Output[_]]()
+  val parameters: Seq[Parameter[_, _]] = Macros.parametersIn(this)
+  val mappings: Seq[Mapping] = Macros.mappingsIn(this)
+  val resources: Seq[Resource[_]] = Macros.resourcesIn(this)
+  val outputs: Seq[Output[_]] = Macros.outputsIn(this)
 }
