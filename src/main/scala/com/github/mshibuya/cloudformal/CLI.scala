@@ -49,7 +49,10 @@ trait CLI {
         opt[String]("backend").valueName("<command line>").
           action { (backend, c) =>
             c.copy(diffBackend = Some(backend))
-          }.text("Diff backend to use. If not given, 'git diff' is used.")
+          }.text("Diff backend to use. If not given, 'git diff' is used."),
+        opt[Unit]('j', "json").action { (_, c) =>
+            c.copy(diffBackend = Some("json-diff -C"))
+          }.text("Use json-diff for diff backend, same as '--backend \"json-diff -C\"'.")
       )
 
     cmd("generate").action { (_, c) =>
