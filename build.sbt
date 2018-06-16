@@ -31,6 +31,7 @@ lazy val example = (project in file("example")).
       scalaVersion := "2.12.4",
       version      := "0.1.0-SNAPSHOT"
     )),
-    name := "cloudformal-example"
+    name := "cloudformal-example",
+    libraryDependencies ++= Seq(awsEc2)
   )
   .dependsOn(root)

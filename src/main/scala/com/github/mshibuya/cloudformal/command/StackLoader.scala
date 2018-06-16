@@ -26,7 +26,6 @@ case class StackLoader(packagePrefix: String = "") {
 
   def findStacksBy(pattern: String): Seq[Stack] = stacks.filter { stack =>
     val fullyQualifiedClassName = stack.getClass.getName.replaceFirst("\\$$", "")
-    val stackName = stack.name
     val compiled: Regex = s"^${pattern.split("\\*", -1).map(Regex.quote).mkString(".*")}$$".r
 
     compiled.findFirstIn(fullyQualifiedClassName).isDefined ||

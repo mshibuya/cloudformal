@@ -10,26 +10,28 @@ import com.amazonaws.services.cloudformation.{AmazonCloudFormation, AmazonCloudF
 import scala.util.Properties
 
 case class Config(profile: Option[String] = None,
-                  region: Option[String] = None,
+                  regionParam: Option[String] = None,
                   force: Boolean = false,
                   command: Option[Command] = None,
                   rawParameters: Option[String] = None,
                   rawTags: Option[String] = None,
                   noChangeSet: Boolean = false,
-                  diffBackend: Option[String] = None,
+                  diffBackendParam: Option[String] = None,
                   stackName: Option[String] = None,
                   output: Option[File] = None) {
   lazy val credentialsProvider: AWSCredentialsProvider = profile
     .fold[AWSCredentialsProvider](DefaultAWSCredentialsProviderChain.getInstance())
     { profile => new ProfileCredentialsProvider(profile) }
 
+  lazy val region: String = regionParam
+    .orElse(Properties.envOrNone("AWS_REGION"))
+    // AWS Java SDK does not handle AWS_DEFAULT_REGION, so set it manually
+    .orElse(Properties.envOrNone("AWS_DEFAULT_REGION"))
+    .getOrElse("")
+
   lazy val cloudFormationClient: AmazonCloudFormation = {
     val builder = AmazonCloudFormationClientBuilder.standard().withCredentials(credentialsProvider)
-    region
-      .orElse(Properties.envOrNone("AWS_REGION"))
-      // AWS Java SDK does not handle AWS_DEFAULT_REGION, so set it manually
-      .orElse(Properties.envOrNone("AWS_DEFAULT_REGION"))
-      .foreach(builder.setRegion)
+    builder.setRegion(region)
     builder.build()
   }
 
@@ -51,5 +53,5 @@ case class Config(profile: Option[String] = None,
     }
   }.getOrElse(Nil)
 
-  lazy val diffBackendOrDefault: String = diffBackend.getOrElse("git diff --no-index --color=always")
+  lazy val diffBackend: String = diffBackendParam.getOrElse("git diff --no-index --color=always")
 }

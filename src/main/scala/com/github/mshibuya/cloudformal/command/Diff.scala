@@ -16,7 +16,7 @@ case object Diff extends Command {
       _ <- Get.execute(config.copy(output = Some(currentTemplateFile)))
       _ <- Generate.execute(config.copy(output = Some(generatedTemplateFile)))
       _ <- Try {
-        val commandLine = Seq(config.diffBackendOrDefault, currentTemplateFile.getPath, generatedTemplateFile.getPath).mkString(" ")
+        val commandLine = Seq(config.diffBackend, currentTemplateFile.getPath, generatedTemplateFile.getPath).mkString(" ")
         System.out.println(commandLine)
         commandLine !
       }

@@ -12,7 +12,7 @@ trait CLI {
       c.copy(profile = Some(str))).text("Use a specific profile from your aws credential file.")
 
     opt[String]("region").action( (str, c) =>
-      c.copy(region = Some(str))).text("The aws region to use. Overrides config/env settings.")
+      c.copy(regionParam = Some(str))).text("The aws region to use. Overrides config/env settings.")
 
     opt[Unit]('f', "force").action( (_, c) =>
       c.copy(force = true) ).text("Executes operation without prompting for confirmation.")
@@ -48,10 +48,10 @@ trait CLI {
       .children(
         opt[String]("backend").valueName("<command line>").
           action { (backend, c) =>
-            c.copy(diffBackend = Some(backend))
+            c.copy(diffBackendParam = Some(backend))
           }.text("Diff backend to use. If not given, 'git diff' is used."),
         opt[Unit]('j', "json").action { (_, c) =>
-            c.copy(diffBackend = Some("json-diff -C"))
+            c.copy(diffBackendParam = Some("json-diff -C"))
           }.text("Use json-diff for diff backend, same as '--backend \"json-diff -C\"'.")
       )
 
@@ -96,9 +96,13 @@ trait CLI {
     }.text("Validates given template.")
   }
 
+  // Expose config for use in Stacks
+  var config: Config = Config()
+
   def run(args: Array[String]): Unit = {
     parser.parse(args, Config()) match {
       case Some(config) =>
+        this.config = config
         config.command.foreach(_.execute(config).recover {
           case e: StackLoadException => System.out.println(e.message)
         }.get)
