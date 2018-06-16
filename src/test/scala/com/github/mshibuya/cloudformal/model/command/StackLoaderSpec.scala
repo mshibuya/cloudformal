@@ -54,7 +54,7 @@ class StackLoaderSpec extends FunSpec with MustMatchers {
   }
 
   it("supports wildcard") {
-    StackLoader().findStacksBy("*Stack") mustBe Seq(MyTestStack, ProductionStack)
+    StackLoader().findStacksBy("*Stack").toSet mustBe Set(MyTestStack, ProductionStack)
     StackLoader().findStacksBy("*My*") mustBe Seq(MyTestStack)
   }
 
